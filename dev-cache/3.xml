@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on delroth's homepage</title><link>https://delroth.net/posts/</link><description>Recent content in Posts on delroth's homepage</description><generator>Hugo</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright><lastBuildDate>Tue, 29 Oct 2024 10:00:00 +0100</lastBuildDate><atom:link href="https://delroth.net/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>One weird trick to get the whole planet to send abuse complaints to your best friend(s)</title><link>https://delroth.net/posts/spoofed-mass-scan-abuse/</link><pubDate>Tue, 29 Oct 2024 10:00:00 +0100</pubDate><guid>https://delroth.net/posts/spoofed-mass-scan-abuse/</guid><description>&lt;p>It all begins with one scary email late at night just before I had to go to
+sleep:&lt;/p>
+&lt;div class="smaller">
+&lt;pre tabindex="0">&lt;code>From: abuse@hetzner.com
+Date: 2024-10-29 01:03:00 CET
+Subject: AbuseInfo: Potential Security issue: AS24940: 195.201.9.37
+
+We have received an abuse report from abuse@watchdogcyberdefense.com for your
+IP address 195.201.9.37.
+
+We are automatically forwarding this report on to you, for your information.
+You do not need to respond, but we do expect you to check it and to resolve any
+potential issues.
+
+&amp;gt; To assist you in understanding the situation, we have provided the relevant
+&amp;gt; log data below, with timestamps adjusted to our GMT +8 timezone:
+&amp;gt;
+&amp;gt; DateTime Action AttackClass SourceIP Srcport Protocol DestinationIP DestPort
+&amp;gt; 0 28-Oct-2024 19:39:11 DENIED 195.201.9.37 36163 TCP 202.91.162.233 22
+&amp;gt; &amp;lt;snip&amp;gt;
+&amp;gt; 20 28-Oct-2024 20:36:33 DENIED 195.201.9.37 22044 TCP 202.91.161.97 22
+&amp;gt; 21 28-Oct-2024 20:41:37 DENIED 195.201.9.37 9305 TCP 202.91.163.36 22
+&amp;gt; 22 28-Oct-2024 20:50:33 DENIED 195.201.9.37 39588 TCP 202.91.163.199 22
+&amp;gt; 23 28-Oct-2024 20:50:58 DENIED 195.201.9.37 62973 TCP 202.91.161.41 22
+&amp;gt; 24 28-Oct-2024 20:51:50 DENIED 195.201.9.37 3085 TCP 202.91.161.97 22
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>My wishlist for NixOS security in 2024+</title><link>https://delroth.net/posts/nixos-security-wishlist/</link><pubDate>Sat, 04 Nov 2023 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/nixos-security-wishlist/</guid><description>&lt;p>At the last &lt;a href="https://2023.nixcon.org/" target="_blank">NixCon in Darmstadt&lt;/a> and later in
+private followup conversations I had the opportunity to talk with a lot of
+amazing fellow NixOS contributors about NixOS security, and how we could
+improve it in the future.&lt;/p>
+&lt;p>This article is my personal wishlist of what I think should be worked on in the
+near-term to mid-term future. It&amp;rsquo;s not really a roadmap, because I don&amp;rsquo;t think
+it has any consensus or authority to be called one, but hopefully it can be
+used as a reference if anyone is looking for ideas or areas where they could
+help! It&amp;rsquo;s a mix of small, medium, and large sized projects. It&amp;rsquo;s also roughly
+ordered in terms of how I&amp;rsquo;d prioritize the work based on how much effort I
+imagine there is to be done and how much benefit we&amp;rsquo;d get in return.&lt;/p></description></item><item><title>Emulators and bundling crypto keys: is it common? is it illegal?</title><link>https://delroth.net/posts/emulation-crypto-keys-copyright-dmca/</link><pubDate>Mon, 05 Jun 2023 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/emulation-crypto-keys-copyright-dmca/</guid><description>&lt;p>&lt;em>This blog post is a copy of &lt;a href="https://www.reddit.com/r/emulation/comments/140b7x5/are_dolphin_devs_special_in_bundling_decryption/" target="_blank">an article I posted on the /r/emulation subreddit&lt;/a>
+regarding the recent Dolphin / Valve / Nintendo &amp;ldquo;drama&amp;rdquo;. You can read it with
+comments over there.&lt;/em>&lt;/p>
+&lt;p>On &lt;a href="https://www.reddit.com/r/emulation/comments/13ss1o9/nintendo_sends_valve_dmca_notice_to_block_steam/jlry1kq/?context=3" target="_blank">/r/emulation 8 days
+ago&lt;/a>
+/u/b0b_d0e (with a &amp;ldquo;Citra Developer&amp;rdquo; flair) mentioned:&lt;/p>
+&lt;blockquote>
+&lt;p>That&amp;rsquo;s right, you know how on all these other emulators like citra, ryu,
+yuzu, cemu etc they all say &amp;ldquo;dump your keys by following this guide&amp;rdquo; ever
+wonder why you didn&amp;rsquo;t need that with dolphin?&lt;/p>
+&lt;p>BECAUSE DOLPHIN ILLEGALLY DISTRIBUTES NINTENDO&amp;rsquo;S WII DECRYPTION KEY&lt;/p>
+&lt;/blockquote>
+&lt;p>I never really spent the time trying to reply to this. At the time I was more
+busy trying to make people understand the difference between a DMCA notice and
+what happened between Valve and Nintendo. But then this was also &lt;a href="https://www.youtube.com/watch?v=W5bfpS-WYUA" target="_blank">picked up by
+my favorite emulation not-journalist
+MVG&lt;/a> who even doubled down on the
+keys situation in his apology-update video.&lt;/p>
+&lt;p>So, I wondered: how do other emulators actually fare? I&amp;rsquo;ll let you decide on
+your own:&lt;/p></description></item><item><title>Boston Key Party crackme300 "hypercube" writeup</title><link>https://delroth.net/posts/boston-key-party-crackme300-writeup/</link><pubDate>Sun, 02 Mar 2014 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/boston-key-party-crackme300-writeup/</guid><description>&lt;p>Been a while since I last took the time to solve a CTF challenge. I did not
+take part in the Boston Key Party CTF, but a friend of mine told me that I
+might be interested in this crackme.&lt;/p>
+&lt;p>hypercube.dol is a GameCube binary that computes a value using terribly
+unoptimized code. The goal of the challenge is to understand the code and
+âoptimizeâ the slow parts. Kind of like the âsupercomputerâ category from
+PlaidCTF. I like crackmes and I like GameCube RE, so letâs get started!&lt;/p></description></item><item><title>Why Dolphin is getting rid of asynchronous audio processing</title><link>https://delroth.net/posts/dolphin-asynchronous-audio-processing/</link><pubDate>Wed, 10 Jul 2013 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/dolphin-asynchronous-audio-processing/</guid><description>&lt;p>Since the release of Dolphin 3.5 half a year ago, audio processing in Dolphin
+has changed a lot. In Dolphin versions up to 3.5, a lot of games required
+low-level emulation of the DSP code in order to not crash or get audio output.
+This low-level emulation (called DSP LLE) is unfortunately a lot slower than
+high-level emulation (DSP HLE): while low-level emulation emulates extremely
+accurately the DSP code by translating the binary code into x86, high-level
+emulation simply runs C++ code which approximates what the DSP code does. Iâve
+spent several months &lt;a href="http://blog.lse.epita.fr/articles/38-emulating-the-gamecube-audio-processing-in-dolphin.html" target="_blank">rewriting most of the DSP HLE code&lt;/a>,
+fixing sound issues in several dozens of games (my current estimate is around
+~150), and now DSP HLE can be used in most GameCube and Wii games that
+previously required DSP LLE. HLE being a lot faster than LLE, everyone should
+be happy, right?&lt;/p>
+&lt;p>Wrong. It turns out that one of the main source of bugs, crashes and
+inaccuracies in DSP HLE was also one of its main features: the ability to run
+sound emulation at full speed even if the emulated game is not able to reach
+100% speed on a computer. This feature, called asynchronous audio processing,
+is obviously being requested again by more and more people. This article is
+here to explain why async audio will not come back and what async audio
+actually breaks.&lt;/p></description></item><item><title>Escaping a Python sandbox (NdH 2013 quals writeup)</title><link>https://delroth.net/posts/escaping-a-python-sandbox-ndh-2013/</link><pubDate>Sun, 10 Mar 2013 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/escaping-a-python-sandbox-ndh-2013/</guid><description>&lt;p>The Nuit du Hack CTF 2013 Quals round was taking place yesterday. As usual,
+I&amp;rsquo;ll be posting a few writeups about fun exercises and/or solutions from this
+CTF. If you want more, my teammateÂ &lt;a href="http://blog.w4kfu.com/" target="_blank">w4kfu&lt;/a>Â should be
+posting some writeups as well on his blog soon.&lt;/p>
+&lt;p>&lt;strong>TL;DR:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>auth(&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>__class__&lt;span style="color:#f92672">.&lt;/span>__class__(&lt;span style="color:#e6db74">&amp;#39;haxx2&amp;#39;&lt;/span>,(),{&lt;span style="color:#e6db74">&amp;#39;__getitem__&amp;#39;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">lambda&lt;/span> self,&lt;span style="color:#f92672">*&lt;/span>a:&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;__len__&amp;#39;&lt;/span>:(&lt;span style="color:#66d9ef">lambda&lt;/span> l:l(&lt;span style="color:#e6db74">&amp;#39;function&amp;#39;&lt;/span>)( l(&lt;span style="color:#e6db74">&amp;#39;code&amp;#39;&lt;/span>)(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">6&lt;/span>,&lt;span style="color:#ae81ff">67&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;d&lt;/span>&lt;span style="color:#ae81ff">\x01\x00&lt;/span>&lt;span style="color:#e6db74">i&lt;/span>&lt;span style="color:#ae81ff">\x00\x00&lt;/span>&lt;span style="color:#e6db74">i&lt;/span>&lt;span style="color:#ae81ff">\x00\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x02\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x08\x00&lt;/span>&lt;span style="color:#e6db74">h&lt;/span>&lt;span style="color:#ae81ff">\x02\x00&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;d&lt;/span>&lt;span style="color:#ae81ff">\x03\x00\x84\x00\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x04\x00&lt;/span>&lt;span style="color:#e6db74">6d&lt;/span>&lt;span style="color:#ae81ff">\x05\x00\x84\x00\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x06\x00&lt;/span>&lt;span style="color:#e6db74">6&lt;/span>&lt;span style="color:#ae81ff">\x83&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\x03\x00\x83\x00\x00\x04&lt;/span>&lt;span style="color:#e6db74">i&lt;/span>&lt;span style="color:#ae81ff">\x01\x00\x02&lt;/span>&lt;span style="color:#e6db74">i&lt;/span>&lt;span style="color:#ae81ff">\x02\x00\x83\x00\x00\x01&lt;/span>&lt;span style="color:#e6db74">z&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x07\x00\x82\x01\x00&lt;/span>&lt;span style="color:#e6db74">Wd&lt;/span>&lt;span style="color:#ae81ff">\x00\x00&lt;/span>&lt;span style="color:#e6db74">QXd&lt;/span>&lt;span style="color:#ae81ff">\x00\x00&lt;/span>&lt;span style="color:#e6db74">S&amp;#39;&lt;/span>,(&lt;span style="color:#66d9ef">None&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;haxx&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>l(&lt;span style="color:#e6db74">&amp;#39;code&amp;#39;&lt;/span>)(&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">83&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;d&lt;/span>&lt;span style="color:#ae81ff">\x00\x00&lt;/span>&lt;span style="color:#e6db74">S&amp;#39;&lt;/span>,(&lt;span style="color:#66d9ef">None&lt;/span>,),(&lt;span style="color:#e6db74">&amp;#39;None&amp;#39;&lt;/span>,),(&lt;span style="color:#e6db74">&amp;#39;self&amp;#39;&lt;/span>,),&lt;span style="color:#e6db74">&amp;#39;stdin&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;enter-lam&amp;#39;&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>),&lt;span style="color:#e6db74">&amp;#39;__enter__&amp;#39;&lt;/span>,l(&lt;span style="color:#e6db74">&amp;#39;code&amp;#39;&lt;/span>)(&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">2&lt;/span>,&lt;span style="color:#ae81ff">3&lt;/span>,&lt;span style="color:#ae81ff">87&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;d&lt;/span>&lt;span style="color:#ae81ff">\x00\x00\x84\x00&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x01\x00\x84\x00\x00\x83\x01\x00&lt;/span>&lt;span style="color:#e6db74">|&lt;/span>&lt;span style="color:#ae81ff">\x01\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x02\x00\x19&lt;/span>&lt;span style="color:#e6db74">i&lt;/span>&lt;span style="color:#ae81ff">\x00&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\x00&lt;/span>&lt;span style="color:#e6db74">i&lt;/span>&lt;span style="color:#ae81ff">\x01\x00&lt;/span>&lt;span style="color:#e6db74">i&lt;/span>&lt;span style="color:#ae81ff">\x01\x00&lt;/span>&lt;span style="color:#e6db74">i&lt;/span>&lt;span style="color:#ae81ff">\x02\x00\x83\x01\x00&lt;/span>&lt;span style="color:#e6db74">S&amp;#39;&lt;/span>,(l(&lt;span style="color:#e6db74">&amp;#39;code&amp;#39;&lt;/span>)(&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">14&lt;/span>,&lt;span style="color:#ae81ff">83&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;|&lt;/span>&lt;span style="color:#ae81ff">\x00\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x00\x00\x83\x01\x00&lt;/span>&lt;span style="color:#e6db74">|&lt;/span>&lt;span style="color:#ae81ff">\x00\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x01\x00\x83\x01\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x02&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x02\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x02\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x03\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x04\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\n\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x0b\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x0c\x00&lt;/span>&lt;span style="color:#e6db74">d&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\x06\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x07\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x02\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x08\x00\x83\x0c\x00&lt;/span>&lt;span style="color:#e6db74">h&lt;/span>&lt;span style="color:#ae81ff">\x00\x00\x83\x02&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\x00&lt;/span>&lt;span style="color:#e6db74">S&amp;#39;&lt;/span>,(&lt;span style="color:#e6db74">&amp;#39;function&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;code&amp;#39;&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">67&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;|&lt;/span>&lt;span style="color:#ae81ff">\x00\x00&lt;/span>&lt;span style="color:#e6db74">GHd&lt;/span>&lt;span style="color:#ae81ff">\x00\x00&lt;/span>&lt;span style="color:#e6db74">S&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;s&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;stdin&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;f&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>,&lt;span style="color:#66d9ef">None&lt;/span>,(&lt;span style="color:#66d9ef">None&lt;/span>,),(),(&lt;span style="color:#e6db74">&amp;#39;s&amp;#39;&lt;/span>,)),(&lt;span style="color:#e6db74">&amp;#39;None&amp;#39;&lt;/span>,),(&lt;span style="color:#e6db74">&amp;#39;l&amp;#39;&lt;/span>,),&lt;span style="color:#e6db74">&amp;#39;stdin&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;exit2-lam&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>),l(&lt;span style="color:#e6db74">&amp;#39;code&amp;#39;&lt;/span>)(&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#ae81ff">3&lt;/span>,&lt;span style="color:#ae81ff">4&lt;/span>,&lt;span style="color:#ae81ff">83&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;g&lt;/span>&lt;span style="color:#ae81ff">\x00\x00\x04&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#ae81ff">\x01\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x01\x00&lt;/span>&lt;span style="color:#e6db74">i&lt;/span>&lt;span style="color:#ae81ff">\x00\x00&lt;/span>&lt;span style="color:#e6db74">i&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\x01\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x00\x00\x19&lt;/span>&lt;span style="color:#e6db74">i&lt;/span>&lt;span style="color:#ae81ff">\x02\x00\x83\x00\x00&lt;/span>&lt;span style="color:#e6db74">D]!&lt;/span>&lt;span style="color:#ae81ff">\x00&lt;/span>&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#ae81ff">\x02\x00&lt;/span>&lt;span style="color:#e6db74">|&lt;/span>&lt;span style="color:#ae81ff">\x02&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\x00&lt;/span>&lt;span style="color:#e6db74">i&lt;/span>&lt;span style="color:#ae81ff">\x03\x00&lt;/span>&lt;span style="color:#e6db74">|&lt;/span>&lt;span style="color:#ae81ff">\x00\x00&lt;/span>&lt;span style="color:#e6db74">j&lt;/span>&lt;span style="color:#ae81ff">\x02\x00&lt;/span>&lt;span style="color:#e6db74">o&lt;/span>&lt;span style="color:#ae81ff">\x0b\x00\x01&lt;/span>&lt;span style="color:#e6db74">|&lt;/span>&lt;span style="color:#ae81ff">\x01\x00&lt;/span>&lt;span style="color:#e6db74">|&lt;/span>&lt;span style="color:#ae81ff">\x02\x00\x12&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;q&lt;/span>&lt;span style="color:#ae81ff">\x1b\x00\x01&lt;/span>&lt;span style="color:#e6db74">q&lt;/span>&lt;span style="color:#ae81ff">\x1b\x00&lt;/span>&lt;span style="color:#e6db74">~&lt;/span>&lt;span style="color:#ae81ff">\x01\x00&lt;/span>&lt;span style="color:#e6db74">d&lt;/span>&lt;span style="color:#ae81ff">\x00\x00\x19&lt;/span>&lt;span style="color:#e6db74">S&amp;#39;&lt;/span>,(&lt;span style="color:#ae81ff">0&lt;/span>, ()),(&lt;span style="color:#e6db74">&amp;#39;__class__&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;__bases__&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;__subclasses__&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;__name__&amp;#39;&lt;/span>),(&lt;span style="color:#e6db74">&amp;#39;n&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;_[1]&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;x&amp;#39;&lt;/span>),&lt;span style="color:#e6db74">&amp;#39;stdin&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;locator&amp;#39;&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>),&lt;span style="color:#ae81ff">2&lt;/span>),(&lt;span style="color:#e6db74">&amp;#39;tb_frame&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;f_back&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;f_globals&amp;#39;&lt;/span>),(&lt;span style="color:#e6db74">&amp;#39;self&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;stdin&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;exit-lam&amp;#39;&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>),&lt;span style="color:#e6db74">&amp;#39;__exit__&amp;#39;&lt;/span>,&lt;span style="color:#ae81ff">42&lt;/span>,()),(&lt;span style="color:#e6db74">&amp;#39;__class__&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;__exit__&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#39;__enter__&amp;#39;&lt;/span>),(&lt;span style="color:#e6db74">&amp;#39;self&amp;#39;&lt;/span>,),&lt;span style="color:#e6db74">&amp;#39;stdin&amp;#39;&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;f&amp;#39;&lt;/span>,&lt;span style="color:#ae81ff">1&lt;/span>,&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>),{}))(&lt;span style="color:#66d9ef">lambda&lt;/span> n:[x &lt;span style="color:#66d9ef">for&lt;/span> x &lt;span style="color:#f92672">in&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>()&lt;span style="color:#f92672">.&lt;/span>__class__&lt;span style="color:#f92672">.&lt;/span>__bases__[&lt;span style="color:#ae81ff">0&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>__subclasses__() &lt;span style="color:#66d9ef">if&lt;/span> x&lt;span style="color:#f92672">.&lt;/span>__name__ &lt;span style="color:#f92672">==&lt;/span> n][&lt;span style="color:#ae81ff">0&lt;/span>])})())&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>GITS 2013 Writeup: MysteryBox (re300)</title><link>https://delroth.net/posts/gits-2013-writeup-mysterybox/</link><pubDate>Sun, 17 Feb 2013 02:00:00 +0200</pubDate><guid>https://delroth.net/posts/gits-2013-writeup-mysterybox/</guid><description>&lt;p>MysteryBox was a remote server disassembling and running its input data for an
+unknown RISC-like CPU. As far as I know the unknown CPU is not a &amp;ldquo;real&amp;rdquo; CPU but
+a VM made solely for this challenge. Here is an example of how to interact with
+the remote MysteryBox service:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell-session" data-lang="shell-session">&lt;span style="display:flex;">&lt;span>$ perl -e &lt;span style="color:#e6db74">&amp;#39;print &amp;#34;\x00\x00\x00\x00&amp;#34;&amp;#39;&lt;/span> |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> nc mysterybox.2013.ghostintheshellcode.com 4242
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>09007800 ldb sp, sp, sp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Caught signal 11. Program terminated.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sp=0900bc08 r1=00000000 r2=00000000 r3=00000000 r4=00000000 r5=00000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r6=00000000 r7=00000000 r8=00000000 r9=00000000 r10=00000000 r11=00000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>r12=00000000 r13=00000000 r14=00000000 r15=00000000 r16=00000000 r17=00000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>r18=00000000 r19=00000000 r20=00000000 r21=00000000 r22=00000000 r23=00000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>r24=00000000 r25=00000000 r26=00000000 r27=00000000 r28=00000000 r29=00000000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> lr=00000000 ip=09007800 cc=ffff
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>GITS 2013 Writeup: RTFM (re100)</title><link>https://delroth.net/posts/gits-2013-writeup-rtfm/</link><pubDate>Sun, 17 Feb 2013 01:00:00 +0200</pubDate><guid>https://delroth.net/posts/gits-2013-writeup-rtfm/</guid><description>&lt;pre tabindex="0">&lt;code>rtfm-67cc5dcb69df4244bcf2d573481e6d6a06b861a3: ELF 32-bit LSB executable
+rtfm-e24f03bb1204f8e3d40fae8ac135187a11b0ba5c: data
+&lt;/code>&lt;/pre>&lt;p>&lt;code>rtfm&lt;/code>Â is a binary processing ASCII input files and outputting seemingly
+compressed versions of these files: testing on a few long text files shows that
+the size of the output file is smaller than the input file. The second file
+from this challenge is a file compressed byÂ &lt;code>rtfm&lt;/code>, our objective is to write
+the decompression code for theÂ &lt;code>rtfm&lt;/code>Â compression.&lt;/p>
+&lt;p>The interesting part of the binary is the function atÂ &lt;code>0x08048910&lt;/code>, which
+compresses the contents of an input buffer and writes it to aÂ &lt;code>calloc&lt;/code>-ed
+output buffer. For each character of the input stream, the function will read
+data from a 128 entries table atÂ &lt;code>0x08048CA0&lt;/code>. Each of these entry contains a
+16-bit word as well as an 8-bit integer.&lt;/p></description></item><item><title>GITS 2013 Writeup: HackTheGibson (re250)</title><link>https://delroth.net/posts/gits-2013-writeup-hackthegibson/</link><pubDate>Sun, 17 Feb 2013 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/gits-2013-writeup-hackthegibson/</guid><description>&lt;pre tabindex="0">&lt;code>hackthegibson: ELF 64-bit LSB executable, x86-64, version 1 (SYSV),
+ dynamically linked (uses shared libs), for GNU/Linux 2.6.15,
+ BuildID[sha1]=0xb8515e4280130d84d4b4e1fd492da1b099ec0eb6, stripped
+&lt;/code>&lt;/pre>&lt;p>&lt;code>hackthegibson&lt;/code>Â is a 64-bit ELF for Linux using OpenSSL (&lt;code>libcrypto&lt;/code>) and FFTW
+to analyze the spectrum of samples coming fromÂ &lt;code>/dev/dsp&lt;/code>.&lt;/p>
+&lt;p>The program does not take a key as an input, only sound data. That means it
+will most likely generate and display a key based on the sound. Indeed, at the
+addressÂ &lt;code>0x401963&lt;/code>Â we can see that the program usesÂ &lt;code>MD5_Final&lt;/code>Â to generate a
+MD5 digest and displays it in hex using aÂ &lt;code>printf(&amp;quot;%02x&amp;quot;)&lt;/code>Â loop. Let&amp;rsquo;s look at
+all the references toÂ &lt;code>MD5_Update&lt;/code>Â to understand how this MD5 digest is
+computed:&lt;/p>
+&lt;ul>
+&lt;li>Just before the program main loop, the first call toÂ &lt;code>MD5_Update&lt;/code>Â hashes 1
+constant byteÂ &lt;code>0x14&lt;/code>&lt;/li>
+&lt;li>At each iteration of the program main loop, if the function analyzing the
+sound data returns the expected value (checked using a table mapping
+iteration number to expected value)Â &lt;code>MD5_Update&lt;/code>Â is called using that
+expected value.&lt;/li>
+&lt;li>Just before the call toÂ &lt;code>MD5_Final&lt;/code>Â the constant byteÂ &lt;code>0x14&lt;/code>Â is hashed once
+again.&lt;/li>
+&lt;/ul></description></item><item><title>Emulating the Gamecube audio processing in Dolphin</title><link>https://delroth.net/posts/emulating-gamecube-audio-dolphin/</link><pubDate>Mon, 03 Dec 2012 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/emulating-gamecube-audio-dolphin/</guid><description>&lt;p>For the last two weeks, I&amp;rsquo;ve been working on enhancements and bug fixes related
+to audio processing in theÂ &lt;a href="http://dolphin-emu.org/" target="_blank">Dolphin Emulator&lt;/a>Â (the
+only Gamecube/Wii emulator that allows playing commercial games at the moment).
+Through this project I have learned a lot about how audio processing works in a
+Gamecube. Very little documentation is available on that subject, so I think
+writing an article explaining how it works might teach some new things to
+people interested in Gamecube/Wii homebrew development or emulators
+development. This article was first published in 3 partsÂ &lt;a href="http://forums.dolphin-emu.org/Thread-new-ax-hle-what-is-it-and-how-does-it-work" target="_blank">on the Dolphin
+official
+forums&lt;/a>.
+Before publishing it on the blog, I made some small changes (mostly
+proof-reading and adding some complementary images) but most explanations are
+the same.&lt;/p>
+&lt;p>If you&amp;rsquo;re interested in the code, it is available in
+theÂ &lt;a href="http://code.google.com/p/dolphin-emu/source/list?name=new-ax-hle" target="_blank">&lt;code>new-ax-hle&lt;/code>Â branch&lt;/a>Â on
+theÂ &lt;a href="http://code.google.com/p/dolphin-emu/" target="_blank">official Google Code repository&lt;/a>.&lt;/p>
+&lt;p>Let&amp;rsquo;s start this exploration of audio emulation in a Gamecube emulator by
+looking at how the real hardware processes sound data.&lt;/p></description></item><item><title>Static analysis of an unknown compression format</title><link>https://delroth.net/posts/static-analysis-compression-format/</link><pubDate>Sat, 07 Apr 2012 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/static-analysis-compression-format/</guid><description>&lt;p>I really enjoy reverse engineering stuff. I also really like playing video
+games. Sometimes, I get bored and start wondering how the video game I&amp;rsquo;m
+playing works internally. Last year, this led me to analyzeÂ &lt;em>Tales of Symphonia
+2&lt;/em>, a Wii RPG. This game uses a custom virtual machine with some really
+interesting features (including cooperative multithreading) in order to
+describe cutscenes, maps, etc. I started to be very interested in how this
+virtual machine worked, and wrote a (mostly) complete implementation of this
+virtual machine in C++.&lt;/p>
+&lt;p>However, I recently discovered that some other games are also using this same
+virtual machine for their own scripts. I was quite interested by that fact and
+started analyzing scripts for these games and trying to find all the
+improvements between versions of the virtual machine. Three days ago, I started
+working onÂ &lt;em>Tales of Vesperia&lt;/em>Â (PS3) scripts, which seem to be compiled in the
+same format as I analyzed before. Unfortunately, every single file in the
+scripts directory seemed to be compressed using an unknown compression format,
+using the magic number &amp;ldquo;TLZC&amp;rdquo;.&lt;/p>
+&lt;p>Normally at this point I would have analyzed the uncompress function
+dynamically using an emulator or an on-target debugger. However, in this case,
+there is no working PS3 emulator able to help me in my task, and I also don&amp;rsquo;t
+possess an homebrew-enabled PS3 to try to dump the game memory. Sadface. I tend
+to prefer static analysis to dynamic analysis, but I also didn&amp;rsquo;t know a lot
+about compression formats at this point. Still, I started working on reversing
+that format statically.&lt;/p></description></item><item><title>More fun with the NDH2k12 Prequals VM</title><link>https://delroth.net/posts/more-fun-ndh2k12-vm/</link><pubDate>Wed, 28 Mar 2012 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/more-fun-ndh2k12-vm/</guid><description>&lt;p>&lt;em>This article was co-authored with &lt;a href="http://blog.w4kfu.com/" target="_blank">Samuel Chevet&lt;/a>.&lt;/em>&lt;/p>
+&lt;p>During the Nuit du Hack 2012 Prequals contest, we often had to remote exploit
+some services running in a custom VM (which wasÂ &lt;a href="https://github.com/JonathanSalwan/VMNDH-2k12" target="_blank">recently released on
+GitHub&lt;/a>). After injecting a
+shellcode in the services (through a remote stack buffer overflow) we were able
+to run VM code, which can execute interesting
+syscalls:Â &lt;code>read&lt;/code>,Â &lt;code>write&lt;/code>,Â &lt;code>open&lt;/code>,Â &lt;code>exit&lt;/code>, and a lot more. However there was
+not a way to directly execute a random x86 binary or to list directories
+(noÂ &lt;code>getdents&lt;/code>), which made it really hard to explore the server filesystem.&lt;/p>
+&lt;p>After the event ended we got an idea that we could have used to bypass this
+security and execute any shell command line on the remote server.
+UsingÂ &lt;code>/proc/self/cmdline&lt;/code>, we can get the path to the VM binary and download
+it. Then, usingÂ &lt;code>/proc/self/mem&lt;/code>Â we can replace some symbols from the binary by
+our custom x86 code. This method works because without theÂ &lt;a href="http://grsecurity.net/" target="_blank">grsecurity
+patchset&lt;/a>Â &lt;code>/proc/self/mem&lt;/code>Â completely overrides NX and
+allows writing to read-only memory locations (likeÂ &lt;code>.text&lt;/code>).&lt;/p></description></item><item><title>GC/Wii DOL Plugin built for IDA 6.1</title><link>https://delroth.net/posts/gcwii-dol-ida-6.1/</link><pubDate>Thu, 22 Mar 2012 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/gcwii-dol-ida-6.1/</guid><description>&lt;p>Once upon a time, Stefan Esser from
+theÂ &lt;a href="http://hitmen.c02.at/index.html" target="_blank">Hitmen&lt;/a>Â programmedÂ &lt;a href="http://hitmen.c02.at/html/tools_ida.html" target="_blank">an IDA loader
+plugin&lt;/a>Â to be able to analyze DOL
+files, which is the executable format used for Gamecube and Wii. Builds are
+published for versions up to 5.2, but nothing more recent.&lt;/p>
+&lt;p>Fortunately they also released the source to their plugin, which allowed me
+(with some very minor modifications to the code to useÂ &lt;code>linput_t&lt;/code>Â instead of
+CÂ &lt;code>FILE&lt;/code>Â structures) to build a version of the IDA DOL loader plugin for IDA
+6.1, the version I&amp;rsquo;m using in my day to day reverse engineering. Here isÂ &lt;a href="downloads/dol.ldw">a
+link to this build&lt;/a>.&lt;/p>
+&lt;p>Have fun with it!&lt;/p></description></item><item><title>My Stripe CTF writeup</title><link>https://delroth.net/posts/stripe-ctf-writeup/</link><pubDate>Thu, 01 Mar 2012 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/stripe-ctf-writeup/</guid><description>&lt;p>RecentlyÂ &lt;a href="http://stri.pe/" target="_blank">Stripe&lt;/a>Â (a startup trying to improve online payments
+for web developers) put onlineÂ &lt;a href="https://stripe.com/blog/capture-the-flag" target="_blank">a fun CTF
+challenge&lt;/a>Â with simple security
+exercises. Now that the challenge is done and the CTF is offline, I wanted to
+share my solutions with people who were interested in this CTF but were not
+able to solve it before the time limit.&lt;/p>
+&lt;p>Unfortunately I don&amp;rsquo;t have the original source code of the exercises here. I
+hope that the Stripe CTF organizers will publish those so that I can explain my
+exploits better ð&lt;/p></description></item><item><title>Reading Wii discs with Python</title><link>https://delroth.net/posts/reading-wii-discs-python/</link><pubDate>Fri, 10 Jun 2011 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/reading-wii-discs-python/</guid><description>&lt;p>What I mean by reading a Wii disc is simple: from a Wii DVD image, being able
+to get metadata about the game, like its name or its unique ID, but also being
+able to read the filesystem on the disc to access the game executable and data.
+We&amp;rsquo;ll do this in three parts: first, we&amp;rsquo;ll decrypt the disc clusters to be able
+to access the raw partition data, then we&amp;rsquo;ll parse the filesystem to access
+files and directories, and we&amp;rsquo;ll end this by a presentation of wiiodfs, the
+software I created to mount Wii discs on Linux using FUSE.&lt;/p>
+&lt;p>I currently only have one game disc image on my computer: the one fromÂ &lt;em>&lt;a href="http://en.wikipedia.org/wiki/Tales_of_Symphonia:_Dawn_of_the_New_World" target="_blank">Tales
+of Symphonia: Dawn of the New
+World&lt;/a>&lt;/em>,
+PAL version, whose ID isÂ &lt;code>RT4PAF&lt;/code>Â (sha1sum:
+&lt;code>b2fb05a7fdf172ea61b5d1872e6b121140c95822&lt;/code>). I&amp;rsquo;m going to work on this disc image
+for my tests, and if needed fix things when I&amp;rsquo;ll have to open another game DVD
+image which doesn&amp;rsquo;t work. To write this article, I&amp;rsquo;m using documentation
+fromÂ &lt;a href="http://wiibrew.org/wiki/Main_Page" target="_blank">WiiBrew&lt;/a>, a wiki about Wii homebrew
+with a lot of technical informations, and theÂ &lt;a href="https://github.com/dolphin-emu/dolphin" target="_blank">source code of
+Dolphin&lt;/a>, the Wii emulator (mostly in
+theÂ &lt;code>Source/Core/DiscIO&lt;/code>Â directory). Thanks a lot to all of the contributors to
+these projects.&lt;/p></description></item><item><title>Reverse engineering a Wii game script interpreter</title><link>https://delroth.net/posts/reverse-engineering-script-interpreter/</link><pubDate>Thu, 09 Jun 2011 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/reverse-engineering-script-interpreter/</guid><description>&lt;p>Most games nowadays avoid hardcoding behavior in the main program code. It
+makes the development process a lot easier by allowing people with less
+programming experience than the core engine developers to contribute by writing
+scripts which defines how conversations happen in the game, how menus work, how
+cinematic scenes go, etc. Scripts are usually written in a higher level
+language than the game engine, as they require less performance and must be
+portable when the game needs to run on different platforms. Easy, common script
+languages like Lua or Python are often used (for example, CCP uses Python to
+describe the EVE Online client GUI, and Microsoft uses Lua in Freelancer to
+describe cinematics), but some companies like to create their own language and
+their own interpreter to do this job.&lt;/p>
+&lt;p>I&amp;rsquo;m a fan of Namco&amp;rsquo;s &amp;ldquo;Tales of&amp;rdquo; RPG games. I was given a Wii last december as a
+gift, and bought &amp;ldquo;Tales of Symphonia: Dawn of the New World&amp;rdquo;. As a true hacker
+interested in game development, after finishing the game, I started
+investigating how this game actually works behind the scenes. After writing
+software to read the encrypted Wii disc of the game, I analyzed the data
+contained on the DVD, trying to find what was each file and how the game engine
+made all of this into a game.&lt;/p></description></item><item><title>DEFCON 19 CTF Binary L33tness 300 (b300) writeup</title><link>https://delroth.net/posts/defcon-19-b300-writeup/</link><pubDate>Tue, 07 Jun 2011 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/defcon-19-b300-writeup/</guid><description>&lt;p>As in the other binary l33tness problems, only a single file was provided in
+the problem description:&lt;/p>
+&lt;pre tabindex="0">&lt;code>b300_b258110ad2d6100c4b8: gzip compressed data
+&lt;/code>&lt;/pre>&lt;p>Decompressing this gives us a tar archive containing these files:&lt;/p>
+&lt;pre tabindex="0">&lt;code>./0/
+./0/heap-dump-tm1306902723-pid12959.hprof
+./0/classes.dex
+./1/
+./1/1306902613084.jpgs
+./1/1306903692478.jpgs
+./2/
+./2/1306902613084.jpgs
+./2/1306903692478.jpgs
+&lt;/code>&lt;/pre>&lt;p>The binary is classes.dex, which is bytecode for the Dalvik virtual machine
+found on Android devices. The hprof file is a heap profiler output file which
+contains the state of the program heap at some point during the execution. The
+.jpgs files seems to contain random data at first, which leaded us to think it
+was encrypted data we needed to decrypt.&lt;/p></description></item><item><title>DEFCON 19 CTF Grab Bag 100 (gb100) writeup</title><link>https://delroth.net/posts/defcon-19-gb100-writeup/</link><pubDate>Mon, 06 Jun 2011 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/defcon-19-gb100-writeup/</guid><description>&lt;p>gb100 took a lot of time to pwn for us as we ran out of ideas really fast and
+it was mostly guessing. Anyway, this is a small writeup about this really
+simple problem from the DEFCON 19 CTF.&lt;/p>
+&lt;p>The description of this problem contained only a host:port which we had to
+connect to. For the first 4 to 6 hours of the contest the server simply closed
+any incoming connection on the specified port, which caused us to try a lot of
+strange protocols, only to find out 4 hours later that the problem was fixed
+and was simply an HTTP server.&lt;/p></description></item><item><title>Release: Eri HaKawai v0.1 for PAL Wiis</title><link>https://delroth.net/posts/eri-hakawai-v0.1-release/</link><pubDate>Sun, 27 Mar 2011 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/eri-hakawai-v0.1-release/</guid><description>&lt;p>Eri HaKawai is a new exploit for PAL Wiis, which works for all currently
+released System Menu versions (&amp;lt;= 4.3). It works by using a bug in the savegame
+loading code of Tales of Symphonia: Dawn of the New World, the sequel to the
+Gamecube game Tales of Symphonia.&lt;/p>
+&lt;p>I&amp;rsquo;m releasing it in a source format (no binary &lt;code>data.bin&lt;/code>) under the GPLv2.
+You&amp;rsquo;ll need a Broadway cross-compilation toolchain, as well as a checkout of
+Segher&amp;rsquo;s Wii Git repository. Do whatever you want with it (as long as it is
+allowed by the license, of course!), I&amp;rsquo;m just too lazy to distribute binaries.&lt;/p>
+&lt;p>&lt;a href="downloads/erihakawai-0.1.tar.bz2">Download Eri HaKawai v0.1&lt;/a>&lt;/p></description></item><item><title>Jailbreaking a Wii the hard way: how to</title><link>https://delroth.net/posts/jailbreak-wii-the-hard-way/</link><pubDate>Fri, 25 Mar 2011 00:00:00 +0200</pubDate><guid>https://delroth.net/posts/jailbreak-wii-the-hard-way/</guid><description>&lt;p>This last Christmas I was happy to get gifted a brand new Nintendo Wii (&amp;ldquo;25
+years of Mario&amp;rdquo; version) from someone in my family. Quickly my interests
+shifted from &amp;ldquo;playing games on the system&amp;rdquo; to trying to understand how the
+console works, and whether I could potentially run my own code on it. This led
+to an article on this blog about &lt;a href="https://delroth.net/posts/reading-wii-discs-python/">the Wii DVD file format&lt;/a>,
+but also a lot of research and reverse engineering to understand how games
+themselves work.&lt;/p>
+&lt;p>However, while I did learn a lot, I was still not able to run my own code on
+the console. It&amp;rsquo;s kind of sad, I would have loved to be able to do more than
+just &lt;em>reading&lt;/em> about the hardware. To run unapproved code on a closed/locked
+platform, one must use what is called a &lt;em>jailbreak&lt;/em>. This usually involves
+exploiting a security vulnerability in software that already runs on the device
+(for example, on the Nintendo Wii, a game). Through this vulnerability,
+arbitrary code gets executed, then this entry point is used to further root the
+device. The iPhone, for example, was jailbroken via a vulnerability in its PDF
+reading code, allowing rooting by direct access to a web page. On the Wii, the
+&lt;em>Bannerbomb&lt;/em> exploit allowed until last year jailbreaking a Wii by making it
+read a malformed image. There are many similar examples.&lt;/p></description></item></channel></rss>

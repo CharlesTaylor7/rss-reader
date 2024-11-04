@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Without boats, dreams dry up</title><link>https://without.boats/</link><description>Recent content on Without boats, dreams dry up</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Fri, 25 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://without.boats/index.xml" rel="self" type="application/rss+xml"/><item><title>Generators with UnpinCell</title><link>https://without.boats/blog/generators-with-unpin-cell/</link><pubDate>Fri, 25 Oct 2024 00:00:00 +0000</pubDate><guid>https://without.boats/blog/generators-with-unpin-cell/</guid><description>&lt;p>In July, I described a way to make pinning &lt;a href="https://without.boats/blog/pinned-places">more ergonomic&lt;/a> by integrating it more
+fully into the language. Last week, I develoepd that idea &lt;a href="https://without.boats/blog/unpin-cell">further&lt;/a> with the notion of
+&lt;code>UnpinCell&lt;/code>: a wrapper type that lets a user take an &lt;code>&amp;amp;pin mut UnpinCell&amp;lt;T&amp;gt;&lt;/code> and produce an &lt;code>&amp;amp;mut T&lt;/code>, similar to how other cells let a user take a shared reference to the cell and produce a mutable
+reference to its contents. I believe that this notion can also solve the biggest outstanding issues
+facing &lt;a href="https://without.boats/blog/generators">generators&lt;/a>: the fact that the &lt;code>Iterator&lt;/code> interface does not permit
+self-referential values.&lt;/p>
+&lt;p>As I wrote in my &lt;a href="https://without.boats/blog/pin">explanation&lt;/a> of Pin&amp;rsquo;s design, the biggest advantage that Pin had over other
+design ideas was that it was a trivially backward compatible way of introducing a contract that an
+object will never be moved. But this meant that a trait could only opt into that contract using the
+new interface; traits that existed before Pin and don&amp;rsquo;t opt into that contract cannot be implemented
+by types that have self-referential values. The most problematic trait here is &lt;code>Iterator&lt;/code>, because
+generators (functions that evaluate to iterators in the same way async functions evaluate to
+futures) would ideally support self-referential values just like async functions do. So long as the
+interface for &lt;code>Iterator&lt;/code> takes a mutable reference and not a pinned mutable reference, implementers
+must assume the iterator can be moved around and therefore can&amp;rsquo;t be self-referential.&lt;/p></description></item><item><title>UnpinCell</title><link>https://without.boats/blog/unpin-cell/</link><pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate><guid>https://without.boats/blog/unpin-cell/</guid><description>&lt;p>A variation on my previous design for &lt;a href="https://without.boats/blog/pinned-places">pinned places&lt;/a> has occurred to me that would
+be more consistent with Rust&amp;rsquo;s existing feature set.&lt;/p>
+&lt;p>The most outlandish aspect of the previous design was the notion of &amp;ldquo;pinned fields,&amp;rdquo; which support
+pinned projection. This is quite different from how field projection normally works in Rust: if you
+have a mutable reference to a struct, you can get a mutable reference to its field, period. (I know
+Niko Matsakis has recently explored ideas that would change this; this post won&amp;rsquo;t go into any deep
+consideration of that proposal.) I&amp;rsquo;ve come up with a design which would have similar properties,
+instead of introducing a kind of field marker.&lt;/p></description></item><item><title>Pinned places</title><link>https://without.boats/blog/pinned-places/</link><pubDate>Tue, 23 Jul 2024 00:00:00 +0000</pubDate><guid>https://without.boats/blog/pinned-places/</guid><description>&lt;p>In the previous &lt;a href="https://without.boats/blog/pin">post&lt;/a>, I described the goal of Rust&amp;rsquo;s &lt;code>Pin&lt;/code> type and the history of how it
+came to exist. When we were initially developing this API in 2018, one of our explicit goals was the
+limit the number of changes we would make to Rust, because we wanted to ship a &amp;ldquo;minimum viable
+product&amp;rdquo; of async/await syntax as soon as possible. This meant that &lt;code>Pin&lt;/code> is a type defined in the
+standard library, without any syntactic or language support except for the ability to use it as a
+method receiver. As I wrote in my previous post, in my opinion this is the source of a &amp;ldquo;complexity
+cliff&amp;rdquo; when users have to interact with &lt;code>Pin&lt;/code>.&lt;/p>
+&lt;p>We knew when we made this choice that pinned references would be harder to use and more confusing
+than ordinary references, though I think we did underestimate just how much more challenging they
+would be for most users. Our initial hope was that with async/await, pinning would disappear into
+the background, because the &lt;code>await&lt;/code> operator and the runtime&amp;rsquo;s &lt;code>spawn&lt;/code> function would pin your
+futures for you and you wouldn&amp;rsquo;t have to encounter it directly. As things played out, there are
+still some cases where users must interact with pinned references, even when using async/await. And
+sometimes users do need to &amp;ldquo;drop down&amp;rdquo; into a lower-level &lt;a href="https://without.boats/blog/the-registers-of-rust">register&lt;/a> to implement
+&lt;code>Future&lt;/code> themselves; this is when they truly encounter a huge complexity cliff: both the essential
+complexity of implementing a state machine &amp;ldquo;by hand&amp;rdquo; and the additional complexity of understanding
+the APIs to do with &lt;code>Pin&lt;/code>.&lt;/p>
+&lt;p>My contention in my previous post was that the difficulties involved in this have very little to do
+with the complexity inherent in the pinned typestate as a concept, or in pinned references as a way
+of representing it, but instead arises from the fact that &lt;code>Pin&lt;/code> is a pure library type without
+support from the language. Users who deal with &lt;code>Pin&lt;/code> are almost always doing something that is
+totally memory safe, the problem is just that the idioms to do so with &lt;code>Pin&lt;/code> are different from and
+less clear than the idioms for doing so with ordinary references.&lt;/p>
+&lt;p>In this post, I want to propose a set of language changes - completely backward compatible with the
+language as it exists and the async ecosystem built on &lt;code>Pin&lt;/code> - which will make interacting with
+pinned references much more similar to interacting with ordinary references.&lt;/p></description></item><item><title>Pin</title><link>https://without.boats/blog/pin/</link><pubDate>Fri, 19 Jul 2024 00:00:00 +0000</pubDate><guid>https://without.boats/blog/pin/</guid><description>&lt;p>The &lt;code>Pin&lt;/code> type (and the concept of &lt;em>pinning&lt;/em> in general) is a foundational building block on which
+the rest of the the Rust async ecosystem stands. Unfortunately, it has also been one of the least
+accessible and most misunderstood elements of async Rust. This post is meant to explain what &lt;code>Pin&lt;/code>
+achieves, how it came to be, and what the current problem with &lt;code>Pin&lt;/code> is.&lt;/p>
+&lt;p>There was an interesting &lt;a href="https://www.modular.com/blog/mojo-vs-rust-is-mojo-faster-than-rust">post&lt;/a> a few months ago on the blog of the company Modular, which is
+developing a new language called Mojo. In a brief section discussing &lt;code>Pin&lt;/code> in Rust, I found that it
+very succinctly captured the zeitgeist of the public discussion of the subject:&lt;/p>
+&lt;blockquote>
+&lt;p>In Rust, there is no concept of value identity. For a self-referential struct pointing to its own
+member, that data can become invalid if the object moves, as it&amp;rsquo;ll be pointing to the old location
+in memory. This creates a complexity spike, particularly in parts of async Rust where futures need
+to be self-referential and store state, so you must wrap Self with Pin to guarantee it&amp;rsquo;s not going
+to move. In Mojo, objects have an identity so referring to self.foo will always return the correct
+location in memory, without any additional complexity required for the programmer.&lt;/p>
+&lt;/blockquote>
+&lt;p>Some aspects of these remarks confuse me. The term &amp;ldquo;value identity&amp;rdquo; is not defined anywhere in this
+post, nor can I find it elsewhere in Mojo&amp;rsquo;s documentation, so I&amp;rsquo;m not clear on how Modular claims
+that Mojo solves the problem that &lt;code>Pin&lt;/code> is meant to solve. Despite this, I do think the criticism of
+&lt;code>Pin&lt;/code>&amp;rsquo;s usability is well stated: there is indeed a &amp;ldquo;complexity spike&amp;rdquo; when a user is forced to
+interact with it. The phrase I would use is actually a &amp;ldquo;complexity cliff,&amp;rdquo; as in the user suddenly
+finds themself thrown off a cliff into a sea of complex, unidiomatic APIs they don&amp;rsquo;t understand.
+This is a problem and it would be very valuable to Rust users if the problem were solved.&lt;/p>
+&lt;p>As it happens, this little corner of Rust is my mess; adding &lt;code>Pin&lt;/code> to Rust to support
+self-referential types was my idea. I have ideas of how this complexity spike could be resolved,
+which I will elaborate in a subsequent post. Before I can get there though I need to first try to
+explain, as efficiently as I know how, what &lt;code>Pin&lt;/code> accomplishes, how it came to exist, and why it is
+currently difficult to use.&lt;/p></description></item><item><title>Ownership</title><link>https://without.boats/blog/ownership/</link><pubDate>Sat, 22 Jun 2024 00:00:00 +0000</pubDate><guid>https://without.boats/blog/ownership/</guid><description>&lt;p>This post is meant as an explainer about how substructural type theory can be applied in programming
+language design. Terms like &amp;ldquo;substructural type theory&amp;rdquo; tend to scare and confuse programmers who
+don&amp;rsquo;t write Haskell on the weekends, so one thing programming language designers should do when
+thinking about how they will present their language is invent metaphors, even slightly misleading
+ones, to help more ordinary programmers understand how their language works. One such term is
+&amp;ldquo;ownership.&amp;rdquo;&lt;/p>
+&lt;p>Not infrequently, objects in a program come to represent something outside of themselves; they are
+not &amp;ldquo;pure data&amp;rdquo; but some kind of resource with identity. A classic example of this might be a
+sort of handle granting exclusive access to a resource. For this to really work well you want to
+know that to get that object you had to execute certain code (a &amp;ldquo;constructor&amp;rdquo;), that when the object
+is no longer used some other code will be executed (a &amp;ldquo;destructor&amp;rdquo;), and that while the object is in
+scope, no concurrently executing code also has an object representing the same exclusive resource
+(that it is not &amp;ldquo;aliased&amp;rdquo;). This is what ownership (as presented in Rust, at least) is all about.&lt;/p>
+&lt;p>I want to demystify ownership and substructural types in the hopes that this will become more common
+knowledge. Nothing in this post is really groundbreaking - if you&amp;rsquo;re already &amp;ldquo;in the know,&amp;rdquo; it will
+contain no new information - but it does contain some notes on aspects of Rust&amp;rsquo;s implementation that
+I think are incorrect (one of which would even be easy to change).&lt;/p></description></item><item><title>References are like jumps</title><link>https://without.boats/blog/references-are-like-jumps/</link><pubDate>Mon, 13 May 2024 00:00:00 +0000</pubDate><guid>https://without.boats/blog/references-are-like-jumps/</guid><description>&lt;blockquote>
+&lt;p>In a high-level language, the programmer is deprived of the dangerous power to update his own
+program while it is running. Even more valuable, he has the power to split his machine into a
+number of separate variables, arrays, files, etc.; when he wishes to update any of these he must
+quote its name explicitly on the left of the assignment, so that the identity of the part of the
+machine subject to change is immediately apparent; and, finally, a high-level language can
+guarantee that all variables are disjoint, and that updating any one of them cannot possibly have
+any effect on any other.&lt;/p>
+&lt;p>Unfortunately, many of these advantages are not maintained in the design of procedures and
+parameters in ALGOL 60 and other languages. But instead of mending these minor faults, many
+language designers have preferred to extend them throughout the whole language by introducing the
+concept of reference, pointer, or indirect address into the language as an assignable item of
+data. This immediately gives rise in a high-level language to one of the most notorious confusions
+of machine code, namely that between an address and its contents. Some languages attempt to solve
+this by even more confusing automatic coercion rules. Worst still, an indirect assignment through
+a pointer, just as in machine code, can update any store location whatsoever, and the damage is no
+longer confined to the variable explicitly named as the target of assignment&amp;hellip;&lt;/p>
+&lt;p>Unlike all other values (integers, strings, arrays, files, etc.) references have no meaning
+independent of a particular run of a program. They cannot be input as data, and they cannot be
+output as results. If either data or references to data have to be stored on files or backing
+stores, the problems are immense. And on many machines they have a surprising overhead on
+performance, for example they will clog up instruction pipelines, data lookahead, slave stores,
+and even paging systems. &lt;strong>References are like jumps, leading wildly from one part of a data
+structure to another. Their introduction into high-level languages has been a step backward from
+which we may never recover.&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>— C.A.R. Hoare, &lt;em>Hints on programming-language design&lt;/em> 1974&lt;/p>
+&lt;p>How embarrassing it is for the practice of software development that, when it comes to the subject
+of references, we have spent half a century creating an enormous object proof that Sir Tony was
+correct. Null pointers may have been his &lt;a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/">billion dollar mistake&lt;/a>, but the decision to
+ignore his remarks about the problem of pointers in general was a trillion dollar mistake that
+everyone else made.&lt;/p>
+&lt;p>What Tony Hoare was writing about when he said that references are like jumps was the problem of
+&lt;em>mutable, aliased state.&lt;/em> If you have in a language the ability to alias two variables so that they
+refer to the same location in memory, and also the ability to assign values to variables as
+execution progresses, your ability to locally reason about the behavior of a component of your
+system becomes badly inhibited. Depriving the user of the ability to mutate aliased state
+by accident is critical to enabling the user to easily create correctly functioning systems.&lt;/p></description></item><item><title>Coroutines and effects</title><link>https://without.boats/blog/coroutines-and-effects/</link><pubDate>Sat, 20 Apr 2024 00:00:00 +0000</pubDate><guid>https://without.boats/blog/coroutines-and-effects/</guid><description>&lt;p>For the past few months I&amp;rsquo;ve been mulling over some things that Russell Johnston made me realize
+about the relationship between effect systems and coroutines. You can read more of his thoughts on
+this subject &lt;a href="https://www.abubalay.com/blog/2024/01/14/rust-effect-lowering">here&lt;/a>, but he made me realize that effect systems (like that found in Koka)
+and coroutines (like Rust&amp;rsquo;s async functions or generators) are in some ways isomorphic to one
+another. I&amp;rsquo;ve been pondering the differences between them, trying to figuring out the advantages and
+disadvantages of each.&lt;/p>
+&lt;p>A few weeks ago, Will Crichton posted something on &lt;a href="https://twitter.com/tonofcrates/status/1770560175835058573">Twitter&lt;/a> that helped bring the
+contrast into sharper focus for me:&lt;/p>
+&lt;blockquote>
+&lt;p>The entire field of PL right now: what if it was dynamically scoped&amp;hellip;. but statically
+typed&amp;hellip;&amp;hellip;&amp;hellip;&amp;hellip;..? (effects, capabilities, contexts, metavariables&amp;hellip;)&lt;/p>
+&lt;/blockquote>
+&lt;p>I&amp;rsquo;m just a humble language designer (and not a theorist of anything, especially not PL), so my
+focus is the difference in user experience and affordance. But this seems like a cutting insight and
+this property of effect handlers - static typing but dynamic scoping - seems to me to be a good
+jumping off point for understanding the difference between effect handlers and coroutines from a
+user perspective.&lt;/p></description></item><item><title>Iterators and traversables</title><link>https://without.boats/blog/iterators-and-traversables/</link><pubDate>Wed, 13 Mar 2024 00:00:00 +0000</pubDate><guid>https://without.boats/blog/iterators-and-traversables/</guid><description>&lt;p>This is a brief note about the definition of &lt;em>iterator&lt;/em>.&lt;/p></description></item><item><title>Asynchronous clean-up</title><link>https://without.boats/blog/asynchronous-clean-up/</link><pubDate>Sat, 24 Feb 2024 00:00:00 +0000</pubDate><guid>https://without.boats/blog/asynchronous-clean-up/</guid><description>&lt;p>One problem with the design of async Rust is what do about async clean-up code. Consider that you
+have a type representing some object or operation (like an async IO handle) and it runs clean up
+code when you are done using it, but that clean up code itself is also non-blocking and could yield
+control. Async Rust has no good way to handle this pattern today.&lt;/p>
+&lt;p>The nicest solution seems to be to just use the mechanism that already exists: destructors. If only
+you could &lt;code>await&lt;/code> inside a destructor, everything would seem to be solved. Alas, this would present
+several problems, and I personally do not believe it is realistic to imagine Rust gaining this
+feature in the same way that destructors work.&lt;/p>
+&lt;p>The first problem is this: what happens if you drop the the value in a non-async scope? It&amp;rsquo;s not
+possible to &lt;code>await&lt;/code> there! There are two options: either the async destructor doesn&amp;rsquo;t run
+(considered too easy a mistake to make), or there is a type-checking rule that prevents users from
+dropping values with async destructors in non-async scopes. The second solution reduces to
+undroppable types, which I will discuss later in this post: this rule is just undroppable types with
+an exception to allow them to be dropped in an async scope. What I can say with certainty is that
+undroppable types, even with an exception, would be very difficult to add to Rust.&lt;/p>
+&lt;p>The second problem is the way that the state of the async destructor would impact the state of any
+future any containing it. This is actually a re-emergence of the problems with async methods, but
+now applied to any generic type (because you don&amp;rsquo;t know of a generic type &lt;code>T&lt;/code> has an async
+destructor). The first problem is that you have any trait object, when it drops, what happens if it
+has an async destructor? This introduces the same object safety issues as async methods: you have
+nowhere to store the future returned by the async destructor of a trait object. The second problem
+is that you want to send a value to a different thread, that state of its async destructor also
+needs to be &lt;code>Send&lt;/code>. This is the same problem that motivated RTN, except that now its a problem for
+&lt;em>every&lt;/em> generic type being moved to another thread, not only types on which you explicitly call an
+async method. I wrote about this problem years and years ago, but it seems to have been
+misunderstood and ignored since then.&lt;/p>
+&lt;p>The third problem is that users are concerned about having implicit await points added to their
+future without them realizing it. Therefore there would need to be some restriction that not only
+doesn&amp;rsquo;t allow these types to be dropped in a non-async scope, but also makes it so that they are
+destructed at an already explicit &lt;code>await&lt;/code> point. This would make the rules around when their async
+destructors run very different from other destructors, if its even possible to make them coherent.&lt;/p>
+&lt;p>The fourth problem, I believe maybe never raised before, is that it is not the ideal code generation
+to run async destructors sequentially no matter what. For example, if I have two values that I am
+asynchronously dropping, possibly I want to &lt;code>join&lt;/code> the destructors so they run concurrently. But
+doing this implicitly would be very risky, because maybe I actually carefully expect one to run
+before the other.&lt;/p>
+&lt;p>All of these problems hint at a different way to frame the problem of asynchronous clean-up: the
+problem is not that there is no async drop, but that destructors really only work when you can write
+a destructor function that returns &lt;code>()&lt;/code>. Async clean-up is just a special case of clean-up which
+does not return &lt;code>()&lt;/code>. In this case it returns a future, but there are also scenarios in which the
+issue is a lack of destructors that can return &lt;code>Result&lt;/code>, for example.&lt;/p>
+&lt;p>I want to explore the design space for asynchronous clean up and clean up code that returns values
+in general, without a focus on destructors specifically. The proposal I&amp;rsquo;ve fleshed out here, based
+heavily on the work of others (especially Eric Holk and Tyler Mandry), combines two distinct
+features - async future cancellation and a &lt;code>do&lt;/code> &amp;hellip; &lt;code>final&lt;/code> construct - to enable users to write
+asynchronous clean up code that is consistently called. I will also show how these constructs are
+required for any sort of &amp;ldquo;linear type&amp;rdquo; mechanism in Rust, so rather than seeing them as alternative
+to type-based async clean up code, they should be seen as prerequisites that can be implemented in
+the nearer term.&lt;/p></description></item><item><title>FuturesUnordered and the order of futures</title><link>https://without.boats/blog/futures-unordered/</link><pubDate>Sun, 18 Feb 2024 00:00:00 +0000</pubDate><guid>https://without.boats/blog/futures-unordered/</guid><description>&lt;p>In my &lt;a href="https://without.boats/blog/let-futures-be-futures">previous post&lt;/a>, I wrote about the distinction between &amp;ldquo;multi-task&amp;rdquo;
+and &amp;ldquo;intra-task&amp;rdquo; concurrency in async Rust. I want to open this post by considering a common pattern
+that users encounter, and how they might implement a solution using each technique.&lt;/p>
+&lt;p>Let&amp;rsquo;s call this &amp;ldquo;sub-tasking.&amp;rdquo; You have a unit of work that you need to perform, and you want to
+divide that unit into many smaller units of work, each of which can be run concurrently. This is
+intentionally extremely abstract: basically every program of any significance contains an instance
+of this pattern at least once (often many times), and the best solution will depend on the kind of
+work being done, how much work there is, the arity of concurrency, and so on.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Using &lt;strong>multi-task concurrency&lt;/strong>, each smaller of work would be its own task. The user would spawn
+each of these tasks onto an executor. The results of the task would be collected with a
+synchronization primitive like a &lt;a href="https://tokio.rs/tokio/tutorial/channels">channel&lt;/a>, or the tasks would be awaited together with
+a &lt;a href="https://docs.rs/tokio/latest/tokio/task/struct.JoinSet.html">JoinSet&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Using &lt;strong>intra-task concurrency&lt;/strong>, each smaller unit will be a future run concurrently within the
+same task. The user would construct all of the futures and then use a concurrency primitive like
+&lt;a href="https://docs.rs/tokio/latest/tokio/macro.join.html">join!&lt;/a> or &lt;a href="https://docs.rs/tokio/latest/tokio/macro.select.html">select!&lt;/a> to combine them into a single future, depending on the exact
+access pattern.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Each of these approaches has its advantages and disadvantages. Spawning multiple tasks requires that
+each task be &lt;code>'static&lt;/code>, which means they cannot borrow data from their parent task. This is
+often a very annoying limitation, not only because it might be costly to use shared ownership
+(meaning &lt;code>Arc&lt;/code> and possibly &lt;code>Mutex&lt;/code>), but also because even if it isn&amp;rsquo;t going to be problematic
+in this context to use shared ownership, &lt;span class="sidenote">
+&lt;label class="sidenote-label" for="1">the design of Rust will make it much more annoying to manage than borrowing.&lt;/label>
+&lt;input class="sidenote-checkbox" type="checkbox" id="1">&lt;/input>
+&lt;span class="sidenote-content">(I&amp;rsquo;d love to see this change! Cheap shared ownership constructs like &lt;code>Arc&lt;/code> and &lt;code>Rc&lt;/code> should have
+non-affine semantics so you don&amp;rsquo;t have to call clone on them.)&lt;/span>
+&lt;/span>
+&lt;/p>
+&lt;p>When you join multiple futures, they &lt;em>can&lt;/em> borrow from state outside of them within the same task,
+but as I wrote in the previous post, you can only join a static number of futures. Users that don&amp;rsquo;t
+want to deal with shared ownership but have a dynamic number of sub-tasks they need to execute are
+left searching for another solution. Enter &lt;a href="https://docs.rs/futures/latest/futures/stream/struct.FuturesUnordered.html">FuturesUnordered&lt;/a>.&lt;/p>
+&lt;p>&lt;code>FuturesUnordered&lt;/code> is an odd duck of an abstraction from the futures library, which represents a
+collection of futures as a &lt;code>Stream&lt;/code> (in std parlance, an &lt;code>AsyncIterator&lt;/code>). This makes it a lot like
+tokio&amp;rsquo;s &lt;code>JoinSet&lt;/code> in surface appearance, but unlike &lt;code>JoinSet&lt;/code> the futures you push into it are not
+spawned separately onto the executor, but are polled as the &lt;code>FuturesUnordered&lt;/code> is polled. Much like
+spawning a task, every future pushed into &lt;code>FuturesUnordered&lt;/code> is separately allocated, so
+representationally its very similar to multi-task concurrency. But because the &lt;code>FuturesUnordered&lt;/code> is
+what polls each of these futures, they don&amp;rsquo;t execute independently and they don&amp;rsquo;t need to be
+&lt;code>'static&lt;/code>. They can borrow surrounding state as long as the &lt;code>FuturesUnordered&lt;/code> doesn&amp;rsquo;t outlive that
+state.&lt;/p>
+&lt;p>In a sense, &lt;code>FuturesUnordered&lt;/code> is a sort of hybrid between intra-task concurrency and multi-task
+concurrency: you can borrow state from the same task like intra-task, but you can execute
+arbitrarily many concurrent futures like multi-task. So it seems like a natural fit for the use case
+I was just describing when the user wants that exact combination of features. But &lt;code>FuturesUnordered&lt;/code>
+has also been a culprit in some of the more frustrating bugs that users encounter when writing async
+Rust. In the rest of this post, I want to investigate the reasons why that is.&lt;/p></description></item><item><title>Let futures be futures</title><link>https://without.boats/blog/let-futures-be-futures/</link><pubDate>Sat, 03 Feb 2024 00:00:00 +0000</pubDate><guid>https://without.boats/blog/let-futures-be-futures/</guid><description>&lt;p>In the early-to-mid 2010s, there was a renaissance in languages exploring new ways of doing
+concurrency. In the midst of this renaissance, one abstraction for achieving concurrent operations
+that was developed was the &amp;ldquo;future&amp;rdquo; or &amp;ldquo;promise&amp;rdquo; abstraction, which represented a unit of work that
+will maybe eventually complete, allowing the programmer to use this to manipulate control flow in
+their program. Building on this, syntactic sugar called &amp;ldquo;async/await&amp;rdquo; was introduced to take futures
+and shape them into the ordinary, linear control flow that is most common. This approach has been
+adopted in many mainstream languages, a series of developments that has been controversial among
+practitioners.&lt;/p>
+&lt;p>There are two excellent posts from that period which do a very good job of making the case for the
+two sides of the argument. I couldn&amp;rsquo;t more strongly recommend reading each these posts in full:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://monkey.org/~marius/futures-arent-ersatz-threads.html">Futures aren&amp;rsquo;t ersatz threads&lt;/a> by Marius Eriksen &lt;time>(April 2, 2013)&lt;/time>
+&lt;/li>
+&lt;li>&lt;a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">What color is your function?&lt;/a> by Bob Nystrom &lt;time>(February 1, 2015)&lt;/time>
+&lt;/li>
+&lt;/ul>
+&lt;p>The thesis of Eriksen&amp;rsquo;s post is that futures provide a fundamentally different model of concurrency
+from threads. Threads provide a model in which all operations occur &amp;ldquo;synchronously,&amp;rdquo; because the
+execution of the program is modeled as a stack of function calls, which block when they need to wait
+for concurrently executing operations to complete. In contrast, by representing concurrent
+operations as asynchronously completing &amp;ldquo;futures,&amp;rdquo; the futures model enabled several advantages
+cited by Eriksen. These are the ones I find particularly compelling:&lt;/p>
+&lt;ol>
+&lt;li>A function performing asynchronous operations has a different type from a &amp;ldquo;pure&amp;rdquo; function,
+because it must return a future instead of just a value. This distinction is useful because it
+lets you know if a function is performing IO or just pure computation, with far-reaching
+implications.&lt;/li>
+&lt;li>Because they create a direct representation of the unit of work to be performed, futures can be
+composed in multiple ways, both sequentially and concurrently. Blocking function calls can only
+be composed sequentially without starting a new thread.&lt;/li>
+&lt;li>Because futures can be composed concurrently, concurrent code can be written which more directly
+expresses the logic of what is occurring. Abstractions can be written which represent particular
+patterns of concurrency, allowing business logic to be lifted from the machinery of scheduling
+work across threads. Eriksen gives examples like a &lt;code>flatMap&lt;/code> operator to chain many
+concurrent network requests after one initial network request.&lt;/li>
+&lt;/ol>
+&lt;p>Nystrom takes the counter-position. He starts by imagining a language in which all functions are
+&amp;ldquo;colored,&amp;rdquo; either &lt;code class="blue">BLUE&lt;/code>
+or &lt;code class="red">RED&lt;/code>
+. In his imaginary language, the important difference
+between the two colors of function is that &lt;code class="red">RED&lt;/code>
+functions can only be called from other &lt;code class="red">RED&lt;/code>
+functions. He posits this distinction as a great frustration for users of the language,
+because having to track two different kinds of functions is annoying and in his language &lt;code class="red">RED&lt;/code>
+functions must be called using an annoyingly baroque syntax. Of course, what he&amp;rsquo;s referring to is
+the difference between synchronous functions and asynchronous functions. Exactly what Eriksen cites
+as an advantage of futures - that functions returning futures are different from functions that
+don&amp;rsquo;t return futures - is for Nystrom it&amp;rsquo;s greatest weakness.&lt;/p>
+&lt;p>Some of the remarks Nystrom makes are not relevant to async Rust. For example, he says that if you
+call a function of one color as if it were a function of the other, dreadful things could happen:&lt;/p>
+&lt;blockquote>
+&lt;p>When calling a function, you need to use the call that corresponds to its color. If you get it
+wrong &amp;hellip; it does something bad. Dredge up some long-forgotten nightmare from your childhood like
+a clown with snakes for arms hiding under your bed. That jumps out of your monitor and sucks out
+your vitreous humour.&lt;/p>
+&lt;/blockquote>
+&lt;p>This is plausibly true of JavaScript, an untyped language with &lt;a href="https://www.destroyallsoftware.com/talks/wat">famously ridiculous&lt;/a> semantics,
+but in a statically typed language like Rust, you&amp;rsquo;ll get a compiler error which you can fix and move
+on.&lt;/p>
+&lt;p>One of his main points is also that calling a &lt;code class="red">RED&lt;/code>
+function is much more &amp;ldquo;painful&amp;rdquo; than
+calling a &lt;code class="blue">BLUE&lt;/code>
+function. As Nystrom later elaborates in his post, he is referring to the
+callback-based API commonly used in JavaScript in 2015, and he says that async/await syntax resolves
+this problem:&lt;/p>
+&lt;blockquote>
+&lt;p>[Async/await] lets you make asynchronous calls just as easily as you can synchronous ones, with the tiny
+addition of a cute little keyword. You can nest &lt;code>await&lt;/code> calls in expressions, use them in
+exception handling code, stuff them inside control flow.&lt;/p>
+&lt;/blockquote>
+&lt;p>Of course, he also says this, which is the crux of the argument about the &amp;ldquo;function coloring
+problem&amp;rdquo;:&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;em>But…&lt;/em> you still have divided the world in two. Those async functions are easier to write, but
+&lt;em>they’re still async functions.&lt;/em>&lt;/p>
+&lt;p>You’ve still got two colors. Async-await solves annoying rule #4: they make red functions not much
+worse to call than blue ones. But all of the other rules are still there.&lt;/p>
+&lt;/blockquote>
+&lt;p>Futures represent asynchronous operations differently from synchronous operations. For Eriksen, this
+provides additional affordances which are the key advantage of futures. For Nystrom, this is just an
+another hurdle to calling functions which return futures instead of blocking.&lt;/p>
+&lt;p>As you might expect if you&amp;rsquo;re familiar with this blog, I fall pretty firmly on the side of Eriksen.
+So it has not been easy on me to find that Nystrom&amp;rsquo;s views have been much more popular with the sort
+of people who comment on Hacker News or write angry, over-confident rants on the internet. A few
+months ago I wrote a &lt;a href="https://without.boats/blog/why-async-rust">post&lt;/a> exploring the history of how Rust came to have the
+futures abstraction and async/await syntax on top of that, as well as a follow-up
+&lt;a href="https://without.boats/blog/a-four-year-plan">post&lt;/a> describing the features I would like to see added to async Rust to make it
+easier to use.&lt;/p>
+&lt;p>Now I would like to take a step back and re-examine the design of async Rust in the context of this
+question about the utility of the futures model of concurrency. What has the use of futures
+actually gotten us in async Rust? I would like us to imagine that there could be a world in which
+the difficulties of using futures have been mitigated or resolved &amp;amp; the additional affordances they
+provide make async Rust not only just as easy to use as non-async Rust, but actually a &lt;em>better&lt;/em>
+experience overall.&lt;/p></description></item><item><title>poll_progress</title><link>https://without.boats/blog/poll-progress/</link><pubDate>Tue, 12 Dec 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/poll-progress/</guid><description>&lt;p>Last week, Tyler Mandry published an interesting &lt;a href="https://tmandry.gitlab.io/blog/posts/for-await-buffered-streams/">post&lt;/a> about a problem that the Rust
+project calls &amp;ldquo;Barbara battles buffered streams.&amp;rdquo; Tyler does a good job explaining the issue, but
+briefly the problem is that the buffering adapters from the futures library (&lt;code>Buffered&lt;/code> and
+&lt;code>BufferUnordered&lt;/code>) do not interact well with &lt;code>for await&lt;/code> if the processing in the body is
+asynchronous (i.e. if it contains any &lt;code>await&lt;/code> expressions).&lt;/p>
+&lt;p>I think we can better understand the problem if we examine it visually. First, let&amp;rsquo;s consider the
+control flow that occurs when a user processes a normal, non-asynchronous &lt;code>Iterator&lt;/code> using a for
+loop:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> ┌── SOME ────────────────┐
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ╔═══════════════╗ ╔═══════▼═══════╗
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ║ ║▐▌ ║ ║▐▌
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ──────▶ NEXT ║▐▌ ║ LOOP BODY ║▐▌
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ║ ║▐▌ ║ ║▐▌
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ╚════════════▲══╝▐▌ ╚═══════════════╝▐▌
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ▀▀│▀▀▀▀▀▀▀▀▀│▀▀▀▀▘ ▀▀▀▀▀▀▀│▀▀▀▀▀▀▀▀▀▘
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> │ └───────────────────┘
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── NONE ──────────────────────────────▶
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The for loop first calls the iterator&amp;rsquo;s &lt;code>next&lt;/code> method, and then passes the resulting item (if there
+is one) to the loop body. When there are no more items, it exits the loop.&lt;/p></description></item><item><title>Three problems of pinning</title><link>https://without.boats/blog/three-problems-of-pinning/</link><pubDate>Thu, 30 Nov 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/three-problems-of-pinning/</guid><description>&lt;p>When we developed the &lt;a href="https://doc.rust-lang.org/std/pin/struct.Pin.html">Pin&lt;/a> API, our vision was that &amp;ldquo;ordinary users&amp;rdquo; - that is, users using
+the &amp;ldquo;high-level&amp;rdquo; &lt;a href="https://without.boats/blog/the-registers-of-rust/">registers&lt;/a> of Rust, would never have to interact with it. We intended
+that only users implementing Futures by hand, in the &amp;ldquo;low-level&amp;rdquo; register, would have to deal with
+that additional complexity. And the benefit that would accrue to all users is that futures, being
+immovable while polling, could store self-references in their state.&lt;/p>
+&lt;p>Things haven&amp;rsquo;t gone perfectly according to plan. The benefits of &lt;code>Pin&lt;/code> have certainly been accrued -
+everyone is writing self-referential async functions all the time, and low-level concurrency
+primitives in all the major runtimes take advantage of &lt;code>Pin&lt;/code> to implement intrusive linked lists
+internally. But &lt;code>Pin&lt;/code> still sometimes rears its ugly head into &amp;ldquo;high-level&amp;rdquo; code, and users are
+unsurprisingly frustrated and confused when that happens.&lt;/p>
+&lt;p>In my experience, there a three main ways that this happens. Two of them can be solved by better
+affordances for &lt;code>AsyncIterator&lt;/code> (a part of why I have been pushing stabilizing this so hard!). The
+third is ultimately because of a mistake that we made when we designed &lt;code>Pin&lt;/code>, and without a breaking
+change there&amp;rsquo;s nothing we could about it. They are:&lt;/p>
+&lt;ol>
+&lt;li>Selecting a &lt;code>Future&lt;/code> in a loop.&lt;/li>
+&lt;li>Calling &lt;code>Stream::next&lt;/code>.&lt;/li>
+&lt;li>Awaiting a &lt;code>Future&lt;/code> behind a pointer (e.g. a boxed future).&lt;/li>
+&lt;/ol></description></item><item><title>Coroutines, asynchronous and iterative</title><link>https://without.boats/blog/coroutines-async-and-iter/</link><pubDate>Wed, 29 Nov 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/coroutines-async-and-iter/</guid><description>&lt;p>I wanted to follow up my &lt;a href="https://without.boats/blog/poll-next">previous post&lt;/a> with a small note elaborating on the use of
+coroutines for asynchrony and iteration from a more abstract perspective. I realized the point I
+made about &lt;code>AsyncIterator&lt;/code> being the product of &lt;code>Iterator&lt;/code> and &lt;code>Future&lt;/code> makes a bit more sense if
+you also consider the &amp;ldquo;base case&amp;rdquo; - a block of code that is neither asynchronous nor iterative.&lt;/p>
+&lt;p>It&amp;rsquo;s also an excuse to draw another fun ASCII diagram, and I&amp;rsquo;ve got to put that Berkeley Mono
+license to good use.&lt;/p></description></item><item><title>poll_next</title><link>https://without.boats/blog/poll-next/</link><pubDate>Mon, 27 Nov 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/poll-next/</guid><description>&lt;p>In my previous &lt;a href="https://without.boats/blog/a-four-year-plan/">post&lt;/a>, I said that the single best thing the Rust project could do for
+users is stabilize &lt;a href="https://doc.rust-lang.org/std/async_iter/trait.AsyncIterator.html">AsyncIterator&lt;/a>. I specifically meant the interface that already exists in
+the standard library, which uses a method called &lt;code>poll_next&lt;/code>. Ideally this would have happened years
+ago, but the second best time would be tomorrow.&lt;/p>
+&lt;p>The main thing holding up the &lt;code>AsyncIterator&lt;/code> stabilization is a commitment by some influential
+contributors of the project to pursue an alternative design. This design, which I&amp;rsquo;ll call the
+&amp;ldquo;async next&amp;rdquo; design, proposes to use an async method for the interface instead of the poll method of
+the &amp;ldquo;poll next&amp;rdquo; design implemented today. In my opinion, continuing to pursue this design is a
+mistake. I&amp;rsquo;ve written about this &lt;a href="https://without.boats/blog/async-iterator/">before&lt;/a>, but I don&amp;rsquo;t have the sense my post was
+fully received by the Rust project.&lt;/p>
+&lt;p>Yosh Wuyts, a leading contributor to the async working group, has written his own &lt;a href="https://blog.yoshuawuyts.com/async-iterator-trait">post&lt;/a> about
+why the async next design is preferable to poll next. A lot of this is structured as an attempted
+refutation of points made by me and others about problems with the async next design. I do not find
+the argument in this post compelling, and my position about what the project should do is unchanged.
+I&amp;rsquo;ve written this to attempt to express again, in more detail and more definitively, why I believe
+the project should accept the poll next design and stabilize &lt;code>AsyncIterator&lt;/code> now.&lt;/p></description></item><item><title>A four year plan for async Rust</title><link>https://without.boats/blog/a-four-year-plan/</link><pubDate>Tue, 07 Nov 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/a-four-year-plan/</guid><description>&lt;p>Four years ago today, the Rust async/await feature was released in version 1.39.0. The announcement
+&lt;a href="https://blog.rust-lang.org/2019/11/07/Async-await-stable.html">post&lt;/a> says that &amp;ldquo;this work has been a long time in development &amp;ndash; the key
+ideas for zero-cost futures, for example, were first proposed by Aaron Turon and Alex Crichton in
+2016&amp;rdquo;. It&amp;rsquo;s now been longer since the release of async/await than the time between the first design
+work on futures and the release of async/await syntax. Despite this, and despite the fact that
+async/await syntax was explicitly shipped as a &amp;ldquo;minimum viable product,&amp;rdquo; the Rust project has
+shipped almost no extensions to async/await in the four years since the MVP was released.&lt;/p>
+&lt;p>This fact has been noticed, and I contend it is the primary controllable reason that async Rust has
+developed a negative reputation (other reasons, like its &lt;a href="https://without.boats/blog/why-async-rust">essential complexity&lt;/a>, are
+not in the project&amp;rsquo;s control). It&amp;rsquo;s encouraging to see project leaders like Niko Matsakis
+&lt;a href="https://smallcultfollowing.com/babysteps/blog/2023/10/14/eurorust-reflections/">recognize&lt;/a> the problem as well. I want to outline the features that I think async Rust needs
+to continue to improve its user experience. I&amp;rsquo;ve organized these features into features that I think
+the project could ship in the short term (say, in the next 18 months), to those that will take
+longer (up to three years), and finally a section on a potential change to the language that I think
+would take years to plan and prepare for.&lt;/p></description></item><item><title>Why async Rust?</title><link>https://without.boats/blog/why-async-rust/</link><pubDate>Sun, 15 Oct 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/why-async-rust/</guid><description>&lt;p>Async/await syntax in Rust was initially released to much fanfare and excitement. To quote &lt;a href="https://news.ycombinator.com/item?id=21473418">Hacker
+News&lt;/a> at the time:&lt;/p>
+&lt;blockquote>
+&lt;p>This is going to open the flood gates. I am sure lot of people were just waiting for this moment
+for Rust adoption. I for one was definitely in this boat.&lt;/p>
+&lt;p>Also, this has all the goodness: open-source, high quality engineering, design in open, large
+contributors to a complex piece of software. Truly inspiring!&lt;/p>
+&lt;/blockquote>
+&lt;p>Recently, the reception has been a bit more mixed. To a quote a comment on &lt;a href="https://news.ycombinator.com/item?id=37436413">Hacker News&lt;/a> again,
+discussing a recent blog post on the subject:&lt;/p>
+&lt;blockquote>
+&lt;p>I genuinely can&amp;rsquo;t understand how anybody could look at the mess that&amp;rsquo;s Rust&amp;rsquo;s async and think that
+it was a good design for a language that already had the reputation of being very complicated to
+write.&lt;/p>
+&lt;p>I tried to get it, I really did, but my god what a massive mess that is. And it contaminates
+everything it touches, too. I really love Rust and I do most of my coding in it these days, but
+every time I encounter async-heavy Rust code my jaw clenches and my vision blurs.&lt;/p>
+&lt;/blockquote>
+&lt;p>Of course, neither of these comments are completely representative: even four years ago, some people
+had pointed concerns. And in the same thread as this comment about jaws clenching and vision
+blurring, there were many people defending async Rust with equal fervor. But I don&amp;rsquo;t think I would
+be out of pocket to say that the nay-sayers have grown more numerous and their tone more strident as
+time has gone on. To some extent this is just the natural progression of the hype cycle, but I also
+think as we have become more distant from the original design process, some of the context has been
+lost.&lt;/p>
+&lt;p>Between 2017 and 2019, I drove the design of async/await syntax, in collaboration with others and
+building on the work of those who came before me. Forgive me if I am put a bit off when someone says
+that they don&amp;rsquo;t know how anyone could look at that &amp;ldquo;mess&amp;rdquo; and &amp;ldquo;think that it was a good design,&amp;rdquo; and
+please indulge me in this imperfectly organized and overly long explanation of how async Rust came
+to exist, what its purpose was, and why, in my opinion, for Rust there was no viable alternative. I
+hope that along the way I might shed more light on the design of Rust in a broader and deeper sense,
+at least slightly, and not merely regurgitate the justifications of the past.&lt;/p></description></item><item><title>Thread-per-core</title><link>https://without.boats/blog/thread-per-core/</link><pubDate>Fri, 06 Oct 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/thread-per-core/</guid><description>&lt;p>I want to address a controversy that has gripped the Rust community for the past year or so: the
+choice by the prominent async &amp;ldquo;runtimes&amp;rdquo; to default to multi-threaded executors that perform
+work-stealing to balance work dynamically among their many tasks. Some Rust users are
+&lt;a href="https://maciej.codes/2022-06-09-local-async.html">unhappy&lt;/a> with this decision, so unhappy that they use language I would characterize as
+melodramatic:&lt;/p>
+&lt;blockquote>
+&lt;p>The Original Sin of Rust async programming is making it multi-threaded by default. If premature
+optimization is the root of all evil, this is the mother of all premature optimizations, and it
+curses all your code with the unholy &lt;code>Send + 'static&lt;/code>, or worse yet &lt;code>Send + Sync + 'static&lt;/code>, which
+just &lt;em>kills all the joy of actually writing Rust&lt;/em>.&lt;/p>
+&lt;/blockquote>
+&lt;p>It&amp;rsquo;s always off-putting to me that claims written this way can be taken seriously as a technical
+criticism, but our industry is rather unserious.&lt;/p></description></item><item><title>Generic trait methods and new auto traits</title><link>https://without.boats/blog/generic-trait-methods-and-new-auto-traits/</link><pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/generic-trait-methods-and-new-auto-traits/</guid><description>&lt;p>I want to wrap up my consideration of the idea of adding new auto traits to Rust with some notes
+from a conversation I had with Ariel Ben-Yehuda.&lt;/p>
+&lt;p>You can read these two previous posts for context:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://without.boats/blog/changing-the-rules-of-rust">Changing the rules of Rust&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://without.boats/blog/follow-up-to-changing-the-rules-of-rust">Follow up to &amp;ldquo;Changing the rules of Rust&amp;rdquo;&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Follow up to "Changing the rules of Rust"</title><link>https://without.boats/blog/follow-up-to-changing-the-rules-of-rust/</link><pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/follow-up-to-changing-the-rules-of-rust/</guid><description>&lt;p>In &lt;a href="https://without.boats/blog/changing-the-rules-of-rust">my previous post&lt;/a>, I described the idea of using an edition mechanism to introduce a new
+auto trait. I wrote that the compiler would need to create an &amp;ldquo;unbreakable firewall&amp;rdquo; to prevent
+using &lt;code>!Leak&lt;/code> types from the new edition with code from the old edition that assumes values of all
+types can be leaked.&lt;/p>
+&lt;p>The response has been pretty optimistic that ensuring this would be possible, even though I wrote in
+the post myself that I &amp;ldquo;despair&amp;rdquo; over how difficult it was. I&amp;rsquo;ve received a great example from Ariel
+Ben-Yehuda which demonstrates how this problem is more difficult to solve than you would probably
+think.&lt;/p></description></item><item><title>Changing the rules of Rust</title><link>https://without.boats/blog/changing-the-rules-of-rust/</link><pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/changing-the-rules-of-rust/</guid><description>&lt;p>In Rust, there are certain API decisions about what is and isn&amp;rsquo;t sound that impact all Rust code.
+That is, a decision was made to allow or not allow types which have certain safety requirements, and
+now all users are committed to that decision. They can&amp;rsquo;t just use a different API with different
+rules: &lt;em>all&lt;/em> APIs must conform to these rules.&lt;/p>
+&lt;p>These rules are determined through certain &amp;ldquo;marker&amp;rdquo; traits. If a safe API could do something to a
+value of a type which some types don&amp;rsquo;t support, the API must be bound by that marker trait, so that
+users can not pass values of those types which don&amp;rsquo;t support that behavior to that API. In contrast,
+if Rust allows APIs to perform that behavior on any type, without any sort of marker trait bound,
+then types which don&amp;rsquo;t support that behavior cannot exist.&lt;/p>
+&lt;p>I&amp;rsquo;m going to give three examples to show what I mean, each of which Rust has considered at different
+points, though only the first one actually exists in Rust.&lt;/p></description></item><item><title>A governance system, if you can keep it</title><link>https://without.boats/blog/if-you-can-keep-it/</link><pubDate>Sat, 27 May 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/if-you-can-keep-it/</guid><description>&lt;p>One of the most famous anecdotes that forms the basis of the United States&amp;rsquo; political self-identity
+is the story of an interaction between Benjamin Franklin and Elizabeth Willing Powel after the
+Constitutional Convention of 1787, which established the United States&amp;rsquo; present form of government.
+Powel asked Franklin what sort of government the U.S. was to have, to which he replied: &lt;strong>&amp;ldquo;a
+republic, if you can keep it.&amp;rdquo;&lt;/strong>&lt;/p>
+&lt;p>Given the self-conscious references to &amp;ldquo;constitutions&amp;rdquo; and &amp;ldquo;checks and balances&amp;rdquo; in the Rust
+project&amp;rsquo;s recent &lt;a href="https://github.com/rust-lang/rfcs/pull/3392">governance RFC&lt;/a> and the discourse around it, some further reflection on
+this quote and its implications about governance as such might now be appropriate for the project
+and its community.&lt;/p></description></item><item><title>Iterator, Generator</title><link>https://without.boats/blog/iterator-generator/</link><pubDate>Sat, 06 May 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/iterator-generator/</guid><description>&lt;p>I have been devoting a lot of my free time in the past month to thinking about structured
+concurrency, and a blog post about that is coming soon, but first I want to revisit iterators and
+generators.&lt;/p>
+&lt;p>In &lt;a href="https://without.boats/blog/generators">a previous post&lt;/a>, I wrote about one of the hardest problems for generators:
+self-referential generators. Unlike the Future trait when we were designing async functions, the
+Iterator trait is already stable, and it does not take a pinned reference to itself. This means an
+Iterator cannot be self-referential.&lt;/p></description></item><item><title>The Scoped Task trilemma</title><link>https://without.boats/blog/the-scoped-task-trilemma/</link><pubDate>Sat, 08 Apr 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/the-scoped-task-trilemma/</guid><description>&lt;p>This is the first post in a series of posts about concurrency in Rust, and the different APIs that
+can exist to support it. Unlike my recent series on control-flow effects, this series isn’t driving
+toward any particular vision of what I think the Rust project should do. Instead, I am just trying
+to publicly explore the problem space and build tools for thinking about the issues involved. I’m
+not sure what the “right” concurrency API is.&lt;/p></description></item><item><title>Generators</title><link>https://without.boats/blog/generators/</link><pubDate>Sun, 26 Mar 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/generators/</guid><description>&lt;p>One of the main emphases of my recent posts has been that I believe shipping generators would solve
+a lot of user problems by making it easy to write imperative iterative code, and especially to make
+that iterative code interact well with asynchrony and fallibility as well. One thing that frustrates
+me about the situation is that generators have been nearly ready to ship for years now, but very
+little visible progress has been made. In particular, the core compiler transform to take a
+generator and produce a state machine already exists, because it’s exactly how async functions are
+implemented.&lt;/p></description></item><item><title>The AsyncIterator interface</title><link>https://without.boats/blog/async-iterator/</link><pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/async-iterator/</guid><description>&lt;p>In &lt;a href="https://without.boats/blog/the-registers-of-rust">a previous post&lt;/a>, I established the notion of “registers” - code in Rust can be
+written in different registers, and it’s important to adequately support all registers. I
+specifically discussed the low-level interface of the AsyncIterator trait, about which there is
+currently a debate. The interface it currently has is a method called &lt;code>poll_next&lt;/code>, which is a “poll”
+method like &lt;code>Future::poll&lt;/code>. Poll methods are very “low-level” and are harder to write correctly than
+async functions. Some people would like to see &lt;code>AsyncIterator&lt;/code> shifted to have an async next method,
+simply the “asyncified” &lt;code>Iterator&lt;/code> trait.&lt;/p></description></item><item><title>Const as an auto trait</title><link>https://without.boats/blog/const-as-an-auto-trait/</link><pubDate>Thu, 16 Mar 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/const-as-an-auto-trait/</guid><description>&lt;p>The previous two posts in this series tried to discuss the design of Rust through the lens of some
+higher level language concepts:&lt;/p>
+&lt;ul>
+&lt;li>First, the notion that programming languages have different &lt;a href="https://without.boats/blog/the-registers-of-rust">registers&lt;/a>&lt;/li>
+&lt;li>Second, the idea that not all &lt;a href="https://without.boats/blog/patterns-and-abstractions">patterns&lt;/a> should be made into abstractions&lt;/li>
+&lt;/ul>
+&lt;p>This post does not introduce any such high-minded concept. It is entirely down in the weeds. That’s
+partly because it is based on content I removed from the previous post so that post could focus on
+the higher point.&lt;/p></description></item><item><title>Patterns &amp; Abstractions</title><link>https://without.boats/blog/patterns-and-abstractions/</link><pubDate>Tue, 14 Mar 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/patterns-and-abstractions/</guid><description>&lt;p>This is the second post in an informal series commenting on the design of async Rust in 2023. In &lt;a href="https://without.boats/blog/the-registers-of-rust">my
+previous post&lt;/a>, after a discussion of the “registers” in which control-flow effects could
+be handled in Rust, I promised to turn my attention to recent proposals around a concept called
+“keyword generics.” For reference, there are two posts by the current design team of Rust that are
+my reference point for this commentary:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://blog.rust-lang.org/inside-rust/2023/02/23/keyword-generics-progress-report-feb-2023.html">Keyword Generics Progress Report: February 2023&lt;/a>&lt;/strong>, a status update from the
+group working on “keyword generics”&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://smallcultfollowing.com/babysteps/blog/2023/03/03/trait-transformers-send-bounds-part-3/">Trait transformers (send bounds, part 3)&lt;/a>&lt;/strong>, a blog post about a related
+idea by Niko Matsakis&lt;/li>
+&lt;/ul>
+&lt;p>I’m not going to reiterate these blog posts at length, but in brief “keyword generics” is a proposal
+to introduce a new kind of abstraction to Rust, to allow types to be abstracted over certain
+effects. The examples have focused on &lt;code>async&lt;/code> and &lt;code>const&lt;/code> as the effects, but there is sometimes
+discussion of &lt;code>try&lt;/code> as well. Astute readers will notice this is an overlapping but not identical set
+of effects to the effects I identified in my last post; I did not mention &lt;code>const&lt;/code> as an effect, and
+as far as I know the keyword generics working group has not devoted much or any time to considering
+iteration as an effect.&lt;/p></description></item><item><title>The registers of Rust</title><link>https://without.boats/blog/the-registers-of-rust/</link><pubDate>Wed, 08 Mar 2023 00:00:00 +0000</pubDate><guid>https://without.boats/blog/the-registers-of-rust/</guid><description>&lt;p>It’s been nearly two and half years since I was an active contributor to the Rust project. There are
+some releases that I’ve been very excited about since then, and I’m heartened by &lt;a href="http://smallcultfollowing.com/babysteps/blog/2023/01/20/rust-in-2023-growing-up/">Niko’s recent blog
+post&lt;/a> emphasizing stability and polish over grand new projects. But I’ve also felt a certain
+apprehension at a lot of the directions the project has taken, which has often occupied my thoughts.
+From that preoccupation this blog post has emerged, hopefully the first in a series over the next
+few weeks outlining my thoughts on the design of Rust in 2023, especially in connection to async,
+and I hope its impact will be chiefly positive.&lt;/p></description></item><item><title>Ringbahn III: A deeper dive into drivers</title><link>https://without.boats/blog/ringbahn-iii/</link><pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/ringbahn-iii/</guid><description>&lt;p>In &lt;a href="../ringbahn-ii">the previous post&lt;/a> in this series, I wrote about how the core state machine of
+&lt;a href="https://github.com/ringbahn/ringbahn">ringbahn&lt;/a> is implemented. In this post I want to talk about another central concept in
+ringbahn: &lt;strong>&amp;ldquo;drivers&amp;rdquo;&lt;/strong>, external libraries which determine how ringbahn schedules IO operations
+over an io-uring instance.&lt;/p></description></item><item><title>Revisiting a 'smaller Rust'</title><link>https://without.boats/blog/revisiting-a-smaller-rust/</link><pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/revisiting-a-smaller-rust/</guid><description>&lt;p>A bit over a year ago, I wrote some &lt;a href="../notes-on-a-smaller-rust">notes on a &amp;ldquo;smaller Rust&amp;rdquo;&lt;/a> - a higher level language
+that would take inspiration from some of Rust&amp;rsquo;s type system innovations, but would be simpler by
+virtue of targeting a domain with less stringent requirements for user control and performance.
+During my time of unemployment this year, I worked on sketching out what a language like that would
+look like in a bit more detail. I wanted to write a bit about what new conclusions I&amp;rsquo;ve come to
+during that time.&lt;/p></description></item><item><title>iou version 0.3 released</title><link>https://without.boats/blog/iou-0-3/</link><pubDate>Tue, 22 Sep 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/iou-0-3/</guid><description>&lt;p>Today I made a new release of the &lt;a href="https://github.com/ringbahn/iou">iou&lt;/a> library, which contains idiomatic Rust bindings to the
+&lt;a href="https://github.com/axboe/liburing">liburing&lt;/a> library. This library allows users to manipulate the new &lt;a href="https://kernel.dk/io_uring.pdf">io-uring&lt;/a>
+interface for asynchronous IO on Linux. For more context, you can read &lt;a href="https://without.boats/blog/iou">my previous post on the
+first release of iou last year&lt;/a>.&lt;/p>
+&lt;p>This new release greatly expands the API of iou, introduces some valuable improvements, and contains
+some breakages. I figured I would let this blog post serve as some basic release notes.&lt;/p></description></item><item><title>Propane: an experimental generator syntax for Rust</title><link>https://without.boats/blog/propane/</link><pubDate>Thu, 06 Aug 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/propane/</guid><description>&lt;p>I&amp;rsquo;ve just released a new crate called &lt;a href="https://crates.io/crates/propane">propane&lt;/a>, which is a library for writing &lt;strong>generator functions&lt;/strong>. It can only run on nightly:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-rust" data-lang="rust">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#![feature(generators, generator_trait, try_trait)]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="cp">#[propane::generator]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">fn&lt;/span> &lt;span class="nf">fizz_buzz&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="w"> &lt;/span>-&amp;gt; &lt;span class="nb">String&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">for&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">in&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">..&lt;/span>&lt;span class="mi">101&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="k">match&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">%&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">%&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kr">yield&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nb">String&lt;/span>::&lt;span class="n">from&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;FizzBuzz&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kr">yield&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nb">String&lt;/span>::&lt;span class="n">from&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Fizz&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kr">yield&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nb">String&lt;/span>::&lt;span class="n">from&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Buzz&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">..&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">=&amp;gt;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kr">yield&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">to_string&lt;/span>&lt;span class="p">(),&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Shipping Const Generics in 2020</title><link>https://without.boats/blog/shipping-const-generics/</link><pubDate>Thu, 16 Jul 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/shipping-const-generics/</guid><description>&lt;p>It&amp;rsquo;s hard to believe that its been more than 3 years since I opened &lt;a href="https://github.com/rust-lang/rfcs/pull/2000">RFC 2000&lt;/a>, which defined
+the const generics for Rust. At the same time, reading the RFC thread, there&amp;rsquo;s also been a huge
+amount of change in this area: for one thing, at the time the RFC was written, const fns weren&amp;rsquo;t
+stable, and consts weren&amp;rsquo;t even being evaluated using miri yet. There&amp;rsquo;s been a lot of work over the
+years on the const generics feature, but still nothing has shipped. However, I think we have defined
+a very useful subset of const generics which is stable enough to ship in the near term.&lt;/p></description></item><item><title>Ringbahn II: the central state machine</title><link>https://without.boats/blog/ringbahn-ii/</link><pubDate>Thu, 02 Jul 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/ringbahn-ii/</guid><description>&lt;p>&lt;a href="../ringbahn">Last time&lt;/a> I wrote about &lt;a href="https://github.com/withoutboats/ringbahn">ringbahn&lt;/a>, a safe API for using io-uring from Rust.
+I wrote that I would soon write a series of posts about the mechanism that makes ringbahn work. In
+the first post in that series, I want to look at the core state machine of ringbahn which makes it
+memory safe. The key types involved are the &lt;a href="https://docs.rs/ringbahn/0.0.0-experimental.3/ringbahn/struct.Ring.html">Ring&lt;/a> and &lt;a href="https://docs.rs/crate/ringbahn/0.0.0-experimental.3/source/src/completion.rs">Completion&lt;/a> types.&lt;/p></description></item><item><title>Two Memory Bugs From Ringbahn</title><link>https://without.boats/blog/two-memory-bugs-from-ringbahn/</link><pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/two-memory-bugs-from-ringbahn/</guid><description>&lt;p>While implementing &lt;a href="https://github.com/withoutboats/ringbahn">ringbahn&lt;/a>, I introduced at least two bugs that caused memory safety
+errors, resulting in segfaults, allocator aborts, and bizarre undefined behavior. I&amp;rsquo;ve fixed both
+bugs that I could find, and now I have no evidence that there are more memory safety issues in the
+current codebase (though that doesn&amp;rsquo;t mean there aren&amp;rsquo;t, of course). I wanted to write about both of
+these bugs, because they had an interesting thing in common: they were both caused by destructors.&lt;/p></description></item><item><title>Futures and Segmented Stacks</title><link>https://without.boats/blog/futures-and-segmented-stacks/</link><pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/futures-and-segmented-stacks/</guid><description>&lt;p>This is just a note on getting the best performance out of an async program.&lt;/p>
+&lt;p>The point of using async IO over blocking IO is that it gives the user program more control over
+handling IO, on the premise that the user program can use resources more effectively than the kernel
+can. In part, this is because of the inherent cost of context switching between the userspace and
+the kernel, but in part it is also because the user program can be written with more specific
+understanding of its exact requirements.&lt;/p></description></item><item><title>Ringbahn: a safe, ergonomic API for io-uring in Rust</title><link>https://without.boats/blog/ringbahn/</link><pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/ringbahn/</guid><description>&lt;p>In &lt;a href="../io-uring">my previous post,&lt;/a> I discussed the new io-uring interface for Linux, and how to create
+a safe API for using io-uring from Rust. In the time since that post, I have implemented a prototype
+of such an API. The crate is called &lt;a href="https://github.com/withoutboats/ringbahn">&lt;strong>ringbahn&lt;/strong>&lt;/a>, and it is intended to enable users to
+perform IO on io-uring without any risk of memory unsafety.&lt;/p></description></item><item><title>Notes on io-uring</title><link>https://without.boats/blog/io-uring/</link><pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/io-uring/</guid><description>&lt;p>Last fall I was working on a library to make a safe API for driving futures on top of an an io-uring
+instance. Though I released bindings to liburing called &lt;a href="https://github.com/withoutboats/iou">iou&lt;/a>, the futures integration, called
+ostkreuz, was never released. I don&amp;rsquo;t know if I will pick this work up again in the future but
+several different people have started writing other libraries with similar goals, so I wanted to
+write up some notes on what I learned working with io-uring and Rust&amp;rsquo;s futures model. This post
+assumes some level of familiarity with the io-uring API. A high level overview is provided in &lt;a href="https://kernel.dk/io_uring.pdf">this
+document&lt;/a>.&lt;/p></description></item><item><title>The problem of effects in Rust</title><link>https://without.boats/blog/the-problem-of-effects/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/the-problem-of-effects/</guid><description>&lt;p>In &lt;a href="https://without.boats/blog/why-ok-wrapping/">a previous post&lt;/a>, I shortly discussed the concept of &amp;ldquo;effects&amp;rdquo; and the parallels
+between them. In an unrelated post since then, &lt;a href="https://blog.yoshuawuyts.com/fallible-iterator-adapters/">Yosh Wuyts&lt;/a> writes about the
+problem of trying to write fallible code inside of an iterator adapter that doesn&amp;rsquo;t support it. In a
+&lt;a href="https://internals.rust-lang.org/t/idea-non-local-control-flow/11976">previous discussion&lt;/a>, the users of the Rust Internals forum hotly discuss the notion of
+closures which would maintain the so-called &lt;a href="https://gafter.blogspot.com/2006/08/tennents-correspondence-principle-and.html">&amp;ldquo;Tennant&amp;rsquo;s Correspondence Principle&amp;rdquo;&lt;/a> - that is,
+closures which support breaking to scopes outside of the closure, inside of the function they are in
+(you can think of this is closures capturing their control flow environment in addition to capturing
+variables).&lt;/p>
+&lt;p>I think it may not be obvious, but these discussions are all deeply related. They all arise from
+what is, in my opinion, one of the biggest problems with the design of the Rust language: its
+failure at 1.0 to give good support for handling common effects related to program control flow.&lt;/p></description></item><item><title>A brief apology of Ok-Wrapping</title><link>https://without.boats/blog/why-ok-wrapping/</link><pubDate>Tue, 07 Apr 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/why-ok-wrapping/</guid><description>&lt;p>I&amp;rsquo;ve &lt;em>long&lt;/em> been a proponent of having some sort of syntax in Rust for writing functions which
+return results which &amp;ldquo;ok-wrap&amp;rdquo; the happy path. This is has also always been a feature with very
+vocal, immediate, and even emotional opposition from many of our most enthusiastic users. I want to
+write, in one place, why I think this feature would be awesome and make Rust much better.&lt;/p>
+&lt;p>I don&amp;rsquo;t want to get into the details too much of the specific proposal, but here&amp;rsquo;s a sketch of one
+way this &lt;em>could&lt;/em> work (there are a number of variables). We would add a syntactic modifier to the
+signature of a function, like this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-rust" data-lang="rust">&lt;span class="line">&lt;span class="cl">&lt;span class="k">fn&lt;/span> &lt;span class="nf">foo&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="w"> &lt;/span>-&amp;gt; &lt;span class="kt">usize&lt;/span> &lt;span class="nc">throws&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">io&lt;/span>::&lt;span class="n">Error&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="c1">//..
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This function returns &lt;code>Result&amp;lt;usize, io::Error&amp;gt;&lt;/code>, but internally the &lt;code>return&lt;/code> expressions return a
+value of type &lt;code>usize&lt;/code>, not the Result type. They are &amp;ldquo;Ok-wrapped&amp;rdquo; into being &lt;code>Ok(usize)&lt;/code>
+automatically by the language. If users wish to throw an error, a new &lt;code>throw&lt;/code> expression is added
+which takes the error side (the type after &lt;code>throws&lt;/code> in the signature). The &lt;code>?&lt;/code> operator would behave
+in this context the same way it behaves in a function that returns &lt;code>Result&lt;/code>.&lt;/p></description></item><item><title>From failure to Fehler</title><link>https://without.boats/blog/failure-to-fehler/</link><pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/failure-to-fehler/</guid><description>About two and a half years ago I wrote a Rust library called failure, which quickly became one of the most popular error handling libraries in Rust. This week, its current maintainer decided to deprecate it, a decision I strongly support. This week, I also released a new and very different error-handling library, called fehler. I wanted to discuss these two libraries briefly.
+A brief history of failure When I released failure, the most popular error handling library by far was error-chain.</description></item><item><title>What constitutes a vulnerability?</title><link>https://without.boats/blog/vulnerabilities/</link><pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/vulnerabilities/</guid><description>This is just a post about something that grinds my gears a bit more than it reasonably should: I think the habit of applying for CVEs for Rust (and Rust ecosystem libraries) is silly at best and harmful at worst. I think it muddies the waters about what a vulnerability is, and paints an overly negative picture of Rust&amp;rsquo;s security situation that can only lead people to make inaccurate evaluations when contrasting it with other languages like C/C++.</description></item><item><title>waitmap - an async awaitable map</title><link>https://without.boats/blog/waitmap/</link><pubDate>Thu, 12 Mar 2020 00:00:00 +0000</pubDate><guid>https://without.boats/blog/waitmap/</guid><description>I&amp;rsquo;ve just released a new crate called waitmap. This is a concurrent hash map (built on top of dashmap) intended for use as a concurrency primitive with async/await. It extends the API of dashmap by having an additional wait method.
+The wait future looks up an entry in the map and suspends this task if the entry was not present when wait was called. The task will be woken whenever a value is inserted under that key.</description></item><item><title>Global Executors</title><link>https://without.boats/blog/global-executors/</link><pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/global-executors/</guid><description>One of the big sources of difficulty on the async ecosystem is spawning tasks. Because there is no API in std for spawning tasks, library authors who want their library to spawn tasks have to depend on one of the multiple executors in the ecosystem to spawn a task, coupling the library to that executor in undesirable ways.
+Ideally, many of these library authors would not need to spawn tasks at all.</description></item><item><title>iou: Rust bindings for liburing</title><link>https://without.boats/blog/iou/</link><pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/iou/</guid><description>Today I&amp;rsquo;m releasing a library called iou. This library provides idiomatic Rust bindings to the C library called liburing, which itself is a higher interface for interacting with the io_uring Linux kernel interface. Here are the answers to some questions I expect that may provoke.
+What is io_uring? io_uring is an interface added to the Linux kernel in version 5.1. Concurrent with that, the primary maintainer of that interface has also been publishing a library for interacting with it called liburing.</description></item><item><title>Asynchronous Destructors</title><link>https://without.boats/blog/poll-drop/</link><pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/poll-drop/</guid><description>The first version of async/await syntax is in the beta release, set to be shipped to stable in 1.39 on November 7, next month. There are a wide variety of additional features we could add to async/await in Rust beyond what we&amp;rsquo;re shipping in that release, but speaking for myself I know that I&amp;rsquo;d like to pump the breaks on pushing forward big ticket items in this space. Let&amp;rsquo;s let the ecosystem develop around what we have now before we start sprinting toward more big additions to the language.</description></item><item><title>Notes on a smaller Rust</title><link>https://without.boats/blog/notes-on-a-smaller-rust/</link><pubDate>Wed, 17 Jul 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/notes-on-a-smaller-rust/</guid><description>&lt;p>Many people who use Rust for a bit - especially those who like the language but
+do not fall in love with it - feel a sense that there must be a smaller,
+simpler variation on the same theme which would maybe be a little less
+powerful, but would also be much easier to use. I agree with them, but I think
+they are almost always wrong about what would need to change. Here are some
+notes on where I would start to create that smaller Rust.&lt;/p></description></item><item><title>Update on await syntax</title><link>https://without.boats/blog/await-decision-ii/</link><pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/await-decision-ii/</guid><description>In my previous post I said that the lang team would be making our final decision about the syntax of the await operator in the May 23 meeting. That was last Thursday, and we did reach a decision. In brief, we decided to go forward with the preliminary proposal I outlined earlier: a postfix dot syntax, future.await. For more background, in addition the previous post on my blog, you can read this write up about some of the trade offs from April.</description></item><item><title>Zero Cost Abstractions</title><link>https://without.boats/blog/zero-cost-abstractions/</link><pubDate>Thu, 16 May 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/zero-cost-abstractions/</guid><description>The idea of a zero cost abstraction is very important to certain programming languages, like Rust and C++, which intend to enable users to write programs with excellent performance profiles with relatively little effort. Since this idea is fundamental to the design of Rust and my work, I want to investigate, for a moment, what exactly a zero cost abstraction even is.
+The idea is summarized in its original by Bjarne Stroustrup, the original developer of C++:</description></item><item><title>A final proposal for await syntax</title><link>https://without.boats/blog/await-decision/</link><pubDate>Mon, 06 May 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/await-decision/</guid><description>This is an announcement regarding the resolution of the syntax for the await operator in Rust. This is one of the last major unresolved questions blocking the stabilization of the async/await feature, a feature which will enable many more people to write non-blocking network services in Rust. This post contains information about the timeline for the final decision, a proposal from the language team which is the most likely syntax to be adopted, and the justification for this decision.</description></item><item><title>for await loops (Part I)</title><link>https://without.boats/blog/for-await-i/</link><pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/for-await-i/</guid><description>The biggest unresolved question regarding the async/await syntax is the final syntax for the await operator. There&amp;rsquo;s been an enormous amount of discussion on this question so far; a summary of the present status of that discussion and the positions within the language team is coming soon. Right now I want to separately focus on one question which impacts that decision but hasn&amp;rsquo;t been considered very much yet: for loops which process streams.</description></item><item><title>Generators II: The Question Mark Problem</title><link>https://without.boats/blog/generators-ii/</link><pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/generators-ii/</guid><description>This is my second post on the design of generators. In the first post, I outlined what an MVP of the feature would look like. In this post, I want to take a look at the first design issue for the feature: how it integrates with the ? operator.
+To explain exactly what I mean, let&amp;rsquo;s start with a specific motivating example:
+// This generator yields the number of alphanumeric characters in every line // in some io::Read&amp;#39;able data // exact sign function declaration syntax left unspecified on purpose |data| { let mut buffered_data = BufReader::new(data); let mut string = String::new(); while buffered_data.</description></item><item><title>Generators I: Toward a minimum viable product</title><link>https://without.boats/blog/generators-i/</link><pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/generators-i/</guid><description>We&amp;rsquo;re still not finished with the design of async/await, but it&amp;rsquo;s already become clear that it&amp;rsquo;s time to get the next phases of the feature into the pipeline. There are two extensions to the minimal async/await feature we&amp;rsquo;ve currently got that seem like the clear high priority:
+Async methods: allowing async fn to be used in traits. Generators: allowing imperative control flow to create Iterators and Streams the same way async fn allows imperative control flow to create a Future.</description></item><item><title>The Waker API II: waking across threads</title><link>https://without.boats/blog/wakers-ii/</link><pubDate>Fri, 11 Jan 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/wakers-ii/</guid><description>In the previous post, I provided a lot of background on what the waker API is trying to solve. Toward the end, I touched on one of the tricky problems the waker API has: how do we handle thread safety for the dynamic Waker type? In this post, I want to look at that in greater detail: what we&amp;rsquo;ve been doing so far, and what I think we should do.</description></item><item><title>The Waker API I: what does a waker do?</title><link>https://without.boats/blog/wakers-i/</link><pubDate>Mon, 07 Jan 2019 00:00:00 +0000</pubDate><guid>https://without.boats/blog/wakers-i/</guid><description>Work on supporting async/await in Rust continues to progress rapidly. I&amp;rsquo;m hoping to write a retrospective on everything that happened in 2018 in a few weeks. Right now we&amp;rsquo;re closing in on an important milestone: stabilizing the futures API that will be used to interact programmatically with asynchronous computations. The biggest remaining area of work is the design of the waker API, an essential but somewhat opaque part of how our asynchronous programming system works.</description></item><item><title>Organizational Debt</title><link>https://without.boats/blog/rust-2019/</link><pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/rust-2019/</guid><description>We all know that classic aphorism: Year comes to an end, Rust blog post press send. This is mine.
+There are lots of cool technical improvements to Rust that I want the project to achieve this year, and a few in particular that I&amp;rsquo;m definitely going to be putting a lot of time into. But this blog post is going to talk about none of them. Instead, I want to talk about organizational debt, and how badly the Rust project needs to deal with it in 2019.</description></item><item><title>Wherefore art thou Romio?</title><link>https://without.boats/blog/romio/</link><pubDate>Wed, 05 Dec 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/romio/</guid><description>This blog post is about a project called Romio that I&amp;rsquo;ve been working on over the past two or three weeks. Romio is a port of a small part of the Tokio project to the newer futures APIs.
+I started the project to get some experience porting code from the old futures API to the new API. However, we realized that this code could also be useful to other people who want to experiment with networking code using the new async/await syntax, so with the help of others we polished it up during the RustFest Rome &amp;ldquo;impl days&amp;rdquo; and now its being released for people to experiment with.</description></item><item><title>Making progress in await syntax</title><link>https://without.boats/blog/await-syntax/</link><pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/await-syntax/</guid><description>One thing we&amp;rsquo;ve left as an unresolved question so far in the matter of async/await syntax is the exact final syntax for the await operation. In the current implementation, awaits are written using a compiler plugin:
+async fn foo() { await!(bar()); } This is not because of any technical limitation: the reason we have done this is that we have not decided on the precise, final syntax for the await operation.</description></item><item><title>Anchored and Uniform Paths</title><link>https://without.boats/blog/anchored-uniform/</link><pubDate>Fri, 02 Nov 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/anchored-uniform/</guid><description>Rust 2018 is almost out the door, but there is one big decision the language team has yet to make. It has to do with the modules and paths system, so of course it is a very easy decision that no one has a strong opinion about. ;-)
+In Rust 2018, we&amp;rsquo;ll be making some big changes to how paths work to try to create a more consistent experience. The &amp;ldquo;lodestar&amp;rdquo; (if you will) of these changes is an idea we call &amp;ldquo;1path:&amp;rdquo; the idea no matter where you are in your project, whether in a use statement or normal code, a path is interpreted the same way.</description></item><item><title>Shifgrethor IV: Tracing</title><link>https://without.boats/blog/shifgrethor-iv/</link><pubDate>Wed, 31 Oct 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/shifgrethor-iv/</guid><description>The post before this one covered how shifgrethor handles rooting: how we track for the garbage collector that this object is alive. That isn&amp;rsquo;t sufficient for implementing a tracing garbage collector though: the idea of a tracing garbage collector is that we can trace from rooted objects through all of the objects they reference. That way, instead of having to root everything you use, you can only root a few objects from which all of the live objects can be traced.</description></item><item><title>Shifgrethor III: Rooting</title><link>https://without.boats/blog/shifgrethor-iii/</link><pubDate>Wed, 24 Oct 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/shifgrethor-iii/</guid><description>After the digression in the previous post, it&amp;rsquo;s time to get back to what I promised in the first post: a look at how shifgrethor handles rooting. Shifgrethor&amp;rsquo;s solution is somewhat novel and takes advantage of some of Rust&amp;rsquo;s specific features, so I want to start by looking briefly at some of the other options.
+How to root a GC&amp;rsquo;d object There are two broad categories of rooting strategies that are common among precise, tracing garbage collectors:</description></item><item><title>Shifgrethor II: Notes on tracing garbage collectors</title><link>https://without.boats/blog/shifgrethor-ii/</link><pubDate>Mon, 22 Oct 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/shifgrethor-ii/</guid><description>In the previous post I said that in the second post in the series we&amp;rsquo;d talk about how rooting works. However, as I sat down to write that post, I realized that it would be a good idea to back up and give an initial overview of how a tracing garbage collector works - and in particular, how the underlying garbage collector in shifgrethor is implemented.
+In the abstract, we can think of the memory of a Rust program with garbage collection as being divided into three sections: the stack, the &amp;ldquo;unmanaged&amp;rdquo; heap, and the &amp;ldquo;managed&amp;rdquo; heap.</description></item><item><title>Shifgrethor I: Garbage collection as a Rust library</title><link>https://without.boats/blog/shifgrethor-i/</link><pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/shifgrethor-i/</guid><description>I&amp;rsquo;m really excited to share with you an experiment that I&amp;rsquo;ve been working on for the past 5 or 6 weeks. It&amp;rsquo;s a Rust library called shifgrethor. shifgrethor implements a garbage collector in Rust with an API I believe to be properly memory safe.
+I&amp;rsquo;ll be going through all of the technical details in future blog posts, so I want to kick this series off with a high level overview of the project&amp;rsquo;s purpose and design decisions.</description></item><item><title>The hard parts of talking about open source</title><link>https://without.boats/blog/the-hard-part-of-open-source/</link><pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/the-hard-part-of-open-source/</guid><description>&lt;p>&lt;a href="https://twitter.com/czaplic">Evan Czaplicki&lt;/a>, the creator and maintainer of the &lt;a href="https://elm-lang.org/">Elm project&lt;/a> (a
+project that I love by the way) gave a great talk at Strange Loop last month
+called &amp;ldquo;The Hard Parts of Open Source.&amp;rdquo; I really enjoyed and valued this talk,
+and I encourage everyone who is involved in open source to watch it. You can
+find on YouTube &lt;a href="https://www.youtube.com/watch?v=o_4EX4dPppA">here&lt;/a>.&lt;/p>
+&lt;p>In particular, I got a lot of value out of his identification of three specific
+harmful patterns of behavior in the open source community, and of his
+geneological work tracing the origins of those behaviors through the history of
+the &amp;ldquo;hacker&amp;rdquo; subculture. I think I&amp;rsquo;m going to be utilising these patterns a lot
+when trying to understand unpleasant interactions I have in connection with my
+open source work.&lt;/p>
+&lt;p>In case some readers decide not to watch Evan&amp;rsquo;s talk, I want to highlight those
+three patterns here:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>&amp;ldquo;Why don&amp;rsquo;t you just..&amp;rdquo;&lt;/strong> People sometimes propose solutions to problems
+that are very obvious, but have nuanced and non-obvious problems. Often,
+these proposals are made with an intonation that the project maintainers -
+who have thought about the domain a great deal more than the person making
+the proposal - have completely overlooked this obvious solution.&lt;/li>
+&lt;li>&lt;strong>&amp;ldquo;On whose authority?&amp;rdquo;&lt;/strong> People sometimes will attempt to subvert and
+undermine the authority of project leadership. Sometimes they go as far as
+suggesting ulterior, untoward motivation for decision-making (usually having
+to do with the project&amp;rsquo;s financial sponsor). Sometimes they undermine the
+competence and capabilities of people leading the project.&lt;/li>
+&lt;li>&lt;strong>&amp;ldquo;All discussion is constructive.&amp;rdquo;&lt;/strong> While the previous two patterns were
+forms of outright attack on project maintainers, this pattern is more subtle.
+It is the attitude which ignores the negative externalities of discussion,
+the way that producing more discussion content can be harmful to the
+project&amp;rsquo;s goals. Sometimes it goes so far as to say that discussion
+containing negative behavioral patterns is still constructivebecause behind
+the attacks there might be good ideas.&lt;/li>
+&lt;/ol>
+&lt;p>As I&amp;rsquo;ve said, I think Evan&amp;rsquo;s talk is quite good and worth watching, but I do
+have an objection, which is why I&amp;rsquo;ve written out this whole blog post. In the
+final segment of the talk, it shifts from disecting these social phenomena into
+a sketch of a proposed discussion platform designed with the goal of producing
+more positive discussions.&lt;/p></description></item><item><title>New crate: pin-cell</title><link>https://without.boats/blog/pin-cell/</link><pubDate>Tue, 09 Oct 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/pin-cell/</guid><description>Today I realized a new crate called pin-cell. This crate contains a type called PinCell, which is a kind of cell that is similar to RefCell, but only can allow pinned mutable references into its interior. Right now, the crate is nightly only and no-std compatible.
+How is the API of PinCell different from RefCell? When you call borrow_mut on a RefCell, you get a type back that implements DerefMut, allowing you to mutate the interior value.</description></item><item><title>Thinking about names, as well as scuba diving</title><link>https://without.boats/blog/names-and-scuba/</link><pubDate>Mon, 10 Sep 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/names-and-scuba/</guid><description>There are 2 hard problems in computer science: cache invalidation, naming things, and off-by-1 errors.
+Naming a project, tool, or concept that you want other people to use is a very hard problem. The most important thing, of course, is that the name sounds cool. Then, significantly less important, but still quite important, is that the name convey useful information to your users. This is where things get tricky. There are tons of different kinds of cool birds and sharks and reptiles we can name our projects after, but only some of those names also convey information to our users.</description></item><item><title>Another look at the pinning API</title><link>https://without.boats/blog/rethinking-pin/</link><pubDate>Wed, 22 Aug 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/rethinking-pin/</guid><description>A few months ago we introduced the concept of &amp;ldquo;pinned&amp;rdquo; references - pointers which &amp;ldquo;pin&amp;rdquo; the data they refer to in a particular memory location, guaranteeing that it will never move again. These are an important building block for certain patterns that had previously been hard for Rust to handle, like self-referential structs and intrusive lists, and we&amp;rsquo;ve in the process of considering stabilizing the API.
+One thing has always nagged about the API we have right now though: the proliferation of different reference types that it implies.</description></item><item><title>My experience with the Rust 2018 preview</title><link>https://without.boats/blog/my-experience-with-rust-2018/</link><pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/my-experience-with-rust-2018/</guid><description>Recently, I wrote a little a side project to sign git commits without gpg. When I did this, I decided to use the Rust 2018 edition. I also transitioned an existing library from Rust 2015 to Rust 2018 to see how that tooling worked. I thought I&amp;rsquo;d write a blog post about my experience using the Rust 2018 preview and the state of things right now.
+Module changes The main thing I noticed vividly was the new experience of the module system.</description></item><item><title>Signing my git commits without GPG</title><link>https://without.boats/blog/signing-commits-without-gpg/</link><pubDate>Mon, 23 Jul 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/signing-commits-without-gpg/</guid><description>Unlike most git users, I try to sign my commits. Unfortunately, the only way to do this right now is to use PGP signatures, because that is all that git is able to integrate with. This has meant that in practice I have to use GPG if I want to sign my commits, an experience I do not relish. Last week, I wrote a program to replace GPG for that purpose.</description></item><item><title>Async Methods II: object safety</title><link>https://without.boats/blog/async-methods-ii/</link><pubDate>Mon, 04 Jun 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/async-methods-ii/</guid><description>Last time, we introduced the idea of async methods, and talked about how they would be implemented: as a kind of anonymous associated type on the trait that declares the method, which corresponds to a different, anonymous future type for each implementation of that method. Starting this week we&amp;rsquo;re going to look at some of the implications of that. The first one we&amp;rsquo;re going to look at is object safety.</description></item><item><title>Async Methods I: generic associated types</title><link>https://without.boats/blog/async-methods-i/</link><pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/async-methods-i/</guid><description>Async/await continues to move along swimmingly. We&amp;rsquo;ve accepted an RFC describing how the async/await syntax will work in Rust, and work is underway on implementing support for it in the compiler. We&amp;rsquo;re hopeful that users will be able to start experimenting with the syntax on nightly by early July.
+The RFC for async/await didn&amp;rsquo;t address one important thing: async methods. It is very important for people defining libraries to be able to define traits that contain async functions, like this:</description></item><item><title>Async &amp; Await in Rust: a full proposal</title><link>https://without.boats/blog/async-await-final/</link><pubDate>Fri, 06 Apr 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/async-await-final/</guid><description>&lt;p>I&amp;rsquo;m really excited to announce the culmination of much of our work over the
+last four months: a pair of RFCs for supporting async &amp;amp; await notation in Rust.
+This will be very impactful for Rust in the network services space. The change
+is proposed as two RFCs:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://github.com/rust-lang/rfcs/pull/2394">RFC #2394:&lt;/a>&lt;/strong> which adds async &amp;amp; await notation to the
+language.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/rust-lang/rfcs/pull/2395">RFC #2395:&lt;/a>&lt;/strong> which moves a part of the futures library into
+std to support that syntax.&lt;/li>
+&lt;/ul>
+&lt;p>These RFCs will enable basic async &amp;amp; await syntax support with the full range
+of Rust features - including borrowing across yield points. The rest of this
+blog post just covers the answers to some anticipated frequently asked
+questions; for more details see the two RFCs.&lt;/p></description></item><item><title>Async/Await VI: 6 weeks of great progress</title><link>https://without.boats/blog/async-vi/</link><pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/async-vi/</guid><description>It&amp;rsquo;s hard to believe its been almost 6 weeks since the last post I made about async/await in Rust. So much has happened that these last several weeks have flown by. We&amp;rsquo;ve made exceptionally good progress on solving the problem laid out in the first post of this series, and I want to document it all for everyone.
+Future and the pinning API Last month I wrote an RFC called &amp;ldquo;Standard library API for immovable types&amp;rdquo;.</description></item><item><title>Failure 1.0.0 on March 15</title><link>https://without.boats/blog/failure-1.0/</link><pubDate>Thu, 22 Feb 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/failure-1.0/</guid><description>I&amp;rsquo;m planning to release a 1.0.0 version of failure on March 15. Once this happens, I don&amp;rsquo;t plan to release any further breaking changes to the failure crate (though maybe someday in the distant future).
+Breaking changes in 1.0 failure is in a somewhat unique position as being a significant part of the public API of other libraries that depend on it. Whether they use the Error struct or derive Fail for a custom error type, this becomes a part of the API they expose to other users.</description></item><item><title>Async/Await V: Getting back to the futures</title><link>https://without.boats/blog/async-v-getting-back-to-the-futures/</link><pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/async-v-getting-back-to-the-futures/</guid><description>Two posts ago I proposed a particular interface for shipping self-referential generators this year. Immediately after that, eddyb showed me a better interface, which I described in the next post. Now, to tie everything together, its time to talk about how we can integrate this into the futures ecosystem.
+Starting point: this Generator API To begin, I want to document the generator API I&amp;rsquo;ll be using in this post, which is roughly what followed from my previous post:</description></item><item><title>Async/Await IV: An Even Better Proposal</title><link>https://without.boats/blog/async-iv-an-even-better-proposal/</link><pubDate>Wed, 07 Feb 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/async-iv-an-even-better-proposal/</guid><description>I did not plan to write this blog post. I thought that the fourth post in my series would explain how we could go from the generator API in my previous post to a futures API in which you don&amp;rsquo;t have to heap allocate every async call. But eddyb surprised me, and now I have to revisit the API in the previous post, because we can implement everything we need from immovability with a safe interface afterall.</description></item><item><title>Async/Await III: Moving Forward with Something Shippable</title><link>https://without.boats/blog/async-iii-moving-forward/</link><pubDate>Sun, 04 Feb 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/async-iii-moving-forward/</guid><description>In the first post, we looked at the relationship between generators and a more general notion of self-references. In the second post, we narrowed down exactly what problem we need to solve to make generators work, and talked about some solutions that we&amp;rsquo;ve considered but don&amp;rsquo;t feel like we could ship in the near future.
+In the original post, I promised that I would have a near term solution by the end of this series.</description></item><item><title>Async/Await II: Narrowing the Scope of the Problem</title><link>https://without.boats/blog/async-ii-narrowing-the-scope/</link><pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/async-ii-narrowing-the-scope/</guid><description>Last time we talked about the broader problem that generators with references across yield points represent: self-referential structs. This time, I want to narrow in on the specific problem that needs to be solved to make generators work, and also discuss some ideas for solutions that I think are false starts.
+(I still don&amp;rsquo;t have a proposal about what to do in this post, but it will come soon enough!)</description></item><item><title>Async/Await I: Self-Referential Structs</title><link>https://without.boats/blog/async-i-self-referential-structs/</link><pubDate>Thu, 25 Jan 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/async-i-self-referential-structs/</guid><description>This is the first in a series of blog posts about generators, async &amp;amp; await in Rust. By the end of this series, I will have a proposal for how we could expediently (within the next 12 months) bring generators, async &amp;amp; await to stable Rust, and resolve some of the most difficult ergonomics problems in the futures ecosystem.
+But that proposal is still several posts away. Before we can get to a concrete proposition, we need to understand the scope &amp;amp; nature of the problem we need to solve.</description></item><item><title>Announcing a new project: configure</title><link>https://without.boats/blog/configure/</link><pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/configure/</guid><description>Hi :) I&amp;rsquo;ve been working on a project called configure, which is intended to create a uniform way to load configuration variables from the environment of the program. Specifically, the goal is to create something that libraries can rely on to allow applications to delegate decisions about how configuration is loaded to applications, without those applications having to write a lot of bespoke configuration management glue.
+Storing configuration in the environment &amp;ldquo;The 12 Factor App&amp;rdquo; has this very good advice about managing configuration:</description></item><item><title>My Goals for Rust in 2018</title><link>https://without.boats/blog/goals-for-rust/</link><pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/goals-for-rust/</guid><description>The Rust project has requested blog posts about the project&amp;rsquo;s goals for 2018. I found myself in pretty much complete agreement with Nick Cameron&amp;rsquo;s post, so I thought instead I would write about my own personal goals for Rust in 2018. I am fortunate enough to work on Rust full-time; modulated by the work that needs to get done to accomplish larger team goals, these are some things that I&amp;rsquo;m individually very motivated to make progress on in 2018.</description></item><item><title>Unsafe Abstractions</title><link>https://without.boats/blog/unsafe-abstractions/</link><pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate><guid>https://without.boats/blog/unsafe-abstractions/</guid><description>Unsafety in Rust is often discussed in terms the primitive operations that can only be performed inside of unsafe blocks (such as dereferencing raw pointers and accessing mutable statics). I want to look at it from a different angle from these primitive operations, and instead focus on the capability to produce unsafe abstractions.
+The general concept of unsafe abstractions An unsafe abstraction is a new abstraction which requires the unsafe keyword to apply to some context (this is an intentionally &amp;ldquo;abstract&amp;rdquo; definition, because as we will see there are several highly divergent forms of unsafe abstraction supported in Rust).</description></item><item><title>Not Explicit</title><link>https://without.boats/blog/things-explicit-is-not/</link><pubDate>Wed, 27 Dec 2017 00:00:00 +0000</pubDate><guid>https://without.boats/blog/things-explicit-is-not/</guid><description>Oftentimes when I am conversing about the design of Rust with other users - as on RFCs or the internals forum - I witness a peculiar remark about &amp;ldquo;explicitness.&amp;rdquo; It usually goes something like this:
+I do not like Feature Design X because it is too implicit. Magic is okay in Other Language Y, but Rust is supposed to be an explicit language, so we should go with Feature Design Z instead.</description></item><item><title>Failure 0.1.1 released</title><link>https://without.boats/blog/failure-0-1-1/</link><pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate><guid>https://without.boats/blog/failure-0-1-1/</guid><description>I&amp;rsquo;ve just published failure 0.1.1 to crates.io. It&amp;rsquo;s mostly some incremental improvements to failure that have been suggested since the first release two weeks ago.
+Improvements to the derive A big change in version 0.1.1 is that the derive can be used without depending on the failure_derive crate separately. All that needs to be done is tagging the extern crate statement with #[macro_use]:
+// No direct dependency on `failure_derive` #[macro_use] extern crate failure; #[derive(Fail, Debug)] #[fail(display = &amp;#34;An error occurred.</description></item><item><title>Announcing Failure</title><link>https://without.boats/blog/announcing-failure/</link><pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate><guid>https://without.boats/blog/announcing-failure/</guid><description>I&amp;rsquo;m really excited to announce a new crate I&amp;rsquo;ve been working on, called failure, and which I&amp;rsquo;ve just released to crates.io. Failure is a Rust library intended to make it easier to manage your error types. This library has been heavily influenced by learnings we gained from previous iterations in our error management story, especially the Error trait and the error-chain crate.
+The Fail trait The core abstraction in failure is the Fail trait, a replacement for the existing std::error::Error trait.</description></item><item><title>Alternative Registries</title><link>https://without.boats/blog/alternative-registries/</link><pubDate>Mon, 23 Oct 2017 14:10:21 -0700</pubDate><guid>https://without.boats/blog/alternative-registries/</guid><description>cargo gained a new feature this week! You can now download dependencies from alternative registries, alongside the dependencies you download from crates.io. This is an important step in enabling organizations to distribute their internal libraries through cargo without requiring them to upload those libraries to a public registry.
+This feature will be available on nightly only, and it is gated behind the alternative-registries feature gate. We&amp;rsquo;ve used feature gates to iterate on new and unstable features in rustc since the 1.</description></item><item><title>Blogging With GitLab and Hugo</title><link>https://without.boats/blog/blogging-with-gitlab-and-hugo/</link><pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate><guid>https://without.boats/blog/blogging-with-gitlab-and-hugo/</guid><description>Previously, I attempted to maintain a blog using GitHub Pages. I was very unsuccessful at actually producing blog posts, though. I don&amp;rsquo;t care a lot about the appearance or maintenance of my blog site. What I want from the experience is the same experience I have writing Rust RFCs (because I have a lot of experience doing that):
+I write some markdown. I commit and push. Other people can read it.</description></item><item><title>Handshake Patterns</title><link>https://without.boats/blog/handshake-patterns/</link><pubDate>Sat, 21 Jan 2017 00:00:00 +0000</pubDate><guid>https://without.boats/blog/handshake-patterns/</guid><description>The problem: defining a &amp;lsquo;handshake&amp;rsquo; protocol between two traits You have a problem that decomposes in this way: you want any type which implements trait Alpha to be composable with any type which implements trait Omega&amp;hellip;
+That is, if Foo and Bar are both Alphas and Baz and Quux are both Omegas, you can compose Foo with Baz or Quux, and the same with Bar, and so on.
+This is not a trivial problem.</description></item><item><title>The Rust module system is too confusing</title><link>https://without.boats/blog/the-rust-module-system-is-too-confusing/</link><pubDate>Wed, 04 Jan 2017 00:00:00 +0000</pubDate><guid>https://without.boats/blog/the-rust-module-system-is-too-confusing/</guid><description>A while ago I was considering an idea, so I wrote a tweet to ask what folks thought about it.
+A very spirited discussion followed about the Rust module system and what the pain points with it were (indeed - whether or not there were pain points at all). Depending on your skill at navigating Twitter&amp;rsquo;s UI, you may or may not be able to read the whole discussion by following the link above.</description></item><item><title>404 Page Not Found</title><link>https://without.boats/404.html</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://without.boats/404.html</guid><description>…In that Empire, the Art of Cartography attained such Perfection that the map of a single Province occupied the entirety of a City, and the map of the Empire, the entirety of a Province. In time, those Unconscionable Maps no longer satisfied, and the Cartographers Guilds struck a Map of the Empire whose size was that of the Empire, and which coincided point for point with it. The following Generations, who were not so fond of the Study of Cartography as their Forebears had been, saw that that vast Map was Useless, and not without some Pitilessness was it, that they delivered it up to the Inclemencies of Sun and Winters.</description></item><item><title>I am looking for work.</title><link>https://without.boats/hire-me/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://without.boats/hire-me/</guid><description>My name is Saoirse; people also call me boats. I am an experienced systems developer, excited by complex problems and serious about building technology that is empowering to other people.
+I am available to work on new projects, full time or part time. I&amp;rsquo;m open to many different possible work arrangements; I am based in Berlin, Germany. I am happy to work remotely, and I have a lot of experience working with distributed teams.</description></item></channel></rss>

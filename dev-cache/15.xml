@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="0.91">
+
+<channel>
+<title>Laurence Tratt</title>
+<link>https://tratt.net/</link>
+<description>Laurence Tratt</description>
+<language>en-gb</language>
+
+<item>
+<pubdate>Wed, 21 Aug 2024 12:30 +0000</pubdate>
+<title>Recording and Processing Spoken Word</title>
+<link>https://tratt.net/laurie/blog/2024/recording_and_processing_spoken_word.html</link>
+<guid>https://tratt.net/laurie/blog/2024/recording_and_processing_spoken_word.html</guid>
+</item>
+
+<item>
+<pubdate>Sat, 27 Jul 2024 08:00 +0000</pubdate>
+<title>pizauth-1.0.5 released</title>
+<link>https://tratt.net/laurie/src/pizauth/</link>
+<guid>https://tratt.net/laurie/src/pizauth/</guid>
+</item>
+
+<item>
+<pubdate>Thu, 25 Jul 2024 08:00 +0000</pubdate>
+<title>snare-0.4.11 released</title>
+<link>https://tratt.net/laurie/src/snare/</link>
+<guid>https://tratt.net/laurie/src/snare/</guid>
+</item>
+
+<item>
+<pubdate>Fri, 31 May 2024 10:10 +0000</pubdate>
+<title>Why the Circular Specification Problem and the Observer Effect Are Distinct</title>
+<link>https://tratt.net/laurie/blog/2024/why_the_circular_specification_problem_and_the_observer_effect_are_distinct.html</link>
+<guid>https://tratt.net/laurie/blog/2024/why_the_circular_specification_problem_and_the_observer_effect_are_distinct.html</guid>
+</item>
+
+<item>
+<pubdate>Tue, 14 May 2024 11:00 +0000</pubdate>
+<title>What Factors Explain the Nature of Software?</title>
+<link>https://tratt.net/laurie/blog/2024/what_factors_explain_the_nature_of_software.html</link>
+<guid>https://tratt.net/laurie/blog/2024/what_factors_explain_the_nature_of_software.html</guid>
+</item>
+
+<item>
+<pubdate>Tue, 02 Apr 2024 08:00 +0000</pubdate>
+<title>snare-0.4.10 released</title>
+<link>https://tratt.net/laurie/src/snare/</link>
+<guid>https://tratt.net/laurie/src/snare/</guid>
+</item>
+
+<item>
+<pubdate>Fri, 08 Mar 2024 08:00 +0000</pubdate>
+<title>supuner-0.3 released</title>
+<link>https://tratt.net/laurie/src/supuner/</link>
+<guid>https://tratt.net/laurie/src/supuner/</guid>
+</item>
+
+<item>
+<pubdate>Wed, 28 Feb 2024 11:00 +0000</pubdate>
+<title>Some Reflections on Writing Unix Daemons</title>
+<link>https://tratt.net/laurie/blog/2024/some_reflections_on_writing_unix_daemons.html</link>
+<guid>https://tratt.net/laurie/blog/2024/some_reflections_on_writing_unix_daemons.html</guid>
+</item>
+
+<item>
+<pubdate>Sun, 04 Feb 2024 08:00 +0000</pubdate>
+<title>pizauth-1.0.4 released</title>
+<link>https://tratt.net/laurie/src/pizauth/</link>
+<guid>https://tratt.net/laurie/src/pizauth/</guid>
+</item>
+
+<item>
+<pubdate>Tue, 16 Jan 2024 14:50 +0000</pubdate>
+<title>Faster Shell Startup With Shell Switching</title>
+<link>https://tratt.net/laurie/blog/2024/faster_shell_startup_with_shell_switching.html</link>
+<guid>https://tratt.net/laurie/blog/2024/faster_shell_startup_with_shell_switching.html</guid>
+</item>
+
+<item>
+<pubdate>Mon, 08 Jan 2024 08:00 +0000</pubdate>
+<title>snare-0.4.9 released</title>
+<link>https://tratt.net/laurie/src/snare/</link>
+<guid>https://tratt.net/laurie/src/snare/</guid>
+</item>
+
+<item>
+<pubdate>Thu, 04 Jan 2024 09:50 +0000</pubdate>
+<title>Choosing What To Read</title>
+<link>https://tratt.net/laurie/blog/2024/choosing_what_to_read.html</link>
+<guid>https://tratt.net/laurie/blog/2024/choosing_what_to_read.html</guid>
+</item>
+
+<item>
+<pubdate>Wed, 27 Dec 2023 08:00 +0000</pubdate>
+<title>hk-0.3.2 released</title>
+<link>https://tratt.net/laurie/src/hk/</link>
+<guid>https://tratt.net/laurie/src/hk/</guid>
+</item>
+
+<item>
+<pubdate>Wed, 13 Dec 2023 13:25 +0000</pubdate>
+<title>Debugging A Failing Hotkey</title>
+<link>https://tratt.net/laurie/blog/2023/debugging_a_failing_hotkey.html</link>
+<guid>https://tratt.net/laurie/blog/2023/debugging_a_failing_hotkey.html</guid>
+</item>
+
+<item>
+<pubdate>Wed, 13 Dec 2023 08:00 +0000</pubdate>
+<title>hk-0.3.1 released</title>
+<link>https://tratt.net/laurie/src/hk/</link>
+<guid>https://tratt.net/laurie/src/hk/</guid>
+</item>
+
+<item>
+<pubdate>Mon, 04 Dec 2023 15:11 +0000</pubdate>
+<title>How Often Should We Sharpen Our Tools?</title>
+<link>https://tratt.net/laurie/blog/2023/how_often_should_we_sharpen_our_tools.html</link>
+<guid>https://tratt.net/laurie/blog/2023/how_often_should_we_sharpen_our_tools.html</guid>
+</item>
+
+<item>
+<pubdate>Tue, 28 Nov 2023 08:00 +0000</pubdate>
+<title>pizauth-1.0.3 released</title>
+<link>https://tratt.net/laurie/src/pizauth/</link>
+<guid>https://tratt.net/laurie/src/pizauth/</guid>
+</item>
+
+<item>
+<pubdate>Tue, 14 Nov 2023 09:30 +0000</pubdate>
+<title>Four Kinds of Optimisation</title>
+<link>https://tratt.net/laurie/blog/2023/four_kinds_of_optimisation.html</link>
+<guid>https://tratt.net/laurie/blog/2023/four_kinds_of_optimisation.html</guid>
+</item>
+
+<item>
+<pubdate>Thu, 12 Oct 2023 08:00 +0000</pubdate>
+<title>pizauth-1.0.2 released</title>
+<link>https://tratt.net/laurie/src/pizauth/</link>
+<guid>https://tratt.net/laurie/src/pizauth/</guid>
+</item>
+
+<item>
+<pubdate>Tue, 03 Oct 2023 13:00 +0000</pubdate>
+<title>Minor Advances in Knowledge Are Still a Worthwhile Goal</title>
+<link>https://tratt.net/laurie/blog/2023/minor_advances_in_knowledge_are_still_a_worthwhile_goal.html</link>
+<guid>https://tratt.net/laurie/blog/2023/minor_advances_in_knowledge_are_still_a_worthwhile_goal.html</guid>
+</item>
+
+</channel>
+</rss>

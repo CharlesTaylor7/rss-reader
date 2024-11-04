@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://octavelarose.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://octavelarose.github.io/" rel="alternate" type="text/html" /><updated>2024-09-12T10:41:04+00:00</updated><id>https://octavelarose.github.io/feed.xml</id><title type="html">Octave Larose</title><subtitle>My own personal website, with my own personal views and random thoughts.
+</subtitle><author><name>octave.larose@hotmail.fr</name></author><entry><title type="html">Using unsafe in our Rust interpreters: easy, debatably ethical performance</title><link href="https://octavelarose.github.io/2024/07/08/unsafeing.html" rel="alternate" type="text/html" title="Using unsafe in our Rust interpreters: easy, debatably ethical performance" /><published>2024-07-08T00:00:00+00:00</published><updated>2024-07-08T00:00:00+00:00</updated><id>https://octavelarose.github.io/2024/07/08/unsafeing</id><content type="html" xml:base="https://octavelarose.github.io/2024/07/08/unsafeing.html"><![CDATA[<h2 id="a-disclaimer">a disclaimer:</h2>
+
+<p>This article garnered a lot of attention for my use of the word <code class="language-plaintext highlighter-rouge">unsafe</code>. Frankly it’s my bad for using terms like “debatably ethical” in a tongue-and-cheek way when it’s in fact hardly unethical: no one but myself is affected by potential <code class="language-plaintext highlighter-rouge">unsafe</code> bugs, as this post is just about a research project (with 1, sometimes 2 people working on it). I’m not a company, we have no users, I’m just working on my research on interpreter performance: and since performance matters, <code class="language-plaintext highlighter-rouge">unsafe</code> has benefits for me.</p>
+
+<p>If you think I’m definitely abusing the <code class="language-plaintext highlighter-rouge">unsafe</code> keyword though, please let me know! Feedback is always appreciated and I’d love to avoid it you can provide potential alternatives.</p>
+
+<h2 id="what-am-i-reading">what am i reading?</h2>
+
+<p>This is part of a series of blog posts relating my experience pushing the performance of programming language interpreters written in Rust. For added context, read the start of <a href="/2024/05/29/to-do-inlining.html">my first blog post</a>.</p>
+
+<p>In short: we optimize AST (Abstract Syntax Tree) and BC (Bytecode) Rust-written implementations of a Smalltalk-based research language called <a href="http://som-st.github.io/">SOM</a>, in hopes of getting them fast enough to meaningfully compare them with other SOM implementations. The ultimate goal is seeing how far we can push the AST’s performance, the BC being mostly to be a meaningful point of comparison (which means its performance needs to be similarly pushed).</p>
+
+<p>As a general rule, all my changes to the original interpreter (that led to speedups + don’t need code cleanups) are present <a href="https://github.com/OctaveLarose/som-rs/tree/best">here</a>…</p>
+
+<p>…and benchmark results are obtained using <a href="https://github.com/smarr/ReBench">Rebench</a>, then I get performance increase/decrease numbers and cool graphs using <a href="https://github.com/smarr/ReBenchDB">RebenchDB</a>. In fact, you can check out RebenchDB in action and all of my results for yourself <a href="https://rebench.stefan-marr.de/som-rs/">here</a>, where you can also admire the stupid names I give my git commits to amuse myself.</p>
+
+<h2 id="what-have-i-been-doing">what have i been doing</h2>
+
+<p>I’ve mostly just been fixing bugs. I’ve been informed that having failing tests in your interpreter is in fact <em>not advisable</em>, so I had to be a good person and fix those. I did most of that… But I was also doing something I invented called “procrastination” where instead of doing the right thing, I work on the fun bits of my work instead: squeezing more performance out of my systems.</p>
+
+<p>Real quick, if anyone’s curious:</p>
+<ul>
+  <li>I fixed some major oversight in the AST that gave us like 40% median performance - it was frequently, needlessly cloning entire blocks. I thought that was a deep-rooted issue but it turned out not to be too bad a change, so that’s very cool for me.</li>
+  <li>I improved the dispatch in the AST, which was overly complex. Pretty sure the biggest win there was that this allows me to initialize method/block frames with their arguments directly, while previously they’d get created with an empty <code class="language-plaintext highlighter-rouge">Vec</code> and have arguments copied in them afterwards.</li>
+  <li>I implemented <code class="language-plaintext highlighter-rouge">to:do:</code> (and friends like <code class="language-plaintext highlighter-rouge">to:by:do:</code>) in the AST interpreter! which was so much more straightforward than <a href="/2024/05/29/to-do-inlining.html">it was for the BC interpreter</a>). That’s like another 40% median speedup.</li>
+  <li>and other minor things I’ve already forgotten about.</li>
+</ul>
+
+<p>Now that this is out of the way: this week’s post is about figuring out why we’re so slow (spoilers: I don’t, not really) and being evil by using <code class="language-plaintext highlighter-rouge">unsafe</code> (spoilers: I do that, it’s pretty easy).</p>
+
+<h2 id="why-are-we-so-slow">why are we so slow?</h2>
+
+<p>My PhD supervisor recently added a bunch of <a href="https://github.com/SOM-st/SOM/pull/121">the microest of benchmarks</a>, designed to test out very basic operations: <code class="language-plaintext highlighter-rouge">ArgRead</code> does nothing but read arguments over and over again, <code class="language-plaintext highlighter-rouge">FieldReadWrite</code> just reads/writes to fields, this kind of stuff. And even on basic operations like these, som-rs is super slow: an <code class="language-plaintext highlighter-rouge">ArgRead</code> has a median runtime of 3.37ms on our fastest bytecode interpreter, versus… 49.23ms on som-rs. Something’s way wrong.</p>
+
+<p>So I’ve been doing profiling to investigate which parts of our interpreters are slower than they could be. I focused on the BC interpreter for this job since it feels like it should be much faster. And for the most part, there weren’t really any clear answers<sup id="fnref:for-the-most-part" role="doc-noteref"><a href="#fn:for-the-most-part" class="footnote" rel="footnote">1</a></sup>: we mostly seem to just be spending too much time in the interpreter loop.</p>
+
+<p>I made a new branch <code class="language-plaintext highlighter-rouge">why-are-we-so-slow</code> and I started experimenting. I did a bunch of small changes that yielded a few % of speedups: for instance, I changed</p>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">bytecode</span> <span class="o">=</span> <span class="k">unsafe</span> <span class="p">{</span> <span class="p">(</span><span class="o">*</span><span class="k">self</span><span class="py">.current_bytecodes</span><span class="p">)</span><span class="nf">.get</span><span class="p">(</span><span class="k">self</span><span class="py">.bytecode_idx</span><span class="p">)</span> <span class="p">};</span>
+</code></pre></div></div>
+<p>…to:</p>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">bytecode</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="k">unsafe</span> <span class="p">{</span> <span class="p">(</span><span class="o">*</span><span class="k">self</span><span class="py">.current_bytecodes</span><span class="p">)</span><span class="nf">.get_unchecked</span><span class="p">(</span><span class="k">self</span><span class="py">.bytecode_idx</span><span class="p">)</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<p>Using <code class="language-plaintext highlighter-rouge">unsafe</code> in Rust means you tell the compiler “I know what I’m doing”. The nice thing about Rust is that <a href="https://stackoverflow.com/a/36137381/10489787">it nets you memory safety</a> if you play by its rules, but they can be limiting: <code class="language-plaintext highlighter-rouge">unsafe</code> allows you to ignore them, at your own risk. It’s generally not recommended… but it has its uses.</p>
+
+<p>We were using <code class="language-plaintext highlighter-rouge">unsafe</code> since we were storing a pointer to the current bytecodes in the bytecode loop for fast access, and it was safe because there’s always bytecodes to execute. Which made me think “we’re already using <code class="language-plaintext highlighter-rouge">unsafe</code>, might as well also call <code class="language-plaintext highlighter-rouge">get_unchecked</code> for more performance”: this code never fails as the bytecode index never increases past the number of bytecodes in a function. That’s because the final bytecode in a method or a block is always a <code class="language-plaintext highlighter-rouge">RETURN</code> of some kind: if a method doesn’t return anything explicitly, it returns a <code class="language-plaintext highlighter-rouge">self</code> value, and the bytecode loop goes back to the calling function.</p>
+
+<p>Theoretically a <code class="language-plaintext highlighter-rouge">JUMP</code> could increase the bytecode index to an incorrect value, say 100000… but here’s how I draw the line for optimizations: I choose to believe that <strong>my bytecode compiler is trustworthy</strong>, and that any code that is unsafe based on that assertion is a valid choice. I could be shooting myself in the foot since there may be bugs in my compiler, but I think trusting it is a fair assumption to make: it’s been proving sturdy enough, and if the bytecode I generate is incorrect, my code will fail miserably (or maybe act clearly incorrectly, but we’ve got many tests to check for that).</p>
+
+<p>So it’s a choice between not trusting my compiler + maybe failing “elegantly”, or trusting it (by using <code class="language-plaintext highlighter-rouge">unsafe</code>) + maybe failing with ugly segmentation faults. And I choose the option that gets me the most performance, so <code class="language-plaintext highlighter-rouge">unsafe</code> it is!</p>
+
+<h2 id="unsafe-frame-accesses">unsafe frame accesses</h2>
+
+<p>Trusting the bytecode compiler means that whenever our bytecode requests a given argument, we know that this argument does in fact exist.  Which means that when we currently look up an argument with this code:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">lookup_argument</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">usize</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">Value</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">self</span><span class="py">.args</span><span class="nf">.get</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="nf">.cloned</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>…if we <strong>know</strong> that the bytecode we emitted is correct, then this <code class="language-plaintext highlighter-rouge">get</code> will never fail: we will <em>always</em> get an argument.</p>
+
+<p>So it now becomes:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">lookup_argument</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">usize</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Value</span> <span class="p">{</span>
+    <span class="k">unsafe</span> <span class="p">{</span> <span class="k">self</span><span class="py">.args</span><span class="nf">.get_unchecked</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="nf">.clone</span><span class="p">()</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>…and code that used this function, which looked like <code class="language-plaintext highlighter-rouge">lookup_argument(0).unwrap()</code>, can now ditch that <code class="language-plaintext highlighter-rouge">unwrap()</code>. We’re no longer using <code class="language-plaintext highlighter-rouge">Option&lt;Value&gt;</code>, but <code class="language-plaintext highlighter-rouge">Value</code> directly.</p>
+
+<p>So that was a very simple change I had little faith in: “it’s just avoiding a couple of minor runtime checks”, I thought. The new code would obviously be faster, but I didn’t think it would be <em>much</em> faster - like 1% at best, maybe. Turns out I was wrong:</p>
+
+<p><img src="/assets/2024-07-unsafeing/lookup-arg.png" alt="d55a2d116d21f1ea4c83410246281de3fd2f5a41..49a98d57883b86a137f36bc4130bfe37446d8dad" /></p>
+
+<p>That’s a 5% median speedup from changing, like, 3 lines of code. Damn. Apparently those <code class="language-plaintext highlighter-rouge">.unwrap()</code> and <code class="language-plaintext highlighter-rouge">get()</code> calls add up.</p>
+
+<p>Which opens a lot of possibilities! Why stop at arguments? Let’s make local variable reads/writes get the same treatment, and same for literal constants (e.g. accessing string literals from a method). Here’s the speedup compared to the branch that already has the argument change:</p>
+
+<p><img src="/assets/2024-07-unsafeing/more-unsafe-accesses.png" alt="bbc03a8bfd4a76cedc15d71626e27ad0b4fddb20..30b66e2855ca804d232d470724b972ce2dd5fe6d" /></p>
+
+<p>Sick. I feel like a proper Rust programmer, using <code class="language-plaintext highlighter-rouge">unsafe</code> as God definitely did not intend (but he seems powerless to stop me).</p>
+
+<p>I also optimized field accesses in the same way, but that wasn’t much of a speedup overall since those are less common.</p>
+
+<h2 id="unsafe-bytecodes">unsafe bytecodes</h2>
+
+<p>If we’re doing <code class="language-plaintext highlighter-rouge">unsafe</code> stuff in the bytecode interpreter, we might as well focus on optimising some bytecodes directly. For that, I need to find out the most interesting bytecodes to optimize. So I did <a href="https://github.com/OctaveLarose/som-rs/commit/d55a2d116d21f1ea4c83410246281de3fd2f5a41">some basic instrumenting using the <code class="language-plaintext highlighter-rouge">measureme</code> crate</a> to be able to print a summary of which bytecodes take up the most execution time.</p>
+
+<p>The biggest offenders are <code class="language-plaintext highlighter-rouge">SEND_X</code> bytecodes: pretty much everything is a method send, so those get invoked a lot. Not sure they can benefit enormously from <code class="language-plaintext highlighter-rouge">unsafe</code> though, sadly, experimenting there didn’t yield much.</p>
+
+<p>We have other targets though. Since we’re a stack based interpreter, we do a lot of calls to <code class="language-plaintext highlighter-rouge">POP</code>. It looks like this:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">Bytecode</span><span class="p">::</span><span class="n">Pop</span> <span class="k">=&gt;</span> <span class="p">{</span>
+    <span class="k">self</span><span class="py">.stack</span><span class="nf">.pop</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">stack</code> is a <code class="language-plaintext highlighter-rouge">Vec</code>, and the code for <code class="language-plaintext highlighter-rouge">Vec::pop()</code> looks like:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">pop</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="k">self</span><span class="py">.len</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+        <span class="nb">None</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">unsafe</span> <span class="p">{</span>
+            <span class="k">self</span><span class="py">.len</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="nn">core</span><span class="p">::</span><span class="nn">hint</span><span class="p">::</span><span class="nf">assert_unchecked</span><span class="p">(</span><span class="k">self</span><span class="py">.len</span> <span class="o">&lt;</span> <span class="k">self</span><span class="nf">.capacity</span><span class="p">());</span>
+            <span class="nf">Some</span><span class="p">(</span><span class="nn">ptr</span><span class="p">::</span><span class="nf">read</span><span class="p">(</span><span class="k">self</span><span class="nf">.as_ptr</span><span class="p">()</span><span class="nf">.add</span><span class="p">(</span><span class="k">self</span><span class="nf">.len</span><span class="p">())))</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Unsurprisingly, it does several things we don’t need:</p>
+<ul>
+  <li>it checks that the length is not 0: we trust our bytecode, and so this never happens in our world - if there’s a <code class="language-plaintext highlighter-rouge">POP</code>, there’s something on our stack.</li>
+  <li>it checks that the length is inferior to its capacity: …I’m not sure why? It’s not like the capacity could ever be inferior to its length. At least I don’t know how our code could ever produce that.</li>
+  <li>it wraps the output in a <code class="language-plaintext highlighter-rouge">Some</code> type: we know there will always be an output, we don’t need an <code class="language-plaintext highlighter-rouge">Option</code> type.</li>
+  <li>it returns an output in the first place: …we don’t even need to know the output!</li>
+</ul>
+
+<p>So really what we want is just:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">Bytecode</span><span class="p">::</span><span class="n">Pop</span> <span class="k">=&gt;</span> <span class="p">{</span>
+    <span class="k">unsafe</span> <span class="p">{</span><span class="k">self</span><span class="py">.stack</span><span class="nf">.set_len</span><span class="p">(</span><span class="k">self</span><span class="py">.stack</span><span class="nf">.len</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I’d do <code class="language-plaintext highlighter-rouge">self.len -= 1</code> like they do, but <code class="language-plaintext highlighter-rouge">len</code> is unsurprisingly not public. That would be an odd software engineering decision if it was.</p>
+
+<p>Speedup from that:
+<img src="/assets/2024-07-unsafeing/pop.png" alt="30b66e2855ca804d232d470724b972ce2dd5fe6d..5853a7543fd996a9b02f0d5d79cf2fc866e08237" /></p>
+
+<p>Hey, we take those. We can do a similar thing for our <code class="language-plaintext highlighter-rouge">DUP</code> bytecode (another common one), which duplicates the last stack element.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">Bytecode</span><span class="p">::</span><span class="n">Dup</span> <span class="k">=&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">value</span> <span class="o">=</span> <span class="k">self</span><span class="py">.stack</span><span class="nf">.last</span><span class="p">()</span><span class="nf">.cloned</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+    <span class="k">self</span><span class="py">.stack</span><span class="nf">.push</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We trust our bytecode etc. etc., there will always be a value on top of the stack, so we end up with this:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">Bytecode</span><span class="p">::</span><span class="n">Dup</span> <span class="k">=&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">value</span> <span class="o">=</span> <span class="k">unsafe</span> <span class="p">{</span> <span class="k">self</span><span class="py">.stack</span><span class="nf">.get_unchecked</span><span class="p">(</span><span class="k">self</span><span class="py">.stack</span><span class="nf">.len</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="nf">.clone</span><span class="p">()</span> <span class="p">};</span>
+    <span class="k">self</span><span class="py">.stack</span><span class="nf">.push</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Man, I wish I had access to a <code class="language-plaintext highlighter-rouge">last_unchecked()</code> function, that’d look prettier. Speedup from that:</p>
+
+<p><img src="/assets/2024-07-unsafeing/dup.png" alt="4c6fa4df8afc7272b1969783f52a64291689d4a1..9d692b2334718b5b16956fc3c62ff05699a9e018" /></p>
+
+<p>Not much at all, but we also take those.</p>
+
+<p>I also spent a bit optimizing random bytecode that had very similar stack operations with peppered uses of <code class="language-plaintext highlighter-rouge">unsafe</code>. Speedup from that: pretty much none (oops). There’s definitely more potential for <code class="language-plaintext highlighter-rouge">unsafe</code> in our interpreter, but you need to identify the right targets. Ideally I’d find good uses for it in the <code class="language-plaintext highlighter-rouge">SEND</code>-related code, which I haven’t so far. I’m thinking that I should check the emitted IR/assembly for it to check for myself if it’s as fast as it could be, and more easily identify potential optimizations. Maybe in a future article.</p>
+
+<h2 id="unsafe-frame-accesses-in-ast-also">unsafe frame accesses in AST also</h2>
+
+<p>That was all in our bytecode interpreter, but we can use <code class="language-plaintext highlighter-rouge">unsafe</code> similarly in our AST interpreter. In fact, we got some speedups from <code class="language-plaintext highlighter-rouge">unsafe</code> in the AST <a href="/2024/06/06/ast-inline-caching.html">in my last post</a>, so we know it benefits from being an evil programmer.</p>
+
+<p>So I implemented all those unsafe frame accesses in our AST as well:</p>
+
+<p><img src="/assets/2024-07-unsafeing/ast.png" alt="5859af1174f64ce78f300f488321dd5b2bed183f..cd616e5c8ff1daf46ac1616cd29a399d47d9766e" /></p>
+
+<p>It looks underwhelming, but I assume that it really did bring a similar speedup. It’s just that the AST is much slower than the bytecode interpreter at the moment, and so that it wasn’t as big a win comparatively. Those performance wins might also only show themselves as they combine with other future optimizations.</p>
+
+<h2 id="final-minor-cleanups">final minor cleanups</h2>
+
+<p>These <code class="language-plaintext highlighter-rouge">get_unchecked_mut</code> and whatnot are nice, but they also make Rust crash unceremoniously, so I’d like to have the option to keep the original not-unsafe code. Rust offers the <code class="language-plaintext highlighter-rouge">debug_assertions</code> preprocessor directive to check whether we are in a debug version (my normal use case as a developer) or release version (fully optimized, the version we assess performance on) of the interpreter. So through cool Rust syntactic sugar, I can do this:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">assign_local</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">usize</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">match</span> <span class="nd">cfg!</span><span class="p">(</span><span class="n">debug_assertions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">true</span> <span class="k">=&gt;</span> <span class="p">{</span> <span class="o">*</span><span class="k">self</span><span class="py">.locals</span><span class="nf">.get_mut</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">()</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span> <span class="p">},</span>
+        <span class="k">false</span> <span class="k">=&gt;</span> <span class="k">unsafe</span> <span class="p">{</span> <span class="o">*</span><span class="k">self</span><span class="py">.locals</span><span class="nf">.get_unchecked_mut</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If we’re in the debug version, we call <code class="language-plaintext highlighter-rouge">unwrap()</code>, otherwise we call <code class="language-plaintext highlighter-rouge">get_unchecked_mut</code>. Really the debug version should have better error handling than just a dump <code class="language-plaintext highlighter-rouge">unwrap</code>, but I don’t want too much complexity from managing two versions of the interpreter at once. At least this code makes me sleep better at night.</p>
+
+<p>Neat. Final numbers:</p>
+
+<p><img src="/assets/2024-07-unsafeing/final-numbers.png" alt="911491f55d1aabb8a106d780ec2daf8f28520a6f..9dbb02aefcb7e244dca5056008548bfc2fc5552b" /></p>
+
+<p>And since it’s been a while since I last showed that: here’s where our Rust interpreters currently are compared to the others!</p>
+
+<p><img src="/assets/2024-07-unsafeing/compare-all.png" alt="147f99b32623d8a641f3756175ec73176ace3cde..3f9bd65b0de2a1ac172623a64fdf87f7815ee9d5" /></p>
+
+<p>Getting closer! If compared with <a href="/2024/05/29/to-do-inlining.html">the numbers in my first blog post</a>, there’s been a lot of progress.</p>
+
+<h3 id="what-have-we-learned">what have we learned?</h3>
+
+<p>To no one’s surprise, <code class="language-plaintext highlighter-rouge">unsafe</code> code is faster since you can remove safety checks. That’s a no brainer, but I did not expect it to be to that extent: an <code class="language-plaintext highlighter-rouge">unwrap()</code> might be extremely cheap, but several thousands of <code class="language-plaintext highlighter-rouge">unwrap()</code> calls aren’t.</p>
+
+<p>Importantly, those changes were <em>minimal</em>: it only took me a couple of minutes and a couple of braincells to get acceptable speedups! And I highly doubt this only applies to my interpreters.</p>
+
+<p>I think my usage of <code class="language-plaintext highlighter-rouge">unsafe</code> is reasonable. The Rust doc says <a href="https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html#unsafe-rust">to use <code class="language-plaintext highlighter-rouge">unsafe</code> when you know code is actually safe, or to do low level operations</a>. But I can’t ensure my code is fully safe, and I don’t need <code class="language-plaintext highlighter-rouge">unsafe</code> for my interpreters to do what I want them to. I’m in it for the performance, and for that I’m doing a third secret thing where I <em>assume</em> my compiler did a good job and therefore that my code is safe.</p>
+
+<p>I’ve not explored every possibility in this article. Hoping to find more as I go on profiling my systems and realize “hey, what if we just used a pointer there instead” or “yeah I don’t need the safety check there”. Though I want to use <code class="language-plaintext highlighter-rouge">unsafe</code> sparingly, since I lose on the benefits of Rust by using it.</p>
+
+<p>And why are we so slow? Not sure yet, unsatisfyingly. But not using <code class="language-plaintext highlighter-rouge">unsafe</code> as much as we can is apparently part of the problem.</p>
+
+<p>Thanks for reading, goodbye, xoxo and whatnot</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:for-the-most-part" role="doc-endnote">
+      <p>only <em>for the most part</em>. I know what else is slow in my bytecode interpreter: I’m hiding things from you. I know we’re close, but we’re not that close. <a href="#fnref:for-the-most-part" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>[&quot;Octave Larose&quot;]</name></author><summary type="html"><![CDATA[a disclaimer:]]></summary></entry><entry><title type="html">Inline caching in our AST interpreter</title><link href="https://octavelarose.github.io/2024/06/06/ast-inline-caching.html" rel="alternate" type="text/html" title="Inline caching in our AST interpreter" /><published>2024-06-06T00:00:00+00:00</published><updated>2024-06-06T00:00:00+00:00</updated><id>https://octavelarose.github.io/2024/06/06/ast-inline-caching</id><content type="html" xml:base="https://octavelarose.github.io/2024/06/06/ast-inline-caching.html"><![CDATA[<p>This is part of a series of blog posts relating my experience pushing the performance of programming language interpreters written in Rust. For added context, read the start of <a href="/2024/05/29/to-do-inlining.html">last week’s blog post</a>.</p>
+
+<p>In short: we optimize AST (Abstract Syntax Tree) and BC (Bytecode) Rust-written implementations of a Smalltalk-based research language called <a href="http://som-st.github.io/">SOM</a>, in hopes of getting them fast enough to meaningfully compare them with other SOM implementations.</p>
+
+<p>As a general rule, all my changes to the original interpreter (that led to speedups + don’t need code cleanups) are present <a href="https://github.com/OctaveLarose/som-rs/tree/best">here</a>. This week’s code is <a href="https://github.com/OctaveLarose/som-rs/tree/f9ba61bcc740cafd32b0b1be517a71ecfd9b3bbb">in its own branch</a>, since it relies on ugly code so I don’t want it on the main branch (explanations further below).</p>
+
+<p>…and benchmark results are obtained using <a href="https://github.com/smarr/ReBench">Rebench</a>, then I get performance increase/decrease numbers and cool graphs using <a href="https://github.com/smarr/ReBenchDB">RebenchDB</a>. In fact, you can check out RebenchDB in action and all of my results for yourself <a href="https://rebench.stefan-marr.de/som-rs/">here</a>, where you can also admire the stupid names I give my git commits to amuse myself.</p>
+
+<h3 id="inline-caching">inline caching?</h3>
+
+<p>Inline caching is a very widespread optimization in dynamic programming language implementation. If you’re reading this kind of blog, chances are you’ve already heard of it. Say you have this code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>someClass := getSomeClassSomehow.
+someClass doSomethingWith: someArg.
+</code></pre></div></div>
+
+<p>Since we’re working with a dynamic language, <code class="language-plaintext highlighter-rouge">someClass</code> can be any class at all: it can be <code class="language-plaintext highlighter-rouge">True</code>, it can be <code class="language-plaintext highlighter-rouge">Integer</code>, it can be <code class="language-plaintext highlighter-rouge">Whatever</code>, etc. Whenever you’ve got a <code class="language-plaintext highlighter-rouge">doSomethingWith</code> method call (a.k.a a “message”: sending the receiver the message “please execute your <code class="language-plaintext highlighter-rouge">doSomethingWith</code> method”), you can’t make any assumptions at compile-time about what class the method is going to get invoked on, therefore what version of <code class="language-plaintext highlighter-rouge">doSomethingWith</code> you should use: who knows what <code class="language-plaintext highlighter-rouge">getSomeClassSomehow</code> did and what it returned, really. You only find that out when it’s actually executed.</p>
+
+<p>This is annoying since that means that at every method call site, once you know what the class is, you need to look up the method in that class to be able to then execute it. That takes a bit of time for every single call, and basically everything under the sun is a call in SOM, so that’s kinda slow.</p>
+
+<p>So why not cache the result of those lookups, so that they don’t have to be done every single time? That’d make it so that whenever we call anything, we check our cached method and we invoke that instead of looking it up.</p>
+
+<p>Obvious caveat: if the method call eventually has a different receiver class, the method is wrong (it belongs to another class). So we need to invalidate the cache…</p>
+<ul>
+  <li>…or better: we make it so that our cache has several entries, and cache all possible receivers, so that we account for both the old and new receivers!</li>
+</ul>
+
+<p>What if there’s so many receivers that caching is impractically expensive?</p>
+<ul>
+  <li>this is not so much of an issue in practice! As it turns out, a method call is rarely invoked with that many different classes: most calls are <em>monomorphic</em>, a fancy term for saying “only one caller met so far”..
+    <ul>
+      <li>We wrote a paper in 2022 on the behavior of Ruby codebases, <a href="https://stefan-marr.de/downloads/dls22-kaleba-et-al-analyzing-the-run-time-call-site-behavior-of-ruby-applications.pdf">which you can read here</a>, in which we observed about 98% of the call-sites in large benchmarks to be monomorphic. Granted this is for the Ruby language and not SOM, but since they’re both highly dynamic and similar in terms of features (e.g. objects and inheritance, lambdas/closures, non-local returns), we argue they’re comparable.</li>
+    </ul>
+  </li>
+  <li>most inline caching implementations add a way to declare a callsite as <em>megamorphic</em> (fancy term for “an impractically large amount of possible callers”): if we’ve observed way too many receivers in the past, we stop caching and looking up entries entirely, only doing a generic lookup from now on.</li>
+</ul>
+
+<p>Cool. And those caches may as well be stored at the call sites themselves, therefore be <em>inline</em>, hence the name (or so I’ve always assumed).</p>
+
+<h3 id="inline-caching-in-our-bytecode-interpreter">inline caching in our bytecode interpreter</h3>
+
+<p>We’ve already implemented in the bytecode interpreter, and looks like this:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">resolve_method</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">SOMRef</span><span class="o">&lt;</span><span class="n">Frame</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">class</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">SOMRef</span><span class="o">&lt;</span><span class="n">Class</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">signature</span><span class="p">:</span> <span class="n">Interned</span><span class="p">,</span> <span class="n">bytecode_idx</span><span class="p">:</span> <span class="nb">usize</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="nb">Rc</span><span class="o">&lt;</span><span class="n">Method</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">inline_cache</span> <span class="o">=</span> <span class="k">unsafe</span> <span class="p">{</span> <span class="p">(</span><span class="o">*</span><span class="n">frame</span><span class="nf">.borrow_mut</span><span class="p">()</span><span class="py">.inline_cache</span><span class="p">)</span><span class="nf">.borrow_mut</span><span class="p">()</span> <span class="p">};</span>
+
+    <span class="k">let</span> <span class="n">maybe_found</span> <span class="o">=</span> <span class="k">unsafe</span> <span class="p">{</span> <span class="n">inline_cache</span><span class="nf">.get_unchecked_mut</span><span class="p">(</span><span class="n">bytecode_idx</span><span class="p">)</span> <span class="p">};</span>
+
+    <span class="k">match</span> <span class="n">maybe_found</span> <span class="p">{</span>
+        <span class="nf">Some</span><span class="p">((</span><span class="n">receiver</span><span class="p">,</span> <span class="n">method</span><span class="p">))</span> <span class="k">if</span> <span class="o">*</span><span class="n">receiver</span> <span class="o">==</span> <span class="n">class</span><span class="nf">.as_ptr</span><span class="p">()</span> <span class="k">=&gt;</span> <span class="p">{</span>
+            <span class="nf">Some</span><span class="p">(</span><span class="nn">Rc</span><span class="p">::</span><span class="nf">clone</span><span class="p">(</span><span class="n">method</span><span class="p">))</span>
+        <span class="p">}</span>
+        <span class="n">place</span> <span class="o">@</span> <span class="nb">None</span> <span class="k">=&gt;</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">found</span> <span class="o">=</span> <span class="n">class</span><span class="nf">.borrow</span><span class="p">()</span><span class="nf">.lookup_method</span><span class="p">(</span><span class="n">signature</span><span class="p">);</span>
+            <span class="o">*</span><span class="n">place</span> <span class="o">=</span> <span class="n">found</span><span class="nf">.clone</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">method</span><span class="p">|</span> <span class="p">(</span><span class="n">class</span><span class="nf">.as_ptr</span><span class="p">()</span> <span class="k">as</span> <span class="o">*</span><span class="k">const</span> <span class="n">_</span><span class="p">,</span> <span class="n">method</span><span class="p">));</span>
+            <span class="n">found</span>
+        <span class="p">}</span>
+        <span class="n">_</span> <span class="k">=&gt;</span> <span class="n">class</span><span class="nf">.borrow</span><span class="p">()</span><span class="nf">.lookup_method</span><span class="p">(</span><span class="n">signature</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Every bytecode has its own associated inline cache. It’s empty most of the time - you don’t need to cache anything for a <code class="language-plaintext highlighter-rouge">POP</code> bytecode - but will get entries for <code class="language-plaintext highlighter-rouge">SEND</code> bytecodes. Whenever you resolve a method, you check whether the inline cache has an entry for this bytecode, and what the cached receiver and methods are: if the cached receiver is the same as the current receiver, then we can just call the method. Otherwise, we do a lookup and put the method in the cache.</p>
+
+<p>Note that this is an inline cache of size one. That’s because <a href="https://github.com/Hirevo/som-rs/pull/31">adding more entries was not that beneficial to performance on our benchmarks</a>. We’ll try varying the number of entries in the AST implementation, and see if it’s the same as in the BC.</p>
+
+<p>Rust side note: this is also a good example of us using pointers + <code class="language-plaintext highlighter-rouge">unsafe</code> to sneak in some performance:</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">*frame.borrow_mut().inline_cache</code>: inline caches are stored in <code class="language-plaintext highlighter-rouge">Method</code> structs directly. Frames keep a pointer to them for fast access, and dereferencing a pointer is unsafe.
+We could theoretically use <code class="language-plaintext highlighter-rouge">&amp;</code> (i.e. a standard Rust reference) instead, but those come with the burden of informing the compiler about lifetimes, which is far from straightforward in this case; we the (very) smart programmers know that a method and its inline cache will definitely outlive any frame that relies on them.</li>
+  <li><code class="language-plaintext highlighter-rouge">inline_cache.get_unchecked_mut(bytecode_idx)</code>: we know there’s as many inline cache entries as there are bytecodes, so we may as well avoid the safety check a regular <code class="language-plaintext highlighter-rouge">get()</code> call would induce.</li>
+</ol>
+
+<h3 id="rust-hates-mutable-trees-and-sadly-ast-interpreters-love-them">rust hates mutable trees (and sadly AST interpreters love them)</h3>
+
+<p>Now we want to implement it in the AST. Unfortunately for us, this may be a case where the choice of the Rust language may not be the best.</p>
+
+<p>Our AST is currently immutable. It just so happens that <a href="https://dl.acm.org/doi/10.1145/2384577.2384587">self-optimizing ASTs are key to good performance</a>, so we’ve got a major issue.</p>
+
+<p>To implement inline caching, we’d want to implement the cache <em>inline</em> in the AST directly, so e.g. have a <code class="language-plaintext highlighter-rouge">MethodCallNode</code> that we modify to cache stuff directly in it. That requires said node to have a mutable state; and if you know anything about Rust, you can foresee how that could easily cause issues.</p>
+
+<p>Easy fix in theory: nodes get invoked with <code class="language-plaintext highlighter-rouge">fn evaluate(&amp;self, ...)</code> - instead let’s make them use <code class="language-plaintext highlighter-rouge">fn evaluate(&amp;mut self, ...)</code> so that they can modify their content when executed! And we change many things around and we run it aaaaand:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">thread</span> <span class="nv">'main</span><span class="err">'</span> <span class="n">panicked</span> <span class="n">at</span> <span class="n">somewhere</span><span class="o">/</span><span class="k">in</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">code</span>
+<span class="n">already</span> <span class="n">mutably</span> <span class="n">borrowed</span><span class="p">:</span> <span class="n">BorrowError</span>
+</code></pre></div></div>
+
+<p>…aaand that makes a lot of sense since Rust ownership is all about either having many immutable borrows or ONE mutable borrow. If whenever we call a method, we borrow it mutably, then a simple recursive call from inside that method will need to also mutably borrow the same method, and we’re already toast - and that’s one of several potential <code class="language-plaintext highlighter-rouge">BorrowError</code> we could see.</p>
+
+<p>Changing the design of the AST interpreter so that it can be self-modifying has been in my todo list since the start of this project. It’s not just for inline caching: the ability to do runtime replacement of any node with a more optimized one would open many many doors, it’s hard if just to wrap my head around how it would be best to go about it. So let’s circumvent that for now: the current quick “"”fix”””, is… using a lot of raw pointers instead of safe <code class="language-plaintext highlighter-rouge">Rc&lt;RefCell&lt;T&gt;&gt;</code> types, and peppering the code with a million uses of <code class="language-plaintext highlighter-rouge">unsafe</code>. Is this bad? Yeah! Does it work? Also yeah!</p>
+
+<p>No more Rust compiler guarantees though, and that’s kind of Rust’s whole thing, so we might as well be working with C at this point. Shame. This is absolutely something that I want to fix, and will fix in the future - and it should make for a decent blog post when I do.</p>
+
+<h3 id="unsafe-is-actually-good">unsafe is actually good?</h3>
+
+<p>Making the interpreter unsafe is a mild speedup:</p>
+
+<p><img src="/assets/inline-caching/unsafe-interp.png" alt="unsafe-interp" /></p>
+
+<p>…very likely from avoiding safety checks and no longer having to increase reference counters. This makes me think that even if I stop using this horribly unsafe AST interpreter, there’s potential for some mindful usage of <code class="language-plaintext highlighter-rouge">unsafe</code> to get little speedups like this.</p>
+
+<p>As time goes on, I’m probably going to have to lean more and more on the <code class="language-plaintext highlighter-rouge">unsafe</code> side to get more performance out of our systems. It’ll be interesting to find out how much, exactly: would Rust even still be that interesting a language choice if we end up having to omit most of its safety guarantees?</p>
+
+<p>My expectation is that I shouldn’t care at all, and that I’ll never get to the point that most of the codebase uses <code class="language-plaintext highlighter-rouge">unsafe</code>. In the work of <a href="https://www.steveblackburn.org/pubs/papers/rust-ismm-2016.pdf">Yi Lin et al. on high performance garbage collection</a>, they found that few uses of <code class="language-plaintext highlighter-rouge">unsafe</code> were necessary to still get high performance. This is for garbage collection and not PL implementation like we’re doing, but it’s similar enough to make me believe that good software engineering can circumvent abusing ugly unsafe code.</p>
+
+<h3 id="rust-semantics-also-dont-play-well-with-self-replacing-nodes">rust semantics also don’t play well with self-replacing nodes</h3>
+
+<p>The way I wanted to implement inline caching mirrors how we do it in our other AST interpreters: replacing an unoptimized <code class="language-plaintext highlighter-rouge">NormalMessageNode</code> with a <em>specialized</em>, optimized <code class="language-plaintext highlighter-rouge">CachedMessageNode</code>. Something like this:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">#[derive(Debug,</span> <span class="nd">Clone,</span> <span class="nd">PartialEq)]</span>
+<span class="k">pub</span> <span class="k">enum</span> <span class="n">MessageEnum</span> <span class="p">{</span>
+    <span class="nf">Uninitialized</span><span class="p">(</span><span class="n">Message</span><span class="p">),</span>
+    <span class="nf">Cached</span><span class="p">(</span><span class="n">CachedMethodDef</span><span class="p">,</span> <span class="n">ClassIdentifier</span><span class="p">,</span> <span class="n">Message</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Turning normal <code class="language-plaintext highlighter-rouge">Uninitialized</code> messages into <code class="language-plaintext highlighter-rouge">Cached</code> ones, which are the same but with a cached method and class, and still able to call the generic case with their <code class="language-plaintext highlighter-rouge">GenericMessage</code> entry.</p>
+
+<p>So to replace an uninitialized node, we’d do something like this:</p>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">*</span><span class="k">self</span> <span class="o">=</span> <span class="nn">ast</span><span class="p">::</span><span class="nn">Message</span><span class="p">::</span><span class="nf">Cached</span><span class="p">(</span><span class="n">method_def</span><span class="p">,</span> <span class="n">class_identifier</span><span class="p">,</span> <span class="k">self</span><span class="py">.message</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Sounds good, right? We replace it and transfer ownership of the messag… wait this code doesn’t work because I can’t transfer ownership in Rust actually oops can I?</p>
+
+<p>Really, it should be allowed: I want to tell Rust to transfer ownership of the <code class="language-plaintext highlighter-rouge">GenericMessage</code> from the node to its new, optimized version. My understanding is that this fails because creating this new node and assigning it to <code class="language-plaintext highlighter-rouge">self</code> are two distinct operations: we create a new node that takes ownership of <code class="language-plaintext highlighter-rouge">self.message</code> and THEN make <code class="language-plaintext highlighter-rouge">self</code> that node, when really <code class="language-plaintext highlighter-rouge">self</code> keeps ownership of the message throughout the whole thing.</p>
+
+<p>If anyone knows how this is achievable, I’d love to know. Is there a way to use <code class="language-plaintext highlighter-rouge">std::mem::replace</code> somehow, or has someone made some crate that addresses this?</p>
+
+<p>EDIT: I was just lacking knowledge, I did get the answers I wanted there! <code class="language-plaintext highlighter-rouge">std::mem::take</code> solves my problem. The annoying thing (and why I’d originally disregarded it as a potential solution, which was my mistake) is that this means my <code class="language-plaintext highlighter-rouge">Message</code> has to implement the <code class="language-plaintext highlighter-rouge">Default</code> trait, since it replaces the taken value with a default - and the idea of making a default message sounded weird to me, so unlikely to be a good solution.</p>
+
+<p>So this implementation could work, as far as I understand. But I don’t think it’d be particularly faster and the approach I follow below sounds more straightforward anyway. Still, that’s very good to know about for the future.</p>
+
+<h3 id="rust-friendly-working-version">rust-friendly working version</h3>
+
+<p>Self-replacement is a no-go, so we’re no longer replacing the <code class="language-plaintext highlighter-rouge">Message</code> itself. Instead, a <code class="language-plaintext highlighter-rouge">Message</code> is now bundled with its cache in a big ol’ <code class="language-plaintext highlighter-rouge">MessageCall</code> :</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">#[derive(Debug,</span> <span class="nd">Clone,</span> <span class="nd">PartialEq)]</span>
+<span class="k">pub</span> <span class="k">struct</span> <span class="n">MessageCall</span> <span class="p">{</span>
+    <span class="k">pub</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">,</span>
+    <span class="k">pub</span> <span class="n">inline_cache</span><span class="p">:</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">CacheEntry</span><span class="o">&gt;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">CacheEntry</code> is just a pointer to a receiver + a pointer to a method (EDIT: both raw pointers, to be clear.). <code class="language-plaintext highlighter-rouge">Option&lt;...&gt;</code> is the default Rust option type, meaning “either something or nothing at all”: there can be some cache, or there can be none.</p>
+
+<p>Before looking up a method, we check whether there’s an entry in the inline cache, and whether it matches that method. If it does, great! We invoke it from the pointer to it that we stored. Otherwise, we look up the method the boring and slow way, and we then store that lookup result in the cache if it’s empty.</p>
+
+<p><img src="/assets/inline-caching/one-entry.png" alt="alt text" /></p>
+
+<p>Neat! Mild speedups!</p>
+
+<p>Though we do have got one outlier in the form of this grey little dot: <code class="language-plaintext highlighter-rouge">NBody</code>. I’ve no idea why. In my experience, adding to basic data structures in the interpreter like this can prevent some compiler optimizations on some benchmarks. <code class="language-plaintext highlighter-rouge">CacheEntry</code> is the size of two pointers - one for the class, one for the method. A <code class="language-plaintext highlighter-rouge">Box&lt;CacheEntry&gt;</code> (Rust heap pointer type) is only the size of one pointer. Let’s use that type instead, because why not:</p>
+
+<p><img src="/assets/inline-caching/one-entry-boxed.png" alt="alt text" /></p>
+
+<p>No more outlier! Fixing this bug after not a minute of thinking makes me feel like I’m starting to master arcane arts. I’m going to need to grow a longer beard to become a proper senior developer (i.e. wizard) though<sup id="fnref:beard" role="doc-noteref"><a href="#fn:beard" class="footnote" rel="footnote">1</a></sup>.</p>
+
+<p>It doesn’t show very well, but boxing is a very minor slowdown for basically all other benchmarks, though, since boxing actually needs to allocate some memory. Oh well.</p>
+
+<p>One entry is good, but several cache entries <em>should</em> be better:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="n">inline_cache</span><span class="p">:</span> <span class="nb">Box</span><span class="o">&lt;</span><span class="p">[</span><span class="nb">Option</span><span class="o">&lt;</span><span class="n">CacheEntry</span><span class="o">&gt;</span><span class="p">;</span> <span class="n">INLINE_CACHE_SIZE</span><span class="p">]</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>We’ll start with an <code class="language-plaintext highlighter-rouge">INLINE_CACHE_SIZE</code> of 2.</p>
+
+<p>From now on, results are compared not with a baseline version of the interpreter without inline caching, but with the previous version of the interpreter with a different version of inline caching (and we use micro benchmarks instead: there’s more of them, so more data points, so slightly more legible results). So in this case, we’re comparing the older 1-entry-cache version with the newer 2-entries-cache version:</p>
+
+<p><img src="/assets/inline-caching/two-entries.png" alt="alt text" /></p>
+
+<p>…ok, that’s a rough 1-2% speedup on the AST. Though those results aren’t very conclusive: the BC interpreter itself is getting a mild speedup. Our BC interp does rely on the AST generated by the parser (which it just turns to bytecode and then discards), so maybe changing the type of the <code class="language-plaintext highlighter-rouge">inline_cache</code> allowed the Rust compiler to do some optimizations that made parsing slightly faster, somehow. Either way, not convinced the cache had a major impact.</p>
+
+<p>…but another inline cache entry will totally change things: comparing the 2-entry one with a new one with an <code class="language-plaintext highlighter-rouge">INLINE_CACHE_SIZE</code> of 3 giiives…</p>
+
+<p><img src="/assets/inline-caching/three-entries.png" alt="alt text" /></p>
+
+<p>…nothing really, just noise. Seven entries?</p>
+
+<p><img src="/assets/inline-caching/seven-entries.png" alt="alt text" /></p>
+
+<p>Slowdown. But I bet ONE THOUSAND entries will do the trick:</p>
+
+<p><img src="/assets/inline-caching/1k-entries.png" alt="alt text" /></p>
+
+<p>Darn. No one could have predicted allocating 1000 entries per callsite would be a slowdown. I think I should try with 2000 (just in case), but for now I think we’re done.</p>
+
+<!--
+### linked lists
+
+...are a bad idea in Rust, [say smart people](https://rust-unofficial.github.io/too-many-lists/index.html#an-obligatory-public-service-announcement). But I'm also occasionally smart[^smart]
+
+but in our case it sounds smart!
+
+```rust
+#[derive(Debug, Clone, PartialEq)]
+pub struct CacheEntry {
+    class_ptr: usize,
+    method_ptr: usize,
+    next: Option<Box<CacheEntry>>,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct MessageCall {
+    pub message: Message,
+    pub inline_cache: Option<Box<CacheEntry>>,
+}
+```
+
+![alt text](/_drafts/linked-list.png)
+
+Only a minor speedup, interestingly.
+-->
+
+<h3 id="done-and-dusted">done and dusted</h3>
+
+<p>OK, an inline cache of 2 is the final choice, then, I guess.</p>
+
+<p><img src="/assets/inline-caching/two-entries-base-compare.png" alt="alt text" /></p>
+
+<p>All our tweaks with caches of varying sizes really didn’t improve much. Results also aren’t insanely good, which is actually expected: when it was implemented it for the bytecode interpreter, <a href="https://github.com/Hirevo/som-rs/pull/13">we got similar numbers</a>. Speaking of the BC interpreter, our experiments today show that increasing the size of its cache by 1 might be beneficial like in the AST, but I’m not doing that just for a potential 1-2% speedup.</p>
+
+<p>I originally had a section where I implemented inline caching as a linked list instead of an array. That felt like a more natural choice since that would make it a lazy cache: the length of the inline cache is X entries (each one a node) if it’s received X receivers, which can be as small or big as it needs. But this wasn’t a speedup, probably because our benchmarks never need big caches anyway.</p>
+
+<h3 id="what-have-we-learned">what have we learned?</h3>
+<ul>
+  <li>you might have learned how inline caching works? But I didn’t learn anything since I already knew that. You’ve effectively ripped me off.</li>
+  <li>monomorphic callsites everywhere! That might be unexpected to some, and makes inline caching not be as beneficial performance-wise as you’d think in many cases.</li>
+  <li>we’ve seen Rust doesn’t like self-modifying tree structures: I have to use <code class="language-plaintext highlighter-rouge">unsafe</code> a lot to make the AST mutable. Which is a pain for me since I want a <strong>self-optimizing AST</strong> in the future, and advice to implement a safe(r) version of my interpreter is more than welcome (tell me on <a href="https://twitter.com/OctaveLarose">Twitter</a>).
+    <ul>
+      <li>my understanding is that managing my own heap/arena of AST nodes may solve it? More on that in the future, since I believe it’s what I’ll have to implement</li>
+      <li><a href="https://doc.rust-lang.org/stable/std/rc/struct.Rc.html#method.new_cyclic">Rc::new_cyclic</a> miiight be helpful here as well? I’m not entirely sure.</li>
+    </ul>
+  </li>
+  <li>shoutout to good benchmark running/visualizing software to allow me to do such a thorough comparison of various slightly different versions of my system!
+    <ul>
+      <li>I know my supervisor designed Rebench and RebenchDB, but I swear I’m not getting paid to praise them (though I wish I were)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>thanks for reading, goodbye</p>
+
+<p>EDIT: minor edits and clarifications based on feedback</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:beard" role="doc-endnote">
+      <p>A colleague recently shaved his massive beard and I commented on that being essentially him truncating his computer science skills, which he admitted to himself. We all hope his GNU/Linux knowledge comes back alongside his beard <a href="#fnref:beard" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>[&quot;Octave Larose&quot;]</name></author><summary type="html"><![CDATA[This is part of a series of blog posts relating my experience pushing the performance of programming language interpreters written in Rust. For added context, read the start of last week’s blog post.]]></summary></entry><entry><title type="html">Spending too much time optimizing for loops</title><link href="https://octavelarose.github.io/2024/05/29/to-do-inlining.html" rel="alternate" type="text/html" title="Spending too much time optimizing for loops" /><published>2024-05-29T00:00:00+00:00</published><updated>2024-05-29T00:00:00+00:00</updated><id>https://octavelarose.github.io/2024/05/29/to-do-inlining</id><content type="html" xml:base="https://octavelarose.github.io/2024/05/29/to-do-inlining.html"><![CDATA[<p>This is part of a series of blog posts relating my experience pushing the performance of programming language interpreters written in Rust.</p>
+
+<h2 id="what-also-who">what? also, who?</h2>
+
+<p>My PhD is on the runtime performance of AST interpreters: my job is to try to make things go fast. Last year, we published the paper “<a href="https://stefan-marr.de/downloads/oopsla23-larose-et-al-ast-vs-bytecode-interpreters-in-the-age-of-meta-compilation.pdf">AST vs Bytecode: Interpreters in the Age of Meta-Compilation</a>”, where we compared AST and bytecode interpreters written on top of two different meta-compilation systems: GraalVM (a partial evaluation approach, relying on the Java language) and RPython (meta-tracing approach, in RPython, a Python subset). We concluded that AST interpreters performed surprisingly well, despite the widespread opinion that bytecode is the superior approach to interpreter design.</p>
+
+<p>Though one question we received a lot was: are AST interpreters only good on meta-compilation systems that rely on higher-level languages, and not REAL PROGRAMMING LANGUAGES like C or Rust where I can do all my fancy optimizations?</p>
+
+<p>So I’m trying, with Rust specifically, to get interpreters to perform as well as our existing ones - maybe better??? As part of his MsC here at the University of Kent, <a href="https://polomack.eu/">Nicolas Polomack</a> wrote the <a href="https://github.com/hirevo/som-rs">som-rs interpreters</a>, one being AST-based and the other BC-based, and he honestly did a tremendous job. However, the focus wasn’t so much on performance, and there’s a lot of effort needed to push it further. How much exactly? Well, here’s how much I improved the performance of the AST and BC interpreters after a few months of implementing various optimizations and fixing performance bugs:</p>
+
+<p><img src="/assets/2024-05-29-to-do-inlining/speedup_compared_to_main_repo.png" alt="speedup compared to base project" /></p>
+
+<p>How to read the graph: each grey dot is one of our benchmarks, and lower is better. A 0.5x median speedup means we’re twice as fast, as we can see here, so not bad. (small disclaimer: only showing results on our micro benchmarks for my own convenience, but results are extremely similar on our macro benchmarks).</p>
+
+<p>And this is where we’re currently at, compared to the interpreters we used in our paper (<a href="https://github.com/SOM-st/TruffleSOM/">TruffleSOM</a> and <a href="https://github.com/som-st/PySOM">PySOM</a>):</p>
+
+<p><img src="/assets/2024-05-29-to-do-inlining/comparing_every_interp.png" alt="compare-all-interps" /></p>
+
+<p>A long ways to go still… The BC one is getting there, progress with the AST one is slower for various reasons, including Rust limitations - there’s some interesting stuff to talk about there, maybe in a future blog post.</p>
+
+<p>As a disclaimer, I’m not a <em>real</em> Rust dev, and I’m in fact a disgusting poser and a sham. My experience with the language before this consists of small personal projects, and were mostly about me getting my bearings with the many foreign concepts introduced by Rust. Having suffered with C for years <sup id="fnref:stockholm-syndrome" role="doc-noteref"><a href="#fn:stockholm-syndrome" class="footnote" rel="footnote">1</a></sup>, I tend to assume other programming languages will always be smooth to use and learn by comparison, but Rust feels like a different beast.</p>
+
+<p>I have been loving my time as a Rust dev, though! It’s a great language and really pleasant to work with. At other times unpleasant to work with when you want to get high performance and ownership rules get in your way… More on that at some point.</p>
+
+<h2 id="what-happened-this-week">what happened this week?</h2>
+
+<p>We’re working with interpreters for the SOM language, a minimal Smalltalk designed for research and teaching. It being based on Smalltalk means that everything under the sun is an object, and so that method calls on said objects are absolutely everywhere. Say your code has a loop:</p>
+
+<p><code class="language-plaintext highlighter-rouge">[ iter &gt; 0 ] whileTrue: [ iter := iter - 1. ]</code></p>
+
+<p>…spoilers, it’s in fact a method called on the <code class="language-plaintext highlighter-rouge">Block</code> class (the condition block) that takes in another block (the loop body) as an argument. Its code looks like this:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">whileTrue</span><span class="p">:</span> <span class="nx">block</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="nb">self</span> <span class="nx">value</span> <span class="nx">ifFalse</span><span class="p">:</span> <span class="p">[</span> <span class="o">^</span><span class="nx">nil</span> <span class="p">].</span>
+    <span class="nx">block</span> <span class="nx">value</span><span class="p">.</span>
+    <span class="nb">self</span> <span class="nx">restart</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>I won’t describe this code in detail. What matters is that in SOM, a loop is a method call, and that method calls need dispatching and are therefore not the fastest. It may sound like a counter-intuitive language design choice, but that’s the beauty of Smalltalk: you can re-implement every method yourself and fundamentally change the behavior of your system, like by making every loop invest in random cryptocurrencies to spice up both your VM <em>and</em> your life (please don’t do this).</p>
+
+<h3 id="can-we-speed-that-up">can we speed that up?</h3>
+
+<p>That’s a cool feature, but 99.999999% of the time we want loops to be regular loops, so we should hard-code somehow to be treated as such to gain performance. This is typically the kind of stuff you can <em>lower</em> (handle at e.g. the bytecode-level or in the interpreter directly: anything to not interpret the code normally) to get better performance, and in fact we already do for <code class="language-plaintext highlighter-rouge">whileTrue:</code> (in the bytecode interpreter). I implemented some <code class="language-plaintext highlighter-rouge">JUMP</code> bytecodes, I inline the condition and body blocks into the method scope, and jump around to their starts and ends depending on what I want. Looks something like this:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">0</span> <span class="o">|</span> <span class="nx">PUSH_LOCAL</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="nx">PUSH_0</span>
+<span class="mi">2</span> <span class="o">|</span> <span class="nx">SEND_2</span> <span class="mi">1</span> <span class="p">(</span><span class="nx">calling</span> <span class="err">#</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="mi">3</span> <span class="o">|</span> <span class="nx">JUMP_ON_FALSE_POP</span> <span class="mi">5</span> <span class="p">(</span><span class="nx">jump</span> <span class="nx">to</span> <span class="nx">idx</span> <span class="mi">8</span><span class="p">)</span>
+<span class="mi">4</span> <span class="o">|</span> <span class="nx">PUSH_LOCAL</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="mi">5</span> <span class="o">|</span> <span class="nx">DEC</span>
+<span class="mi">6</span> <span class="o">|</span> <span class="nx">POP_LOCAL</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="mi">7</span> <span class="o">|</span> <span class="nx">JUMP_BACKWARD</span> <span class="mi">7</span> <span class="p">(</span><span class="nx">jump</span> <span class="nx">to</span> <span class="nx">idx</span> <span class="mi">0</span><span class="p">)</span>
+<span class="mi">8</span> <span class="o">|</span> <span class="p">...</span>
+</code></pre></div></div>
+
+<p>Once again, the details don’t matter here. The big idea is that we jump past the body block when we’re done, and we jump to the condition block after we execute the body block. It’s pretty classic stuff, was surprisingly time-consuming to implement, but provided an unsurprisingly large amount of performance. Make every loop faster, and you speed up every program by a lot.</p>
+
+<h3 id="the-todo-method">the <code class="language-plaintext highlighter-rouge">to:do:</code> method</h3>
+
+<p>But currently, we don’t handle every loop that way: a common way of looping is to call the <code class="language-plaintext highlighter-rouge">Integer&gt;&gt;#to:do:</code> method, invoked like <code class="language-plaintext highlighter-rouge">1 to: 50 do: [ ... ]</code> . In case anyone’s curious, here’s its code (no need to look at it that closely):</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">to</span><span class="p">:</span> <span class="n">limit</span> <span class="k">do</span><span class="p">:</span> <span class="n">block</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="k">self</span> <span class="n">to</span><span class="p">:</span> <span class="n">limit</span> <span class="n">by</span><span class="p">:</span> <span class="mi">1</span> <span class="k">do</span><span class="p">:</span> <span class="n">block</span>
+<span class="p">)</span>
+
+<span class="n">to</span><span class="p">:</span> <span class="n">limit</span> <span class="n">by</span><span class="p">:</span> <span class="n">step</span> <span class="k">do</span><span class="p">:</span> <span class="n">block</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">|</span> <span class="n">i</span> <span class="p">|</span>
+    <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="k">self</span><span class="err">.</span>
+    <span class="p">[</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">limit</span> <span class="p">]</span> <span class="n">whileTrue</span><span class="p">:</span> <span class="p">[</span> <span class="n">block</span> <span class="n">value</span><span class="p">:</span> <span class="n">i</span><span class="py">. i</span> <span class="p">:</span><span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">step</span> <span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">to:do:</code> is essentially a <code class="language-plaintext highlighter-rouge">for</code> loop and is consequently used very frequently, but it <em>doesn’t</em> get turned to specialized bytecode right now because I’ve only got so much time. Let’s finally speed it up!</p>
+
+<p>Now, inlining calls and blocks at the bytecode level is nice, but another way of lowering code is to implement some function as a <em>primitive</em>: i.e. handling it as its own special case in the interpreter. Primitives are everywhere and unavoidable in PL implementation: just ask yourself how you would allow a program to perform a system call like <code class="language-plaintext highlighter-rouge">time</code> , and you’ll find making a primitive for it is a very sensible solution.</p>
+
+<p>In this case, I’m confident that specialized bytecode would be faster, but I figured a primitive would be a quick and easy solution so I could move on to trying to squeeze (hopefully major) performance wins elsewhere. Especially since there’s <code class="language-plaintext highlighter-rouge">Integer&gt;&gt;#to:do:</code> but also <code class="language-plaintext highlighter-rouge">Integer&gt;&gt;#to:by:do:</code> and <code class="language-plaintext highlighter-rouge">Integer&gt;&gt;#downTo:do:</code> and <code class="language-plaintext highlighter-rouge">Integer&gt;&gt;#downTo:by:do:</code> and they all have different behaviors and I am lazy. I’d rather make them primitives with nearly identical code than wrap my head around how bytecode should be generated for each - we want an easy, in and out, 20 minute adventure (spoilers: I have forgotten <a href="https://en.wikipedia.org/wiki/Hofstadter%27s_law">Hofstadter’s law</a> yet again)</p>
+
+<p>So here’s our <code class="language-plaintext highlighter-rouge">to:do:</code> primitive:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">to_do</span><span class="p">(</span><span class="n">interpreter</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">Interpreter</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">Universe</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="n">SIGNATURE</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span> <span class="o">=</span> <span class="s">"Integer&gt;&gt;to:do:"</span><span class="p">;</span>
+
+    <span class="nd">expect_args!</span><span class="p">(</span><span class="n">SIGNATURE</span><span class="p">,</span> <span class="n">interpreter</span><span class="p">,</span> <span class="p">[</span>
+        <span class="nn">Value</span><span class="p">::</span><span class="nf">Integer</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">start</span><span class="p">,</span>
+        <span class="nn">Value</span><span class="p">::</span><span class="nf">Integer</span><span class="p">(</span><span class="n">end</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">end</span><span class="p">,</span>
+        <span class="nn">Value</span><span class="p">::</span><span class="nf">Block</span><span class="p">(</span><span class="n">blk</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">blk</span><span class="p">,</span>
+    <span class="p">]);</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">start</span><span class="o">..=</span><span class="n">end</span> <span class="p">{</span>
+        <span class="nd">todo!</span><span class="p">(</span><span class="s">"execute the block every time"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">interpreter</span><span class="py">.stack</span><span class="nf">.push</span><span class="p">(</span><span class="nn">Value</span><span class="p">::</span><span class="nf">Integer</span><span class="p">(</span><span class="n">start</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">expect_args!</code> is a macro that pops arguments from the stack (because this is a stack-based bytecode interpreter, by the way) and checks their types. In this case, we expect three: if we’re calling <code class="language-plaintext highlighter-rouge">1 to: 50 do: [ ... ]</code> , we expect <code class="language-plaintext highlighter-rouge">start</code> to be 1, <code class="language-plaintext highlighter-rouge">end</code> to be 50 and <code class="language-plaintext highlighter-rouge">blk</code> to be the body block.</p>
+
+<p>Then from 1 to 50 (using Rust’s nice <code class="language-plaintext highlighter-rouge">..=</code> inclusive range syntax), we’ll execute the body block somehow. Then every method returns its caller (<code class="language-plaintext highlighter-rouge">self</code>) when there’s no explicit return, which in this case is <code class="language-plaintext highlighter-rouge">start</code> (remember this is a method defined ON an integer class, which means <code class="language-plaintext highlighter-rouge">self</code> is an Integer with a value of 1!), so we put <code class="language-plaintext highlighter-rouge">start</code> back on the stack.</p>
+
+<p>Neat. It’s missing a critical part though…</p>
+
+<h3 id="how-do-we-execute-that-block">how do we execute that block?</h3>
+
+<p>The bytecode loop for som-rs is a big <code class="language-plaintext highlighter-rouge">run</code> method invoked once at the start of the program and which continues until execution ends. There’s a call stack of method/block frames that gets added onto throughout execution depending on what calls are made, and getting the current bytecode is just a matter of accessing the current frame (the last on the frames stack) and reading the bytecode from it that corresponds to the current bytecode index.</p>
+
+<p>If the bytecode says you need to return from a function, you pop from the frames stack and so the current frame switches back to the previous one. To call a new function/block, you push a new function/block frame and it becomes the current frame.</p>
+
+<p>So with that in mind, this primitive should just be a matter of pushing… 50 new block frames. Which doesn’t sound like the best way to go about it, but I can’t think of a better way to do it with of our bytecode interpreter design. Easy:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="p">(</span><span class="n">start</span><span class="o">..=</span><span class="n">end</span><span class="p">)</span><span class="nf">.rev</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">interpreter</span><span class="nf">.push_block_frame</span><span class="p">(</span><span class="nn">Rc</span><span class="p">::</span><span class="nf">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">blk</span><span class="p">),</span> <span class="nd">vec!</span><span class="p">[</span><span class="nn">Value</span><span class="p">::</span><span class="nf">Block</span><span class="p">(</span><span class="nn">Rc</span><span class="p">::</span><span class="nf">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">blk</span><span class="p">)),</span> <span class="nn">Value</span><span class="p">::</span><span class="nf">Integer</span><span class="p">(</span><span class="n">i</span><span class="p">)]);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">push_block_frame</code> needs two arguments: the block to make a frame out of, and a vector containing the arguments it should be executed with. The first argument of a block is always itself, and <code class="language-plaintext highlighter-rouge">to:do:</code> semantics are that the block takes in the range index as an argument, so that’s why <code class="language-plaintext highlighter-rouge">Value::Integer(i)</code> is there.</p>
+
+<p>Since a stack is last-in-first-out, we call <code class="language-plaintext highlighter-rouge">rev()</code> on the range so that we add the “50” block first on the frame stack and the “1” block last, such that we execute the “1” frame first, then the “2” frame, etc., all the way to “50”.</p>
+
+<p>Job’s done, so we can just run it with a random benchmark and -</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Starting</span> <span class="n">QuickSort</span> <span class="n">benchmark</span><span class="py">.
+thread</span> <span class="nv">'main</span><span class="err">'</span> <span class="n">panicked</span> <span class="n">at</span> <span class="n">som</span><span class="o">-</span><span class="n">interpreter</span><span class="o">-</span><span class="n">bc</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">universe</span><span class="py">.rs</span><span class="p">:</span><span class="mi">527</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span>
+<span class="n">does</span> <span class="n">not</span> <span class="n">understand</span><span class="p">:</span> <span class="s">"verifyResult:"</span>
+<span class="n">note</span><span class="p">:</span> <span class="n">run</span> <span class="n">with</span> <span class="err">`</span><span class="n">RUST_BACKTRACE</span><span class="o">=</span><span class="mi">1</span><span class="err">`</span> <span class="n">environment</span> <span class="n">variable</span> <span class="n">to</span> <span class="n">display</span> <span class="n">a</span> <span class="n">backtrace</span>
+</code></pre></div></div>
+
+<ul>
+  <li>and we broke the interpreter somehow. Why?</li>
+</ul>
+
+<p>This kind of error really just means “the stack got messed up and that caused the interpreter to panic somewhere down the line afterwards”. <code class="language-plaintext highlighter-rouge">verifyResult:</code> exists, it was just called on the wrong class because the stack didn’t contain the right values in the right order.</p>
+
+<p>And that gives us a hint as to why it broke. Earlier I mentioned “every method returns its caller (<code class="language-plaintext highlighter-rouge">self</code>) when there’s no explicit return”: every single method or block returns something, which gets put on the stack. But in this case, we really don’t care about whatever the block returns, and the real <code class="language-plaintext highlighter-rouge">to:do:</code> pops it off the stack after each execution.</p>
+
+<p>So we need to call POP after each block. The issue is that with our current interpreter design, there’s no easy way to inform the interpreter to do that. TruffleSOM and PySOM (our two best interpreters) don’t have a single big <code class="language-plaintext highlighter-rouge">run</code> bytecode loop, and in fact call the bytecode loop function for each method individually, so it’s pretty easy to say “invoke this method and then discard its results” - just call <code class="language-plaintext highlighter-rouge">run_bytecode_loop(method)</code>. No such luxury here.</p>
+
+<h3 id="selling-my-soul-for-performance">selling my soul for performance</h3>
+
+<p>OK, here’s a fix: add an <code class="language-plaintext highlighter-rouge">am_i_ugly</code> flag to every frame, set it to <code class="language-plaintext highlighter-rouge">true</code> only for these specific <code class="language-plaintext highlighter-rouge">to:do:</code> frames, and whenever we pop a frame (i.e. we return from a block/function) if the frame had that flag, we pop a value off the stack to ignore its output. And that works pretty damn well: look at that speedup!</p>
+
+<p><img src="/assets/2024-05-29-to-do-inlining/ugly_changes_1.png" alt="after ugly changes" /></p>
+
+<p>But I’ve got two major issues:</p>
+
+<ul>
+  <li>A) this is ugly code and I hate it very much</li>
+  <li>B) this is a slowdown in some odd cases - up to 15%. I assume that making <em>every</em> frame have a bigger/different layout prevents some compiler optimizations, or slows down accesses to frame info. I don’t know what’s happening specifically, but I’m sure of what caused it: this extra argument.</li>
+</ul>
+
+<p>It’s a working solution though, so I went ahead and implemented the other variations like <code class="language-plaintext highlighter-rouge">to:by:do:</code> and <code class="language-plaintext highlighter-rouge">downTo:do:</code> and whatnot, to see what the total speedup was like. Which would be this:</p>
+
+<p><img src="/assets/2024-05-29-to-do-inlining/ugly_changes_2.png" alt="after ugly changes 2" /></p>
+
+<p>Looks reaaal good. A 100% speedup on one of our benchmarks even (one whose runtime is extremely dominated by a <code class="language-plaintext highlighter-rouge">to:by:do:</code> call)! The code sucks, but we’re at least on the right track.</p>
+
+<p>So we’re back to the drawing board when it comes to informing the interpreter to clean up after some blocks. I guess we could also store some sort of state in the interpreter instead of in each frame, which would likely be faster and wouldn’t prevent compiler optimizations, but it’d be a pretty unclean solution and not as straightforward as one might think (we can’t just tell it: “do a POP after the next 50 frames”, because those <code class="language-plaintext highlighter-rouge">to:do:</code> frames may invoke nested blocks of their own, so it still needs to track info on a frame-by-frame basis).</p>
+
+<h3 id="a-better-solution">a better solution</h3>
+
+<p>I’ve got a better idea: instead of executing the block as is, we execute a <em>modified</em> version of the block that cleans up after itself.</p>
+
+<p>Say we’ve got this block:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PUSH_ARG 1, 1   # stack: [arg1-1]
+PUSH_ARG 0, 1   # stack: [arg1-1, arg0-1]
+SEND_2 0        # stack: [send-return-value]
+RETURN_LOCAL    # stack: [send-return-value]
+</code></pre></div></div>
+
+<p>I’ve described the stack state next to each bytecode. Any <code class="language-plaintext highlighter-rouge">PUSH</code> bytecode is naturally going to push something onto the stack; a <code class="language-plaintext highlighter-rouge">SEND</code> will consume arguments to emit a single return value; and a <code class="language-plaintext highlighter-rouge">RETURN_LOCAL</code> won’t touch the stack, it just pops a frame.</p>
+
+<p>We want an empty stack, so we want to generate this new block right there instead:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">PUSH_ARG</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>   <span class="err">#</span> <span class="n">stack</span><span class="p">:</span> <span class="p">[</span><span class="n">arg1</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">PUSH_ARG</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>   <span class="err">#</span> <span class="n">stack</span><span class="p">:</span> <span class="p">[</span><span class="n">arg1</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">arg0</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">SEND_2</span> <span class="mi">0</span>        <span class="err">#</span> <span class="n">stack</span><span class="p">:</span> <span class="p">[</span><span class="n">send</span><span class="o">-</span><span class="k">return</span><span class="o">-</span><span class="n">value</span><span class="p">]</span>
+<span class="n">POP</span>             <span class="err">#</span> <span class="n">stack</span><span class="p">:</span> <span class="p">[]</span>
+<span class="n">RETURN_LOCAL</span>    <span class="err">#</span> <span class="n">stack</span><span class="p">:</span> <span class="p">[]</span>
+</code></pre></div></div>
+
+<p>So what we do is that instead of invoking the block, calling <code class="language-plaintext highlighter-rouge">to:do:</code> first creates a new block based on the existing one with a POP added before every RETURN, and we execute that instead! It’s kind of annoying since creating that block means checking which <code class="language-plaintext highlighter-rouge">JUMP</code> bytecodes need to be adjusted, since if we’ve got a <code class="language-plaintext highlighter-rouge">JUMP 10</code> bytecode (meaning “jump to 10 instructions further”) and there’s a RETURN in the middle which we prepended with a <code class="language-plaintext highlighter-rouge">POP</code> , it now has to become a <code class="language-plaintext highlighter-rouge">JUMP 11</code> to account for the new instruction.</p>
+
+<p>Way more annoyingly, there is such a thing as a <code class="language-plaintext highlighter-rouge">RETURN_NON_LOCAL</code> in our bytecode set. I don’t have time to go into non-local returns (this article is long enough as is), but we want to actually <em>keep</em> whatever return value is associated with a non-local return on the stack, while making sure to remove the SECOND TO LAST value on the stack which corresponds to the <code class="language-plaintext highlighter-rouge">self</code> value that we <em>want</em> to clean up. So my supervisor suggested I add a <code class="language-plaintext highlighter-rouge">POP2</code> bytecode which pops the second to last value off the stack, to easily do just that - and I did, and it worked.</p>
+
+<p>This was confusing, hard to discover and understand, needed amending the goddamn bytecode set itself, and cost me many hours of my life that I’m never getting back :(</p>
+
+<p>So the <code class="language-plaintext highlighter-rouge">to:do:</code> code is now:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">new_block_rc</span> <span class="o">=</span> <span class="n">blk</span><span class="nf">.make_equivalent_with_no_return</span><span class="p">();</span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="p">(</span><span class="n">start</span><span class="o">..=</span><span class="n">end</span><span class="p">)</span><span class="nf">.rev</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">interpreter</span><span class="nf">.push_block_frame</span><span class="p">(</span><span class="nn">Rc</span><span class="p">::</span><span class="nf">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_block_rc</span><span class="p">),</span> <span class="nd">vec!</span><span class="p">[</span><span class="nn">Value</span><span class="p">::</span><span class="nf">Block</span><span class="p">(</span><span class="nn">Rc</span><span class="p">::</span><span class="nf">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_block_rc</span><span class="p">)),</span> <span class="nn">Value</span><span class="p">::</span><span class="nf">Integer</span><span class="p">(</span><span class="n">i</span><span class="p">)]);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We could do even better: generating the block at compile-time instead of parse-time. When handling messages (function calls), if its name is <code class="language-plaintext highlighter-rouge">to:do:</code> or one of its friends, we would simply replace its block argument with our new, optimized one. Something pretty much like this:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">[</span><span class="s">"to:do:"</span><span class="p">,</span> <span class="s">"to:by:do:"</span><span class="p">,</span> <span class="s">"downTo:do:"</span><span class="p">,</span> <span class="s">"downTo:by:do:"</span><span class="p">,</span> <span class="s">"timesRepeat:"</span><span class="p">]</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.any</span><span class="p">(|</span><span class="n">s</span><span class="p">|</span> <span class="o">*</span><span class="n">s</span> <span class="o">==</span> <span class="n">message</span><span class="py">.signature</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">match</span> <span class="n">ctxt</span><span class="nf">.get_instructions</span><span class="p">()</span><span class="nf">.last</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nn">Bytecode</span><span class="p">::</span><span class="nf">PushBlock</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+            <span class="c1">// find block from index "idx"</span>
+            <span class="c1">// call our new `make_equivalent_with_no_return()`;</span>
+            <span class="c1">// replace the block</span>
+        <span class="p">},</span>
+        <span class="n">_</span> <span class="k">=&gt;</span> <span class="p">{</span> <span class="nd">todo!</span><span class="p">(</span><span class="s">"uh... what's this case?"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>…except it’s not that simple, and this <code class="language-plaintext highlighter-rouge">todo!("...")</code> case highlights why. If the block is the result of a <code class="language-plaintext highlighter-rouge">PushArgument</code> or <code class="language-plaintext highlighter-rouge">PushLocal</code> or whatnot, we can only get access to it during the runtime. So this sadly isn’t an easily available option, which is a shame since it would net us up a median speedup of 8% or so. <sup id="fnref:better-block-solution" role="doc-noteref"><a href="#fn:better-block-solution" class="footnote" rel="footnote">2</a></sup></p>
+
+<p>So we keep our previous solution of creating modified blocks at runtime. OK, final results:</p>
+
+<p><img src="/assets/2024-05-29-to-do-inlining/final_results.png" alt="final results" /></p>
+
+<p>Massive speedups! It’s a very minor slowdown on one of our microbenchmarks and I’m not sure why - <a href="https://stefan-marr.de/2020/07/is-this-noise-or-does-this-mean-something-benchmarking/">maybe it’s just noise</a>.</p>
+
+<h2 id="so-what-have-we-learned">so what have we learned?</h2>
+
+<ul>
+  <li>being mindful of the design of the interpreter itself matters, unsurprisingly. Choosing to have a single execution of a massive bytecode loop function, as opposed to designing the interpreter such that the bytecode loop function is invoked for each method call, makes things <em>much</em> harder in this context.
+    <ul>
+      <li>It doesn’t sound like a bad design decision to me, but is it? It’s hard for me to tell since I’m lacking experience. Let me know more about why that’s a bad idea if you know!</li>
+      <li>If not enough people point out to me that it is in fact a bad idea, I’d be interested to rebuild the bytecode interpreter to fix that design decision, and see if it’s faster. But I’d need to push the performance a lot more first.</li>
+    </ul>
+  </li>
+  <li>There’s a lot of performance to be gained from optimizing loop operations. It’s fairly obvious, but a solid chunk of the runtime will be spent in long-running loops: if you can make them all a bit smoother, you make runtime a lot faster.</li>
+  <li>Aaaand the quick and easy solution is rarely quick or easy. This was never meant to be so arduous - this whole “let’s make a primitive function” idea was meant to take an hour tops to avoid spending a couple hours implementing it at the bytecode level, but it ended up taking much longer! I don’t think I could have easily predicted this seemingly easy change would be so hard: this requires a lot of knowledge about the system you’re working with and about interpreter design, yet I’m but a humble PhD student. We’re getting there though.</li>
+</ul>
+
+<p>That’s about it. Thanks to <a href="https://stefan-marr.de/">Stefan Marr</a> (my PhD supervisor) for the feedback and the help. I’ll post more stuff in the future. xoxo</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:stockholm-syndrome" role="doc-endnote">
+      <p><a href="https://en.wikipedia.org/wiki/Stockholm_syndrome">https://en.wikipedia.org/wiki/Stockholm_syndrome</a> <a href="#fnref:stockholm-syndrome" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:better-block-solution" role="doc-endnote">
+      <p>This problem is far from unfixable. We <em>could</em> still instrument the blocks in the <code class="language-plaintext highlighter-rouge">PushBlock</code> case at compile-time and only instrument at runtime when we know it wasn’t instrumented at compile-time, but we’d need a way to differentiate instrumented from non-instrumented blocks. I’m thinking one good solution would be for primitives to check whether the last bytecode executed was a <code class="language-plaintext highlighter-rouge">PushBlock</code>, but our solution and this article are wordy enough as is… <a href="#fnref:better-block-solution" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>[&quot;Octave Larose&quot;]</name></author><summary type="html"><![CDATA[This is part of a series of blog posts relating my experience pushing the performance of programming language interpreters written in Rust.]]></summary></entry></feed>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>pwy.io</title>
+    <link>https://pwy.io</link>
+    <description>pwy.io - throwing algorithms at problems and observing what happens!</description>
+    <atom:link href="https://pwy.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Nix as Static Site Generator for My Blog</title>
+      <link>https://pwy.io/talks/2024-nix-as-static-site-generator</link>
+      <description><![CDATA[Nix as Static Site Generator for My Blog]]></description>
+      <guid>https://pwy.io/talks/2024-nix-as-static-site-generator</guid>
+      <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Memory for Nothing: Why Vec&amp;lt;usize&amp;gt; is (probably) a bad idea</title>
+      <link>https://pwy.io/posts/memory-for-nothing</link>
+      <description><![CDATA[Every now and then one has to index something - and what's better than a
+<code>Vec&lt;usize&gt;</code>?]]></description>
+      <guid>https://pwy.io/posts/memory-for-nothing</guid>
+      <pubDate>Tue, 15 Oct 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Mimalloc Cigarette: Losing one week of my life catching a memory leak</title>
+      <link>https://pwy.io/posts/mimalloc-cigarette</link>
+      <description><![CDATA[Memory allocators are great, I love allocating memory! But they can be a
+great source of pain as well - this is a story of how I lost one week
+catching a memory leak in a core Rust application at work.]]></description>
+      <guid>https://pwy.io/posts/mimalloc-cigarette</guid>
+      <pubDate>Wed, 21 Aug 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Coolest algorithms and optimizations I've used at work</title>
+      <link>https://pwy.io/talks/2024-coolest-algorithms-and-optimizations</link>
+      <description><![CDATA[Coolest algorithms and optimizations I've used at work]]></description>
+      <guid>https://pwy.io/talks/2024-coolest-algorithms-and-optimizations</guid>
+      <pubDate>Thu, 6 Jun 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Learning to Fly series got updated to 2024!</title>
+      <link>https://pwy.io/posts/learning-to-fly-update-2024</link>
+      <description><![CDATA[My Learning to Fly series, a beginner-friendly Rust tutorial combining
+evolution, neural network and genetic algorithm, got an upgrade!]]></description>
+      <guid>https://pwy.io/posts/learning-to-fly-update-2024</guid>
+      <pubDate>Thu, 4 Apr 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Trace Me a River (v2): Computing stuff on GPU using Rust</title>
+      <link>https://pwy.io/talks/2024-trace-me-a-river-v2</link>
+      <description><![CDATA[Trace Me a River (v2): Computing stuff on GPU using Rust]]></description>
+      <guid>https://pwy.io/talks/2024-trace-me-a-river-v2</guid>
+      <pubDate>Thu, 11 Jan 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Trace Me a River: Computing stuff on GPU using Rust</title>
+      <link>https://pwy.io/talks/2023-trace-me-a-river</link>
+      <description><![CDATA[Trace Me a River: Computing stuff on GPU using Rust]]></description>
+      <guid>https://pwy.io/talks/2023-trace-me-a-river</guid>
+      <pubDate>Thu, 16 Nov 2023 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>wait, why (??): Surprising corners of Rust - part 2</title>
+      <link>https://pwy.io/talks/2023-wait-why-pt2</link>
+      <description><![CDATA[wait, why (??): Surprising corners of Rust - part 2]]></description>
+      <guid>https://pwy.io/talks/2023-wait-why-pt2</guid>
+      <pubDate>Thu, 19 Oct 2023 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>(r)IDE on a (t)IDE with my IDE: Why Emacs + Rust?</title>
+      <link>https://pwy.io/talks/2023-emacs</link>
+      <description><![CDATA[(r)IDE on a (t)IDE with my IDE: Why Emacs + Rust?]]></description>
+      <guid>https://pwy.io/talks/2023-emacs</guid>
+      <pubDate>Thu, 22 Jun 2023 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>wait, why (??): Surprising corners of Rust - part 1</title>
+      <link>https://pwy.io/talks/2023-wait-why-pt1</link>
+      <description><![CDATA[wait, why (??): Surprising corners of Rust - part 1]]></description>
+      <guid>https://pwy.io/talks/2023-wait-why-pt1</guid>
+      <pubDate>Thu, 13 Apr 2023 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Look Ma: My computer is talking! - Markov chains and N-grams</title>
+      <link>https://pwy.io/posts/look-ma-my-computer-is-talking</link>
+      <description><![CDATA[ChatGPT is all the hype now, but the math behind it is pretty complex - can
+we create something simpler, possibly under 200 lines of code?]]></description>
+      <guid>https://pwy.io/posts/look-ma-my-computer-is-talking</guid>
+      <pubDate>Thu, 23 Mar 2023 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>DoomÃ©: What we didnât know we didnât know</title>
+      <link>https://pwy.io/talks/2022-doome</link>
+      <description><![CDATA[DoomÃ©: What we didnât know we didnât know]]></description>
+      <guid>https://pwy.io/talks/2022-doome</guid>
+      <pubDate>Thu, 1 Dec 2022 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Let's implement a virtual machine! -- from AST to JIT in one hour</title>
+      <link>https://pwy.io/talks/2022-ast-virtual-machine</link>
+      <description><![CDATA[Let's implement a virtual machine! -- from AST to JIT in one hour]]></description>
+      <guid>https://pwy.io/talks/2022-ast-virtual-machine</guid>
+      <pubDate>Thu, 6 Oct 2022 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Microdosing Rust: Why &amp; How to Get Started with AVR?</title>
+      <link>https://pwy.io/talks/2022-microdosing-rust</link>
+      <description><![CDATA[Microdosing Rust: Why & How to Get Started with AVR?]]></description>
+      <guid>https://pwy.io/talks/2022-microdosing-rust</guid>
+      <pubDate>Thu, 23 Jun 2022 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Learning to Fly: Let's simulate evolution in Rust (pt 4)</title>
+      <link>https://pwy.io/posts/learning-to-fly-pt4</link>
+      <description><![CDATA[This is the last part of the Learning to Fly series in which we're coding a
+simulation of evolution using neural network and genetic algorithm.]]></description>
+      <guid>https://pwy.io/posts/learning-to-fly-pt4</guid>
+      <pubDate>Thu, 10 Jun 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Learning to Fly: Let's simulate evolution in Rust (pt 3)</title>
+      <link>https://pwy.io/posts/learning-to-fly-pt3</link>
+      <description><![CDATA[This is the third part of the Learning to Fly series in which we're coding a
+simulation of evolution using neural network and genetic algorithm.]]></description>
+      <guid>https://pwy.io/posts/learning-to-fly-pt3</guid>
+      <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Learning to Fly: Let's simulate evolution in Rust (pt 2)</title>
+      <link>https://pwy.io/posts/learning-to-fly-pt2</link>
+      <description><![CDATA[This is the second part of the Learning to Fly series in which we're coding
+a simulation of evolution using neural network and genetic algorithm.]]></description>
+      <guid>https://pwy.io/posts/learning-to-fly-pt2</guid>
+      <pubDate>Mon, 1 Feb 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Learning to Fly: Let's simulate evolution in Rust (pt 1)</title>
+      <link>https://pwy.io/posts/learning-to-fly-pt1</link>
+      <description><![CDATA[In this series we'll create a simulation of evolution using neural network
+and genetic algorithm.
+
+I'm going to introduce you to how a basic neural network and genetic
+algorithm works, then we'll implement both in Rust and compile our
+application to WebAssembly.]]></description>
+      <guid>https://pwy.io/posts/learning-to-fly-pt1</guid>
+      <pubDate>Mon, 4 Jan 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Imitating specialization with OIBITs</title>
+      <link>https://pwy.io/posts/imitating-specialization-with-oibits</link>
+      <description><![CDATA[Why does the code below compile?]]></description>
+      <guid>https://pwy.io/posts/imitating-specialization-with-oibits</guid>
+      <pubDate>Sun, 25 Oct 2020 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Canât Hack This: A hard-headed introduction to Nix</title>
+      <link>https://pwy.io/talks/2020-cant-hack-this</link>
+      <description><![CDATA[Canât Hack This: A hard-headed introduction to Nix]]></description>
+      <guid>https://pwy.io/talks/2020-cant-hack-this</guid>
+      <pubDate>Fri, 3 Jul 2020 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Scary Acronyms (and Super Creeps): OIBITs, HRTBs and others</title>
+      <link>https://pwy.io/talks/2020-scary-acronyms</link>
+      <description><![CDATA[Scary Acronyms (and Super Creeps): OIBITs, HRTBs and others]]></description>
+      <guid>https://pwy.io/talks/2020-scary-acronyms</guid>
+      <pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Graphviz in the service of Factorio (pt 1)</title>
+      <link>https://pwy.io/posts/factorio-graphviz-pt1</link>
+      <description><![CDATA[Graphviz is a software that renders graphs, Factorio is a game in which you
+build and maintain factories; letâs explore how both can complement each
+other.]]></description>
+      <guid>https://pwy.io/posts/factorio-graphviz-pt1</guid>
+      <pubDate>Tue, 3 Mar 2020 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Fantastic Actors and Where to Find Them: Actor system from scratch</title>
+      <link>https://pwy.io/talks/2020-fantastic-actors</link>
+      <description><![CDATA[Fantastic Actors and Where to Find Them: Actor system from scratch]]></description>
+      <guid>https://pwy.io/talks/2020-fantastic-actors</guid>
+      <pubDate>Thu, 27 Feb 2020 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>

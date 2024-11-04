@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Scattered Thoughts</title>
+  <link href="https://www.scattered-thoughts.net/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.scattered-thoughts.net/"/>
+  <updated>2024-10-30T00:00:00+00:00</updated>
+<author><name>Jamie Brandon</name></author>
+  <id>https://www.scattered-thoughts.net/atom.xml</id>
+  <entry xml:lang="en">
+    <title>What is the point of an online conference?</title>
+    <published>2024-10-30T00:00:00+00:00</published>
+    <updated>2024-10-30T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/what-is-the-point-of-an-online-conference/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/what-is-the-point-of-an-online-conference/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/what-is-the-point-of-an-online-conference/">What is the point of an online conference?</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Serious fun</title>
+    <published>2024-10-20T00:00:00+00:00</published>
+    <updated>2024-10-20T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/serious-fun/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/serious-fun/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/serious-fun/">Serious fun</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0049: hytradboi 2025, consulting, zest progress, labeled continue, bet against sql, zero-cost costs in debug, packed memory arrays, papers, books</title>
+    <published>2024-10-08T00:00:00+00:00</published>
+    <updated>2024-10-08T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0049/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0049/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0049/">0049: hytradboi 2025, consulting, zest progress, labeled continue, bet against sql, zero-cost costs in debug, packed memory arrays, papers, books</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Smolderingly fast b-trees</title>
+    <published>2024-10-06T00:00:00+00:00</published>
+    <updated>2024-10-06T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/smolderingly-fast-btrees/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/smolderingly-fast-btrees/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/smolderingly-fast-btrees/">Smolderingly fast b-trees</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>HYTRADBOI 2025</title>
+    <published>2024-09-21T00:00:00+00:00</published>
+    <updated>2024-09-21T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/hytradboi-2025/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/hytradboi-2025/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/hytradboi-2025/">HYTRADBOI 2025</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0048: zest progress, zest ordering, wasm alignment, umbra papers, future of fast code, new internet, books, other stuff</title>
+    <published>2024-08-31T00:00:00+00:00</published>
+    <updated>2024-08-31T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0048/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0048/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0048/">0048: zest progress, zest ordering, wasm alignment, umbra papers, future of fast code, new internet, books, other stuff</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0047: babys second wasm compiler, zig honggfuzz, values can be values, dont look UB, surely you can be serious, other links, books</title>
+    <published>2024-07-11T00:00:00+00:00</published>
+    <updated>2024-07-11T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0047/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0047/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0047/">0047: babys second wasm compiler, zig honggfuzz, values can be values, dont look UB, surely you can be serious, other links, books</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Baby&#x27;s second wasm compiler</title>
+    <published>2024-07-09T00:00:00+00:00</published>
+    <updated>2024-07-09T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/babys-second-wasm-compiler/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/babys-second-wasm-compiler/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/babys-second-wasm-compiler/">Baby&#x27;s second wasm compiler</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Ruminating about mutable value semantics</title>
+    <published>2024-06-03T00:00:00+00:00</published>
+    <updated>2024-06-03T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/ruminating-about-mutable-value-semantics/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/ruminating-about-mutable-value-semantics/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/ruminating-about-mutable-value-semantics/">Ruminating about mutable value semantics</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0046: zest syntax, zest progress, sponsors-only repos, future compilers, error-handling implementations, suboperators, why we drive</title>
+    <published>2024-05-02T00:00:00+00:00</published>
+    <updated>2024-05-02T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0046/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0046/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0046/">0046: zest syntax, zest progress, sponsors-only repos, future compilers, error-handling implementations, suboperators, why we drive</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Zest: syntax</title>
+    <published>2024-04-16T00:00:00+00:00</published>
+    <updated>2024-04-16T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/zest-syntax/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/zest-syntax/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/zest-syntax/">Zest: syntax</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0045: unexplanations, business things, zest progress, internal consistency repro, why murat blogs, compiler books + papers, compiling sql to wasm, other books</title>
+    <published>2024-03-28T00:00:00+00:00</published>
+    <updated>2024-03-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0045/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0045/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0045/">0045: unexplanations, business things, zest progress, internal consistency repro, why murat blogs, compiler books + papers, compiling sql to wasm, other books</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Notes on compiler IRs</title>
+    <published>2024-03-27T00:00:00+00:00</published>
+    <updated>2024-03-27T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/notes-on-compiler-irs/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/notes-on-compiler-irs/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/notes-on-compiler-irs/">Notes on compiler IRs</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Miscellaneous ideas</title>
+    <published>2024-03-23T00:00:00+00:00</published>
+    <updated>2024-03-23T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/miscellaneous-ideas/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/miscellaneous-ideas/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/miscellaneous-ideas/">Miscellaneous ideas</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>How to trade software for small money?</title>
+    <published>2024-03-21T00:00:00+00:00</published>
+    <updated>2024-03-21T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/how-to-trade-software-for-small-money/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/how-to-trade-software-for-small-money/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/how-to-trade-software-for-small-money/">How to trade software for small money?</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Unexplanations: sql is syntactic sugar for relational algebra</title>
+    <published>2024-03-18T00:00:00+00:00</published>
+    <updated>2024-03-18T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/unexplanations-sql-is-syntactic-sugar-for-relational-algebra/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/unexplanations-sql-is-syntactic-sugar-for-relational-algebra/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/unexplanations-sql-is-syntactic-sugar-for-relational-algebra/">Unexplanations: sql is syntactic sugar for relational algebra</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Unexplanations: relational algebra is math</title>
+    <published>2024-03-11T00:00:00+00:00</published>
+    <updated>2024-03-11T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/unexplanations-relational-algebra-is-math/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/unexplanations-relational-algebra-is-math/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/unexplanations-relational-algebra-is-math/">Unexplanations: relational algebra is math</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0044: zest progress, unexplanations, generic dilemma, bitc retrospective, adversarial memory safety, done list, tiny muffins, anti-anti-spam, happiness, daily rituals, other books</title>
+    <published>2024-02-28T00:00:00+00:00</published>
+    <updated>2024-02-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0044/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0044/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0044/">0044: zest progress, unexplanations, generic dilemma, bitc retrospective, adversarial memory safety, done list, tiny muffins, anti-anti-spam, happiness, daily rituals, other books</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Zest: dialects and metaprogramming</title>
+    <published>2024-02-28T00:00:00+00:00</published>
+    <updated>2024-02-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/zest-dialects-and-metaprogramming/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/zest-dialects-and-metaprogramming/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/zest-dialects-and-metaprogramming/">Zest: dialects and metaprogramming</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Unexplanations: query optimization works because sql is declarative</title>
+    <published>2024-02-21T00:00:00+00:00</published>
+    <updated>2024-02-21T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/unexplanations-sql-declarative/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/unexplanations-sql-declarative/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/unexplanations-sql-declarative/">Unexplanations: query optimization works because sql is declarative</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Zest: notation and representation</title>
+    <published>2024-02-04T00:00:00+00:00</published>
+    <updated>2024-02-04T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/notation-and-representation/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/notation-and-representation/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/notation-and-representation/">Zest: notation and representation</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0043: 2023, debog, never sort, critique of sql, status game, more fuel you</title>
+    <published>2024-01-15T00:00:00+00:00</published>
+    <updated>2024-01-15T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0043/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0043/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0043/">0043: 2023, debog, never sort, critique of sql, status game, more fuel you</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>2023</title>
+    <published>2024-01-15T00:00:00+00:00</published>
+    <updated>2024-01-15T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/2023/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/2023/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/2023/">2023</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0042: consulting lessons, there are no strings on me, buttondown, focus goof, jsfuck, 1ml</title>
+    <published>2023-12-01T00:00:00+00:00</published>
+    <updated>2023-12-01T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0042/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0042/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0042/">0042: consulting lessons, there are no strings on me, buttondown, focus goof, jsfuck, 1ml</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>There are no strings on me</title>
+    <published>2023-11-22T00:00:00+00:00</published>
+    <updated>2023-11-22T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/there-are-no-strings-on-me/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/there-are-no-strings-on-me/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/there-are-no-strings-on-me/">There are no strings on me</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0041: columnar kernels in go, go grouches, column sketches, why user-mode threads, gross margins vs open source, celebrity worship</title>
+    <published>2023-11-04T00:00:00+00:00</published>
+    <updated>2023-11-04T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0041/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0041/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0041/">0041: columnar kernels in go, go grouches, column sketches, why user-mode threads, gross margins vs open source, celebrity worship</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Columnar kernels in go?</title>
+    <published>2023-10-20T00:00:00+00:00</published>
+    <updated>2023-10-20T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/columnar-kernels-in-go/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/columnar-kernels-in-go/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/columnar-kernels-in-go/">Columnar kernels in go?</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0040.1: meta in myanmar</title>
+    <published>2023-09-29T00:00:00+00:00</published>
+    <updated>2023-09-29T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0040-1/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0040-1/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0040-1/">0040.1: meta in myanmar</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0040: olap survey, lobster, feldera, innovation, wizard papers, umbra papers, olap papers</title>
+    <published>2023-09-29T00:00:00+00:00</published>
+    <updated>2023-09-29T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0040/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0040/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0040/">0040: olap survey, lobster, feldera, innovation, wizard papers, umbra papers, olap papers</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>A shallow survey of OLAP and HTAP query engines</title>
+    <published>2023-09-28T00:00:00+00:00</published>
+    <updated>2023-09-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/a-shallow-survey-of-olap-and-htap-query-engines/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/a-shallow-survey-of-olap-and-htap-query-engines/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/a-shallow-survey-of-olap-and-htap-query-engines/">A shallow survey of OLAP and HTAP query engines</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0039: implementing interactive languages, baby&#x27;s first wasm compiler, zig 0.11, attack of the killer features, zed, attention span, psychology&#x27;s loss, privatizing sovereignty</title>
+    <published>2023-08-29T00:00:00+00:00</published>
+    <updated>2023-08-29T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0039/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0039/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0039/">0039: implementing interactive languages, baby&#x27;s first wasm compiler, zig 0.11, attack of the killer features, zed, attention span, psychology&#x27;s loss, privatizing sovereignty</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Baby&#x27;s first wasm compiler</title>
+    <published>2023-08-28T00:00:00+00:00</published>
+    <updated>2023-08-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/babys-first-wasm-compiler/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/babys-first-wasm-compiler/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/babys-first-wasm-compiler/">Baby&#x27;s first wasm compiler</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Implementing interactive languages</title>
+    <published>2023-08-24T00:00:00+00:00</published>
+    <updated>2023-08-24T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/implementing-interactive-languages/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/implementing-interactive-languages/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/implementing-interactive-languages/">Implementing interactive languages</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0038.1: consulting</title>
+    <published>2023-08-10T00:00:00+00:00</published>
+    <updated>2023-08-10T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0038-1/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0038-1/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0038-1/">0038.1: consulting</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0038: cheap compilation, mvs-to-wasm, automatically isolating bugs, mastodone, other stuff</title>
+    <published>2023-07-28T00:00:00+00:00</published>
+    <updated>2023-07-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0038/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0038/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0038/">0038: cheap compilation, mvs-to-wasm, automatically isolating bugs, mastodone, other stuff</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0037: dynamic mutable value semantics, interior pointers, uninterning, functionless effects, papers, books</title>
+    <published>2023-06-27T00:00:00+00:00</published>
+    <updated>2023-06-27T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0037/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0037/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0037/">0037: dynamic mutable value semantics, interior pointers, uninterning, functionless effects, papers, books</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0036: typescript, papers, books</title>
+    <published>2023-05-29T00:00:00+00:00</published>
+    <updated>2023-05-29T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0036/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0036/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0036/">0036: typescript, papers, books</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0035: back to the shack</title>
+    <published>2023-05-04T00:00:00+00:00</published>
+    <updated>2023-05-04T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0035/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0035/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0035/">0035: back to the shack</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>What is a database?</title>
+    <published>2023-04-19T00:00:00+00:00</published>
+    <updated>2023-04-19T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/what-is-a-database/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/what-is-a-database/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/what-is-a-database/">What is a database?</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0034: perf handover, compaction unchained, crash harder, sketching the query engine, focus catchup, android update policies, legopunk, a world without email, nobody cares, segcache, bloomRF, existential consistency, ssd parameters, fantastic ssd internals</title>
+    <published>2023-03-31T00:00:00+00:00</published>
+    <updated>2023-03-31T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0034/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0034/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0034/">0034: perf handover, compaction unchained, crash harder, sketching the query engine, focus catchup, android update policies, legopunk, a world without email, nobody cares, segcache, bloomRF, existential consistency, ssd parameters, fantastic ssd internals</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0033: table sizing, bench harder, wasm first steps, sycl vancouver, breathing for warriors, move your dna, the molecule of more, how to decide, slouching towards utopia</title>
+    <published>2023-03-05T00:00:00+00:00</published>
+    <updated>2023-03-05T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0033/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0033/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0033/">0033: table sizing, bench harder, wasm first steps, sycl vancouver, breathing for warriors, move your dna, the molecule of more, how to decide, slouching towards utopia</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0032: undroppable tombstones, forest fuzzer, manifest race, hash_log, zig coercions, zig pointer hops, zig object notation, domain knowledge, built from broken, database internals, papers</title>
+    <published>2023-01-31T00:00:00+00:00</published>
+    <updated>2023-01-31T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0032/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0032/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0032/">0032: undroppable tombstones, forest fuzzer, manifest race, hash_log, zig coercions, zig pointer hops, zig object notation, domain knowledge, built from broken, database internals, papers</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0031: 2022, systems distributed, random ids, deleting tombstones, disorderly compaction, juggling blocks, code review woes, holiday shutdown, searching for implementors, everything is copy, sharing the page cache after fysncgate, 9&#x2F;10 climbers, rise and fall of peer review, real-world concurrency</title>
+    <published>2023-01-05T00:00:00+00:00</published>
+    <updated>2023-01-05T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0031/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0031/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0031/">0031: 2022, systems distributed, random ids, deleting tombstones, disorderly compaction, juggling blocks, code review woes, holiday shutdown, searching for implementors, everything is copy, sharing the page cache after fysncgate, 9&#x2F;10 climbers, rise and fall of peer review, real-world concurrency</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>2022</title>
+    <published>2023-01-05T00:00:00+00:00</published>
+    <updated>2023-01-05T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/2022/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/2022/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/2022/">2022</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0030: lsm perf, colorblind concurrency, tracing, evacuating preimp, reading, fixing my shoulders</title>
+    <published>2022-12-05T00:00:00+00:00</published>
+    <updated>2022-12-05T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0030/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0030/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0030/">0030: lsm perf, colorblind concurrency, tracing, evacuating preimp, reading, fixing my shoulders</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0029: san francisco, seattle, tigerbeetle, studying, links</title>
+    <published>2022-11-04T00:00:00+00:00</published>
+    <updated>2022-11-04T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0029/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0029/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0029/">0029: san francisco, seattle, tigerbeetle, studying, links</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0028: HYTRADBOI jam, sqllogictest in a week, how safe is zig again, rr on alder lake, google maps jank, links</title>
+    <published>2022-10-05T00:00:00+00:00</published>
+    <updated>2022-10-05T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0028/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0028/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0028/">0028: HYTRADBOI jam, sqllogictest in a week, how safe is zig again, rr on alder lake, google maps jank, links</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0027.1: hytradboi jam</title>
+    <published>2022-08-31T00:00:00+00:00</published>
+    <updated>2022-08-31T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0027-1/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0027-1/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0027-1/">0027.1: hytradboi jam</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0027: preimp, framework, dotfiles and backups, links</title>
+    <published>2022-08-28T00:00:00+00:00</published>
+    <updated>2022-08-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0027/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0027/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0027/">0027: preimp, framework, dotfiles and backups, links</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0026: break, preimp essay, focus + clojure, zed experiments, decorrelation and nested relations, bunny, sqlite mode, reading, links</title>
+    <published>2022-07-26T00:00:00+00:00</published>
+    <updated>2022-07-26T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0026/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0026/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0026/">0026: break, preimp essay, focus + clojure, zed experiments, decorrelation and nested relations, bunny, sqlite mode, reading, links</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0025: preimp, focus + mach, emergent ventures, clockwork labs, success, hytradboi ideas, zig debugging tips, dev-setup.sh, clojurescript blues, analogies for end-user programming, half-arsed workflows, javascript vs serialization, links</title>
+    <published>2022-06-24T00:00:00+00:00</published>
+    <updated>2022-06-24T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0025/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0025/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0025/">0025: preimp, focus + mach, emergent ventures, clockwork labs, success, hytradboi ideas, zig debugging tips, dev-setup.sh, clojurescript blues, analogies for end-user programming, half-arsed workflows, javascript vs serialization, links</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0024: HYTRADBOI postmortem, HYTWACFI?, preimp, emergent ventures, data and reality, merkle search trees, readyset, julia compilation times</title>
+    <published>2022-05-28T00:00:00+00:00</published>
+    <updated>2022-05-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0024/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0024/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0024/">0024: HYTRADBOI postmortem, HYTWACFI?, preimp, emergent ventures, data and reality, merkle search trees, readyset, julia compilation times</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>HYTRADBOI 2022 postmortem</title>
+    <published>2022-05-02T00:00:00+00:00</published>
+    <updated>2022-05-02T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/hytradboi-2022-postmortem/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/hytradboi-2022-postmortem/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/hytradboi-2022-postmortem/">HYTRADBOI 2022 postmortem</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0023: HYTRADBOI teaser, dida vs datalogui, preimp cruft, dbsp, links etc</title>
+    <published>2022-04-24T00:00:00+00:00</published>
+    <updated>2022-04-24T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0023/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0023/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0023/">0023: HYTRADBOI teaser, dida vs datalogui, preimp cruft, dbsp, links etc</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>The shape of data</title>
+    <published>2022-03-29T00:00:00+00:00</published>
+    <updated>2022-03-29T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/the-shape-of-data/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/the-shape-of-data/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/the-shape-of-data/">The shape of data</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0022: preimp, shape of data, hytradboi progress, office hours, in nyc, riffle, cue, technical dimensions, js compound keys, hop</title>
+    <published>2022-03-28T00:00:00+00:00</published>
+    <updated>2022-03-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0022/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0022/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0022/">0022: preimp, shape of data, hytradboi progress, office hours, in nyc, riffle, cue, technical dimensions, js compound keys, hop</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0021: hytradboi schedule + tickets, imp v3 ideas, real world of technology, changing minds, essence of software, typed image-based programming with structure editing, fosdem 2022, introspecting async</title>
+    <published>2022-02-21T00:00:00+00:00</published>
+    <updated>2022-02-21T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0021/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0021/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0021/">0021: hytradboi schedule + tickets, imp v3 ideas, real world of technology, changing minds, essence of software, typed image-based programming with structure editing, fosdem 2022, introspecting async</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0020: hytradboi, milestones, data soup, airtable, self-hosting</title>
+    <published>2022-02-03T00:00:00+00:00</published>
+    <updated>2022-02-03T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0020/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0020/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0020/">0020: hytradboi, milestones, data soup, airtable, self-hosting</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0019: Refactor</title>
+    <published>2022-01-26T00:00:00+00:00</published>
+    <updated>2022-01-26T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0019/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0019/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0019/">0019: Refactor</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0018: last reflections, why start a new database conference, 2021 retrospective, imp schemaless db + crdt, office hours, internal inconsistency in the wild, rss feeds, salsa needs finite collections, tiddlywiki vs unigraph, multidimensional indexes, arrow, just don&#x27;t fsync, testing distributeds systems, tigerbeetle perf demos, web3, explicit formal structure, zig doctests, rust arenas, semidirect products of crdts, single-program distributed systems, sqlite qpsg, valhalla, mundanity of excellence, to mmap or not to mmap, libgavran, relational e-matching</title>
+    <published>2022-01-17T00:00:00+00:00</published>
+    <updated>2022-01-17T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0018/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0018/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0018/">0018: last reflections, why start a new database conference, 2021 retrospective, imp schemaless db + crdt, office hours, internal inconsistency in the wild, rss feeds, salsa needs finite collections, tiddlywiki vs unigraph, multidimensional indexes, arrow, just don&#x27;t fsync, testing distributeds systems, tigerbeetle perf demos, web3, explicit formal structure, zig doctests, rust arenas, semidirect products of crdts, single-program distributed systems, sqlite qpsg, valhalla, mundanity of excellence, to mmap or not to mmap, libgavran, relational e-matching</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imp: heterogenous types</title>
+    <published>2022-01-10T00:00:00+00:00</published>
+    <updated>2022-01-10T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imp-heterogenous-types/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imp-heterogenous-types/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imp-heterogenous-types/">Imp: heterogenous types</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>2021</title>
+    <published>2021-12-30T00:00:00+00:00</published>
+    <updated>2021-12-30T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/2021/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/2021/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/2021/">2021</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Coding</title>
+    <published>2021-12-20T00:00:00+00:00</published>
+    <updated>2021-12-20T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/coding/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/coding/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/coding/">Coding</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Why start a new database conference?</title>
+    <published>2021-12-17T00:00:00+00:00</published>
+    <updated>2021-12-17T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/why-start-a-new-database-conference/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/why-start-a-new-database-conference/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/why-start-a-new-database-conference/">Why start a new database conference?</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0017: hytradboi updates, imp stonks, misparaphrasing oracle, technical books, rum, creator economy, friend groups, ub, omg design principles, zig build, fossil and indexes, flatpak, skiplang, convex, fuzzing beyond testing, tigerbeetle dev videos, wafl</title>
+    <published>2021-12-15T00:00:00+00:00</published>
+    <updated>2021-12-15T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0017/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0017/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0017/">0017: hytradboi updates, imp stonks, misparaphrasing oracle, technical books, rum, creator economy, friend groups, ub, omg design principles, zig build, fossil and indexes, flatpak, skiplang, convex, fuzzing beyond testing, tigerbeetle dev videos, wafl</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Testing</title>
+    <published>2021-11-26T00:00:00+00:00</published>
+    <updated>2021-11-26T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/testing/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/testing/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/testing/">Testing</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Writing</title>
+    <published>2021-11-25T00:00:00+00:00</published>
+    <updated>2021-11-25T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/writing/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/writing/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/writing/">Writing</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0016: dida validator and debugger, focus selector perf and async children, emotional management, speed matters, moving faster, have you tried rubbing a database on it, handmade highlights, airtable scripts, bank python, napa, pollen, against markdown, zig-snapshots, exhaustive test inputs, gf, nixos debug symbols, duckdb blog</title>
+    <published>2021-11-15T00:00:00+00:00</published>
+    <updated>2021-11-15T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0016/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0016/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0016/">0016: dida validator and debugger, focus selector perf and async children, emotional management, speed matters, moving faster, have you tried rubbing a database on it, handmade highlights, airtable scripts, bank python, napa, pollen, against markdown, zig-snapshots, exhaustive test inputs, gf, nixos debug symbols, duckdb blog</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Emotional management</title>
+    <published>2021-11-01T00:00:00+00:00</published>
+    <updated>2021-11-01T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/emotional-management/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/emotional-management/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/emotional-management/">Emotional management</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Moving faster</title>
+    <published>2021-10-23T00:00:00+00:00</published>
+    <updated>2021-10-23T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/moving-faster/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/moving-faster/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/moving-faster/">Moving faster</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Speed matters</title>
+    <published>2021-10-14T00:00:00+00:00</published>
+    <updated>2021-10-14T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/speed-matters/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/speed-matters/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/speed-matters/">Speed matters</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0015: imp internals, reflections, precedence, make mode, mutant, q3, error recovery, tonsky ui, subtext 10, factfulness, benchmarking advice, dependency hubs, independent research, zig wayland, retool, observable dependencies, ugly buildings, without scihub, wasm virtual memory, huawei breakdown, infrastructure langauges, stencil vectors, chiX</title>
+    <published>2021-10-12T00:00:00+00:00</published>
+    <updated>2021-10-12T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0015/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0015/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0015/">0015: imp internals, reflections, precedence, make mode, mutant, q3, error recovery, tonsky ui, subtext 10, factfulness, benchmarking advice, dependency hubs, independent research, zig wayland, retool, observable dependencies, ugly buildings, without scihub, wasm virtual memory, huawei breakdown, infrastructure langauges, stencil vectors, chiX</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>2021 Q3 roundup</title>
+    <published>2021-10-12T00:00:00+00:00</published>
+    <updated>2021-10-12T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/2021-q3-roundup/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/2021-q3-roundup/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/2021-q3-roundup/">2021 Q3 roundup</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Better operator precedence</title>
+    <published>2021-10-09T00:00:00+00:00</published>
+    <updated>2021-10-09T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/better-operator-precedence/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/better-operator-precedence/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/better-operator-precedence/">Better operator precedence</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Setting goals</title>
+    <published>2021-10-06T00:00:00+00:00</published>
+    <updated>2021-10-06T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/setting-goals/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/setting-goals/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/setting-goals/">Setting goals</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Things unlearned</title>
+    <published>2021-09-29T00:00:00+00:00</published>
+    <updated>2021-09-29T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/things-unlearned/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/things-unlearned/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/things-unlearned/">Things unlearned</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>On bad advice</title>
+    <published>2021-09-22T00:00:00+00:00</published>
+    <updated>2021-09-22T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/on-bad-advice/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/on-bad-advice/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/on-bad-advice/">On bad advice</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Reflections on a decade of coding</title>
+    <published>2021-09-22T00:00:00+00:00</published>
+    <updated>2021-09-22T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/reflections-on-a-decade-of-coding/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/reflections-on-a-decade-of-coding/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/reflections-on-a-decade-of-coding/">Reflections on a decade of coding</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0014: imp live repl + syntax + errors, focus highlighting + squigglies, dida nop, web woes, undrafting, rel, oracle encore, chidb, pinebook touchpad, toplev, use of a life, imgui accessibility, wheel reinvention jam, chibicc, files vs web silos, handwritten parsers, perf ninja</title>
+    <published>2021-09-06T00:00:00+00:00</published>
+    <updated>2021-09-06T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0014/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0014/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0014/">0014: imp live repl + syntax + errors, focus highlighting + squigglies, dida nop, web woes, undrafting, rel, oracle encore, chidb, pinebook touchpad, toplev, use of a life, imgui accessibility, wheel reinvention jam, chibicc, files vs web silos, handwritten parsers, perf ninja</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Focus: intro</title>
+    <published>2021-09-06T00:00:00+00:00</published>
+    <updated>2021-09-06T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/focus-intro/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/focus-intro/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/focus-intro/">Focus: intro</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Focus: rendering</title>
+    <published>2021-09-06T00:00:00+00:00</published>
+    <updated>2021-09-06T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/focus-rendering/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/focus-rendering/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/focus-rendering/">Focus: rendering</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Focus: text</title>
+    <published>2021-09-06T00:00:00+00:00</published>
+    <updated>2021-09-06T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/focus-text/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/focus-text/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/focus-text/">Focus: text</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Thoughts on benchmarking streaming systems</title>
+    <published>2021-09-06T00:00:00+00:00</published>
+    <updated>2021-09-06T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/thoughts-on-benchmarking-streaming-systems/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/thoughts-on-benchmarking-streaming-systems/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/thoughts-on-benchmarking-streaming-systems/">Thoughts on benchmarking streaming systems</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imp: live repl</title>
+    <published>2021-09-04T00:00:00+00:00</published>
+    <updated>2021-09-04T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imp-live-repl/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imp-live-repl/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imp-live-repl/">Imp: live repl</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0013: till death do us part, minimum wage, dida free, implicit ordering in relational languages, ultralearning, responses to against sql, oracle decorrelation, gede improvements, antisponsoring, convivial design heuristics, knowledge transfer, crafting databases, rust complexity, antitrust, gelly, shakti, lumosql, anti-marketing, NAAL, ledger of harms, tonsky icfp, debugging stories</title>
+    <published>2021-08-07T00:00:00+00:00</published>
+    <updated>2021-08-07T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0013/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0013/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0013/">0013: till death do us part, minimum wage, dida free, implicit ordering in relational languages, ultralearning, responses to against sql, oracle decorrelation, gede improvements, antisponsoring, convivial design heuristics, knowledge transfer, crafting databases, rust complexity, antitrust, gelly, shakti, lumosql, anti-marketing, NAAL, ledger of harms, tonsky icfp, debugging stories</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Implicit ordering in relational languages</title>
+    <published>2021-08-05T00:00:00+00:00</published>
+    <updated>2021-08-05T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/implicit-ordering-in-relational-languages/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/implicit-ordering-in-relational-languages/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/implicit-ordering-in-relational-languages/">Implicit ordering in relational languages</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Ultralearning</title>
+    <published>2021-07-27T00:00:00+00:00</published>
+    <updated>2021-07-27T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/notes/ultralearning/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/notes/ultralearning/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/notes/ultralearning/">Ultralearning</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0012: dida wasm api + indexes + reduce, food and carbon emissions, async rust, handmade seattle, ideas matter, tools for thought and dida animations, redpanda wasm, live 2021, opportunity costs of twitter, work vs jobs, sourcehut simplicity, writing tools faster, ec2 trends, the state of academia</title>
+    <published>2021-07-09T00:00:00+00:00</published>
+    <updated>2021-07-09T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0012/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0012/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0012/">0012: dida wasm api + indexes + reduce, food and carbon emissions, async rust, handmade seattle, ideas matter, tools for thought and dida animations, redpanda wasm, live 2021, opportunity costs of twitter, work vs jobs, sourcehut simplicity, writing tools faster, ec2 trends, the state of academia</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>2021 Q2 roundup</title>
+    <published>2021-07-09T00:00:00+00:00</published>
+    <updated>2021-07-09T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/2021-q2-roundup/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/2021-q2-roundup/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/2021-q2-roundup/">2021 Q2 roundup</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Against SQL</title>
+    <published>2021-07-09T00:00:00+00:00</published>
+    <updated>2021-07-09T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/against-sql/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/against-sql/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/against-sql/">Against SQL</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0011: dida release, DD reading, antirez and small tech, reactive ui, how to test, doom vs memory safety, state of academia, wasm-bindgen, apl compilers, relational.ai and salsa.jl</title>
+    <published>2021-06-14T00:00:00+00:00</published>
+    <updated>2021-06-14T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0011/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0011/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0011/">0011: dida release, DD reading, antirez and small tech, reactive ui, how to test, doom vs memory safety, state of academia, wasm-bindgen, apl compilers, relational.ai and salsa.jl</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0010: dida, live repls, query planning for streaming, rust allocators, more zig goto, database resources, guix on mac, criticising people&#x27;s work, pay what you want</title>
+    <published>2021-05-18T00:00:00+00:00</published>
+    <updated>2021-05-18T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0010/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0010/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0010/">0010: dida, live repls, query planning for streaming, rust allocators, more zig goto, database resources, guix on mac, criticising people&#x27;s work, pay what you want</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Making live repls behave</title>
+    <published>2021-05-18T00:00:00+00:00</published>
+    <updated>2021-05-18T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/making-live-repls-behave/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/making-live-repls-behave/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/making-live-repls-behave/">Making live repls behave</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Why query planning for streaming systems is hard</title>
+    <published>2021-05-08T00:00:00+00:00</published>
+    <updated>2021-05-08T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/why-query-planning-for-streaming-systems-is-hard/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/why-query-planning-for-streaming-systems-is-hard/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/why-query-planning-for-streaming-systems-is-hard/">Why query planning for streaming systems is hard</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0009: 2021 Q1 roundup, updates to internal consistency, garden of forking paths, push vs pull, beca, cambria</title>
+    <published>2021-04-24T00:00:00+00:00</published>
+    <updated>2021-04-24T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0009/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0009/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0009/">0009: 2021 Q1 roundup, updates to internal consistency, garden of forking paths, push vs pull, beca, cambria</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>2021 Q1 roundup</title>
+    <published>2021-04-22T00:00:00+00:00</published>
+    <updated>2021-04-22T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/2021-q1-roundup/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/2021-q1-roundup/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/2021-q1-roundup/">2021 Q1 roundup</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0008: the last internal consistency, geoffrey litt&#x27;s new newsletter, business structure vs quality, aws throttling, papoc, our machinery, on twitter, injuries</title>
+    <published>2021-04-17T00:00:00+00:00</published>
+    <updated>2021-04-17T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0008/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0008/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0008/">0008: the last internal consistency, geoffrey litt&#x27;s new newsletter, business structure vs quality, aws throttling, papoc, our machinery, on twitter, injuries</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Internal consistency in streaming systems</title>
+    <published>2021-04-17T00:00:00+00:00</published>
+    <updated>2021-04-17T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/internal-consistency-in-streaming-systems/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/internal-consistency-in-streaming-systems/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/internal-consistency-in-streaming-systems/">Internal consistency in streaming systems</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0007: yet more internal consistency, re: how safe is zig, async performance, local-first software, fuzzers and emulators, deterministic hardware counters, zig goto</title>
+    <published>2021-04-03T00:00:00+00:00</published>
+    <updated>2021-04-03T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0007/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0007/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0007/">0007: yet more internal consistency, re: how safe is zig, async performance, local-first software, fuzzers and emulators, deterministic hardware counters, zig goto</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0006: more internal consistency, how safe is zig, bullshit jobs, debt, utopia of rules, kevin&#x27;s zig adventure, pinebook pro, trio</title>
+    <published>2021-03-19T00:00:00+00:00</published>
+    <updated>2021-03-19T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0006/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0006/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0006/">0006: more internal consistency, how safe is zig, bullshit jobs, debt, utopia of rules, kevin&#x27;s zig adventure, pinebook pro, trio</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Bullshit jobs</title>
+    <published>2021-03-19T00:00:00+00:00</published>
+    <updated>2021-03-19T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/notes/bullshit-jobs/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/notes/bullshit-jobs/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/notes/bullshit-jobs/">Bullshit jobs</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Debt</title>
+    <published>2021-03-19T00:00:00+00:00</published>
+    <updated>2021-03-19T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/notes/debt/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/notes/debt/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/notes/debt/">Debt</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Utopia of rules</title>
+    <published>2021-03-19T00:00:00+00:00</published>
+    <updated>2021-03-19T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/notes/utopia-of-rules/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/notes/utopia-of-rules/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/notes/utopia-of-rules/">Utopia of rules</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>How (memory) safe is zig?</title>
+    <published>2021-03-19T00:00:00+00:00</published>
+    <updated>2022-09-21T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/how-safe-is-zig/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/how-safe-is-zig/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/how-safe-is-zig/">How (memory) safe is zig?</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Memory-mapped IO registers in zig</title>
+    <published>2021-03-08T00:00:00+00:00</published>
+    <updated>2021-03-08T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/mmio-in-zig/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/mmio-in-zig/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/mmio-in-zig/">Memory-mapped IO registers in zig</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0005: internal consistency in streaming systems, MMIO in zig, a small matter of programming, rxi, martin kleppmann&#x27;s new patreon, redpanda benchmarks</title>
+    <published>2021-02-27T00:00:00+00:00</published>
+    <updated>2021-02-27T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0005/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0005/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0005/">0005: internal consistency in streaming systems, MMIO in zig, a small matter of programming, rxi, martin kleppmann&#x27;s new patreon, redpanda benchmarks</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>An opinionated map of incremental and streaming systems</title>
+    <published>2021-02-27T00:00:00+00:00</published>
+    <updated>2021-04-18T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/an-opinionated-map-of-incremental-and-streaming-systems/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/an-opinionated-map-of-incremental-and-streaming-systems/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/an-opinionated-map-of-incremental-and-streaming-systems/">An opinionated map of incremental and streaming systems</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>A small matter of programming</title>
+    <published>2021-02-25T00:00:00+00:00</published>
+    <updated>2021-02-25T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/notes/a-small-matter-of-programming/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/notes/a-small-matter-of-programming/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/notes/a-small-matter-of-programming/">A small matter of programming</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0004: map of incremental&#x2F;streaming systems, draft of thoughts on benchmarking streaming systems, the mature optimization handbook, various dataflow and database talks</title>
+    <published>2021-02-16T00:00:00+00:00</published>
+    <updated>2021-02-16T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0004/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0004/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0004/">0004: map of incremental&#x2F;streaming systems, draft of thoughts on benchmarking streaming systems, the mature optimization handbook, various dataflow and database talks</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>The mature optimization handbook</title>
+    <published>2021-02-16T00:00:00+00:00</published>
+    <updated>2021-02-16T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/notes/the-mature-optimization-handbook/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/notes/the-mature-optimization-handbook/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/notes/the-mature-optimization-handbook/">The mature optimization handbook</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>How Materialize and other databases optimize SQL subqueries</title>
+    <published>2021-02-16T00:00:00+00:00</published>
+    <updated>2021-02-16T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/materialize-decorrelation/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/materialize-decorrelation/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/materialize-decorrelation/">How Materialize and other databases optimize SQL subqueries</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0003: optimizing correlated subqueries, digital minimalism, data-oriented design</title>
+    <published>2021-02-06T00:00:00+00:00</published>
+    <updated>2021-02-06T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0003/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0003/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0003/">0003: optimizing correlated subqueries, digital minimalism, data-oriented design</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Digital minimalism</title>
+    <published>2021-02-06T00:00:00+00:00</published>
+    <updated>2021-02-06T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/notes/digital-minimalism/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/notes/digital-minimalism/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/notes/digital-minimalism/">Digital minimalism</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0002: correlated subqueries intro, text editor data-structures, working in public, thoughts on independent research</title>
+    <published>2021-01-30T00:00:00+00:00</published>
+    <updated>2021-01-30T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0002/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0002/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0002/">0002: correlated subqueries intro, text editor data-structures, working in public, thoughts on independent research</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Working in public</title>
+    <published>2021-01-26T00:00:00+00:00</published>
+    <updated>2021-01-26T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/notes/working-in-public/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/notes/working-in-public/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/notes/working-in-public/">Working in public</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>0001: welcome, text editor intro + rendering</title>
+    <published>2021-01-25T00:00:00+00:00</published>
+    <updated>2021-01-25T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/log/0001/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/log/0001/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/log/0001/">0001: welcome, text editor intro + rendering</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Why isn&#x27;t differential dataflow more popular?</title>
+    <published>2021-01-21T00:00:00+00:00</published>
+    <updated>2021-01-21T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/why-isnt-differential-dataflow-more-popular/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/why-isnt-differential-dataflow-more-popular/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/why-isnt-differential-dataflow-more-popular/">Why isn&#x27;t differential dataflow more popular?</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>2020 spending</title>
+    <published>2021-01-15T00:00:00+00:00</published>
+    <updated>2021-01-15T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/2020-spending/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/2020-spending/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/2020-spending/">2020 spending</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Looking for more debugger</title>
+    <published>2020-12-13T00:00:00+00:00</published>
+    <updated>2020-12-13T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/looking-for-debugger-2/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/looking-for-debugger-2/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/looking-for-debugger-2/">Looking for more debugger</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Looking for debugger</title>
+    <published>2020-12-13T00:00:00+00:00</published>
+    <updated>2020-12-13T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/looking-for-debugger/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/looking-for-debugger/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/looking-for-debugger/">Looking for debugger</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Canada&#x27;s Express Entry program</title>
+    <published>2020-10-26T00:00:00+00:00</published>
+    <updated>2020-10-26T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/canadas-express-entry-program/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/canadas-express-entry-program/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/canadas-express-entry-program/">Canada&#x27;s Express Entry program</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Assorted thoughts on zig (and rust)</title>
+    <published>2020-10-19T00:00:00+00:00</published>
+    <updated>2020-10-19T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/assorted-thoughts-on-zig-and-rust/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/assorted-thoughts-on-zig-and-rust/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/assorted-thoughts-on-zig-and-rust/">Assorted thoughts on zig (and rust)</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Small tech</title>
+    <published>2020-09-07T00:00:00+00:00</published>
+    <updated>2020-09-07T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/small-tech/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/small-tech/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/small-tech/">Small tech</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imp: iteration</title>
+    <published>2020-06-17T00:00:00+00:00</published>
+    <updated>2020-06-17T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imp-iteration/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imp-iteration/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imp-iteration/">Imp: iteration</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imp: boxes</title>
+    <published>2020-06-02T00:00:00+00:00</published>
+    <updated>2020-06-02T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imp-boxes/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imp-boxes/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imp-boxes/">Imp: boxes</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imp: solving functions</title>
+    <published>2020-04-29T00:00:00+00:00</published>
+    <updated>2020-04-29T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imp-solving-functions/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imp-solving-functions/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imp-solving-functions/">Imp: solving functions</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Open multiple dispatch in zig</title>
+    <published>2020-04-28T00:00:00+00:00</published>
+    <updated>2020-04-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/open-multiple-dispatch-in-zig/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/open-multiple-dispatch-in-zig/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/open-multiple-dispatch-in-zig/">Open multiple dispatch in zig</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Pinephone first steps</title>
+    <published>2020-04-27T00:00:00+00:00</published>
+    <updated>2020-04-27T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/pinephone-first-steps/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/pinephone-first-steps/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/pinephone-first-steps/">Pinephone first steps</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>SELECT wat FROM sql</title>
+    <published>2020-04-16T00:00:00+00:00</published>
+    <updated>2020-04-16T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/select-wat-from-sql/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/select-wat-from-sql/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/select-wat-from-sql/">SELECT wat FROM sql</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imp: decorrelation</title>
+    <published>2020-02-02T00:00:00+00:00</published>
+    <updated>2020-02-02T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imp-decorrelation/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imp-decorrelation/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imp-decorrelation/">Imp: decorrelation</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>2019 spending</title>
+    <published>2020-01-04T00:00:00+00:00</published>
+    <updated>2020-01-04T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/2019-spending/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/2019-spending/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/2019-spending/">2019 spending</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imp: simple interpreter</title>
+    <published>2019-10-18T00:00:00+00:00</published>
+    <updated>2019-10-18T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imp-simple-interpreter/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imp-simple-interpreter/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imp-simple-interpreter/">Imp: simple interpreter</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imp: types</title>
+    <published>2019-10-14T00:00:00+00:00</published>
+    <updated>2019-10-14T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imp-types/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imp-types/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imp-types/">Imp: types</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imp: denotational semantics</title>
+    <published>2019-10-01T00:00:00+00:00</published>
+    <updated>2019-10-01T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imp-denotational-semantics/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imp-denotational-semantics/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imp-denotational-semantics/">Imp: denotational semantics</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imp: core language</title>
+    <published>2019-09-30T00:00:00+00:00</published>
+    <updated>2019-09-30T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imp-sets-and-funs/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imp-sets-and-funs/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imp-sets-and-funs/">Imp: core language</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imp: intro</title>
+    <published>2019-09-27T00:00:00+00:00</published>
+    <updated>2019-09-27T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imp-intro/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imp-intro/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imp-intro/">Imp: intro</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Frugality is non-linear</title>
+    <published>2019-04-09T00:00:00+00:00</published>
+    <updated>2019-04-09T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/frugality-is-non-linear/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/frugality-is-non-linear/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/frugality-is-non-linear/">Frugality is non-linear</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Zero-copy deserialization in Julia</title>
+    <published>2018-08-28T00:00:00+00:00</published>
+    <updated>2018-08-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/zero-copy-deserialization-in-julia/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/zero-copy-deserialization-in-julia/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/zero-copy-deserialization-in-julia/">Zero-copy deserialization in Julia</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Julia as a platform for language development</title>
+    <published>2018-08-16T00:00:00+00:00</published>
+    <updated>2018-08-16T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/julia-as-a-platform-for-language-development/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/julia-as-a-platform-for-language-development/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/julia-as-a-platform-for-language-development/">Julia as a platform for language development</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Psychology vs the graphics pipeline</title>
+    <published>2017-12-11T00:00:00+00:00</published>
+    <updated>2017-12-11T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/psychology-vs-the-graphics-pipeline/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/psychology-vs-the-graphics-pipeline/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/psychology-vs-the-graphics-pipeline/">Psychology vs the graphics pipeline</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Staged interpreters in rust</title>
+    <published>2017-11-22T00:00:00+00:00</published>
+    <updated>2017-11-22T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/staged-interpreters-in-rust/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/staged-interpreters-in-rust/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/staged-interpreters-in-rust/">Staged interpreters in rust</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Contrast codes are an implementation detail</title>
+    <published>2017-11-21T00:00:00+00:00</published>
+    <updated>2017-11-21T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/contrast-coding-is-an-implementation-detail/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/contrast-coding-is-an-implementation-detail/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/contrast-coding-is-an-implementation-detail/">Contrast codes are an implementation detail</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>A UI library for a relational language</title>
+    <published>2017-07-28T00:00:00+00:00</published>
+    <updated>2017-07-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/relational-ui/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/relational-ui/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/relational-ui/">A UI library for a relational language</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Decision points and utility</title>
+    <published>2017-07-08T00:00:00+00:00</published>
+    <updated>2017-07-08T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/decision-points-and-utility/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/decision-points-and-utility/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/decision-points-and-utility/">Decision points and utility</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Monolog</title>
+    <published>2017-03-16T00:00:00+00:00</published>
+    <updated>2017-03-16T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/monolog/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/monolog/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/monolog/">Monolog</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Quick and dirty review of Psychology of Programming Interest Group 1989-2015</title>
+    <published>2016-11-17T00:00:00+00:00</published>
+    <updated>2016-11-17T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/qnd-review-of-ppig-1989-2015/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/qnd-review-of-ppig-1989-2015/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/qnd-review-of-ppig-1989-2015/">Quick and dirty review of Psychology of Programming Interest Group 1989-2015</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Vive experiments</title>
+    <published>2016-10-28T00:00:00+00:00</published>
+    <updated>2016-10-28T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/vive-experiments/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/vive-experiments/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/vive-experiments/">Vive experiments</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>A practical relational query compiler in 500 lines of code</title>
+    <published>2016-10-11T00:00:00+00:00</published>
+    <updated>2016-10-11T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/a-practical-relational-query-compiler-in-500-lines/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/a-practical-relational-query-compiler-in-500-lines/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/a-practical-relational-query-compiler-in-500-lines/">A practical relational query compiler in 500 lines of code</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Complexity budgets</title>
+    <published>2015-10-25T00:00:00+00:00</published>
+    <updated>2015-10-25T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/complexity-budgets/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/complexity-budgets/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/complexity-budgets/">Complexity budgets</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Three months of rust</title>
+    <published>2015-06-04T00:00:00+00:00</published>
+    <updated>2015-06-04T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/three-months-of-rust/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/three-months-of-rust/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/three-months-of-rust/">Three months of rust</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Scaling down</title>
+    <published>2015-02-09T00:00:00+00:00</published>
+    <updated>2015-02-09T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/scaling-down/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/scaling-down/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/scaling-down/">Scaling down</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Imperative thinking and the making of sandwiches</title>
+    <published>2014-07-21T00:00:00+00:00</published>
+    <updated>2014-07-21T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/imperative-thinking-and-the-making-of-sandwiches/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/imperative-thinking-and-the-making-of-sandwiches/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/imperative-thinking-and-the-making-of-sandwiches/">Imperative thinking and the making of sandwiches</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Pain we forgot</title>
+    <published>2014-05-17T00:00:00+00:00</published>
+    <updated>2014-05-17T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/pain-we-forgot/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/pain-we-forgot/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/pain-we-forgot/">Pain we forgot</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Local state is harmful</title>
+    <published>2014-02-17T00:00:00+00:00</published>
+    <updated>2014-02-17T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/local-state-is-harmful/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/local-state-is-harmful/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/local-state-is-harmful/">Local state is harmful</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Search trees and core.logic</title>
+    <published>2012-12-19T00:00:00+00:00</published>
+    <updated>2012-12-19T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/search-trees-and-core-dot-logic/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/search-trees-and-core-dot-logic/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/search-trees-and-core-dot-logic/">Search trees and core.logic</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Strucjure: motivation</title>
+    <published>2012-12-04T00:00:00+00:00</published>
+    <updated>2012-12-04T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/strucjure-motivation/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/strucjure-motivation/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/strucjure-motivation/">Strucjure: motivation</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Causal ordering</title>
+    <published>2012-08-16T00:00:00+00:00</published>
+    <updated>2012-08-16T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/causal-ordering/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/causal-ordering/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/causal-ordering/">Causal ordering</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Optimising texsearch</title>
+    <published>2010-12-08T00:00:00+00:00</published>
+    <updated>2010-12-08T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/optimising-texsearch/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/optimising-texsearch/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/optimising-texsearch/">Optimising texsearch</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Design and analysis of a gossip algorithm</title>
+    <published>2010-09-04T00:00:00+00:00</published>
+    <updated>2010-09-04T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/design-and-analysis-of-a-gossip-algorithm/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/design-and-analysis-of-a-gossip-algorithm/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/design-and-analysis-of-a-gossip-algorithm/">Design and analysis of a gossip algorithm</a></content>
+  </entry>
+  <entry xml:lang="en">
+    <title>Examining scampy</title>
+    <published>2010-05-19T00:00:00+00:00</published>
+    <updated>2010-05-19T00:00:00+00:00</updated>
+    <link href="https://www.scattered-thoughts.net/writing/examining-scampy/" type="text/html" rel="alternate"/>
+    <id>https://www.scattered-thoughts.net/writing/examining-scampy/</id>
+    <content type="text/html"><a href="https://www.scattered-thoughts.net/writing/examining-scampy/">Examining scampy</a></content>
+  </entry>
+</feed>

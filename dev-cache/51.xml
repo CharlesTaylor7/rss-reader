@@ -1,0 +1,1427 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+  <title>Brane Dump</title>
+  <link href="//www.hezmatt.org/~mpalmer/blog/"/>
+  <link type="application/atom+xml" rel="self" href="//www.hezmatt.org/~mpalmer/blog/atom.xml"/>
+  <updated>2024-07-31T15:37:32+10:00</updated>
+  <id>//www.hezmatt.org/~mpalmer/blog/</id>
+  <author>
+    <name>Matt Palmer</name>
+    <email>mpalmer@hezmatt.org</email>
+  </author>
+
+  
+  <entry>
+    <id>//www.hezmatt.org/~mpalmer/blog/2024/07/31/healthcare-company-sues-to-stop-certificate-revocation</id>
+    <link type="text/html" rel="alternate" href="//www.hezmatt.org/~mpalmer/blog/2024/07/31/healthcare-company-sues-to-stop-certificate-revocation.html"/>
+    <title>Health Industry Company Sues to Prevent Certificate Revocation</title>
+    <updated>2024-07-31T00:00:00+10:00</updated>
+    <author>
+      <name>Matt Palmer</name>
+      <uri>//www.hezmatt.org/~mpalmer/blog/</uri>
+      <email>mpalmer@hezmatt.org</email>
+    </author>
+    <content type="html">&lt;p&gt;It’s not often that a company is willing to make &lt;a href=&quot;https://storage.courtlistener.com/recap/gov.uscourts.utd.149707/gov.uscourts.utd.149707.1.0.pdf&quot;&gt;a sworn statement to a court about how its IT practices are incompatible with the needs of the Internet&lt;/a&gt;, but when they do… it’s popcorn time.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-combatants&quot;&gt;The Combatants&lt;/h1&gt;
+
+&lt;p&gt;In the red corner, weighing in at… nah, I’m not going to do that schtick.&lt;/p&gt;
+
+&lt;p&gt;The plaintiff in &lt;a href=&quot;https://www.courtlistener.com/docket/68995396/alegeus-technologies-llc-v-digicert/&quot;&gt;the case&lt;/a&gt; is &lt;a href=&quot;https://www.alegeus.com/&quot;&gt;Alegeus Technologies, LLC&lt;/a&gt;, a Delaware Corporation that, according to their filings, “is a leading provider of a business-tobusiness, white-label funding and payment platform for healthcare carriers and third-party administrators to administer consumer-directed employee benefit programs”.
+Not being subject to the US’ bonkers health care system, I have only a passing familiarity with the sorts of things they do, but presumably it involves moving a lot of money around, which is sometimes important.&lt;/p&gt;
+
+&lt;p&gt;The defendant is &lt;a href=&quot;https://www.digicert.com/&quot;&gt;DigiCert&lt;/a&gt;, a CA which, based on &lt;a href=&quot;https://www.hezmatt.org/~mpalmer/blog/2024/01/30/why-certificate-automation-matters.html&quot;&gt;analysis I’ve done previously&lt;/a&gt;, is the second-largest issuer of WebPKI certificates by volume.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-history&quot;&gt;The History&lt;/h1&gt;
+
+&lt;p&gt;According to &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1910322&quot;&gt;a recently opened Mozilla CA bug&lt;/a&gt;, DigiCert found an issue in their “domain control validation” workflow, that meant it may have been possible for a miscreant to have &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1910322#c10&quot;&gt;certificates issued to them that they weren’t legitimately entitled to&lt;/a&gt;.
+Given that validating domain names is basically the “YOU HAD ONE JOB!” of a CA, this is a big deal.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://cabforum.org/working-groups/server/baseline-requirements/documents/CA-Browser-Forum-TLS-BR-2.0.5.pdf&quot;&gt;CA/Browser Forum Baseline Requirements&lt;/a&gt; (BRs) (which all CAs are required to adhere to, by virtue of their being included in various browser and OS trust stores), say that revocation is required within 24 hours when “[t]he CA obtains evidence that the validation of domain authorization or control for any Fully‐Qualified Domain Name or IP address in the Certificate should not be relied upon” (section 4.9.1.1, point 5).&lt;/p&gt;
+
+&lt;p&gt;DigiCert appears to have at least &lt;em&gt;tried&lt;/em&gt; to do the right thing, by opening the above Mozilla bug giving some details of the problem, and notifying their customers that their certificates were going to be revoked.
+One may quibble about how fast they’re doing it, but they’re giving it a decent shot, at least.&lt;/p&gt;
+
+&lt;p&gt;A complicating factor in all this is that, only a touch over a month ago, &lt;a href=&quot;https://security.googleblog.com/2024/06/sustaining-digital-certificate-security.html&quot;&gt;Google Chrome announced the removal of another CA, Entrust, from its own trust store program&lt;/a&gt;, citing “a pattern of compliance failures, unmet improvement commitments, and the absence of tangible, measurable progress in response to publicly disclosed incident reports”.
+Many of these compliance failures were failures to revoke certificates in a timely manner.
+One imagines that DigiCert would not like to gain a reputation for tardy revocation, particularly at the moment.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-legal-action&quot;&gt;The Legal Action&lt;/h1&gt;
+
+&lt;p&gt;Now we come to Alegeus Technologies.
+They’ve opened a civil case whose first action is to request the issuance of a Temporary Restraining Order (TRO) that prevents DigiCert from revoking certificates issued to Alegeus (which the court &lt;a href=&quot;https://storage.courtlistener.com/recap/gov.uscourts.utd.149707/gov.uscourts.utd.149707.3.0.pdf&quot;&gt;has issued&lt;/a&gt;).
+This is a big deal, because TROs are legal instruments that, if not obeyed, constitute contempt of court (or something similar) – and courts do &lt;em&gt;not&lt;/em&gt; like people who disregard their instructions.
+That means that, in the short term, those certificates aren’t getting revoked, despite the requirement imposed by root stores on DigiCert that the certificates &lt;em&gt;must&lt;/em&gt; be revoked.
+DigiCert is in a real “rock / hard place” situation here: revoke and get punished by the courts, or don’t revoke and potentially (though almost certainly not, in the circumstances) face removal from trust stores (which would kill, or at least massively hurt, their business).&lt;/p&gt;
+
+&lt;p&gt;The reasons that Alegeus gives for requesting the restraining order is that “[t]o
+Reissue and Reinstall the Security Certificates, Alegeus must work with and
+coordinate with its Clients, who are required to take steps to rectify the
+certificates. Alegeus has hundreds of such Clients. Alegeus is generally
+required by contract to give its clients much longer than 24 hours’ notice
+before executing such a change regarding certification.”&lt;/p&gt;
+
+&lt;p&gt;In the filing, Alegeus does acknowledge that “DigiCert is a voluntary member of the Certification Authority Browser Forum (CABF), which has bylaws stating that certificates with an issue in their domain validation must be revoked within 24 hours.”
+This is a misstatement of the facts, though.
+It is the BRs, not the CABF bylaws, that require revocation, and the BRs apply to all CAs that wish to be included in browser and OS trust stores, not just those that are members of the CABF.
+In any event, given that Alegeus was aware that DigiCert is required to revoke certificates within 24 hours, one wonders why Alegeus went ahead and signed agreements with their customers that required a lengthy notice period before changing certificates.&lt;/p&gt;
+
+&lt;p&gt;What complicates the situation is that there is apparently a &lt;a href=&quot;https://storage.courtlistener.com/recap/gov.uscourts.utd.149707/gov.uscourts.utd.149707.1.1.pdf&quot;&gt;Master Services Agreement&lt;/a&gt; (MSA) that states that it “constitutes the entire agreement between the parties” – and that MSA doesn’t mention certificate revocation anywhere relevant.
+That means that it’s not quite so cut-and-dried that DigiCert does, in fact, have the right to revoke those certificates.
+I’d expect a lot of “update to your Master Services Agreement” emails to be going out from DigiCert (and other CAs) in the near future to clarify this point.&lt;/p&gt;
+
+&lt;p&gt;Not being a lawyer, I can’t imagine which way this case might go, but there’s one thing we &lt;em&gt;can&lt;/em&gt; be sure of: some lawyers are going to able to afford that trip to a tropical paradise this year.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-security-issues&quot;&gt;The Security Issues&lt;/h1&gt;
+
+&lt;p&gt;The requirement for revocation within 24 hours is an important security control in the WebPKI ecosystem.
+If a certificate &lt;em&gt;is&lt;/em&gt; misissued to a malicious party, or is otherwise compromised, it needs to be marked as untrustworthy as soon as possible.
+While &lt;a href=&quot;https://www.hezmatt.org/~mpalmer/blog/2024/01/16/pwned-certificates-on-the-fediverse.html#why-dont-you-just-have-the-certificates-revoked&quot;&gt;revocation is far from perfect&lt;/a&gt;, it is the best tool we have.&lt;/p&gt;
+
+&lt;p&gt;In this court filing, Alegeus has claimed that they are unable to switch certificates with less than 24 hours notice (due to “contractual SLAs”).
+This is a pretty big problem, because there are lots of reasons why a certificate might need to be switched out Very Quickly.
+As a practical example, &lt;a href=&quot;https://www.hezmatt.org/~mpalmer/blog/2023/06/12/private-key-redaction-redux.html&quot;&gt;someone with access to the private key for your SSL certificate might decide to use it in a blog post&lt;/a&gt;.
+Letting that sort of problem linger for an extended period of time might end up being a Pretty Big Problem of its own.
+An organisation that cannot respond within hours to a compromised certificate is playing chicken with their security.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-takeaways&quot;&gt;The Takeaways&lt;/h1&gt;
+
+&lt;p&gt;Contractual obligations that require you to notify anyone else of a certificate (or private key) changing are bonkers, and completely antithetical to the needs of the WebPKI.
+If you have to have them, you’re going to want to start transitioning to a private PKI, wherein you can do whatever you darn well please with revocation (or not).
+As these sorts of problems keep happening, trust stores (and hence CAs) are going to crack down on this sort of thing, so you may as well move sooner rather than later.&lt;/p&gt;
+
+&lt;p&gt;If you are an organisation that uses WebPKI certificates, you’ve &lt;em&gt;got&lt;/em&gt; to be able to deal with any kind of certificate revocation event within hours, not days.
+This basically boils down to &lt;a href=&quot;https://www.hezmatt.org/~mpalmer/blog/2024/01/30/why-certificate-automation-matters.html&quot;&gt;automated issuance and lifecycle management&lt;/a&gt;, because having someone manually request and install certificates is terrible on many levels.
+There isn’t currently a completed standard for notifying subscribers if their certificates need premature renewal (say, due to needing to be revoked), but the &lt;a href=&quot;https://datatracker.ietf.org/doc/draft-ietf-acme-ari/&quot;&gt;ACME Renewal Information Extension&lt;/a&gt; is currently being developed to fill that need.
+Ask your CA if they’re tracking this standards development, and when they intend to have the extension available for use.
+(Pro-tip: if they say “we’ll start doing development when the RFC is published”, run for the hills; that’s not how responsible organisations work on the Internet).&lt;/p&gt;
+
+&lt;h1 id=&quot;the-givings&quot;&gt;The Givings&lt;/h1&gt;
+
+&lt;p&gt;If you’ve found this helpful, consider &lt;a href=&quot;https://ko-fi.com/tobermorytech&quot;&gt;shouting me a refreshing beverage&lt;/a&gt;.
+Reading through legal filings is thirsty work!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>//www.hezmatt.org/~mpalmer/blog/2024/06/28/easy-compromised-key-checking</id>
+    <link type="text/html" rel="alternate" href="//www.hezmatt.org/~mpalmer/blog/2024/06/28/easy-compromised-key-checking.html"/>
+    <title>Checking for Compromised Private Keys has Never Been Easier</title>
+    <updated>2024-06-28T00:00:00+10:00</updated>
+    <author>
+      <name>Matt Palmer</name>
+      <uri>//www.hezmatt.org/~mpalmer/blog/</uri>
+      <email>mpalmer@hezmatt.org</email>
+    </author>
+    <content type="html">&lt;p&gt;As regular readers would know, since I never stop banging on about it, I run &lt;a href=&quot;https://pwnedkeys.com&quot;&gt;Pwnedkeys&lt;/a&gt;, a service which finds and collates private keys which have been disclosed or are otherwise compromised.
+Until now, the only way to check if a key is compromised has been to use &lt;a href=&quot;https://pwnedkeys.com/api/v1&quot;&gt;the Pwnedkeys API&lt;/a&gt;, which is not necessarily trivial for everyone.&lt;/p&gt;
+
+&lt;p&gt;Starting today, that’s changing.&lt;/p&gt;
+
+&lt;p&gt;The next phase of Pwnedkeys is to start offering more user-friendly tools for checking whether keys being used are compromised.
+These will typically be web-based or command-line tools intended to answer the question “is the key in this (certificate, CSR, &lt;code&gt;authorized_keys&lt;/code&gt; file, TLS connection, email, etc) known to Pwnedkeys to have been compromised?”.&lt;/p&gt;
+
+&lt;h1 id=&quot;opening-the-toolbox&quot;&gt;Opening the Toolbox&lt;/h1&gt;
+
+&lt;p&gt;Available right now are the first &lt;a href=&quot;https://pwnedkeys.com/tools&quot;&gt;web-based key checking tools&lt;/a&gt; in this arsenal.
+These tools allow you to:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Check the key in a PEM-format X509 data structure (such as a CSR or certificate);&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Check the keys in an &lt;code&gt;authorized_keys&lt;/code&gt; file you upload; and&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Check the SSH keys used by a user at any one of a number of widely-used code-hosting sites.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Further planned tools include “live” checking of the certificates presented in TLS connections (for HTTPS, etc), SSH host keys, command-line utilities for checking local &lt;code&gt;authorized_keys&lt;/code&gt; files, and many other goodies.&lt;/p&gt;
+
+&lt;h1 id=&quot;if-you-are-intrigued-by-my-ideas&quot;&gt;If You Are Intrigued By My Ideas…&lt;/h1&gt;
+
+&lt;p&gt;… and wish to subscribe to my newsletter, now you can!&lt;/p&gt;
+
+&lt;p&gt;I’m not going to be blogging every little update to Pwnedkeys, because that would probably get a bit tedious for readers who aren’t as intrigued by compromised keys as I am.
+Instead, I’ll be posting every little update in &lt;a href=&quot;https://pwnedkeys.com/newsletter/subscribe&quot;&gt;the Pwnedkeys newsletter&lt;/a&gt;.
+So, if you want to keep up-to-date with the latest and greatest news and information, &lt;a href=&quot;https://pwnedkeys.com/newsletter/subscribe&quot;&gt;subscribe to the newsletter&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;supporting-pwnedkeys&quot;&gt;Supporting Pwnedkeys&lt;/h1&gt;
+
+&lt;p&gt;All this work I’m doing on my own time, and I’m paying for the infrastructure from my own pocket.
+If you’ve got a few dollars to spare, I’d really appreciate it if you &lt;a href=&quot;https://ko-fi.com/tobermorytech&quot;&gt;bought me a refreshing beverage&lt;/a&gt;.
+It helps keep the lights on here at Pwnedkeys Global HQ.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>//www.hezmatt.org/~mpalmer/blog/2024/06/14/information-security-we-can-do-it-right-we-choose-not-to</id>
+    <link type="text/html" rel="alternate" href="//www.hezmatt.org/~mpalmer/blog/2024/06/14/information-security-we-can-do-it-right-we-choose-not-to.html"/>
+    <title>Information Security: "We Can Do It, We Just Choose Not To"</title>
+    <updated>2024-06-14T00:00:00+10:00</updated>
+    <author>
+      <name>Matt Palmer</name>
+      <uri>//www.hezmatt.org/~mpalmer/blog/</uri>
+      <email>mpalmer@hezmatt.org</email>
+    </author>
+    <content type="html">&lt;p&gt;Whenever a large corporation disgorges the personal information of millions of people onto the Internet, there is a standard playbook that is followed.&lt;/p&gt;
+
+&lt;p&gt;“Security is our top priority”.&lt;/p&gt;
+
+&lt;p&gt;“Passwords were hashed”.&lt;/p&gt;
+
+&lt;p&gt;“No credit card numbers were disclosed”.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;record scratch&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s talk about that last one a bit.&lt;/p&gt;
+
+&lt;h1 id=&quot;a-case-study&quot;&gt;A Case Study&lt;/h1&gt;
+
+&lt;p&gt;This post could have been written any time in the past… well, decade or so, really.
+But the trigger for my sitting down and writing this post is the recent breach of wallet-finding and criminal-harassment-enablement platform Tile.
+As &lt;a href=&quot;https://www.engadget.com/a-hacker-obtained-tile-customers-personal-information-171632302.html&quot;&gt;reported by Engadget&lt;/a&gt;, a statement attributed to Life360 CEO Chris Hulls says&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The potentially impacted data consists of information such as names, addresses, email addresses, phone numbers, and Tile device identification numbers.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;But don’t worry though; even though your home address is now public information&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It does not include more sensitive information, such as credit card numbers&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Aaaaaand here is where I get salty.&lt;/p&gt;
+
+&lt;h1 id=&quot;why-credit-card-numbers-dont-matter&quot;&gt;Why Credit Card Numbers Don’t Matter&lt;/h1&gt;
+
+&lt;p&gt;Describing credit card numbers as “more sensitive information” is somewhere between disingenuous and a flat-out lie.
+It was probably included in the statement because it’s part of the standard playbook.
+Why is it part of the playbook, though?&lt;/p&gt;
+
+&lt;p&gt;Not being a disaster comms specialist, I can’t say for sure, but my hunch is that the post-breach playbook includes this line because (a) credit cards are less commonly breached these days (more on that later), and (b) it’s a way to &lt;em&gt;insinuate&lt;/em&gt; that “all your financial data is safe, no need to worry” without having to say that (because that statement would absolutely be a lie).&lt;/p&gt;
+
+&lt;p&gt;The thing that not nearly enough people realise about credit card numbers is:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;The credit card holder is not usually liable for most fraud done via credit card numbers; and&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In terms of actual, long-term damage to individuals, credit card fraud barely rates a mention.
+Identity fraud, Business Email Compromise, extortion, and all manner of other unpleasantness is far more damaging to individuals.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;why-credit-card-numbers-do-matter&quot;&gt;Why Credit Card Numbers Do Matter&lt;/h1&gt;
+
+&lt;p&gt;Losing credit card numbers in a data breach &lt;em&gt;is&lt;/em&gt; a huge deal – but not for the users of the breached platform.
+Instead, it’s a problem for &lt;em&gt;the company that got breached&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;See, going back some years now, there was a wave of &lt;em&gt;huge&lt;/em&gt; credit card data breaches.
+If you’ve been around a while, names like &lt;a href=&quot;https://www.nytimes.com/2017/05/23/business/target-security-breach-settlement.html&quot;&gt;Target&lt;/a&gt; and &lt;a href=&quot;https://www.csoonline.com/article/522898/malware-cybercrime-heartland-largest-data-breach-ever.html&quot;&gt;Heartland&lt;/a&gt; will bring back some memories.&lt;/p&gt;
+
+&lt;p&gt;Because these breaches cost issuing banks and card brands a lot of money, the Payment Card Industry Security Standards Council (PCI-SSC) and the rest of the ecosystem went full goblin mode.
+Now, if you lose credit card numbers in bulk, it will cost you big.
+Massive fines for breaches (typically levied by the card brands via the acquiring bank), increased transaction fees, and even the Credit Card Death Penalty (being banned from charging credit cards), are all &lt;em&gt;very&lt;/em&gt; big sticks.&lt;/p&gt;
+
+&lt;h1 id=&quot;now-comes-the-finding-out&quot;&gt;Now Comes the Finding Out&lt;/h1&gt;
+
+&lt;p&gt;In news that should not be surprising, when there are &lt;em&gt;actual&lt;/em&gt; consequences for failing to do something, companies take the problem seriously.
+Which is why “no credit card numbers were disclosed” is such an interesting statement.&lt;/p&gt;
+
+&lt;p&gt;Consider &lt;em&gt;why&lt;/em&gt; no credit card numbers were disclosed.
+It’s not that credit card numbers aren’t valuable to criminals – because they are.
+Instead, it’s because &lt;em&gt;the company took steps to properly secure the credit card data&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Next, you’ll start to consider why, if the credit card numbers were secured, why wasn’t the personal information that &lt;em&gt;did&lt;/em&gt; get disclosed similarly secured?
+Information that is far more damaging to the individuals to whom that information relates than credit card numbers.&lt;/p&gt;
+
+&lt;p&gt;The only logical answer is that it wasn’t deemed financially beneficial to the company to secure that data.
+The consequences of disclosure for that information isn’t felt by the company which was breached.
+Instead, it’s felt by the individuals who have to spend weeks of their life cleaning up from identity fraud committed against them.
+It’s felt by the victim of intimate partner violence whose new address is found in a data dump, letting their ex find them again.&lt;/p&gt;
+
+&lt;p&gt;Until there are real, &lt;em&gt;actual&lt;/em&gt; consequences for the companies which hemorrhage our personal data (preferably ones that have “percentage of global revenue” at the end), data breaches will continue to happen.
+Not because they’re inevitable – because as credit card numbers show, data &lt;em&gt;can&lt;/em&gt; be secured – but because there’s no incentive for companies to prevent our personal data from being handed over to whoever comes along.&lt;/p&gt;
+
+&lt;h1 id=&quot;support-my-salt&quot;&gt;Support my Salt&lt;/h1&gt;
+
+&lt;p&gt;My salty takes are powered by refreshing beverages.
+If you’d like to see more of the same, &lt;a href=&quot;https://ko-fi.com/tobermorytech&quot;&gt;buy me one&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>//www.hezmatt.org/~mpalmer/blog/2024/05/30/githubs-missing-tab</id>
+    <link type="text/html" rel="alternate" href="//www.hezmatt.org/~mpalmer/blog/2024/05/30/githubs-missing-tab.html"/>
+    <title>GitHub's Missing Tab</title>
+    <updated>2024-05-30T00:00:00+10:00</updated>
+    <author>
+      <name>Matt Palmer</name>
+      <uri>//www.hezmatt.org/~mpalmer/blog/</uri>
+      <email>mpalmer@hezmatt.org</email>
+    </author>
+    <content type="html">&lt;p&gt;Visit any GitHub project page, and the first thing you see is something that looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;images/github_as_is.png&quot; alt=&quot;screenshot of the GitHub repository page, showing the Code, Issues, and Pull Requests tabs&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;“Code”, that’s fairly innocuous, and it’s what we came here for.
+The “Issues” and “Pull Requests” tabs, with their count of open issues, might give us some sense of “how active” the project is, or perhaps “&lt;a href=&quot;https://www.hezmatt.org/~mpalmer/blog/2024/05/14/is-this-project-still-maintained.html&quot;&gt;how maintained&lt;/a&gt;”.
+Useful information for the casual visitor, undoubtedly.&lt;/p&gt;
+
+&lt;p&gt;However, there’s another user community that visits this page on the regular, and these same tabs mean something very different to them.&lt;/p&gt;
+
+&lt;p&gt;I’m talking about the maintainers (or, more commonly, maintain&lt;em&gt;er&lt;/em&gt;, singular).
+When they see those tabs, all they see is &lt;em&gt;work&lt;/em&gt;.
+The “Code” tab is irrelevant to them – they already have the code, and know it possibly better than they know their significant other(s) (if any).
+“Issues” and “Pull Requests” are just things that have to be done.&lt;/p&gt;
+
+&lt;p&gt;I know for myself, at least, that it is demoralising to look at a repository page and see nothing but work.
+I’d be surprised if it didn’t contribute in some small way to maintainers just noping the fudge out.&lt;/p&gt;
+
+&lt;h1 id=&quot;a-modest-proposal&quot;&gt;A Modest Proposal&lt;/h1&gt;
+
+&lt;p&gt;So, here’s my thought.  What if instead of the repo tabs looking like the above, they instead looked like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;images/github_extra_tab.png&quot; alt=&quot;modified screenshot of the GitHub repository page, showing a new Kudos tab, with a smiley face icon, between the Code and Issues tabs&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;My conception of this is that it would, essentially, be a kind of “yearbook”, that people who used and liked the software could scribble their thoughts on.
+With some fairly straightforward affordances elsewhere to encourage its use, it could be a powerful way to show maintainers that they are, in fact, valued and appreciated.&lt;/p&gt;
+
+&lt;p&gt;There are a number of software packages I’ve used recently, that I’d &lt;em&gt;really&lt;/em&gt; like to say a general “thanks, this is awesome!” to.
+However, I’m not about to make the Issues tab look even scarier by creating an “issue” to say thanks, and digging up an email address is often surprisingly difficult, and wouldn’t be a &lt;em&gt;public&lt;/em&gt; show of my gratitude, which I believe is a valuable part of the interaction.&lt;/p&gt;
+
+&lt;h1 id=&quot;you-cant-pay-your-rent-with-kudos&quot;&gt;You Can’t Pay Your Rent With Kudos&lt;/h1&gt;
+
+&lt;p&gt;Absolutely you cannot.
+A means of expressing appreciation in no way replaces the pressing need to figure out a way to allow open source developers to pay their rent.
+Conversely, however, the need to pay open source developers doesn’t remove the need to also show those people that their work is appreciated and valued by many people around the world.&lt;/p&gt;
+
+&lt;p&gt;Anyway, who knows a senior exec at GitHub?
+I’ve got an idea I’d like to run past them…&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>//www.hezmatt.org/~mpalmer/blog/2024/05/14/is-this-project-still-maintained</id>
+    <link type="text/html" rel="alternate" href="//www.hezmatt.org/~mpalmer/blog/2024/05/14/is-this-project-still-maintained.html"/>
+    <title>"Is This Project Still Maintained?"</title>
+    <updated>2024-05-14T00:00:00+10:00</updated>
+    <author>
+      <name>Matt Palmer</name>
+      <uri>//www.hezmatt.org/~mpalmer/blog/</uri>
+      <email>mpalmer@hezmatt.org</email>
+    </author>
+    <content type="html">&lt;p&gt;If you wander around a lot of open source repositories on the likes of GitHub, you’ll invariably stumble over repos that have an issue (or more than one!) with a title like the above.
+Sometimes sitting open and unloved, often with a comment or two from the maintainer and a bunch of “I’ll help out!” followups that never seemed to pan out.
+Very rarely, you’ll find one that has been closed, with a happy ending.&lt;/p&gt;
+
+&lt;p&gt;These issues always fascinate me, because they say a lot about what it means to “maintain” an open source project, the nature of succession (particularly in a &lt;a href=&quot;https://en.wikipedia.org/wiki/XZ_Utils_backdoor&quot;&gt;post-Jia Tan world&lt;/a&gt;), and the expectations of users and the impedence mismatch between maintainers, contributors, and users.
+I’ve also recently been thinking about pre-empting this sort of issue, and opening my own issue that answers the question before it’s even asked.&lt;/p&gt;
+
+&lt;h1 id=&quot;why-these-issues-are-created&quot;&gt;Why These Issues Are Created&lt;/h1&gt;
+
+&lt;p&gt;As both a producer and consumer of open source software, I completely understand the reasons someone might want to know whether a project is abandoned.
+It’s comforting to be able to believe that there’s someone “on the other end of the line”, and that if you have a problem, you can ask for help with a non-zero chance of someone answering you.
+There’s also a better chance that, if the maintainer is still interested in the software, that compatibility issues and at least show-stopper bugs might get fixed for you.&lt;/p&gt;
+
+&lt;p&gt;But often there’s more at play.
+There is a delusion that “maintained” open source software comes with entitlements – an expectation that your questions, bug reports, and feature requests will be attended to in some fashion.&lt;/p&gt;
+
+&lt;p&gt;This comes about, I think, in part because there are a &lt;em&gt;lot&lt;/em&gt; of open source projects that are energetically supported, where generous volunteers &lt;em&gt;do&lt;/em&gt; answer questions, fix reported bugs, and implement things that they don’t personally need, but which random Internet strangers ask for.
+If you’ve had that kind of user experience, it’s not surprising that you might start to expect it from all open source projects.&lt;/p&gt;
+
+&lt;p&gt;Of course, these wonders of cooperative collaboration are the exception, rather than the rule.
+In many (most?) cases, there is little practical difference between most projects that are “maintained” and those that are formally declared “unmaintained”.
+The contributors (or, most often, contributor – singular) are unlikely to have the time or inclination to respond to your questions in a timely and effective manner.
+If you find a problem with the software, you’re going to be paddling your own canoe, even if the maintainer swears that they’re still “maintaining” it.&lt;/p&gt;
+
+&lt;h1 id=&quot;a-thought-appears&quot;&gt;A Thought Appears&lt;/h1&gt;
+
+&lt;p&gt;With this in mind, I’ve been considering how to get ahead of the problem and answer the question for the software projects I’ve put out in the world.
+Nothing I’ve built has anything like what you’d call a “community”; most have never seen an external PR, or even an issue.
+The last commit date on them might be years ago.&lt;/p&gt;
+
+&lt;p&gt;By most measures, almost all of my repos look “unmaintained”.
+Yet, they don’t &lt;em&gt;feel&lt;/em&gt; unmaintained to me.
+I’m still using the code, sometimes as often as every day, and if something broke for me, I’d fix it.
+Anyone who needs the functionality I’ve developed can use the code, and be pretty confident that it’ll do what it says in the README.&lt;/p&gt;
+
+&lt;p&gt;I’m considering creating an issue in all my repos, titled “Is This Project Still Maintained?”, pinning it to the issues list, and pasting in something I’m starting to think of as “The Open Source Maintainer’s Manifesto”.&lt;/p&gt;
+
+&lt;p&gt;It goes something like this:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h2 id=&quot;is-this-project-still-maintained&quot;&gt;Is This Project Still Maintained?&lt;/h2&gt;
+
+  &lt;p&gt;Yes.  Maybe.  Actually, perhaps no.  Well, really, it depends on what you mean by “maintained”.&lt;/p&gt;
+
+  &lt;p&gt;I wrote the software in this repo for my own benefit – to solve the problems I had, when I had them.
+While I could have kept the software to myself, I instead released it publicly, under the terms of an open licence, with the hope that it might be useful to others, but with no guarantees of any kind.
+Thanks to the generosity of others, it costs me literally nothing for you to use, modify, and redistribute this project, so have at it!&lt;/p&gt;
+
+  &lt;h2 id=&quot;ok-whatever--what-about-maintenance&quot;&gt;OK, Whatever.  What About Maintenance?&lt;/h2&gt;
+
+  &lt;p&gt;In one sense, this software is “maintained”, and always will be.
+I fix the bugs that annoy me, I upgrade dependencies when not doing so causes me problems, and I add features that I need.
+To the degree that any on-going development is happening, it’s because I want that development to happen.&lt;/p&gt;
+
+  &lt;p&gt;However, if “maintained” to you means responses to questions, bug fixes, upgrades, or new features, you may be somewhat disappointed.
+That’s not “maintenance”, that’s “support”, and if you expect support, you’ll probably want to have a “&lt;a href=&quot;https://tobermorytech.com&quot;&gt;support contract&lt;/a&gt;”, where we come to an agreement where you pay me money, and I help you with the things you need help with.&lt;/p&gt;
+
+  &lt;h2 id=&quot;that-doesnt-sound-fair&quot;&gt;That Doesn’t Sound Fair!&lt;/h2&gt;
+
+  &lt;p&gt;If it makes you feel better, there are several things you &lt;em&gt;are&lt;/em&gt; entitled to:&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;The ability to use, study, modify, and redistribute the contents of this repository, under the terms stated in the applicable licence(s).&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;That any interactions you may have with myself, other contributors, and anyone else in this project’s spaces will be in line with the published Code of Conduct, and any transgressions of the Code of Conduct will be dealt with appropriately.&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;… actually, that’s it.&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;Things that you are not entitled to include an answer to your question, a fix for your bug, an implementation of your feature request, or a merge (or even review) of your pull request.
+Sometimes I may respond, either immediately or at some time long afterwards.
+You may luck out, and I’ll think “hmm, yeah, that’s an interesting thing” and I’ll work on it, but if I do that in any particular instance, it does not create an entitlement that I will continue to do so, or that I will ever do so again in the future.&lt;/p&gt;
+
+  &lt;h2 id=&quot;but-ive-found-a-huge-and-terrible-bug&quot;&gt;But… I’ve Found a Huge and Terrible Bug!&lt;/h2&gt;
+
+  &lt;p&gt;You have my full and complete sympathy.
+It’s reasonable to assume that I haven’t come across the same bug, or at least that it doesn’t bother me, otherwise I’d have fixed it for myself.&lt;/p&gt;
+
+  &lt;p&gt;Feel free to report it, if only to warn other people that there is a huge bug they might need to avoid (possibly by not using the software at all).
+Well-written bug reports are great contributions, and I appreciate the effort you’ve put in, but the work that you’ve done on your bug report still doesn’t create any entitlement on me to fix it.&lt;/p&gt;
+
+  &lt;p&gt;If you &lt;em&gt;really&lt;/em&gt; want that bug fixed, the source is available, and the licence gives you the right to modify it as you see fit.
+I encourage you to dig in and fix the bug.
+If you don’t have the necessary skills to do so yourself, you can get someone else to fix it – everyone has the same entitlements to use, study, modify, and redistribute as you do.&lt;/p&gt;
+
+  &lt;p&gt;You may also decide to pay me for a &lt;a href=&quot;https://tobermorytech.com&quot;&gt;support contract&lt;/a&gt;, and get the bug fixed that way.
+That gets the bug fixed for everyone, and gives you the bonus warm fuzzies of contributing to the digital commons, which is always nice.&lt;/p&gt;
+
+  &lt;h2 id=&quot;but-my-pr-is-a-gift&quot;&gt;But… My PR is a Gift!&lt;/h2&gt;
+
+  &lt;p&gt;If you take the time and effort to make a PR, you’re doing good work and I commend you for it.
+However, that doesn’t mean I’ll necessarily merge it into this repository, or even work with you to get it into a state suitable for merging.&lt;/p&gt;
+
+  &lt;p&gt;A PR is what is often called a “gift of work”.
+I’ll have to make sure that, at the very least, it doesn’t make anything actively &lt;em&gt;worse&lt;/em&gt;.
+That includes introducing bugs, or causing maintenance headaches in the future (which includes my getting irrationally angry at indenting, because I’m like that).
+Properly reviewing a PR takes me &lt;em&gt;at least&lt;/em&gt; as much time as it would take me to write it from scratch, in almost all cases.&lt;/p&gt;
+
+  &lt;p&gt;So, if your PR languishes, it might not be that it’s bad, or that the project is (dum dum dummmm!) “unmaintained”, but just that I don’t accept this particular gift of work at this particular time.&lt;/p&gt;
+
+  &lt;p&gt;Don’t forget that the terms of licence include permission to redistribute modified versions of the code I’ve released.
+If you think your PR is all that and a bag of potato chips, fork away!
+I won’t be offended if you decide to release a permanent fork of this software, as long as you comply with the terms of the licence(s) involved.&lt;/p&gt;
+
+  &lt;p&gt;(Note that I do &lt;em&gt;not&lt;/em&gt; undertake support contracts solely to review and merge PRs; that reeks a little too much of “pay to play” for my liking)&lt;/p&gt;
+
+  &lt;h2 id=&quot;gee-you-sound-like-an-asshole&quot;&gt;Gee, You Sound Like an Asshole&lt;/h2&gt;
+
+  &lt;p&gt;I prefer to think of myself as “forthright” and “plain-speaking”, but that brings to mind that third thing you’re entitled to: your opinion.&lt;/p&gt;
+
+  &lt;p&gt;I’ve written this out because I feel like clarifying the reality we’re living in, in the hope that it prevents misunderstandings.
+If what I’ve written makes you not want to use the software I’ve written, that’s fine – you’ve probably avoided future disappointment.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;opinions-sought&quot;&gt;Opinions Sought&lt;/h1&gt;
+
+&lt;p&gt;What do you think?
+Too harsh?
+Too wishy-washy?
+Comment away!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>//www.hezmatt.org/~mpalmer/blog/2024/05/01/the-mediocre-programmers-guide-to-rust</id>
+    <link type="text/html" rel="alternate" href="//www.hezmatt.org/~mpalmer/blog/2024/05/01/the-mediocre-programmers-guide-to-rust.html"/>
+    <title>The Mediocre Programmer's Guide to Rust</title>
+    <updated>2024-05-01T00:00:00+10:00</updated>
+    <author>
+      <name>Matt Palmer</name>
+      <uri>//www.hezmatt.org/~mpalmer/blog/</uri>
+      <email>mpalmer@hezmatt.org</email>
+    </author>
+    <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;Me: “Hi everyone, my name’s Matt, and I’m a mediocre programmer.”&lt;/em&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;em&gt;Everyone: “Hi, Matt.”&lt;/em&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;em&gt;Facilitator: “Are you an alcoholic, Matt?”&lt;/em&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;em&gt;Me: “No, not since I stopped reading Twitter.”&lt;/em&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;em&gt;Facilitator: “Then I think you’re in the wrong room.”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Yep, that’s my little secret – I’m a mediocre programmer.
+The definition of the word “hacker” I most closely align with is “someone who makes furniture with an axe”.
+I write simple, straightforward code because trying to understand complexity makes my head hurt.&lt;/p&gt;
+
+&lt;p&gt;Which is why I’ve always avoided the more “academic” languages, like OCaml, Haskell, Clojure, and so on.
+I know they’re good languages – people far smarter than me are building amazing things with them – but the time I hear the word “endofunctor”, I’ve lost all focus (and most of my will to live).
+My preferred languages are the ones that come with less intellectual overhead, like C, PHP, Python, and Ruby.&lt;/p&gt;
+
+&lt;p&gt;So it’s interesting that I’ve embraced Rust with significant vigour.
+It’s by far the most “complicated” language that I feel at least vaguely comfortable with using “in anger”.
+Part of that is that I’ve managed to assemble a set of principles that allow me to almost completely avoid arguing with Rust’s dreaded borrow checker, lifetimes, and all the rest of the dark, scary corners of the language.
+It’s also, I think, that Rust helps me to write better software, and I can &lt;em&gt;feel&lt;/em&gt; it helping me (almost) all of the time.&lt;/p&gt;
+
+&lt;p&gt;In the spirit of helping my fellow mediocre programmers to embrace Rust, I present the principles I’ve assembled so far.&lt;/p&gt;
+
+&lt;h1 id=&quot;neither-a-borrower-nor-a-lender-be&quot;&gt;Neither a Borrower Nor a Lender Be&lt;/h1&gt;
+
+&lt;p&gt;If you know anything about Rust, you probably know about the dreaded “&lt;a href=&quot;https://doc.rust-lang.org/stable/book/ch10-03-lifetime-syntax.html#the-borrow-checker&quot;&gt;borrow checker&lt;/a&gt;”.
+It’s the thing that makes sure you don’t have two pieces of code trying to modify the same data at the same time, or using a value when it’s no longer valid.&lt;/p&gt;
+
+&lt;p&gt;While Rust’s borrowing semantics allow excellent performance without compromising safety, for us mediocre programmers it gets very complicated, very quickly.
+So, the moment the compiler wants to start talking about “explicit lifetimes”, I shut it up by just using “owned” values instead.&lt;/p&gt;
+
+&lt;p&gt;It’s not that I &lt;em&gt;never&lt;/em&gt; borrow anything; I have some situations that I know are “borrow-safe” for the mediocre programmer (I’ll cover those later).
+But any time I’m not sure how things will pan out, I’ll go straight for an owned value.&lt;/p&gt;
+
+&lt;p&gt;For example, if I need to store some text in a &lt;code class=&quot;language-rust&quot;&gt;struct&lt;/code&gt; or &lt;code class=&quot;language-rust&quot;&gt;enum&lt;/code&gt;, it’s going straight into a &lt;a href=&quot;https://doc.rust-lang.org/stable/std/string/struct.String.html&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;String&lt;/code&gt;&lt;/a&gt;.
+I’m not going to start thinking about lifetimes and &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;&#39;a str&lt;/code&gt;; I’ll leave that for smarter people.
+Similarly, if I need a list of things, it’s a &lt;a href=&quot;https://doc.rust-lang.org/std/vec/struct.Vec.html&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;Vec&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; every time – no &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;&#39;b [T]&lt;/code&gt; in my structs, thank you very much.&lt;/p&gt;
+
+&lt;h1 id=&quot;attack-of-the-clones&quot;&gt;Attack of the Clones&lt;/h1&gt;
+
+&lt;p&gt;Following on from the above, I’ve come to not be afraid of &lt;a href=&quot;https://doc.rust-lang.org/std/clone/trait.Clone.html&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;.clone()&lt;/code&gt;&lt;/a&gt;.
+I scatter them around my code like seeds in a field.
+Life’s too short to spend time trying to figure out who’s borrowing what from whom, if I can just give everyone their own thing.&lt;/p&gt;
+
+&lt;p&gt;There are warnings in the Rust book (and everywhere else) about how &lt;a href=&quot;https://doc.rust-lang.org/stable/book/ch04-01-what-is-ownership.html#variables-and-data-interacting-with-clone&quot;&gt;a clone can be “expensive”&lt;/a&gt;.
+While it’s true that, yes, making clones of data structures consumes CPU cycles and memory, it very rarely matters.
+CPU cycles are (usually) plentiful and RAM (usually) relatively cheap.
+Mediocre programmer mental effort is expensive, and not to be spent on premature optimisation.
+Also, if you’re coming from most any other modern language, Rust is already giving you so much more performance that you’re probably ending up ahead of the game, even if you &lt;code class=&quot;language-rust&quot;&gt;.clone()&lt;/code&gt; everything in sight.&lt;/p&gt;
+
+&lt;p&gt;If, by some miracle, something I write gets so popular that the “expense” of all those spurious clones becomes a problem, it might make sense to pay someone much smarter than I to figure out how to make the program a zero-copy masterpiece of efficient code.
+Until then… clone early and clone often, I say!&lt;/p&gt;
+
+&lt;h1 id=&quot;derive-macros-are-powerful-magicks&quot;&gt;Derive Macros are Powerful Magicks&lt;/h1&gt;
+
+&lt;p&gt;If you start &lt;code class=&quot;language-rust&quot;&gt;.clone()&lt;/code&gt;ing everywhere, pretty quickly you’ll be hit with this error:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+error[E0599]: no method named `clone` found for struct `Foo` in the current scope
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;This is because not everything can be cloned, and so if you want &lt;em&gt;your&lt;/em&gt; thing to be cloned, you need to implement the method yourself.
+Well… sort of.&lt;/p&gt;
+
+&lt;p&gt;One of the things that I find absolutely outstanding about Rust is the “derive macro”.
+These allow you to put a little marker on a &lt;code class=&quot;language-rust&quot;&gt;struct&lt;/code&gt; or &lt;code class=&quot;language-rust&quot;&gt;enum&lt;/code&gt;, and the compiler will write a bunch of code for you!
+&lt;code class=&quot;language-rust&quot;&gt;Clone&lt;/code&gt; is one of the available so-called “&lt;a href=&quot;https://doc.rust-lang.org/book/appendix-03-derivable-traits.html&quot;&gt;derivable traits&lt;/a&gt;”, so you add &lt;code class=&quot;language-rust&quot;&gt;#[derive(Clone)]&lt;/code&gt; to your structs, and &lt;em&gt;poof!&lt;/em&gt; you can &lt;code class=&quot;language-rust&quot;&gt;.clone()&lt;/code&gt; to your heart’s content.&lt;/p&gt;
+
+&lt;p&gt;But there are other things that are commonly useful, and so I’ve got a set of traits that basically &lt;em&gt;all&lt;/em&gt; of my data structures derive:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+#[derive(Clone, Debug, Default)]
+struct Foo {
+    // ...
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Every time I write a &lt;code class=&quot;language-rust&quot;&gt;struct&lt;/code&gt; or &lt;code class=&quot;language-rust&quot;&gt;enum&lt;/code&gt; definition, that line &lt;code class=&quot;language-rust&quot;&gt;#[derive(Clone, Debug, Default)]&lt;/code&gt; goes at the top.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://doc.rust-lang.org/std/fmt/trait.Debug.html&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;Debug&lt;/code&gt; trait&lt;/a&gt; allows you to print a “debug” representation of the data structure, either with the &lt;a href=&quot;https://doc.rust-lang.org/std/macro.dbg.html&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;dbg!()&lt;/code&gt; macro&lt;/a&gt;, or via the &lt;code class=&quot;language-rust&quot;&gt;{:?}&lt;/code&gt; format in the &lt;a href=&quot;https://doc.rust-lang.org/std/macro.format.html&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;format!()&lt;/code&gt; macro&lt;/a&gt; (and anywhere else that takes a format string).
+Being able to say “what exactly &lt;em&gt;is&lt;/em&gt; that?” comes in handy so often, not having a &lt;code class=&quot;language-rust&quot;&gt;Debug&lt;/code&gt; implementation is like programming with one arm tied behind your Aeron.&lt;/p&gt;
+
+&lt;p&gt;Meanwhile, the &lt;a href=&quot;https://doc.rust-lang.org/std/default/trait.Default.html&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;Default&lt;/code&gt; trait&lt;/a&gt; lets you create an “empty” instance of your data structure, with all of the fields set to their own default values.
+This only works if all the fields themselves implement &lt;code class=&quot;language-rust&quot;&gt;Default&lt;/code&gt;, but &lt;a href=&quot;https://doc.rust-lang.org/std/default/trait.Default.html#implementors&quot;&gt;a lot of standard types do&lt;/a&gt;, so it’s rare that you’ll define a structure that can’t have an auto-derived &lt;code class=&quot;language-rust&quot;&gt;Default&lt;/code&gt;.
+Enums are easily handled too, you just mark one variant as the default:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+#[derive(Clone, Debug, Default)]
+enum Bar {
+    Something(String),
+    SomethingElse(i32),
+    #[default]   // &amp;lt;== mischief managed
+    Nothing,
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;h1 id=&quot;borrowing-is-ok-sometimes&quot;&gt;Borrowing is OK, Sometimes&lt;/h1&gt;
+
+&lt;p&gt;While I previously said that I like and usually use owned values, there are a few situations where I &lt;em&gt;know&lt;/em&gt; I can borrow without angering the borrow checker gods, and so I’m comfortable doing it.&lt;/p&gt;
+
+&lt;p&gt;The first is when I need to pass a value into a function that only needs to take a little look at the value to decide what to do.
+For example, if I want to know whether any values in a &lt;code class=&quot;language-rust&quot;&gt;Vec&amp;lt;u32&amp;gt;&lt;/code&gt; are even, I &lt;em&gt;could&lt;/em&gt; pass in a Vec, like this:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+fn main() {
+    let numbers = vec![0u32, 1, 2, 3, 4, 5];
+
+    if has_evens(numbers) {
+        println!(&quot;EVENS!&quot;);
+    }
+}
+
+fn has_evens(numbers: Vec&amp;lt;u32&amp;gt;) -&amp;gt; bool {
+    numbers.iter().any(|n| n % 2 == 0)
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Howver, this gets ugly if I’m going to use &lt;code class=&quot;language-rust&quot;&gt;numbers&lt;/code&gt; later, like this:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+fn main() {
+    let numbers = vec![0u32, 1, 2, 3, 4, 5];
+
+    if has_evens(numbers) {
+        println!(&quot;EVENS!&quot;);
+    }
+
+    // Compiler complains about &quot;value borrowed here after move&quot;
+    println!(&quot;Sum: {}&quot;, numbers.iter().sum::&amp;lt;u32&amp;gt;());
+}
+
+fn has_evens(numbers: Vec&amp;lt;u32&amp;gt;) -&amp;gt; bool {
+    numbers.iter().any(|n| n % 2 == 0)
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Helpfully, the compiler will suggest I use my old standby, &lt;code class=&quot;language-rust&quot;&gt;.clone()&lt;/code&gt;, to fix this problem.
+But I &lt;em&gt;know&lt;/em&gt; that the borrow checker won’t have a problem with lending that &lt;code class=&quot;language-rust&quot;&gt;Vec&amp;lt;u32&amp;gt;&lt;/code&gt; into &lt;code class=&quot;language-rust&quot;&gt;has_evens()&lt;/code&gt; as a borrowed slice, &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;[u32]&lt;/code&gt;, like this:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+fn main() {
+    let numbers = vec![0u32, 1, 2, 3, 4, 5];
+
+    if has_evens(&amp;amp;numbers) {
+        println!(&quot;EVENS!&quot;);
+    }
+}
+
+fn has_evens(numbers: &amp;amp;[u32]) -&amp;gt; bool {
+    numbers.iter().any(|n| n % 2 == 0)
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;The general rule I’ve got is that if I can take advantage of &lt;a href=&quot;https://doc.rust-lang.org/reference/lifetime-elision.html&quot;&gt;lifetime elision&lt;/a&gt; (a fancy term meaning “the compiler can figure it out”), I’m &lt;em&gt;probably&lt;/em&gt; OK.
+In less fancy terms, as long as the compiler doesn’t tell me to put &lt;code class=&quot;language-rust&quot;&gt;&#39;a&lt;/code&gt; anywhere, I’m in the green.
+On the other hand, the moment the compiler starts using the words “explicit lifetime”, I nope the heck out of there and start cloning everything in sight.&lt;/p&gt;
+
+&lt;p&gt;Another example of using lifetime elision is when I’m returning the value of a field from a &lt;code class=&quot;language-rust&quot;&gt;struct&lt;/code&gt; or &lt;code class=&quot;language-rust&quot;&gt;enum&lt;/code&gt;.
+In that case, I can usually get away with returning a borrowed value, knowing that the caller will probably just be taking a peek at that value, and throwing it away before the struct itself goes out of scope.
+For example:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+struct Foo {
+    id: u32,
+    desc: String,
+}
+
+impl Foo {
+    fn description(&amp;amp;self) -&amp;gt; &amp;amp;str {
+        &amp;amp;self.desc
+    }
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Returning a reference from a &lt;em&gt;function&lt;/em&gt; is practically always a mortal sin for mediocre programmers, but returning one from a struct method is often OK.
+In the rare case that the caller &lt;em&gt;does&lt;/em&gt; want the reference I return to live for longer, they can always turn it into an owned value themselves, by calling &lt;code class=&quot;language-rust&quot;&gt;.to_owned()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;avoid-the-string-tangle&quot;&gt;Avoid the String Tangle&lt;/h1&gt;
+
+&lt;p&gt;Rust has a couple of different types for representing strings – &lt;code class=&quot;language-rust&quot;&gt;String&lt;/code&gt; and &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;str&lt;/code&gt; being the ones you see most often.
+There are good reasons for this, however it complicates method signatures when you just want to take some sort of “bunch of text”, and don’t care so much about the messy details.&lt;/p&gt;
+
+&lt;p&gt;For example, let’s say we have a function that wants to see if the length of the string is even.
+Using the logic that since we’re just taking a peek at the value passed in, our function might take a string reference, &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;str&lt;/code&gt;, like this:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+fn is_even_length(s: &amp;amp;str) -&amp;gt; bool {
+    s.len() % 2 == 0
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;That seems to work fine, until someone wants to check a formatted string:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+fn main() {
+    // The compiler complains about &quot;expected `&amp;amp;str`, found `String`&quot;
+    if is_even_length(format!(&quot;my string is {}&quot;, std::env::args().next().unwrap())) {
+        println!(&quot;Even length string&quot;);
+    }
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Since &lt;code class=&quot;language-rust&quot;&gt;format!&lt;/code&gt; returns an owned string, &lt;code class=&quot;language-rust&quot;&gt;String&lt;/code&gt;, rather than a string reference, &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;str&lt;/code&gt;, we’ve got a problem.
+Of course, it’s straightforward to turn the &lt;code class=&quot;language-rust&quot;&gt;String&lt;/code&gt; from &lt;code class=&quot;language-rust&quot;&gt;format!()&lt;/code&gt; into a &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;str&lt;/code&gt; (just prefix it with an &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;&lt;/code&gt;).
+But as mediocre programmers, we can’t be expected to remember which sort of string all our functions take and add &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;&lt;/code&gt; wherever it’s needed, and having to fix everything when the compiler complains is tedious.&lt;/p&gt;
+
+&lt;p&gt;The converse can also happen: a method that wants an owned &lt;code class=&quot;language-rust&quot;&gt;String&lt;/code&gt;, and we’ve got a &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;str&lt;/code&gt; (say, because we’re passing in a string literal, like &lt;code class=&quot;language-rust&quot;&gt;&quot;Hello, world!&quot;&lt;/code&gt;).
+In this case, we need to use one of the plethora of available “turn this into a &lt;code class=&quot;language-rust&quot;&gt;String&lt;/code&gt;” mechanisms (&lt;code class=&quot;language-rust&quot;&gt;.to_string()&lt;/code&gt;, &lt;code class=&quot;language-rust&quot;&gt;.to_owned()&lt;/code&gt;, &lt;code class=&quot;language-rust&quot;&gt;String::from()&lt;/code&gt;, and probably a few others I’ve forgotten), on the value before we pass it in, which gets ugly real fast.&lt;/p&gt;
+
+&lt;p&gt;For these reasons, I never take a &lt;code class=&quot;language-rust&quot;&gt;String&lt;/code&gt; &lt;em&gt;or&lt;/em&gt; an &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;str&lt;/code&gt; as an argument.
+Instead, I use the Power of Traits to let callers pass in anything that is, or can be turned into, a string.
+Let us have some examples.&lt;/p&gt;
+
+&lt;p&gt;First off, if I would normally use &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;str&lt;/code&gt; as the type, I instead use &lt;code class=&quot;language-rust&quot;&gt;impl AsRef&amp;lt;str&amp;gt;&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+fn is_even_length(s: impl AsRef&amp;lt;str&amp;gt;) -&amp;gt; bool {
+    s.as_ref().len() % 2 == 0
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Note that I had to throw in an extra &lt;code class=&quot;language-rust&quot;&gt;as_ref()&lt;/code&gt; call in there, but now I can call this with &lt;em&gt;either&lt;/em&gt; a &lt;code class=&quot;language-rust&quot;&gt;String&lt;/code&gt; or a &lt;code class=&quot;language-rust&quot;&gt;&amp;amp;str&lt;/code&gt; and get an answer.&lt;/p&gt;
+
+&lt;p&gt;Now, if I want to be given a &lt;code class=&quot;language-rust&quot;&gt;String&lt;/code&gt; (presumably because I plan on taking ownership of the value, say because I’m creating a new instance of a struct with it), I use &lt;code class=&quot;language-rust&quot;&gt;impl Into&amp;lt;String&amp;gt;&lt;/code&gt; as my type:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+struct Foo {
+    id: u32,
+    desc: String,
+}
+
+impl Foo {
+    fn new(id: u32, desc: impl Into&amp;lt;String&amp;gt;) -&amp;gt; Self {
+        Self { id, desc: desc.into() }
+    }
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;We have to call &lt;code class=&quot;language-rust&quot;&gt;.into()&lt;/code&gt; on our &lt;code class=&quot;language-rust&quot;&gt;desc&lt;/code&gt; argument, which makes the struct building a bit uglier, but I’d argue that’s a small price to pay for being able to call both &lt;code class=&quot;language-rust&quot;&gt;Foo::new(1, &quot;this is a thing&quot;)&lt;/code&gt; and &lt;code class=&quot;language-rust&quot;&gt;Foo::new(2, format!(&quot;This is a thing named {name}&quot;))&lt;/code&gt; without caring what sort of string is involved.&lt;/p&gt;
+
+&lt;h1 id=&quot;always-have-an-error-enum&quot;&gt;Always Have an &lt;code&gt;Error&lt;/code&gt; Enum&lt;/h1&gt;
+
+&lt;p&gt;Rust’s error handing mechanism (&lt;code class=&quot;language-rust&quot;&gt;Result&lt;/code&gt;s… &lt;em&gt;everywhere&lt;/em&gt;), along with the quality-of-life sugar surrounding it (like the short-circuit operator, &lt;code class=&quot;language-rust&quot;&gt;?&lt;/code&gt;), is a delightfully ergonomic approach to error handling.
+To make life easy for mediocre programmers, I recommend starting every project with an &lt;code class=&quot;language-rust&quot;&gt;Error&lt;/code&gt; enum, that derives &lt;a href=&quot;https://docs.rs/thiserror/latest/thiserror/&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;thiserror::Error&lt;/code&gt;&lt;/a&gt;, and using that in every method and function that returns a &lt;code class=&quot;language-rust&quot;&gt;Result&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;How you structure your &lt;code class=&quot;language-rust&quot;&gt;Error&lt;/code&gt; type from there is less cut-and-dried, but typically I’ll create a separate enum variant for each type of error I want to have a different description.
+With &lt;code class=&quot;language-rust&quot;&gt;thiserror&lt;/code&gt;, it’s easy to then attach those descriptions:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+#[derive(Clone, Debug, thiserror::Error)]
+enum Error {
+    #[error(&quot;{0} caught fire&quot;)]
+    Combustion(String),
+    #[error(&quot;{0} exploded&quot;)]
+    Explosion(String),
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;I also implement functions to create each error variant, because that allows me to do the &lt;code class=&quot;language-rust&quot;&gt;Into&amp;lt;String&amp;gt;&lt;/code&gt; trick, and can sometimes come in handy when creating errors from other places with &lt;code class=&quot;language-rust&quot;&gt;.map_err()&lt;/code&gt; (more on that later).
+For example, the &lt;code class=&quot;language-rust&quot;&gt;impl&lt;/code&gt; for the above &lt;code class=&quot;language-rust&quot;&gt;Error&lt;/code&gt; would probably be:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+impl Error {
+    fn combustion(desc: impl Into&amp;lt;String&amp;gt;) -&amp;gt; Self {
+        Self::Combustion(desc.into())
+    }
+
+    fn explosion(desc: impl Into&amp;lt;String&amp;gt;) -&amp;gt; Self {
+        Self::Explosion(desc.into())
+    }
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;It’s a tedious bit of boilerplate, and you can use the &lt;a href=&quot;https://docs.rs/thiserror-ext/latest/thiserror_ext/&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;thiserror-ext&lt;/code&gt; crate&lt;/a&gt;’s &lt;a href=&quot;https://docs.rs/thiserror-ext/latest/thiserror_ext/derive.Construct.html&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;thiserror_ext::Construct&lt;/code&gt; derive macro&lt;/a&gt; to do the hard work for you, if you like.
+It, too, knows all about the &lt;code class=&quot;language-rust&quot;&gt;Into&amp;lt;String&amp;gt;&lt;/code&gt; trick.&lt;/p&gt;
+
+&lt;h1 id=&quot;banish-maperr-well-mostly&quot;&gt;Banish &lt;code&gt;map_err&lt;/code&gt; (well, mostly)&lt;/h1&gt;
+
+&lt;p&gt;The newer mediocre programmer, who is just dipping their toe in the water of Rust, might write file handling code that looks like this:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+fn read_u32_from_file(name: impl AsRef&amp;lt;str&amp;gt;) -&amp;gt; Result&amp;lt;u32, Error&amp;gt; {
+    let mut f = File::open(name.as_ref())
+        .map_err(|e| Error::FileOpenError(name.as_ref().to_string(), e))?;
+
+    let mut buf = vec![0u8; 30];
+    f.read(&amp;amp;mut buf)
+        .map_err(|e| Error::ReadError(e))?;
+
+    String::from_utf8(buf)
+        .map_err(|e| Error::EncodingError(e))?
+        .parse::&amp;lt;u32&amp;gt;()
+        .map_err(|e| Error::ParseError(e))
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;This works great (or it probably does, I haven’t actually tested it), but there are a &lt;em&gt;lot&lt;/em&gt; of &lt;code class=&quot;language-rust&quot;&gt;.map_err()&lt;/code&gt; calls in there.
+They take up over half the function, in fact.
+With the power of the &lt;a href=&quot;https://dev-doc.rust-lang.org/beta/std/convert/trait.From.html&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;From&lt;/code&gt; trait&lt;/a&gt; and the magic of the &lt;code class=&quot;language-rust&quot;&gt;?&lt;/code&gt; operator, we can make this a lot tidier.&lt;/p&gt;
+
+&lt;p&gt;First off, assume we’ve written boilerplate error creation functions (or used &lt;a href=&quot;https://docs.rs/thiserror-ext/latest/thiserror_ext/derive.Construct.html&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;thiserror_ext::Construct&lt;/code&gt;&lt;/a&gt; to do it for us)).
+That allows us to simplify the file handling portion of the function a bit:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+fn read_u32_from_file(name: impl AsRef&amp;lt;str&amp;gt;) -&amp;gt; Result&amp;lt;u32, Error&amp;gt; {
+    let mut f = File::open(name.as_ref())
+        // We&#39;ve dropped the `.to_string()` out of here...
+        .map_err(|e| Error::file_open_error(name.as_ref(), e))?;
+
+    let mut buf = vec![0u8; 30];
+    f.read(&amp;amp;mut buf)
+        // ... and the explicit parameter passing out of here
+        .map_err(Error::read_error)?;
+
+    // ...
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;If that latter &lt;code class=&quot;language-rust&quot;&gt;.map_err()&lt;/code&gt; call looks weird, without the &lt;code class=&quot;language-rust&quot;&gt;|e|&lt;/code&gt; and such, it’s passing a function-as-closure, which just saves on a few characters typing.
+Just because we’re mediocre, doesn’t mean we’re not also lazy.&lt;/p&gt;
+
+&lt;p&gt;Next, if we implement the &lt;code class=&quot;language-rust&quot;&gt;From&lt;/code&gt; trait for the other two errors, we can make the string-handling lines &lt;em&gt;significantly&lt;/em&gt; cleaner.
+First, the trait impl:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+impl From&amp;lt;std::string::FromUtf8Error&amp;gt; for Error {
+    fn from(e: std::string::FromUtf8Error) -&amp;gt; Self {
+        Self::EncodingError(e)
+    }
+}
+
+impl From&amp;lt;std::num::ParseIntError&amp;gt; for Error {
+    fn from(e: std::num::ParseIntError) -&amp;gt; Self {
+        Self::ParseError(e)
+    }
+}
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;(Again, this is boilerplate that can be autogenerated, this time by adding a &lt;code class=&quot;language-rust&quot;&gt;#[from]&lt;/code&gt; tag to the variants you want a &lt;code class=&quot;language-rust&quot;&gt;From&lt;/code&gt; impl on, and &lt;code class=&quot;language-rust&quot;&gt;thiserror&lt;/code&gt; will take care of it for you)&lt;/p&gt;
+
+&lt;p&gt;In any event, no matter how you get the &lt;code class=&quot;language-rust&quot;&gt;From&lt;/code&gt; impls, once you have them, the string-handling code becomes practically error-handling-free:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code class=&quot;language-rust&quot;&gt;
+    Ok(
+        String::from_utf8(buf)?
+            .parse::&amp;lt;u32&amp;gt;()?
+    )
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-rust&quot;&gt;?&lt;/code&gt; operator will &lt;em&gt;automatically&lt;/em&gt; convert the error from the types returned from each method into the return error type, using &lt;code class=&quot;language-rust&quot;&gt;From&lt;/code&gt;.
+The only tiny downside to this is that the &lt;code class=&quot;language-rust&quot;&gt;?&lt;/code&gt; at the end strips the &lt;code class=&quot;language-rust&quot;&gt;Result&lt;/code&gt;, and so we’ve got to wrap the returned value in &lt;code class=&quot;language-rust&quot;&gt;Ok()&lt;/code&gt; to turn it back into a &lt;code class=&quot;language-rust&quot;&gt;Result&lt;/code&gt; for returning.
+But I think that’s a small price to pay for the removal of those &lt;code class=&quot;language-rust&quot;&gt;.map_err()&lt;/code&gt; calls.&lt;/p&gt;
+
+&lt;p&gt;In many cases, my coding process involves just putting a &lt;code&gt;?&lt;/code&gt; after every call that returns a &lt;code class=&quot;language-rust&quot;&gt;Result&lt;/code&gt;, and adding a new &lt;code class=&quot;language-rust&quot;&gt;Error&lt;/code&gt; variant whenever the compiler complains about not being able to convert some new error type.
+It’s practically zero effort – outstanding outcome for the mediocre programmer.&lt;/p&gt;
+
+&lt;h1 id=&quot;just-because-youre-mediocre-doesnt-mean-you-cant-get-better&quot;&gt;Just Because You’re Mediocre, Doesn’t Mean You Can’t Get Better&lt;/h1&gt;
+
+&lt;p&gt;To finish off, I’d like to point out that mediocrity doesn’t imply shoddy work, nor does it mean that you shouldn’t keep learning and improving your craft.
+One book that I’ve recently found &lt;em&gt;extremely&lt;/em&gt; helpful is &lt;a href=&quot;https://effective-rust.com/&quot;&gt;Effective Rust&lt;/a&gt;, by &lt;a href=&quot;https://lurklurk.org/&quot;&gt;David Drysdale&lt;/a&gt;.
+The author has very kindly put it up to read online, but buying a (paper or ebook) copy would no doubt be appreciated.&lt;/p&gt;
+
+&lt;p&gt;The thing about this book, for me, is that it is &lt;em&gt;very&lt;/em&gt; readable, even by us mediocre programmers.
+The sections are written in a way that really “clicked” with me.
+Some aspects of Rust that I’d had trouble understanding for a &lt;em&gt;long&lt;/em&gt; time – such as lifetimes and the borrow checker, and particularly lifetime elision – actually made sense after I’d read the appropriate sections.&lt;/p&gt;
+
+&lt;h1 id=&quot;finally-a-quick-beg&quot;&gt;Finally, a Quick Beg&lt;/h1&gt;
+
+&lt;p&gt;I’m currently subsisting on the kindness of strangers, so if you found something useful (or entertaining) in this post, why not &lt;a href=&quot;https://ko-fi.com/tobermorytech&quot;&gt;buy me a refreshing beverage&lt;/a&gt;?
+It helps to know that people like what I’m doing, and helps keep me from having to sell my soul to a private equity firm.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>//www.hezmatt.org/~mpalmer/blog/2024/04/09/how-i-tripped-over-the-debian-weak-keys-vuln</id>
+    <link type="text/html" rel="alternate" href="//www.hezmatt.org/~mpalmer/blog/2024/04/09/how-i-tripped-over-the-debian-weak-keys-vuln.html"/>
+    <title>How I Tripped Over the Debian Weak Keys Vulnerability</title>
+    <updated>2024-04-09T00:00:00+10:00</updated>
+    <author>
+      <name>Matt Palmer</name>
+      <uri>//www.hezmatt.org/~mpalmer/blog/</uri>
+      <email>mpalmer@hezmatt.org</email>
+    </author>
+    <content type="html">&lt;p&gt;&lt;em&gt;Those of you who haven’t been in IT for far, far too long might not know that next month will be the 16th(!) anniversary of the &lt;a href=&quot;https://security-tracker.debian.org/tracker/DSA-1571-1&quot;&gt;disclosure&lt;/a&gt; of what was, at the time, a fairly earth-shattering revelation: that for about 18 months, the Debian OpenSSL package was &lt;a href=&quot;https://security-tracker.debian.org/tracker/CVE-2008-0166&quot;&gt;generating entirely predictable private keys&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The recent &lt;a href=&quot;https://en.wikipedia.org/wiki/XZ_Utils_backdoor&quot;&gt;xz-stential threat&lt;/a&gt; (thanks to &lt;a href=&quot;https://infosec.exchange/@nixCraft@mastodon.social&quot;&gt;@nixCraft&lt;/a&gt; for &lt;a href=&quot;https://mastodon.social/@nixCraft/112219225728684695&quot;&gt;making me aware of that one&lt;/a&gt;), has got me thinking about my own serendipitous interaction with a major vulnerability.
+Given that the statute of limitations has (probably) run out, I thought I’d share it as a tale of how “huh, that’s weird” can be a powerful threat-hunting tool – but only if you’ve got the time to keep pulling at the thread.&lt;/p&gt;
+
+&lt;h1 id=&quot;prelude-to-an-adventure&quot;&gt;Prelude to an Adventure&lt;/h1&gt;
+
+&lt;p&gt;Our story begins back in March 2008.
+I was working at Engine Yard (EY), a now largely-forgotten Rails-focused hosting company, which pioneered several advances in Rails application deployment.
+Probably EY’s greatest claim to lasting fame is that they helped launch a little code hosting platform you might have heard of, by providing them free infrastructure when they were little more than a glimmer in the Internet’s eye.&lt;/p&gt;
+
+&lt;p&gt;I am, of course, talking about everyone’s favourite Microsoft product: GitHub.&lt;/p&gt;
+
+&lt;p&gt;Since GitHub was in the right place, at the right time, with a compelling product offering, they quickly started to gain traction, and grow their userbase.
+With growth comes challenges, amongst them the one we’re focusing on today: SSH login times.
+Then, as now, GitHub provided SSH access to the git repos they hosted, by SSHing to &lt;code&gt;git@github.com&lt;/code&gt; with publickey authentication.
+They were using the standard way that everyone manages SSH keys: the &lt;code&gt;~/.ssh/authorized_keys&lt;/code&gt; file, and that became a problem as the number of keys started to grow.&lt;/p&gt;
+
+&lt;p&gt;The way that SSH uses this file is that, when a user connects and asks for publickey authentication, SSH opens the &lt;code&gt;~/.ssh/authorized_keys&lt;/code&gt; file and scans all of the keys listed in it, looking for a key which matches the key that the user presented.
+This linear search is normally not a huge problem, because nobody in their right mind puts more than a few keys in their &lt;code&gt;~/.ssh/authorized_keys&lt;/code&gt;, right?&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;img src=&quot;images/2008_github_auth_keys_sideeye.jpg&quot; alt=&quot;2008-era GitHub giving monkey puppet side-eye to the idea that nobody stores many keys in an authorized_keys file&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Of course, as a popular, rapidly-growing service, GitHub was gaining users at a fair clip, to the point that the one big file that stored all the SSH keys was starting to visibly impact SSH login times.
+This problem was also not going to get any better by itself.
+Something Had To Be Done.&lt;/p&gt;
+
+&lt;p&gt;EY management was keen on making sure GitHub ran well, and so despite it not &lt;em&gt;really&lt;/em&gt; being a hosting problem, they were willing to help fix this problem.
+For some reason, the late, great, Ezra Zygmuntowitz pointed GitHub in my direction, and let me take the time to &lt;em&gt;really&lt;/em&gt; get into the problem with the GitHub team.
+After examining a variety of different possible solutions, we came to the conclusion that the least-worst option was to patch OpenSSH to lookup keys in a MySQL database, indexed on the key fingerprint.&lt;/p&gt;
+
+&lt;p&gt;We didn’t take this decision on a whim – it wasn’t a case of “yeah, sure, let’s just hack around with OpenSSH, what could possibly go wrong?”.
+We knew it was potentially catastrophic if things went sideways, so you can imagine how much worse the other options available were.
+Ensuring that this wouldn’t compromise security was a lot of the effort that went into the change.
+In the end, though, we rolled it out in early April, and lo! SSH logins were fast, and we were pretty sure we wouldn’t have to worry about this problem for a long time to come.&lt;/p&gt;
+
+&lt;p&gt;Normally, you’d think “patching OpenSSH to make mass SSH logins super fast” would be a good story on its own.
+But no, this is just the opening scene.&lt;/p&gt;
+
+&lt;h1 id=&quot;chekovs-gun-makes-its-appearance&quot;&gt;Chekov’s Gun Makes its Appearance&lt;/h1&gt;
+
+&lt;p&gt;Fast forward a little under a month, to the first few days of May 2008.
+I get a message from one of the GitHub team, saying that &lt;em&gt;somehow&lt;/em&gt; users were able to access other users’ repos over SSH.
+Naturally, as we’d recently rolled out the OpenSSH patch, which touched &lt;em&gt;this very thing&lt;/em&gt;, the code I’d written was suspect number one, so I was called in to help.&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;img src=&quot;images/the_usual_suspects.png&quot; alt=&quot;The lineup scene from the movie The Usual Suspects&quot; /&gt;
+&lt;figcaption&gt;
+  They&#39;re called The Usual Suspects for a reason, but sometimes, it really &lt;b&gt;is&lt;/b&gt; Keyser Söze
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Eventually, after more than a little debugging, we discovered that, somehow, there were two users with keys that had the same key fingerprint.
+This &lt;em&gt;absolutely&lt;/em&gt; shouldn’t happen – it’s a bit like winning the lottery twice in a row&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; – unless the users had somehow shared their keys with each other, of course.
+Still, it was worth investigating, just in case it was a web application bug, so the GitHub team reached out to the users impacted, to try and figure out what was going on.&lt;/p&gt;
+
+&lt;p&gt;The users professed no knowledge of each other, neither admitted to publicising their key, and couldn’t offer any explanation as to how the other person could possibly have gotten their key.&lt;/p&gt;
+
+&lt;p&gt;Then things went from “weird” to “what the…?”.
+Because &lt;em&gt;another&lt;/em&gt; pair of users showed up, sharing a key fingerprint – but it was a &lt;em&gt;different&lt;/em&gt; shared key fingerprint.
+The odds now have gone from “winning the lottery multiple times in a row” to as close to “this literally cannot happen” as makes no difference.&lt;/p&gt;
+
+&lt;figure&gt;
+&lt;img src=&quot;images/were_through_the_looking_glass.jpg&quot; alt=&quot;Milhouse from The Simpsons says that We&#39;re Through The Looking Glass Here, People&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Once we were really, &lt;em&gt;really&lt;/em&gt; confident that the OpenSSH patch wasn’t the cause of the problem, my involvement in the problem basically ended.
+I wasn’t a GitHub employee, and EY had plenty of other customers who needed my help, so I wasn’t able to stay deeply involved in the on-going investigation of The Mystery of the Duplicate Keys.&lt;/p&gt;
+
+&lt;p&gt;However, the GitHub team did keep talking to the users involved, and managed to determine the only apparent common factor was that all the users claimed to be using Debian or Ubuntu systems, which was where their SSH keys would have been generated.&lt;/p&gt;
+
+&lt;p&gt;That was as far as the investigation had really gotten, when along came May 13, 2008.&lt;/p&gt;
+
+&lt;h1 id=&quot;chekovs-gun-goes-off&quot;&gt;Chekov’s Gun Goes Off&lt;/h1&gt;
+
+&lt;p&gt;With the publication of &lt;a href=&quot;https://security-tracker.debian.org/tracker/DSA-1571-1&quot;&gt;DSA-1571-1&lt;/a&gt;, everything suddenly became clear.
+Through a well-meaning but ultimately disasterous cleanup of OpenSSL’s randomness generation code, the Debian maintainer had inadvertently reduced the number of possible keys that could be generated by a given user from “bazillions” to a little over 32,000.
+With so many people signing up to GitHub – some of them no doubt following best practice and freshly generating a separate key – it’s unsurprising that some collisions occurred.&lt;/p&gt;
+
+&lt;p&gt;You can imagine the sense of “oooooooh, so &lt;em&gt;that’s&lt;/em&gt; what’s going on!” that rippled out once the issue was understood.
+I was mostly glad that we had conclusive evidence that my OpenSSH patch wasn’t at fault, little knowing how much more contact I was to have with Debian weak keys in the future, running &lt;a href=&quot;https://pwnedkeys.com&quot;&gt;a huge store of known-compromised keys&lt;/a&gt; and using them to find &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1620772&quot;&gt;misbehaving Certificate Authorities&lt;/a&gt;, amongst other things.&lt;/p&gt;
+
+&lt;h1 id=&quot;lessons-learned&quot;&gt;Lessons Learned&lt;/h1&gt;
+
+&lt;p&gt;While I’ve not found a description of exactly when and how Luciano Bello discovered the vulnerability that became CVE-2008-0166, I presume he first came across it some time before it was disclosed – likely before GitHub tripped over it.
+The stable Debian release that included the vulnerable code had been released a year earlier, so there was plenty of time for Luciano to have discovered key collisions and go “hmm, I wonder what’s going on here?”, then keep digging until the solution presented itself.&lt;/p&gt;
+
+&lt;p&gt;The thought “hmm, that’s odd”, followed by intense investigation, leading to the discovery of a major flaw is also what ultimately brought down the recent XZ backdoor.
+The critical part of that sequence is the ability to &lt;em&gt;do&lt;/em&gt; that intense investigation, though.&lt;/p&gt;
+
+&lt;p&gt;When I reflect on my brush with the Debian weak keys vulnerability, what sticks out to me is the fact that I &lt;em&gt;didn’t&lt;/em&gt; do the deep investigation.
+I wonder if Luciano hadn’t found it, how long it might have been before it was found.
+The GitHub team would have continued investigating, presumably, and perhaps they (or I) would have eventually dug deep enough to find it.
+But we were all super busy – myself, working support tickets at EY, and GitHub feverishly building features and fighting the fires in their rapidly-growing service.&lt;/p&gt;
+
+&lt;p&gt;As it was, Luciano &lt;em&gt;was&lt;/em&gt; able to take the time to dig in and find out what was happening, but just like the XZ backdoor, I feel like we, as an industry, got a bit lucky that someone with the skills, time, and energy was on hand at the right time to make a huge difference.&lt;/p&gt;
+
+&lt;p&gt;It’s a luxury to be able to take the time to really dig into a problem, and it’s a luxury that most of us rarely have.
+Perhaps an understated takeaway is that somehow we all need to wrestle back some time to follow our hunches and really dig into the things that make us go “hmm…”.&lt;/p&gt;
+
+&lt;h1 id=&quot;support-my-hunches&quot;&gt;Support My Hunches&lt;/h1&gt;
+
+&lt;p&gt;If you’d like to help me be able to do intense investigations of mysterious software phenomena, you can &lt;a href=&quot;https://ko-fi.com/tobermorytech&quot;&gt;shout me a refreshing beverage on ko-fi&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;the odds are actually probably more like winning the lottery about twenty times in a row.
+The numbers involved are staggeringly huge, so it’s easiest to just approximate it as “really, &lt;em&gt;really&lt;/em&gt; unlikely”. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>//www.hezmatt.org/~mpalmer/blog/2024/02/13/not-all-tlds-are-created-equal</id>
+    <link type="text/html" rel="alternate" href="//www.hezmatt.org/~mpalmer/blog/2024/02/13/not-all-tlds-are-created-equal.html"/>
+    <title>Not all TLDs are Created Equal</title>
+    <updated>2024-02-13T00:00:00+11:00</updated>
+    <author>
+      <name>Matt Palmer</name>
+      <uri>//www.hezmatt.org/~mpalmer/blog/</uri>
+      <email>mpalmer@hezmatt.org</email>
+    </author>
+    <content type="html">&lt;p&gt;In light of the recent &lt;a href=&quot;https://akko.erincandescent.net/notice/AenvYJ0yiHfspKM8uW&quot;&gt;cancellation of the &lt;code&gt;queer.af&lt;/code&gt; domain registration by the Taliban&lt;/a&gt;, the fragile and difficult nature of country-code top-level domains (ccTLDs) has once again been comprehensively demonstrated.
+Since many people may not be aware of the risks, I thought I’d give a solid explainer of the whole situation, and explain why you should, in general, not have anything to do with domains which are registered under ccTLDs.&lt;/p&gt;
+
+&lt;h1 id=&quot;top-level-what-now&quot;&gt;Top-level What-Now?&lt;/h1&gt;
+
+&lt;p&gt;A top-level domain (TLD) is the last part of a domain name (the collection of words, separated by periods, after the &lt;code&gt;https://&lt;/code&gt; in your web browser’s location bar).
+It’s the “com” in &lt;code&gt;example.com&lt;/code&gt;, or the “af” in &lt;code&gt;queer.af&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;There are two kinds of TLDs: country-code TLDs (ccTLDs) and generic TLDs (gTLDs).
+Despite all being TLDs, they’re very different beasts under the hood.&lt;/p&gt;
+
+&lt;h1 id=&quot;whats-the-difference&quot;&gt;What’s the Difference?&lt;/h1&gt;
+
+&lt;p&gt;Generic TLDs are what most organisations and individuals register their domains under: old-school technobabble like “com”, “net”, or “org”, historical oddities like “gov”, and the new-fangled world of words like “tech”, “social”, and “bank”.
+These gTLDs are all regulated under a set of rules created and administered by ICANN (the “Internet Corporation for Assigned Names and Numbers”), which try to ensure that things aren’t a complete wild-west, limiting things like price hikes (well, sometimes, anyway), and providing means for disputes over names&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Country-code TLDs, in contrast, are all two letters long&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, and are given out to countries to do with as they please.
+While ICANN kinda-sorta has something to do with ccTLDs (in the sense that it makes them exist on the Internet), it has no authority to control how a ccTLD is managed.
+If a country decides to raise prices by 100x, or cancel all registrations that were made on the 12th of the month, there’s nothing anyone can do about it.&lt;/p&gt;
+
+&lt;p&gt;If that sounds bad, that’s because it is.
+Also, it’s not a theoretical problem – the Taliban deciding to asssert its bigotry over the little corner of the Internet namespace it has taken control of is far from the first time that ccTLDs have caused grief.&lt;/p&gt;
+
+&lt;h1 id=&quot;shifting-sands&quot;&gt;Shifting Sands&lt;/h1&gt;
+
+&lt;p&gt;The &lt;code&gt;queer.af&lt;/code&gt; cancellation is interesting because, at the time the domain was reportedly registered, 2018, Afghanistan had what one might describe as, at least, a &lt;em&gt;different&lt;/em&gt; political climate.
+Since then, of course, things have changed, and the new bosses have decided to get a bit more active.&lt;/p&gt;
+
+&lt;p&gt;Those running &lt;code&gt;queer.af&lt;/code&gt; seem to have seen the writing on the wall, and were planning on moving to another, less fraught, domain, but hadn’t completed that move when the Taliban came knocking.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-curious-case-of-brexit&quot;&gt;The Curious Case of Brexit&lt;/h1&gt;
+
+&lt;p&gt;When the United Kingdom decided to leave the European Union, it fell foul of the EU’s rules for the registration of domains under the “eu” ccTLD&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;.
+To register (and maintain) a domain name ending in &lt;code&gt;.eu&lt;/code&gt;, you have to be a resident of the EU.
+When the UK ceased to be part of the EU, residents of the UK were no longer EU residents.&lt;/p&gt;
+
+&lt;p&gt;Cue much unhappiness, wailing, and gnashing of teeth when this was pointed out to Britons.
+Some decided to give up their domains, and move to other parts of the Internet, while others managed to hold onto them by various legal sleight-of-hand (like having an EU company maintain the registration on their behalf).&lt;/p&gt;
+
+&lt;p&gt;In any event, all very unpleasant for everyone involved.&lt;/p&gt;
+
+&lt;h1 id=&quot;geopolitics-on-the-internet&quot;&gt;Geopolitics… on the Internet?!?&lt;/h1&gt;
+
+&lt;p&gt;After Russia invaded Ukraine in February 2022, the Ukranian Vice Prime Minister &lt;a href=&quot;https://eump.org/media/2022/Goran-Marby.pdf&quot;&gt;asked ICANN to suspend ccTLDs associated with Russia&lt;/a&gt;.
+While ICANN said that it wasn’t going to do that, because it wouldn’t do anything useful, some domain registrars (the companies you pay to register domain names) ceased to deal in Russian ccTLDs, and some websites restricted links to domains with Russian ccTLDs.&lt;/p&gt;
+
+&lt;p&gt;Whether or not you agree with the sort of activism implied by these actions, the fact remains that even the actions of a government that &lt;em&gt;aren’t&lt;/em&gt; directly related to the Internet can have grave consequences for your domain name if it’s registered under a ccTLD.
+I don’t &lt;em&gt;think&lt;/em&gt; any gTLD operator will be invading a neighbouring country any time soon.&lt;/p&gt;
+
+&lt;h1 id=&quot;money-money-money-must-be-funny&quot;&gt;Money, Money, Money, Must Be Funny&lt;/h1&gt;
+
+&lt;p&gt;When you register a domain name, you pay a registration fee to a registrar, who does administrative gubbins and causes you to be able to control the domain name in the DNS.
+However, you don’t “own” that domain name&lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; – you’re only &lt;em&gt;renting&lt;/em&gt; it.
+When the registration period comes to an end, you have to renew the domain name, or you’ll cease to be able to control it.&lt;/p&gt;
+
+&lt;p&gt;Given that a domain name is typically your “brand” or “identity” online, the chances are you’d prefer to keep it over time, because moving to a new domain name is a &lt;em&gt;massive&lt;/em&gt; pain, having to tell all your customers or users that now you’re somewhere else, plus having to accept the risk of someone registering the domain name you used to have and capturing your traffic… it’s all a gigantic hassle.&lt;/p&gt;
+
+&lt;p&gt;For gTLDs, ICANN has various rules around price increases and bait-and-switch pricing that tries to keep a lid on the worst excesses of registries.
+While there are any number of reasonable criticisms of the rules, and the Internet community has to stay on their toes to keep ICANN from &lt;a href=&quot;https://domainnamewire.com/2019/03/18/icann-proposes-lifting-price-controls-on-org-info-domains/&quot;&gt;totally succumbing to regulatory capture&lt;/a&gt;, at least in the gTLD space there’s some degree of control over price gouging.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, ccTLDs have no effective controls over their pricing.
+For example, in 2008 the Seychelles increased the price of &lt;code&gt;.sc&lt;/code&gt; domain names from &lt;a href=&quot;https://web.archive.org/web/20071113061947/http://www.afilias-grs.info:80/public/policies/sc&quot;&gt;US$25&lt;/a&gt; to &lt;a href=&quot;https://web.archive.org/web/20080308114828/http://www.afilias-grs.info:80/public/policies/sc&quot;&gt;US$75&lt;/a&gt;.  No reason, no warning, just “pay up”.&lt;/p&gt;
+
+&lt;h1 id=&quot;who-is-even-getting-that-money&quot;&gt;Who Is Even Getting That Money?&lt;/h1&gt;
+
+&lt;p&gt;A closely related concern about ccTLDs is that some of the “cool” ones are assigned to countries that are… not great.&lt;/p&gt;
+
+&lt;p&gt;The poster child for this is almost certainly Libya, which has the ccTLD “ly”.
+While Libya was being run by a &lt;a href=&quot;https://en.wikipedia.org/wiki/Muammar_Gaddafi&quot;&gt;terrorist-supporting extremist&lt;/a&gt;, companies thought it was a great idea to have domain names that ended in &lt;code&gt;.ly&lt;/code&gt;.
+These domain registrations weren’t (and aren’t) cheap, and it’s hard to imagine that at least some of that money wasn’t going to benefit the Gaddafi regime.&lt;/p&gt;
+
+&lt;p&gt;Similarly, the British Indian Ocean Territory, which has the “io” ccTLD, was created in a &lt;a href=&quot;https://theconversation.com/how-the-us-and-uk-worked-together-to-recolonise-the-chagos-islands-and-evict-chagossians-177636&quot;&gt;colonialist piece of chicanery that expelled thousands of native Chagossians from Diego Garcia&lt;/a&gt;.
+Money from the registration of &lt;code&gt;.io&lt;/code&gt; domains doesn’t go to the (former) residents of the Chagos islands, instead &lt;a href=&quot;https://web.archive.org/web/20200314085443/gigaom.com/2014/06/30/the-dark-side-of-io-how-the-u-k-is-making-web-domain-profits-from-a-shady-cold-war-land-deal/&quot;&gt;it gets paid to the UK government&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Again, I’m not trying to suggest that all gTLD operators are wonderful people, but it’s not particularly likely that the direct beneficiaries of the operation of a gTLD stole an island chain and evicted the residents.&lt;/p&gt;
+
+&lt;h1 id=&quot;are-cctlds-ever-useful&quot;&gt;Are ccTLDs Ever Useful?&lt;/h1&gt;
+
+&lt;p&gt;The answer to that question is an unqualified “maybe”.
+I certainly don’t think it’s a good idea to register a domain under a ccTLD for “vanity” purposes: because it makes a word, is the same as a file extension you like, or because it looks cool.&lt;/p&gt;
+
+&lt;p&gt;Those ccTLDs that clearly represent and are associated with a particular country are more likely to be OK, because there is less impetus for the registry to try a naked cash grab.
+Unfortunately, ccTLD registries have a disconcerting habit of changing their minds on whether they serve their geographic locality, such as when auDA decided to declare an open season in the &lt;code&gt;.au&lt;/code&gt; namespace some years ago.
+Essentially, while a ccTLD may have geographic connotations &lt;em&gt;now&lt;/em&gt;, there’s not a lot of guarantee that they won’t fall victim to scope creep in the future.&lt;/p&gt;
+
+&lt;p&gt;Finally, it &lt;em&gt;might&lt;/em&gt; be somewhat safer to register under a ccTLD if you live in the location involved.
+At least then you might have a better idea of whether your domain is likely to get pulled out from underneath you.
+Unfortunately, as the &lt;code&gt;.eu&lt;/code&gt; example shows, living somewhere today is no guarantee you’ll still be living there tomorrow, even if you don’t move house.&lt;/p&gt;
+
+&lt;p&gt;In short, I’d suggest sticking to gTLDs.
+They’re at least &lt;em&gt;lower&lt;/em&gt; risk than ccTLDs.&lt;/p&gt;
+
+&lt;h1 id=&quot;helpful&quot;&gt;“+1, Helpful”&lt;/h1&gt;
+
+&lt;p&gt;If you’ve found this post informative, why not &lt;a href=&quot;https://ko-fi.com/tobermorytech&quot;&gt;buy me a refreshing beverage&lt;/a&gt;?
+My typing fingers (both of them) thank you in advance for your generosity.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h2&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;don’t make the mistake of thinking that I approve of ICANN or how it operates; it’s an omnishambles of poor governance and incomprehensible decision-making. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;corresponding &lt;em&gt;roughly&lt;/em&gt;, though not precisely (because everything has to be complicated, because humans are complicated), to the entries in the ISO standard for “Codes for the representation of names of countries and their subdivisions”, ISO 3166. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;yes, the EU is not a country; it’s part of the “&lt;em&gt;roughly&lt;/em&gt;, though not precisely” caveat mentioned previously. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot;&gt;
+      &lt;p&gt;despite what domain registrars try very hard to imply, without falling foul of deceptive advertising regulations. &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>//www.hezmatt.org/~mpalmer/blog/2024/01/30/why-certificate-automation-matters</id>
+    <link type="text/html" rel="alternate" href="//www.hezmatt.org/~mpalmer/blog/2024/01/30/why-certificate-automation-matters.html"/>
+    <title>Why Certificate Lifecycle Automation Matters</title>
+    <updated>2024-01-30T00:00:00+11:00</updated>
+    <author>
+      <name>Matt Palmer</name>
+      <uri>//www.hezmatt.org/~mpalmer/blog/</uri>
+      <email>mpalmer@hezmatt.org</email>
+    </author>
+    <content type="html">&lt;p&gt;If you’ve perused the &lt;a href=&quot;https://botsin.space/@pwnedcerts&quot;&gt;ActivityPub feed of certificates whose keys are known to be compromised&lt;/a&gt;, and clicked on the “Show More” button to see the name of the certificate issuer, you may have noticed that some issuers seem to come up again and again.
+This might make sense – after all, if a CA is issuing a large volume of certificates, they’ll be seen more often in a list of compromised certificates.
+In an attempt to see if there is anything that we can learn from this data, though, I did a bit of digging, and came up with some illuminating results.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-procedure&quot;&gt;The Procedure&lt;/h1&gt;
+
+&lt;p&gt;I started off by finding all the unexpired certificates logged in &lt;a href=&quot;https://certificate.transparency.dev&quot;&gt;Certificate Transparency&lt;/a&gt; (CT) logs that have a key that is in the &lt;a href=&quot;https://pwnedkeys.com&quot;&gt;pwnedkeys&lt;/a&gt; database as having been publicly disclosed.
+From this list of certificates, I removed duplicates by matching up issuer/serial number tuples, and then reduced the set by counting the number of unique certificates by their issuer.&lt;/p&gt;
+
+&lt;p&gt;This gave me a list of the issuers of these certificates, which looks a bit like this:&lt;/p&gt;
+
+&lt;pre&gt;
+/C=BE/O=GlobalSign nv-sa/CN=AlphaSSL CA - SHA256 - G4
+/C=GB/ST=Greater Manchester/L=Salford/O=Sectigo Limited/CN=Sectigo RSA Domain Validation Secure Server CA
+/C=GB/ST=Greater Manchester/L=Salford/O=Sectigo Limited/CN=Sectigo RSA Organization Validation Secure Server CA
+/C=US/ST=Arizona/L=Scottsdale/O=GoDaddy.com, Inc./OU=http://certs.godaddy.com/repository//CN=Go Daddy Secure Certificate Authority - G2
+/C=US/ST=Arizona/L=Scottsdale/O=Starfield Technologies, Inc./OU=http://certs.starfieldtech.com/repository//CN=Starfield Secure Certificate Authority - G2
+/C=AT/O=ZeroSSL/CN=ZeroSSL RSA Domain Secure Site CA
+/C=BE/O=GlobalSign nv-sa/CN=GlobalSign GCC R3 DV TLS CA 2020
+&lt;/pre&gt;
+
+&lt;p&gt;Rather than try to work with raw issuers (because, as Andrew Ayer says, &lt;a href=&quot;https://www.agwa.name/blog/post/the_certificate_issuer_field_is_a_lie&quot;&gt;The SSL Certificate Issuer Field is a Lie&lt;/a&gt;), I mapped these issuers to the organisations that manage them, and summed the counts for those grouped issuers together.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-data&quot;&gt;The Data&lt;/h1&gt;
+
+&lt;figure&gt;
+&lt;img src=&quot;images/raw_data.jpg&quot; alt=&quot;Lieutenant Commander Data from Star Trek: The Next Generation&quot; /&gt;
+&lt;figcaption&gt;
+  Insert obligatory &quot;not THAT data&quot; comment here
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The end result of this work is the following table, sorted by the count of certificates which have been compromised by exposing their private key:&lt;/p&gt;
+
+&lt;table class=&quot;tabular&quot;&gt;
+&lt;tr&gt;&lt;th&gt;Issuer&lt;/th&gt;&lt;th&gt;Compromised Count&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Sectigo&lt;/td&gt;&lt;td&gt;170&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;ISRG (Let&#39;s Encrypt)&lt;/td&gt;&lt;td&gt;161&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GoDaddy&lt;/td&gt;&lt;td&gt;141&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;DigiCert&lt;/td&gt;&lt;td&gt;81&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GlobalSign&lt;/td&gt;&lt;td&gt;46&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Entrust&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;SSL.com&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;If you’re familiar with the CA ecosystem, you’ll probably recognise that the organisations with large numbers of compromised certificates are also those who issue a lot of certificates.
+So far, nothing particularly surprising, then.&lt;/p&gt;
+
+&lt;p&gt;Let’s look more closely at the relationships, though, to see if we can get more useful insights.&lt;/p&gt;
+
+&lt;h1 id=&quot;volume-control&quot;&gt;Volume Control&lt;/h1&gt;
+
+&lt;p&gt;Using the &lt;a href=&quot;https://crt.sh/cert-populations&quot;&gt;issuance volume report from crt.sh&lt;/a&gt;, we can compare issuance volumes to compromise counts, to come up with a “compromise rate”.
+I’m using the “Unexpired Precertificates” colume from the issuance volume report, as I feel that’s the number that best matches the certificate population I’m examining to find compromised certificates.
+To maintain parity with the previous table, this one is still sorted by the count of certificates that have been compromised.&lt;/p&gt;
+
+&lt;table class=&quot;tabular&quot;&gt;
+&lt;tr&gt;&lt;th&gt;Issuer&lt;/th&gt;&lt;th&gt;Issuance Volume&lt;/th&gt;&lt;th&gt;Compromised Count&lt;/th&gt;&lt;th&gt;Compromise Rate&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Sectigo&lt;/td&gt;&lt;td&gt;88,323,068&lt;/td&gt;&lt;td&gt;170&lt;/td&gt;&lt;td&gt;1 in 519,547&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;ISRG (Let&#39;s Encrypt)&lt;/td&gt;&lt;td&gt;315,476,402&lt;/td&gt;&lt;td&gt;161&lt;/td&gt;&lt;td&gt;1 in 1,959,480&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GoDaddy&lt;/td&gt;&lt;td&gt;56,121,429&lt;/td&gt;&lt;td&gt;141&lt;/td&gt;&lt;td&gt;1 in 398,024&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;DigiCert&lt;/td&gt;&lt;td&gt;144,713,475&lt;/td&gt;&lt;td&gt;81&lt;/td&gt;&lt;td&gt;1 in 1,786,586&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GlobalSign&lt;/td&gt;&lt;td&gt;1,438,485&lt;/td&gt;&lt;td&gt;46&lt;/td&gt;&lt;td&gt;1 in 31,271&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Entrust&lt;/td&gt;&lt;td&gt;23,166&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;1 in 7,722&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;SSL.com&lt;/td&gt;&lt;td&gt;171,816&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1 in 171,816&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;If we now sort this table by compromise rate, we can see which organisations have the most (and least) leakiness going on from their customers:&lt;/p&gt;
+
+&lt;table class=&quot;tabular&quot;&gt;
+&lt;tr&gt;&lt;th&gt;Issuer&lt;/th&gt;&lt;th&gt;Issuance Volume&lt;/th&gt;&lt;th&gt;Compromised Count&lt;/th&gt;&lt;th&gt;Compromise Rate&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Entrust&lt;/td&gt;&lt;td&gt;23,166&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;1 in 7,722&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GlobalSign&lt;/td&gt;&lt;td&gt;1,438,485&lt;/td&gt;&lt;td&gt;46&lt;/td&gt;&lt;td&gt;1 in 31,271&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;SSL.com&lt;/td&gt;&lt;td&gt;171,816&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1 in 171,816&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GoDaddy&lt;/td&gt;&lt;td&gt;56,121,429&lt;/td&gt;&lt;td&gt;141&lt;/td&gt;&lt;td&gt;1 in 398,024&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Sectigo&lt;/td&gt;&lt;td&gt;88,323,068&lt;/td&gt;&lt;td&gt;170&lt;/td&gt;&lt;td&gt;1 in 519,547&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;DigiCert&lt;/td&gt;&lt;td&gt;144,713,475&lt;/td&gt;&lt;td&gt;81&lt;/td&gt;&lt;td&gt;1 in 1,786,586&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;ISRG (Let&#39;s Encrypt)&lt;/td&gt;&lt;td&gt;315,476,402&lt;/td&gt;&lt;td&gt;161&lt;/td&gt;&lt;td&gt;1 in 1,959,480&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;By grouping by order-of-magnitude in the compromise rate, we can identify three “bands”:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;The Super Leakers&lt;/strong&gt;: Customers of Entrust and GlobalSign seem to love to lose control of their private keys.
+For Entrust, at least, though, the small volumes involved make the numbers somewhat untrustworthy.
+The three compromised certificates could very well belong to just one customer, for instance.
+I’m not aware of anything that GlobalSign does that would make them such an outlier, either, so I’m inclined to think they just got unlucky with one or two customers, but as CAs don’t include customer IDs in the certificates they issue, it’s not possible to say whether that’s the actual cause or not.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;The “Regular” Leakers&lt;/strong&gt;: Customers of SSL.com, GoDaddy, and Sectigo all have compromise rates in the 1-in-hundreds-of-thousands range.
+Again, the low volumes of SSL.com make the numbers somewhat unreliable, but the other two organisations in this group have large enough numbers that we can rely on that data fairly well, I think.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;The Low Leakers&lt;/strong&gt;: Customers of DigiCert and Let’s Encrypt are at least three times less likely than customers of the “regular leakers” to lose control of their private keys.
+Good for them!&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now we have some useful insights we can think about.&lt;/p&gt;
+
+&lt;h1 id=&quot;why-is-it-so&quot;&gt;Why Is It So?&lt;/h1&gt;
+
+&lt;figure&gt;
+&lt;img src=&quot;images/why_is_it_so.jpg&quot; alt=&quot;Professor Julius Sumner Miller&quot; /&gt;
+&lt;figcaption&gt;If you don&#39;t know who Professor Julius Sumner Miller is, I highly recommend &lt;a href=&quot;https://www.abc.net.au/science/features/whyisitso/about.htm&quot;&gt;finding out&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;All of the organisations on the list, with the exception of Let’s Encrypt, are what one might term “traditional” CAs.
+To a first approximation, it’s reasonable to assume that the vast majority of the customers of these traditional CAs probably manage their certificates the same way they have for the past two decades or more.
+That is, they generate a key and CSR, upload the CSR to the CA to get a certificate, then copy the cert and key… somewhere.
+Since humans are handling the keys, there’s a higher risk of the humans using either risky practices, or making a mistake, and exposing the private key to the world.&lt;/p&gt;
+
+&lt;p&gt;Let’s Encrypt, on the other hand, issues all of its certificates using &lt;a href=&quot;https://en.wikipedia.org/wiki/Automatic_Certificate_Management_Environment&quot;&gt;the ACME (Automatic Certificate Management Environment) protocol&lt;/a&gt;, and all of the Let’s Encrypt documentation encourages the use of software tools to generate keys, issue certificates, and install them for use.
+Given that Let’s Encrypt has 161 compromised certificates currently in the wild, it’s clear that the automation in use is far from perfect, but the significantly lower compromise rate suggests to me that lifecycle automation at least &lt;em&gt;reduces&lt;/em&gt; the rate of key compromise, even though it doesn’t eliminate it completely.&lt;/p&gt;
+
+&lt;h2 id=&quot;sidebar-acme-does-not-currently-rule-the-world&quot;&gt;Sidebar: ACME Does Not Currently Rule The World&lt;/h2&gt;
+
+&lt;p&gt;It is true that &lt;em&gt;all&lt;/em&gt; of the organisations in this analysis &lt;em&gt;also&lt;/em&gt; provide ACME issuance workflows, should customers desire it.
+However, the “traditional CA” companies have been around a lot longer than ACME has, and so they probably acquired many of their customers before ACME existed.&lt;/p&gt;
+
+&lt;p&gt;Given that it’s &lt;em&gt;incredibly&lt;/em&gt; hard to get humans to change the way they do things, once they have a way that “works”, it seems reasonable to assume that most of the certificates issued by these CAs are handled in the same human-centric, error-prone manner they always have been.&lt;/p&gt;
+
+&lt;p&gt;If organisations would like to refute this assumption, though, by sharing their data on ACME vs legacy issuance rates, I’m sure we’d all be extremely interested.&lt;/p&gt;
+
+&lt;h2 id=&quot;explaining-the-outlier&quot;&gt;Explaining the Outlier&lt;/h2&gt;
+
+&lt;p&gt;The difference in presumed issuance practices would seem to explain the significant difference in compromise rates between Let’s Encrypt and the other organisations, if it weren’t for one outlier.
+This is a largely “traditional” CA, with the manual-handling issues that implies, but with a compromise rate close to that of Let’s Encrypt.&lt;/p&gt;
+
+&lt;p&gt;We are, of course, talking about DigiCert.&lt;/p&gt;
+
+&lt;p&gt;The thing about DigiCert, that doesn’t show up in the raw numbers from crt.sh, is that DigiCert manages the issuance of certificates for several of the biggest “hosted TLS” providers, such as CloudFlare and AWS.
+When these services obtain a certificate from DigiCert on their customer’s behalf, the private key is kept locked away, and no human can (we hope) get access to the private key.
+This is supported by the fact that no certificates identifiably issued to either CloudFlare or AWS appear in the set of certificates with compromised keys.&lt;/p&gt;
+
+&lt;p&gt;When we ask for “all certificates issued by DigiCert”, we get both the certificates issued to these big providers, which are very good at keeping their keys under control, as well as the certificates issued to everyone else, whose key handling practices may not be quite so stringent.&lt;/p&gt;
+
+&lt;p&gt;It’s possible, though not trivial, to account for certificates issued to these “hosted TLS” providers, because the certificates they use are issued from intermediates “branded” to those companies.
+With the &lt;a href=&quot;https://groups.google.com/g/crtsh/c/sUmV0mBz8bQ/m/K-6Vymd_AAAJ&quot;&gt;crt.sh psql interface&lt;/a&gt; we can run this query to get the total number of unexpired precertificates issued to these managed services:&lt;/p&gt;
+
+&lt;pre&gt;
+SELECT SUM(sub.NUM_ISSUED[2] - sub.NUM_EXPIRED[2])
+  FROM (
+    SELECT ca.name, max(coalesce(coalesce(nullif(trim(cc.SUBORDINATE_CA_OWNER), &#39;&#39;), nullif(trim(cc.CA_OWNER), &#39;&#39;)), cc.INCLUDED_CERTIFICATE_OWNER)) as OWNER,
+           ca.NUM_ISSUED, ca.NUM_EXPIRED
+      FROM ccadb_certificate cc, ca_certificate cac, ca
+     WHERE cc.CERTIFICATE_ID = cac.CERTIFICATE_ID
+       AND cac.CA_ID = ca.ID
+  GROUP BY ca.ID
+  ) sub
+ WHERE sub.name ILIKE &#39;%Amazon%&#39; OR sub.name ILIKE &#39;%CloudFlare%&#39; AND sub.owner = &#39;DigiCert&#39;;
+&lt;/pre&gt;
+
+&lt;p&gt;The number I get from running that query is 104,316,112, which should be &lt;em&gt;subtracted&lt;/em&gt; from DigiCert’s total issuance figures to get a more accurate view of what DigiCert’s “regular” customers do with their private keys.
+When I do this, the compromise rates table, sorted by the compromise rate, looks like this:&lt;/p&gt;
+
+&lt;table class=&quot;tabular&quot;&gt;
+&lt;tr&gt;&lt;th&gt;Issuer&lt;/th&gt;&lt;th&gt;Issuance Volume&lt;/th&gt;&lt;th&gt;Compromised Count&lt;/th&gt;&lt;th&gt;Compromise Rate&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Entrust&lt;/td&gt;&lt;td&gt;23,166&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;1 in 7,722&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GlobalSign&lt;/td&gt;&lt;td&gt;1,438,485&lt;/td&gt;&lt;td&gt;46&lt;/td&gt;&lt;td&gt;1 in 31,271&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;SSL.com&lt;/td&gt;&lt;td&gt;171,816&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1 in 171,816&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GoDaddy&lt;/td&gt;&lt;td&gt;56,121,429&lt;/td&gt;&lt;td&gt;141&lt;/td&gt;&lt;td&gt;1 in 398,024&lt;/td&gt;&lt;/tr&gt;
+&lt;tr style=&quot;font-weight: bold&quot;&gt;&lt;td&gt;&quot;Regular&quot; DigiCert&lt;/td&gt;&lt;td&gt;40,397,363&lt;/td&gt;&lt;td&gt;81&lt;/td&gt;&lt;td&gt;1 in 498,732&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Sectigo&lt;/td&gt;&lt;td&gt;88,323,068&lt;/td&gt;&lt;td&gt;170&lt;/td&gt;&lt;td&gt;1 in 519,547&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;All DigiCert&lt;/td&gt;&lt;td&gt;144,713,475&lt;/td&gt;&lt;td&gt;81&lt;/td&gt;&lt;td&gt;1 in 1,786,586&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;ISRG (Let&#39;s Encrypt)&lt;/td&gt;&lt;td&gt;315,476,402&lt;/td&gt;&lt;td&gt;161&lt;/td&gt;&lt;td&gt;1 in 1,959,480&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;In short, it appears that DigiCert’s regular customers are just as likely as GoDaddy or Sectigo customers to expose their private keys.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-does-it-all-mean&quot;&gt;What Does It All Mean?&lt;/h1&gt;
+
+&lt;p&gt;The takeaway from all this is fairly straightforward, and not overly surprising, I believe.&lt;/p&gt;
+
+&lt;p class=&quot;large&quot;&gt;&lt;em&gt;The less humans have to do with certificate issuance, the less likely they are to compromise that certificate by exposing the private key.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;While it may not be surprising, it is nice to have some empirical evidence to back up the common wisdom.&lt;/p&gt;
+
+&lt;p&gt;Fully-managed TLS providers, such as CloudFlare, AWS Certificate Manager, and whatever Azure’s thing is called, is the platonic ideal of this principle: never give humans any opportunity to expose a private key.
+I’m not saying you &lt;em&gt;should&lt;/em&gt; use one of these providers, but the security approach they have adopted appears to be the optimal one, and should be emulated universally.&lt;/p&gt;
+
+&lt;p&gt;The ACME protocol is the next best, in that there are a variety of standardised tools widely available that &lt;em&gt;allow&lt;/em&gt; humans to take themselves out of the loop, but it’s still possible for humans to handle (and mistakenly expose) key material if they try hard enough.&lt;/p&gt;
+
+&lt;p&gt;Legacy issuance methods, which either cannot be automated, or require custom, per-provider automation to be developed, appear to be &lt;em&gt;at least&lt;/em&gt; four times less helpful to the goal of avoiding compromise of the private key associated with a certificate.&lt;/p&gt;
+
+&lt;h2 id=&quot;humans-are-of-course-the-problem&quot;&gt;Humans Are, Of Course, The Problem&lt;/h2&gt;
+
+&lt;figure&gt;
+&lt;img src=&quot;images/kill_all_humans.jpg&quot; alt=&quot;Bender, the robot from Futurama, asking if we&#39;d like to kill all humans&quot; /&gt;
+&lt;figcaption&gt;No thanks, Bender, I&#39;m busy tonight&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;This observation – that if you don’t let humans near keys, they don’t get leaked – is further supported by considering the biggest issuers by volume who have not issued &lt;em&gt;any&lt;/em&gt; certificates whose keys have been compromised: Google Trust Services (fourth largest issuer overall, with 57,084,529 unexpired precertificates), and Microsoft Corporation (sixth largest issuer overall, with 22,852,468 unexpired precertificates).
+It appears that somewhere between “most” and “basically all” of the certificates these organisations issue are to customers of their public clouds, and my understanding is that the keys for these certificates are managed in same manner as CloudFlare and AWS – the keys are locked away where humans can’t get to them.&lt;/p&gt;
+
+&lt;p&gt;It should, of course, go without saying that if a human can never have access to a private key, it makes it rather difficult for a human to expose it.&lt;/p&gt;
+
+&lt;p&gt;More broadly, if you are building something that handles sensitive or secret data, the more you can do to keep humans out of the loop, the better everything will be.&lt;/p&gt;
+
+&lt;h1 id=&quot;your-support-is-appreciated&quot;&gt;Your Support is Appreciated&lt;/h1&gt;
+
+&lt;p&gt;If you’d like to see more analysis of how key compromise happens, and the lessons we can learn from examining billions of certificates, please show your support by &lt;a href=&quot;https://ko-fi.com/tobermorytech&quot;&gt;buying me a refreshing beverage&lt;/a&gt;.
+Trawling CT logs is thirsty work.&lt;/p&gt;
+
+&lt;h1 id=&quot;appendix-methodology-limitations&quot;&gt;Appendix: Methodology Limitations&lt;/h1&gt;
+
+&lt;p&gt;In the interests of clarity, I feel it’s important to describe ways in which my research might be flawed.
+Here are the things I know of that may have impacted the accuracy, that I couldn’t feasibly account for.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Time Periods&lt;/strong&gt;: Because time never stops, there is likely to be some slight “mismatches” in the numbers obtained from the various data sources, because they weren’t collected at exactly the same moment.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Issuer-to-Organisation Mapping&lt;/strong&gt;: It’s possible that the way I mapped issuers to organisations doesn’t match exactly with how crt.sh does it, meaning that counts might be skewed.
+I tried to minimise that by using the same data sources (the &lt;a href=&quot;https://www.ccadb.org/resources&quot;&gt;CCADB AllCertificates report&lt;/a&gt;) that I believe that crt.sh uses for its mapping, but I cannot be certain of a perfect match.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Unwarranted Grouping&lt;/strong&gt;: I’ve drawn some conclusions about the practices of the various organisations based on their general approach to certificate issuance.
+If a particular subordinate CA that I’ve grouped into the parent organisation is managed in some unusual way, that might cause my conclusions to be erroneous.
+I was able to fairly easily separate out CloudFlare, AWS, and Azure, but there are almost certainly others that I didn’t spot, because hoo &lt;em&gt;boy&lt;/em&gt; there are a lot of intermediate CAs out there.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>//www.hezmatt.org/~mpalmer/blog/2024/01/16/pwned-certificates-on-the-fediverse</id>
+    <link type="text/html" rel="alternate" href="//www.hezmatt.org/~mpalmer/blog/2024/01/16/pwned-certificates-on-the-fediverse.html"/>
+    <title>Pwned Certificates on the Fediverse</title>
+    <updated>2024-01-16T00:00:00+11:00</updated>
+    <author>
+      <name>Matt Palmer</name>
+      <uri>//www.hezmatt.org/~mpalmer/blog/</uri>
+      <email>mpalmer@hezmatt.org</email>
+    </author>
+    <content type="html">&lt;p&gt;As well as the collection and distribution of &lt;a href=&quot;https://pwnedkeys.com&quot;&gt;compromised keys&lt;/a&gt;, the &lt;a href=&quot;https://pwnedkeys.com&quot;&gt;pwnedkeys&lt;/a&gt; project also matches those pwned keys against issued SSL certificates.
+I’m excited to announce that, as of the beginning of 2024, all matched certificates are now being published &lt;a href=&quot;https://botsin.space/@pwnedcerts&quot;&gt;on the Fediverse&lt;/a&gt;, thanks to the &lt;a href=&quot;https://botsin.space/&quot;&gt;botsin.space&lt;/a&gt; Mastodon server.&lt;/p&gt;
+
+&lt;p&gt;Want to know which sites are susceptible to interception and interference, in (near-)real time?
+Do you have a burning desire to know who is issuing certificates to people that post their private keys in public?
+Now you can.&lt;/p&gt;
+
+&lt;h1 id=&quot;how-it-works&quot;&gt;How It Works&lt;/h1&gt;
+
+&lt;p&gt;The process for publishing pwned certs is, roughly, as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;All the certificates in &lt;a href=&quot;https://certificate.transparency.dev&quot;&gt;Certificate Transparency&lt;/a&gt; (CT) logs are hoovered up (using my &lt;a href=&quot;https://github.com/mpalmer/scrape-ct-log&quot;&gt;scrape-ct-log&lt;/a&gt; tool, the fastest log scraper in the west!), and the fingerprint of the public key of each certificate is stored in an &lt;a href=&quot;https://lmdb.tech/&quot;&gt;LMDB&lt;/a&gt; datafile.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;As new private keys are identified as having been compromised, the fingerprint of that key is checked against all the LMDB files, which map key fingerprints to certificates (actually to CT log entry IDs, from which the certificates themselves are retrieved).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;If one or more matches are found, then the certificates using the compromised key are forwarded to the “tooter”, which &lt;a href=&quot;https://botsin.space/@pwnedcerts&quot;&gt;publishes them for the world to marvel at&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This makes it sound all very straightforward, and  it is… in theory.
+The trick comes in optimising the pipeline so that the five million or so new certificates every day can get indexed on the one slightly middle-aged server I’ve got, without getting backlogged.&lt;/p&gt;
+
+&lt;h1 id=&quot;why-dont-you-just-have-the-certificates-revoked&quot;&gt;Why Don’t You Just Have the Certificates Revoked?&lt;/h1&gt;
+
+&lt;p&gt;Funny story about that…&lt;/p&gt;
+
+&lt;p&gt;I used to notify CAs of certificates they’d issued using compromised keys, which had the effect of requiring them to revoke the associated certificates.
+However, several CAs disliked having to revoke all those certificates, because it cost them staff time (and hence money) to do so.
+They went so far as to change their procedures from the standard way of accepting problem reports (emailing a generic attestation of compromise), and instead required CA-specific hoop-jumping to notify them of compromised keys.&lt;/p&gt;
+
+&lt;p&gt;Since the effectiveness of revocation in the WebPKI is, shall we say, “homeopathic” at best, I decided I couldn’t be bothered to play whack-a-mole with CAs that just wanted to be difficult, and I stopped sending compromised key notifications to CAs.
+Instead, now I’m publishing the details of compromised certificates to everyone, so that users can protect themselves directly should they choose to.&lt;/p&gt;
+
+&lt;h1 id=&quot;further-work&quot;&gt;Further Work&lt;/h1&gt;
+
+&lt;p&gt;The astute amongst you may have noticed, in the above “How It Works” description, a bit of a gap in my scanning coverage.
+CAs can (and do!) issue certificates for keys that are &lt;em&gt;already&lt;/em&gt; compromised, including “weak” keys that have been known about for a decade or more (&lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1472052&quot;&gt;1&lt;/a&gt;, &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1620772&quot;&gt;2&lt;/a&gt;, &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1789521&quot;&gt;3&lt;/a&gt;).
+However, as currently implemented, the pwnedkeys certificate checker does not automatically find such certificates.&lt;/p&gt;
+
+&lt;p&gt;My plan is to augment the CT scraping / cert processing pipeline to check all incoming certificates against the existing (2M+) set of pwned keys.
+Though, with over five million new certificates to check every day, it’s not necessarily as simple as “just hit the &lt;a href=&quot;https://pwnedkeys.com/api/v1.html&quot;&gt;pwnedkeys API&lt;/a&gt; for every new cert”.
+The poor old API server might not like that very much.&lt;/p&gt;
+
+&lt;h1 id=&quot;support-my-work&quot;&gt;Support My Work&lt;/h1&gt;
+
+&lt;p&gt;If you’d like to see this extra matching happen a bit quicker, I’ve setup a &lt;a href=&quot;https://ko-fi.com/tobermorytech&quot;&gt;ko-fi supporters page&lt;/a&gt;, where you can support my work on &lt;a href=&quot;https://pwnedkeys.com&quot;&gt;pwnedkeys&lt;/a&gt; and the other open source software and projects I work on by &lt;a href=&quot;https://ko-fi.com/tobermorytech&quot;&gt;buying me a refreshing beverage&lt;/a&gt;.
+I would be very appreciative, and your support lets me know I should do more interesting things with the giant database of compromised keys I’ve accumulated.&lt;/p&gt;
+</content>
+  </entry>
+  
+ 
+</feed>

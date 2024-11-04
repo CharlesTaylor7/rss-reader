@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>R. Eric Reuss</title>
+	<atom:link href="https://rericreuss.com/feed/" rel="self" type="application/rss+xml" />
+	<link>https://rericreuss.com</link>
+	<description>Boardgames and otherwise</description>
+	<lastBuildDate>Sun, 14 Jan 2024 02:53:27 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.5</generator>
+	<item>
+		<title>Spirit Island question: Dahan proactiveness, or lack thereof</title>
+		<link>https://rericreuss.com/2023/11/02/spirit-island-question-dahan-proactiveness-or-lack-thereof/</link>
+		
+		<dc:creator><![CDATA[Eric]]></dc:creator>
+		<pubDate>Thu, 02 Nov 2023 21:45:47 +0000</pubDate>
+				<category><![CDATA[Q&A]]></category>
+		<category><![CDATA[Spirit Island]]></category>
+		<guid isPermaLink="false">https://rericreuss.com/?p=1479</guid>
+
+					<description><![CDATA[Recently, a fan of Spirit Island who studies anticolonialism asked me a really good question, and I thought others might be interested both in the query and in my answer.&#8230; ]]></description>
+										<content:encoded><![CDATA[		<div data-elementor-type="wp-post" data-elementor-id="1479" class="elementor elementor-1479">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-7562898 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="7562898" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-4803c49" data-id="4803c49" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-e2103a6 elementor-widget elementor-widget-text-editor" data-id="e2103a6" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<div class="separate-divs">
+<div>
+
+Recently, a fan of Spirit Island who studies anticolonialism asked me a really good question, and I thought others might be interested both in the query and in my answer. The questioner was kind enough to give me permission to quote them if I anonymized it, so here&#8217;s their query and the (lightly edited) core of my reply.
+
+</div>
+<div style="margin-left: 14px; padding-left: 12px; border-left: 6px solid #DDDDDD;">
+<div>In one of your design-diary-entries you wrote the
+following:</div>
+<div><i>
+&#8220;I realized that the Invaders felt not merely implacable (good) but inhuman (bad) &#8211; here they are facing down all these
+inexplicable disasters, and it doesn&#8217;t affect what they do? At
+all?&#8221;</i></div>
+<div>Fear as a mechanic now creates some sort of &#8220;collective
+memory&#8221; among the invaders, which I really appreciate!</div>
+<div>Now I am looking at the Dahan who are witnessing ravaging and the killing of their own people for the 10th time and still only strike BACK? And only after being attacked? I know this has to do with balancing but thematically I think at some point they should be clever enough to see that these invaders from across the seas do not come in friendly manners and the ravaging and killing is no single case. At the moment the Dahan feel helpless and in a way also stupid not taking any form of precautions against the colonial menace. The
+invaders are getting scared from round to round but the Dahan carry on with their business as usual from the beginning to the end all the same way. What do they think of all the ravaging and killing happening around them? Can you see my point?</div>
+<div>I know, this is addressing a core mechanic and balancing of the game but for the feeling of the gameplay this could enable an understanding of anticolonial resistance as human-work and not some supernatural spirit-work only (except for some random events). Maybe you can consider this for future developments on Spirit Island.</div>
+</div>
+
+<hr style="margin-bottom: 10px;" />
+
+</div>
+<div style="margin-bottom: 10px;">Indeed &#8211; what&#8217;s up with that? There&#8217;s several things going on.</div>
+<div><style type="text/css">#reply-list li {  margin-bottom: 10px; }</style>
+<ul id="reply-list">
+ 	<li><b>Partly:</b> the question is entirely correct, it&#8217;s a deficiency in the game. The base game in particular doesn&#8217;t do nearly as much to represent Dahan activity, attitudes, and agency as I&#8217;d like. The expansions which add Events improve the situation a bit, but I&#8217;d like to do more &#8211; I&#8217;m currently working on another expansion for which the core intent is creating more detail for the Dahan, and hopefully some agency as well.
+<ul>
+ 	<li>It ended up this way because at the time I was designing Spirit Island, it was much more complex than most published co-ops, and I was trying hard to keep that under control. I did experiment with changing Dahan attitudes towards the conflict, but those efforts didn&#8217;t seem (to the me of 2013-2014) to pan out well enough to justify the additional complexity / barrier-to-entry. Mea culpa.</li>
+</ul>
+</li>
+ 	<li><b>Partly:</b> Dahan communities are caught on the horns of a dilemma similar to one faced by many real-world Indigenous peoples: if they take pre-emptive action, the colonists brand them as &#8220;aggressors&#8221; and &#8220;savage&#8221; and enact immediate large-scale reprisal. Historic Indigenous communities often had internal disagreement over the best way to handle the incoming tide of colonists, because &#8220;keeping the peace&#8221; and &#8220;starting a fight&#8221; could both prove disastrous, in different ways.
+<ul>
+ 	<li>This is why some Fear cards involve Dahan attacking: when the Invaders are daunted, it allows those Dahan who favor direct action to persuade their communities that now is the time to strike.</li>
+</ul>
+</li>
+ 	<li><b>Partly:</b> because Spirit Island is a board game (requiring a very high level of abstraction), and because the players directly enact the game mechanisms, and because we perhaps have some awareness of how history went and what colonialism was like, it is tremendously easy for us as players to perceive the structural inevitability of the Invaders&#8217; aggression. But in the &#8220;inside&#8221; view &#8211; i.e., considering the fictional world the game represents, which contains vastly more detail and nuance and exception than the abstractions of the game system permit, and has no 3rd-person-omniscient viewpoint &#8211; a particular Dahan community is not going to have perfect information about exactly what the Invaders have done, why they have acted as they did, or what they will do several years hence. Larger patterns will take longer to become clear, and matters of the future will seem much less inevitable than they seem to us as players. A given community might see striking first as closing off all hope of peace / making dangerous conflict inevitable.
+<ul>
+ 	<li>Another factor here is that Dahan and European cultures have different conceptions of &#8220;warfare&#8221; &#8211; what it means, what types of it there are, what the normal progression of escalation is, how it&#8217;s used, etc &#8211; so there&#8217;s also a certain amount of confusion caused by each side not understanding why the other is acting as they do, and having trouble predicting the other&#8217;s likely actions.</li>
+</ul>
+</li>
+ 	<li><b>Partly:</b> when a Dahan piece is Destroyed in the game, while that can (and often does) represent literal physical harm &#8211; bloody fights, massacres, etc. &#8211; it can also represent cultural damage and/or assimilation (on a smaller scale than something like the Sweden escalation effect). So a Dahan piece removed from the board might represent a huge number of deaths, or it might represent few to no deaths. All it signifies for certain is &#8220;this group of Dahan no longer plays a significant role in the unfolding conflict&#8221;.
+<ul>
+ 	<li>To put it another way: <i>some</i> percentage of the people represented by a Dahan piece destroyed in a Ravage are still alive &#8211; perhaps living in another Dahan community, or perhaps in an Invader settlement somewhere. In one game that % might be near or at 0, in another it might be very high indeed; it all depends on the story being told by that specific play session, as suggested by things like Events, Fear Cards, player imagination, etc. It&#8217;s entirely plausible that some Dahan might decide that, should living peacefully near the Invaders prove impossible, they would rather adapt and persist (even if that means assimilating) than start a violent conflict which could risk annihilation. <b>Survival is a form of resistance</b>, even if that particular means of survival does not suit the Spirits&#8217; desires.</li>
+</ul>
+</li>
+</ul>
+<div>
+
+&#8230;and a pair of asides that are a bit relevant, but much less determinative than the above (for reasons in parentheses):
+<ul>
+ 	<li>The colonial situation is far from the only thing occupying the day-to-day thoughts and activities of any given person among Dahan communities &#8211; they are living their own lives! (However, they are not generally oblivious, and will notice the danger, particularly as it unfolds in their local area.)</li>
+ 	<li>Each Dahan community (as a whole) works largely via consensus and persuasion. This handles some sorts of problems much better than a hierarchical society is likely to, but consensus takes time and effort, and in uncertain situations it can be tricky to reach consensus that action is needed, let alone what action to take. (However, Dahan society has social structures specifically to deal with this, both through traditional ways of dealing with uncertainty or deadlock, and by appointing individuals into temporary leadership roles when the need for decisiveness / quick reaction / having a single coherent plan is high.)</li>
+</ul>
+</div>
+</div>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>The Green Games Guide</title>
+		<link>https://rericreuss.com/2023/05/12/the-green-games-guide/</link>
+		
+		<dc:creator><![CDATA[Eric]]></dc:creator>
+		<pubDate>Fri, 12 May 2023 19:12:54 +0000</pubDate>
+				<category><![CDATA[Boardgame Industry]]></category>
+		<category><![CDATA[News]]></category>
+		<category><![CDATA[Recs]]></category>
+		<guid isPermaLink="false">https://rericreuss.com/?p=1353</guid>
+
+					<description><![CDATA[In brief: check out the Green Games Guide! Most folks are well aware that board gaming, like most industries, carries an environmental cost. While the total impact of our industry&#8230; ]]></description>
+										<content:encoded><![CDATA[		<div data-elementor-type="wp-post" data-elementor-id="1353" class="elementor elementor-1353">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-e2958a2 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="e2958a2" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2f60848" data-id="2f60848" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-686dd70 elementor-widget elementor-widget-text-editor" data-id="686dd70" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<div class="separate-divs">
+<div><i>In brief: check out <a href="https://www.greengamesguide.com/">the Green Games Guide</a>!</i></div>
+<div>Most folks are well aware that board gaming, like most industries, carries an environmental cost. While the total impact of our industry may not be as high as that of other sectors, we should still address it: we need <i>lots and lots</i> of systemic improvement all through human society in order to (short-term) keep things from getting even worse than is currently inevitable, and (eventually) to get things back on track.</div>
+<div>But exactly what to do isn&#8217;t always clear: &#8220;buy fewer games&#8221; is an obvious option, but insufficient; so long as the industry continues to exist, people <i>will</i> be manufacturing games. How can we make them more sustainably?</div>
+<div>A group of industry professionals &#8211; publishers, designers, manufacturers, and more &#8211; have gone over research, figured out good / better / best options for improving sustainability in various ways, and collated version 1.0 of the Green Games Guide, a practical, easy-to-read guide for manufacturers, publishers, retailers, designers, and players. It&#8217;s a great resource!</div>
+<div>(I helped out with some of the very early groundwork, but had to bow out before the real heavy lifting started, so can&#8217;t claim any real credit for the final result. But I can say how impressed I was with everyone&#8217;s dedication and passion: this is a volunteer project done in people&#8217;s spare time, with assistance from some folks in academic programs.)</div>
+<div>If you just want to read the Guide, <a href="https://www.greengamesguide.com/read-the-guide">the link to the PDF is here</a>. But <a href="https://www.greengamesguide.com/">the main website</a> also has links to more about the project, the ability to sign up for updates when new versions of the Guide come out, and <a href="https://www.greengamesguide.com/feedback">a survey link</a> if you have comments, suggestions, or other feedback.</div>
+<div>
+If you enjoy podcasts, <a href="https://podcastaddict.com/ludology/episode/156985263">Ludology Episode 298 &#8220;Green Team Wins&#8221;</a> is all about the Green Games Guide &#8211; an interview with two of the folks behind it, Carlos Flores and Eric Zimmerman.
+</div>
+<div>I hope you check it out!</div>
+</div>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>&#8220;How Good Is This?&#8221; &#8211; valuation in board games</title>
+		<link>https://rericreuss.com/2023/03/31/how-good-is-this-valuation-in-board-games/</link>
+		
+		<dc:creator><![CDATA[Eric]]></dc:creator>
+		<pubDate>Fri, 31 Mar 2023 17:27:53 +0000</pubDate>
+				<category><![CDATA[Game Design]]></category>
+		<category><![CDATA[Thoughts]]></category>
+		<guid isPermaLink="false">https://rericreuss.com/?p=1322</guid>
+
+					<description><![CDATA[There&#8217;s been discussion for years about games that aren&#8217;t presented as auction games but can be interpreted and analyzed as auctions. (Sometimes taken to fantastic tongue-in-cheek extremes.) The following thoughts&#8230; ]]></description>
+										<content:encoded><![CDATA[		<div data-elementor-type="wp-post" data-elementor-id="1322" class="elementor elementor-1322">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-0a30884 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="0a30884" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-7fb9674" data-id="7fb9674" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-3d04e83 elementor-widget elementor-widget-text-editor" data-id="3d04e83" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<style type="text/css">
+.footnote { font-size: smaller;}<br />
+</style>
+<div class="separate-divs">
+<div>There&#8217;s been discussion for years about games that aren&#8217;t <i>presented</i> as auction games but <a href="https://www.skotos.net/articles/TTnT_161.phtml">can be interpreted and analyzed as auctions</a>. (Sometimes taken to <a href="https://boardgamegeek.com/thread/395840/chess-just-two-player-solitaire-game/page/1">fantastic tongue-in-cheek extremes</a>.) The following thoughts sprang from that discussion.</div>
+<h5>What&#8217;s Valuation?</h5>
+<div>A <u>lot</u> of boardgame mechanisms &#8211; including but not limited to anything auction-like &#8211; can be thought of as the <b>valuation of choices</b>: <i>You have options A, B, and C; which is best for you?</i> This consideration weighs anything &amp; everything that makes an option good or bad relative to other options: the game state, likely responses of other players, probabilities of uncertain events, options available in the future, etc. It can even include non-mechanical factors<sup>1</sup>.</div>
+<div>While there are an abundance of mechanisms that <i>don&#8217;t</i> reduce to valuation,<sup>2</sup> it&#8217;s undeniably an immense part of modern games.</div>
+<div>
+<h5>Different Flavors of Valuation</h5>
+<div>
+
+All valuations guide decision-making, but they vary a great deal in what <i>sort</i> of information they provide about &#8220;what is best?&#8221;. They might:
+<ul>
+ 	<li>Give a simple number (&#8220;Getting this grain provides me 2 VP&#8221;).</li>
+ 	<li>Give a contingent number (&#8220;Getting this Shiny will give me 5 VP if I earn the Patronage of the Raven&#8221;)</li>
+ 	<li>Give future options (&#8220;Getting this mill will let me turn 1 grain into 2 VP every turn&#8221;)</li>
+ 	<li>Give multiple numbers (&#8220;This building gives me 5 VP and an income of 2 gold/turn&#8221;)</li>
+ 	<li>Give infrastructure that is difficult to reduce to a simple value (&#8220;This choice gives me +1 card draw per turn if my hand size is below 3 and I also control the Red Keep&#8221;)</li>
+ 	<li>Give changes to the duration/tempo of the game (&#8220;This move will accelerate endgame&#8221;)</li>
+ 	<li>Give changes to the game as a whole (&#8220;Taking this train will cause all older trains to rust and be discarded&#8221;)</li>
+ 	<li>&#8230;and more.</li>
+</ul>
+</div>
+<div><i>(The above list mentions Victory Points a lot only because they&#8217;re very good for concise examples that have a direct and obvious relevance to winning &#8211; valuation can absolutely apply to things which have nothing to do with VP.) </i></div>
+<div>
+<h5>Relevance to Design</h5>
+<div>Given the above, what are some ways in which different flavors of valuation impact a game?</div>
+<div><b>Different types of valuations create different sorts of experiences, and can appeal to different types of players.</b>
+&#8220;I earn 3 points&#8221; is a very tangible, straightforward reward for an action; it creates a sense of groundedness, surety, openness, and simplicity. More opaque valuations can create uncertainty, tension, obfuscation, and a sense of complexity. Valuations which depend on controllable future events yield long-term strategy and a sense of unfolding plans. Valuations which depend on unknowable or uncontrollable factors yield a more tacical game and confine the sense of control to the here-and-now.</div>
+<div><b>Different types of valuations ask for different amounts of player attention.</b>
+Options which are highly variable in usefulness or which change value suddenly (depending on context) require more player attention than options which are more constant or which change value smoothly a little bit at a time. More opaque, hard-to-figure-out valuations require more player attention than simpler ones.</div>
+<div><b>Valuations which are &#8216;too simple&#8217; tend to be less interesting.</b>
+E.g., with options plainly worth 2, 3, and 4 points, and no other side effects, there is an obviously best answer and not much in the way of <i>deciding</i>. But what constitutes &#8220;too simple&#8221; is far from an objective yardstick; it will vary depending on the preferences and abilities of the players. And if a design derives its fun from things other than valuation, that lack of interest may not matter.</div>
+<div><b>The approach of endgame collapses many more-interesting forms of valuation into less-interesting forms.</b>
+The value of future options/income/infrastructure declines, the number of potential endgame-states shrinks, the likelihood of &#8220;if can I also&#8230;&#8221; contingencies coming to pass is more likely to be known. (Which is why highly calculable valuations tend to rear their head most just before endgame.)</div>
+<div><b>Valuations which produce simple or lightly-variable integers promote a point-salad feel.</b>
+I often see &#8220;point salad&#8221; defined in terms of &#8220;earn a few points every turn&#8221; (similar benefit for each action taken) or &#8220;everything kind of feels the same&#8221; (homogenous feel among systems). While I do think those are two good indicators, I think &#8220;actions are reducible to a point gain, perhaps with light uncertainty&#8221; is another.</div>
+<div><b>Some valuations can prompt divergent behavior between different types of players.</b>
+Valuations which are <i>notionally</i> calculable but very complex will cause some players analysis-paralysis in figuring out what they&#8217;re worth, while others will simply play heuristically and use a rough estimate. Valuations which rely on other players&#8217; actions prompt some folks to consider what seems most likely, while other people will treat their fellow players as sources of randomness that are either unknowable or not worth trying to anticipate.</div>
+<div><b>Some players may nope out of mechanics-based valuation altogether.</b>
+Perhaps they just don&#8217;t enjoy valuation, or dislike it if it&#8217;s too involved, or maybe they had a rough day at work and don&#8217;t want to think much. So they make decisions randomly or based entirely on non-mechanical factors<sup>1</sup>. If one player doing this has the potential to mess up the gameplay, that&#8217;s not <i>necessarily</i> bad &#8211; there are exquisite games which happen to be very fragile to a player not pursuing victory &#8211; but it&#8217;s <i>definitely</i> worth being aware of, and perhaps telegraphing in the game&#8217;s written materials so that playgroups know it going in rather than discovering it the hard way. And if it can be mitigated in some easy way, so much the better.</div>
+<h5>In Conclusion</h5>
+<div>I don&#8217;t think any of the above is particularly new, but most of the time I see these sorts of considerations, they&#8217;re framed as being about &#8220;presenting interesting decisions&#8221; or &#8220;players making choices&#8221;. I suspect it&#8217;s worth thinking one level deeper, about the mental process a player is likely to engage in when presented with a decision requiring a choice.</div>
+
+<hr />
+
+&nbsp;
+<h5>Footnotes</h5>
+<div class="footnote"><sup>1</sup> For instance, a player may factor in aesthetics, ethics, challenging themselves, or self-expression when weighing which options are &#8220;best&#8221;. My thoughts here are about the more mechanically-affected portions of valuation, though this is a limited view: mechanisms are far from the only relevant part of a game.</div>
+<div class="footnote"><sup>2</sup> Eg: <b>physical enaction</b> (any dexterity game); <b>perception of choices</b> (when there are enough options that merely perceiving them all is mentally challenging); <b>working memory challenges</b> (holding plans/data in your head); <b>social perception</b> (reading/anticipating other players); <b>social action</b> (persuasion/bluffing); <b>expression/non-verbal communication</b> (as in Pictionary); <b>sensory perception</b> (as in Mord Im Arosa), and more.</div>
+</div>
+</div>
+</div>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Being a Force for Bad</title>
+		<link>https://rericreuss.com/2022/09/25/being-a-force-for-bad/</link>
+		
+		<dc:creator><![CDATA[Eric]]></dc:creator>
+		<pubDate>Sun, 25 Sep 2022 00:05:59 +0000</pubDate>
+				<category><![CDATA[Game Design]]></category>
+		<category><![CDATA[Thoughts]]></category>
+		<guid isPermaLink="false">https://rericreuss.com/?p=1147</guid>
+
+					<description><![CDATA[Content warning: mentions of racism, violence, abuse, oppression, slavery. When is it a good idea for a board game to make a villain a playable position? In competitive board games,&#8230; ]]></description>
+										<content:encoded><![CDATA[		<div data-elementor-type="wp-post" data-elementor-id="1147" class="elementor elementor-1147">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-744bb6d elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="744bb6d" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-0d6830d" data-id="0d6830d" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-0646492 elementor-widget elementor-widget-text-editor" data-id="0646492" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<div class="separate-divs">
+<div style="text-align: center;"><i>Content warning: mentions of racism, violence, abuse, oppression, slavery.</i></div>
+<div>
+<h5>When is it a good idea for a board game to make a villain a playable position?</h5>
+</div>
+<div>In competitive board games, all players are each others&#8217; antagonists. But this is a different thing than having roles which are coded as &#8220;villains&#8221;, &#8220;bad&#8221;, &#8220;malefic&#8221;, or &#8220;in the wrong&#8221; &#8211; roles that would probably be antagonists in books, film, or most other forms of media.</div>
+<div>There are <i>many</i> games which let you do this &#8211; you can play <a href="https://boardgamegeek.com/boardgame/256382/disney-villainous">Disney villains</a>, <a href="https://boardgamegeek.com/boardgame/37111/battlestar-galactica-board-game">deep agents</a>, <a href="https://boardgamegeek.com/boardgame/187645/star-wars-rebellion">evil empires</a>, <a href="https://boardgamegeek.com/boardgame/195162/plague-inc-board-game">deadly diseases</a>, <a href="https://boardgamegeek.com/boardgame/9609/war-ring">the forces of Sauron</a>, <a href="https://boardgamegeek.com/boardgame/139976/cthulhu-wars">eldritch gods</a>, and many more.</div>
+<div>Yet, one of the strengths of board games relative to books or film is that they let a player step into the shoes of a particular role rather than witnessing it passively in the third person. Regardless of whether someone engages in &#8216;role-playing&#8217; in the tabletop-RPG sense, a boardgame creates a temporary space where the player&#8217;s <i>point of view, incentives, and expected actions</i> all align with the role they take on. And we do this with roles which would generally be considered &#8216;wrong&#8217; or &#8216;bad&#8217; or &#8216;evil&#8217;.</div>
+<div>I think most of us who play lots of games would be quick to say that this is <b>often completely fine</b>, a total nonissue. But I also think &#8211; or at least hope! &#8211; that most gamers wouldn&#8217;t be entirely comfortable with, e.g., a game where one player played a police force that earned VPs for killing Black people.</div>
+<div>So what makes that different from playing Sauron?</div>
+<div>The purpose of this post isn&#8217;t to be prescriptive (&#8220;always do X, never do Y&#8221;), but to discuss some <i>tools for thinking about that question</i>. I don&#8217;t believe for a moment that I have all the answers, but I think I see two patterns that can cause problems, and two things that can <i>potentially</i> help mitigate them:</div>
+<div>
+<h5>&#8211; Pattern 1: The more closely the game mirrors a contemporary, real life conflict, the more fraught it is to cast a player as a villain.</h5>
+</div>
+<div>This is a spectrum. Eg:</div>
+<div>
+<ul>
+ 	<li>A game where one player is an alien trying to devour the other players isn&#8217;t something that happens much in real life. (Thankfully!) No problem.</li>
+ 	<li>A player taking the role of Sauron or the Empire (from Star Wars) might feel relevant for people fighting a military war against an overwhelming malefic empire in real life, but that&#8217;s not the case for *most* players of hobby boardgames.</li>
+ 	<li>In Plague Inc, a player taking on the role of a world-shattering pandemic seemed whimsically fanciful&#8230; but when Covid hit, that changed how some players felt about it.</li>
+ 	<li>A boardgame about healthcare where one player can choose to deny critically needed services in order to make a quick buck might cut a bit close to home for many players in the US. (Unless it&#8217;s a really well-done satire, in which case we might laugh as we cried.)</li>
+ 	<li>A boardgame where one player plays the part of an abusive parent trying, in detail, to manipulate, coerce, and abuse their children is something that certainly <i>could</i> be made, but I don&#8217;t really think <i>should</i> be made. (I am a proponent both of the right to free speech, and of social pressure to encourage individuals to use that free speech responsibly.)</li>
+</ul>
+</div>
+<div><b>OK, so <i>why</i> does it get more fraught?</b> Specifically, <i>having a human play</i> this sort of &#8216;bad&#8217; role, not just &#8220;this game contains bad things reminiscent of real life&#8221;.</div>
+<div>Again, I have some answers, but I&#8217;m sure there are others:</div>
+<div>
+<ul>
+ 	<li>When someone is <i>playing</i> a position, it gives that position <i>agency</i>. This can feel very different than simply having something bad exist within a game (represented only by mechanisms). Fighting against evil may feel liberating, giving evil a seat at the table may feel distressing.</li>
+ 	<li>When someone is <i>playing</i> a position, they may &#8211; depending on the player &#8211; end up <i>expressing enthusiasm</i> for that position. Not that someone playing the Black Death would state &#8220;the Black Death was great!&#8221; as a sincerely held belief, but they might get visibly excited about killing lots of people. Hopefully it&#8217;s obvious that someone expressing triumph over a clever play could be really upsetting if that clever play represented emotional abuse of a child.</li>
+ 	<li>The question of &#8220;can playing a game inform the player&#8217;s real-life opinions?&#8221; is a rabbithole I don&#8217;t want to dive too deeply into &#8211; players are, in general, quite able to distinguish games from reality (see the research on &#8220;does playing violent video games make you violent?&#8221;), but at the same time players can absolutely learn things (both consciously and subconsciously) from games they play. I suspect those two truths interact in subtle, messy ways.</li>
+ 	<li>What we choose to represent as &#8220;valid positions&#8221; in games absolutely informs the <i>cultural conversation</i> about those things. It asserts, &#8220;it is socially acceptable to play-pretend to do this thing&#8221;.</li>
+ 	<li>It can be more viscerally uncomfortable to take on a role too much like a real, day-to-day force of threat or harm.</li>
+ 	<li>It can be more viscerally uncomfortable to take on a role which one knows may make <i>other</i> players at the table uncomfortable or distressed.</li>
+</ul>
+</div>
+<div>
+<h5>&#8211; Pattern 2: The more a game&#8217;s conflict models real-world harmful social power imbalances (&#8220;punching down&#8221;), the less OK it is to cast a player as villain.</h5>
+</div>
+<div>Dan Thurot wrote <a href="https://spacebiff.com/2021/08/12/greenwashing-history/">an excellent essay</a> on <i>A Study in Emerald</i> vs. <i>AuZtralia</i> (each by Martin Wallace). He points out that both games have been set in an alternate-history mythos-horror world in order to make violent activities (bombing royalty, conquering Australia) more palatable, and that <i>Emerald</i> manages it much more comfortably than <i>AuZtralia</i>.</div>
+<div>This is in large part because the violence of <i>Emerald</i> models a conflict that is <i>punching up</i> (revolutionaries attacking tyrannical royalty in Europe), while the violence of <i>AuZtralia</i> mirrors a conflict that is <i>punching down</i> (conquering Australia, only with zombies standing in for its Aboriginal inhabitants). I&#8217;d also add that the former conflict is less immediately relevant to modern audiences, while the harm of the latter definitely continues on into the present day.</div>
+<div>
+
+<hr />
+
+</div>
+<div>
+<div>
+<h5>&#8211; Mitigation 1: The game is divorced from reality.</h5>
+</div>
+<div>A game which is highly fantastical, or an obvious parody, or very abstract, or strongly grounded in a specific, fictional world which does not parallel our own can get away with a lot more because the game&#8217;s framing makes it clearer that it&#8217;s inapplicable to our reality.</div>
+<div>This is far from a panacea: per the discussion of Pattern 2 above, efforts to use this mitigation can succeed or fail. Context matters, and a fictional setting which contains strong parallels or allegories with our actual reality is much less fanciful than it might appear on the surface.</div>
+<div>Execution also matters: it&#8217;s not enough to simply <i>declare</i> &#8220;this is a fantasy&#8221;, that has to <i>come across to the player</i> &#8211; take <a href="https://boardgamegeek.com/boardgame/172386/mombasa">Mombasa</a>, which replicates some really terrible and bloody European exploitation of Africa. The rulebook states that it&#8217;s set in an alternate reality with no atrocities, but this is conveyed nowhere in the actual game: the names are African names, the shape of the continent is just what one would expect, the diamonds being struggled over are what have fueled so much horror in real life. The game doesn&#8217;t do anything to convey the notion that it&#8217;s a different world from our own.</div>
+<div>One form of this which has the potential to do more harm than good is merely eliding the <i>portrayal</i> of bad things being done by a player&#8217;s role. This may well make the game more comfortable and palatable and fun to play, but erasure of harmful things can be a problem in and of itself.</div>
+<div>
+<h5>&#8211; Mitigation 2: Everyone&#8217;s a villain.</h5>
+</div>
+<div>The game is in no way a contest of evil vs good or oppressor vs oppressed, because everyone&#8217;s an evil oppressor (or plague, or eldritch abomination from beyond space and time). Or perhaps everyone&#8217;s morally grey, or the setting is such that it&#8217;s ambiguous who &#8211; if anyone &#8211; is a villain.</div>
+<div>This also isn&#8217;t a panacea: it works best when everyone&#8217;s a villain <i>and there are no innocent victims</i>. Some games manage to have innocent victims while maintaining a low squick factor; I suspect these are games which don&#8217;t run into the above problems particularly strongly in the first place, or have other mitigating factors? A game set in the antebellum South certainly wouldn&#8217;t be made <i>less</i> problematic by changing from &#8220;some players are slaveholders&#8221; to &#8220;all players are slaveholders&#8221;.</div>
+<div>(And again, eliding or sanitizing the existence of innocent victims that are otherwise strongly implied by the narrative framing can be its own problem.)</div>
+<div>
+
+<hr />
+
+</div>
+<div>
+<h5>Postscript</h5>
+</div>
+<div>I&#8217;ve left some slightly more involved/contentious cases (eg, historic wargaming) and some thoughts about how applicable the above is/isn&#8217;t to RPGs and LARPing for a follow-up post, because I didn&#8217;t want my main thoughts above to get derailed by them. If/when I write the follow-up post, I&#8217;ll link to it from here.</div>
+</div>
+</div>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Showing my work</title>
+		<link>https://rericreuss.com/2022/08/19/showing-my-work/</link>
+		
+		<dc:creator><![CDATA[Eric]]></dc:creator>
+		<pubDate>Fri, 19 Aug 2022 00:22:31 +0000</pubDate>
+				<category><![CDATA[Boardgame Industry]]></category>
+		<category><![CDATA[Spirit Island]]></category>
+		<category><![CDATA[Thoughts]]></category>
+		<guid isPermaLink="false">https://rericreuss.com/?p=1130</guid>
+
+					<description><![CDATA[Earlier this year, an Indigenous gamer1 asked what I was doing to find, create, or advance actual Indigenous voices in the board game industry. On hearing my answer, they suggested&#8230; ]]></description>
+										<content:encoded><![CDATA[		<div data-elementor-type="wp-post" data-elementor-id="1130" class="elementor elementor-1130">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-6876007 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6876007" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-0fd1894" data-id="0fd1894" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-a517983 elementor-widget elementor-widget-text-editor" data-id="a517983" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<div class="separate-divs">
+<div>Earlier this year, an Indigenous gamer<sup>1</sup> asked what I was doing to find, create, or advance actual Indigenous voices in the board game industry. On hearing my answer, they suggested I ought to be more public with that information, to raise awareness and promote <i>taking action</i> as a norm. <i>(Tied to the concepts of <a href="https://www.cio.com/article/193769/corporate-allyship-show-your-work-or-quiet-down.html">showing your work</a> or <a href="https://www.milkwood.net/2020/02/10/pay-the-rent/">paying the rent</a>.)</i></div>
+<div>I find it a touch uncomfortable to talk about<sup>2</sup>, but I see the point / overall benefit, and a bit of discomfort on my part seems far outweighed by helping to normalize good stuff. So, here&#8217;s some things I do.</div>
+<div><i>(Note: this is intended to help normalize taking action. It is <b>not</b> intended to fuel one-upsmanship or scorn. Different people can manage different amounts and kinds of action; more on this at the end.)</i></div>
+<div>
+
+<hr />
+
+</div>
+<div>First:</div>
+<div><b>As a white male game designer, I believe I have a responsibility to try and support / elevate underrepresented voices in the board game industry</b> &#8211; which is overwhelmingly &amp; disproportionately white, male, and non-Indigenous.</div>
+<div>Some actions I take include:</div>
+<div>
+<ul>
+ 	<li>Monthly support of the <a href="https://www.patreon.com/TabletopMentorshipProgram/membership">Tabletop Mentorship Program</a>, which (among other things) provides micro-grants to underrepresented creators;</li>
+ 	<li>Supporting <a href="https://theabcon.com/">AB Con</a>, and other crowdfunding endeavors by African designers;</li>
+ 	<li>Crowdfunding support of games designed by BIPoC / non-male designers (whether by ordering the game or just chipping in);</li>
+ 	<li>Trying to make the Spirit Island playtesting group more diverse, because playtesting can sometimes serve as a stepping-stone to paid opportunities in the industry. <i>(There&#8217;s also sensible self-interested reasons to do this, such as getting a better diversity of viewpoints.)</i></li>
+ 	<li>Giving priority with professional assistance to BIPoC / non-male folks I&#8217;ve met who are in (or would like to get into) the boardgame industry &#8211; conveying industry information, signal-boosting projects, playtesting (if in person), networking (on those rare occasions I have useful contacts), etc. This is honestly a pleasure in and of itself &#8211; I like helping! &#8211; but time and energy constraints mean it&#8217;s not something I can do for everyone I meet. So, I try to prioritize folks who face systemic barriers / underrepresentation when allocating the time and attention I do have for that sort of thing.</li>
+ 	<li>Donating to <a href="http://newvoicesingaming.org/">New Voices in Gaming</a>, a sort of scholarship fund for game designers from underrepresented backgrounds to attend professional events.</li>
+</ul>
+</div>
+<div style="color: #660066; font-weight: 450;"><i>If you&#8217;re making money in the board game industry and are part of any of tabletop&#8217;s disproportionate majorities (white folks, guys), I encourage you to join me in addressing the field&#8217;s inequality in some tangible manner.</i></div>
+<div>
+
+<hr />
+
+</div>
+<div>Second:</div>
+<div><b>As the designer of Spirit Island, and as a non-Indigenous resident of the United States, I believe I have a responsibility to try and support Indigenous and environmental causes in general.</b> Although Spirit Island doesn&#8217;t portray a real-life Indigenous culture, it draws on the history, stories, and zeitgeist of colonial-Indigenous conflicts, so it seems right to pay some of that back. And like all board games, it has an environmental impact<sup>3</sup>, so I also see an imperative there.</div>
+<div>This largely takes the form of donating to charities (listed below), though I also make contributions to a local Indigenous group, and have found occasional one-off opportunities to help in other ways, financial or otherwise.</div>
+<div>The primary organizations I&#8217;ve supported have been:</div>
+<div>
+<ul>
+ 	<li><a href="https://www.narf.org/">Native American Rights Fund</a> &#8211; a legal-assistance group that&#8217;s been fighting for the rights of Native Americans since the 1970s, taking on all manner of court cases, winning many of them.</li>
+ 	<li><a href="https://www.ran.org/mission-and-values/">Rainforest Action Network</a> &#8211; pressures the companies and industries driving deforestation and climate change to shape up. More scrappy/confrontational than the big environmental charities like WWF, Sierra Club, etc (who often take more of a &#8220;partner and persuade&#8221; approach). Works with front-line Indigenous communities.</li>
+ 	<li><a href="https://www.culturalsurvival.org/our-approach">Cultural Survival</a> &#8211; an advocacy and partnership group for Indigenous peoples worldwide. They work primarily through grants and other support of local initiatives. While the environment is not their primary focus, it&#8217;s very much on their radar as an issue that has huge impact on Indigenous peoples. (See <a href="https://www.culturalsurvival.org/issues">here</a>, about halfway down.)</li>
+ 	<li><a href="https://fonkoze.org/">Fonkoze</a>, which empowers Haitians to help break the cycle of poverty. Haiti has massive economic and political problems, which can be traced directly back to the colonial &amp; imperial pressures it&#8217;s been forced to contend with for its entire existence.</li>
+</ul>
+</div>
+<div style="color: #660066; font-weight: 450;"><i>I think everyone should support Indigenous and environmental causes, but I <u>particularly</u> encourage folks who live on land taken by colonists to provide tangible support of money and/or time, and board game publishers/creators to actively support environmental causes &#8211; there are loads of things you can do, some as straightforward as <a href="https://www.popsci.com/story/environment/how-to-bank-green-environment/"><b>changing your bank</b></a>. Any designer whose game has benefited from the heritage of other cultures will hopefully have already respected that via paid cultural consulting, but if not, post facto support is vastly better than none at all!</i></div>
+<div>
+
+<hr />
+
+</div>
+<div>Finally, to get more concrete:</div>
+<div>From 2017 &#8211; 2021, my contributions for the above were around 20-25% of gross royalties (roughly 30-35% of my post-tax income); as of mid-2022 changes to my family&#8217;s financial situation mean I&#8217;ve stepped that down to around 8-11% of gross royalties (roughly 12-16% of my post-tax income).
+I acknowledge that I am deeply fortunate to be in a financial situation where I can afford to help others to this extent &#8211; board games are not a lucrative industry, and many people in both the US and the world as a whole must make do with far too little.</div>
+<div>I mention numbers both to hold myself accountable, and to show that I genuinely believe these are goals worth supporting in a more than token or offhand way &#8211; not to make people feel bad, nor to prompt toxic comparisons of who&#8217;s doing more / most / the properly sanctified things / etc. Rather, it&#8217;s about making certain types of actions normal, a thing people do, rather than something exceptional or unusual.</div>
+<div>I hope this might prompt people to act, because it&#8217;s not about whether you did the Most or the Best, it&#8217;s about whether you are Doing at all. <b>And if you are: thank you!!</b> Keep it up, as your life permits!</div>
+<div style="padding-top: 60px;">
+
+<hr />
+
+</div>
+<div><b>Footnotes:</b></div>
+<div><sup>1</sup> Who&#8217;d been very kindly spending their time to give me thoughts on a Dahan-centric Spirit Island expansion, something I appreciate immensely.</div>
+<div><sup>2</sup> Our culture is weird about saying &#8220;I did this thing and it was a good thing to do&#8221;, particularly when it involves money.</div>
+<div><sup>3</sup> I am keenly aware of the irony of the game&#8217;s &#8220;plastic = the enemy&#8221; framing resulting in the manufacture of so many plastic Invader pieces.</div>
+<div style="padding-top: 20px;">
+
+<hr />
+
+</div>
+<div><i>Changelog since original publication in mid-2022:</i>
+<ul>
+ 	<li>2023-Oct: Added New Voices in Gaming, tidied up wording, added local Indigenous contribution. Set up footnotes section and moved a few parentheticals there. Updated &#8220;changing your bank&#8221; due to defunct WaPo link.</li>
+</ul>
+</div>
+</div>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Spirit Island in a paper analyzing island-themed board games</title>
+		<link>https://rericreuss.com/2021/06/30/spirit-island-in-critical-analysis/</link>
+		
+		<dc:creator><![CDATA[Eric]]></dc:creator>
+		<pubDate>Wed, 30 Jun 2021 19:13:38 +0000</pubDate>
+				<category><![CDATA[News]]></category>
+		<category><![CDATA[Spirit Island]]></category>
+		<category><![CDATA[Paper]]></category>
+		<guid isPermaLink="false">https://rericreuss.com/?p=724</guid>
+
+					<description><![CDATA[Dr. Hannah Fair of the University of Oxford has published an analysis of island-themed board games, looking at how they reflect society&#8217;s ideas of the world &#8211; environmental, social, and&#8230; ]]></description>
+										<content:encoded><![CDATA[		<div data-elementor-type="wp-post" data-elementor-id="724" class="elementor elementor-724">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-b555bca elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="b555bca" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-30749e2" data-id="30749e2" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-cc7acb1 elementor-widget elementor-widget-text-editor" data-id="cc7acb1" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Dr. Hannah Fair of the University of Oxford has published an analysis of island-themed board games, looking at how they reflect society&#8217;s ideas of the world &#8211; environmental, social, and more. The main three games examined are <a href="https://boardgamegeek.com/boardgame/24508/taluva"><i>Taluva</i></a>, <i><a href="https://boardgamegeek.com/boardgame/104020/vanuatu">Vanuatu</a></i>, and <a href="https://boardgamegeek.com/boardgame/162886/spirit-island"><i>Spirit Island</i></a>. It&#8217;s a really neat read if you enjoy academic papers; I was struck by a number of its observations &#8211; e.g., the difference in stance between the base game of <i>Vanuatu</i> and its <i>Rising Tide</i> expansion &#8211; and felt its take on Spirit Island was insightful, interesting, enheartening, and fair. <a href="https://doi.org/10.24043/isj.165">Take a look! (PDF)</a></p>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Colonialism and Games</title>
+		<link>https://rericreuss.com/2021/02/23/colonialism-and-games/</link>
+		
+		<dc:creator><![CDATA[Eric]]></dc:creator>
+		<pubDate>Tue, 23 Feb 2021 02:43:58 +0000</pubDate>
+				<category><![CDATA[Boardgame Industry]]></category>
+		<category><![CDATA[Links]]></category>
+		<guid isPermaLink="false">https://rericreuss.com/?p=549</guid>
+
+					<description><![CDATA[Several articles and videos addressing colonialism &#38; board games came out recently (Feb 2021). It&#8217;s made me think I should start keeping a reference list of links on the topic.&#8230; ]]></description>
+										<content:encoded><![CDATA[		<div data-elementor-type="wp-post" data-elementor-id="549" class="elementor elementor-549">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-cef8656 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="cef8656" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-a2e8719" data-id="a2e8719" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-c74dff5 elementor-widget elementor-widget-text-editor" data-id="c74dff5" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							Several articles and videos addressing colonialism &amp; board games came out recently (Feb 2021). It&#8217;s made me think I should start keeping a reference list of links on the topic. If there&#8217;s a good read/watch/resource that I&#8217;ve missed, or if you&#8217;re a creator who&#8217;d like to be credited differently, please <a style="background-color: #ffffff;" href="https://rericreuss.com/getting-in-touch/">drop me a line</a>!
+
+When I know that a creator is speaking as someone from a colonized culture, I&#8217;ve marked the title with a *. (It might also be true for some unmarked ones if I&#8217;m unaware / uncertain.)
+<h3>Videos</h3>
+<ul>
+ 	<li><a href="https://www.youtube.com/watch?v=VQuFSxs9VXA">Colonialism &#8211; the Board Game Struggle</a>*, by Efka of No Pun Included &#8211; both very personal and broadly applicable. (30m, 2021)</li>
+ 	<li><a href="https://www.youtube.com/watch?v=ytCmiFwr8GQ">Checking Slavery and Colonialism in Board Games</a>* (and <a href="https://www.youtube.com/watch?v=xpgXq6CvlWA">a follow-up</a>), by Jason Perez of Shelf Stories &#8211; about history and erasure, plus a pair of case studies / closer looks at <i>Puerto Rico</i> and <i>Endeavor: Age of Sail</i> (25m, 2021 and 16m, 2021)
+<ul>
+ 	<li>Jason also has a video <a href="https://www.youtube.com/watch?v=iArLXVNbgzc">re-imagining <i>Puerto Rico</i></a> as a non-colonial and more-thematic game .</li>
+</ul>
+</li>
+ 	<li><a href="https://www.youtube.com/watch?v=5zbknE1BZqI&amp;vl=en">Decolonising Games</a>*, by Conquest of Dread &#8211; more focused around video games and tabletop RPGs, but many of the core explanations and points apply to board games as well. (33m, 2019)</li>
+ 	<li><a href="https://www.gdcvault.com/play/1025686/Board-Game-Design-Day-Better">Better Board Games Through Cultural Engagement</a>, by Rik Eberhardt and Mikael Jakobsson of the MIT Gamelab &#8211; a GDC talk presenting findings from design workshops engaging with residents in Colombia and Puerto Rico. (30m, 2019)</li>
+ 	<li><a href="https://www.youtube.com/watch?v=MO_wKdr0RoM">Spirit Island Cultural Analysis</a> &#8211; a 3-way discussion between Jason Perez of Shelf Stories(*), Cole Wherle, and Dr. Mary Flanagan about colonialism in board games through the lens of Spirit Island. (62m, 2023)</li>
+<li><a href="https://www.youtube.com/watch?v=QKXTd2IrNlg">The Imperial Dilemma of Civilization V</a>, by Crocodile Gambit &#8211; entirely about a video game, but it explains a bunch of concepts and nomenclature that&#8217;s not at all specific to video games in the first half-hour, and the actual video game analysis that follows has a great deal of salience for board game designs as well (especially 4X designs).
+</li>
+</ul>
+<h3>Posts / Essays / Editorials</h3>
+<ul>
+ 	<li><a href="https://www.theatlantic.com/culture/archive/2021/07/board-games-have-colonialism-problem/619518/">The Board Games That Ask You To Re-Enact Colonialism</a>, by Luke Winkie in The Atlantic. (2021) A really good mainstream-oriented overview of the problem.</li>
+ 	<li><a href="https://dailyworkerplacement.com/2021/02/15/colonialism-in-and-of-board-games-part-one/">Colonialism In and Of Board Games, part 1</a> and <a href="https://dailyworkerplacement.com/2021/02/22/colonialism-in-and-of-boardgames-part-two/">part 2</a>, by Nicole H of The Daily Worker Placement. (2021)</li>
+ 	<li><a href="https://aestheticsforbirds.com/2019/08/21/playing-games-with-history-philosophers-on-the-ethics-of-historical-board-games/">Playing Games with History: Philosophers on the Ethics of Historical Board Games</a>, a trio of essays by <a href="https://www.otterbein.edu/faculty/stephanie-patridge/">Stephanie Patridge</a>, <a href="https://philrel.appstate.edu/faculty-staff/christopher-bartel">Chris Bartel</a>, and <a href="https://objectionable.net">C. Thi Nguyen</a> in the wake of the controversy about <i>Scramble for Africa</i>. Each essay has its own insights to offer; don&#8217;t stop at just one! (2019)</li>
+ 	<li><a href="https://www.nytimes.com/2019/08/01/style/board-games-cancel-culture.html">Should Board Gamers Play the Role of Racists, Slavers, and Nazis?</a>, by Kevin Draper in the New York Times. (2019) Also a reaction to the controversy over <i>Scramble for Africa</i>, though pitched much more mainstream rather than for a gaming audience.</li>
+ 	<li><a href="https://www.vice.com/en/article/4aggzm/civilization-and-strategy-games-progress-delusion">&#8216;Civilization&#8217; and Strategy Games&#8217; Progress Delusion</a>, by Gabriel Soares on VICE. Focused on videogames, but applicable to the entire 4X genre in any medium. (2019)
+<ul>
+ 	<li>
+<div><i>Note: a comment elseweb on the above article mentions that the complex kinship relationships depicted aren&#8217;t static / set in stone as is implied, but are dynamic, linking to <a href="https://journals.openedition.org/actesbranly/526?lang=en#ftn5">this journal article</a> by way of reference.</i></div></li>
+</ul>
+</li>
+ 	<li>
+<div><a style="background-color: #ffffff;" href="https://gamingforjustice.wordpress.com/2016/09/09/waka-tanka-a-response/">Waka Tanka: a Response to Bruno Faidutti</a>, by Brendon on Reading and Gaming for Justice &#8211; a response to Bruno Faidutti&#8217;s writings on Waka Tanka and &#8216;Postcolonial Catan&#8217; essay. It explains quite well why they&#8217;re problematic, and covers a number of important issues. (2016)</div>
+<ul>
+ 	<li>
+<div>I&#8217;ve decided to unlink <b>Postcolonial Catan</b>, by Bruno Faidutti (French version at top, English below &#8211; keep scrolling, it&#8217;s long) because while the overview of colonialism and Orientalism is decent, the article also has some real issues &#8211; e.g., the author&#8217;s defense of how Europeans see Native Americans is a textbook example of erasing real, modern peoples by appropriating and romanticizing their past while ignoring their present-day existence. However, it&#8217;s certainly worth mentioning; if nothing else it really helped boost awareness of and discussion about colonialism &amp; exoticism in the board game industry. If you&#8217;d like to read it, you can find it linked from &#8220;Waka Tanka: a Response to Bruno Faidutti&#8221;, above. (2014)</div></li>
+</ul>
+</li>
+</ul>
+<h3>Books</h3>
+<ul>
+ 	<li><a href="https://mitpress.mit.edu/9780262047913/playing-oppression/">Playing Oppression</a> by Dr. Mary Flanagan (2023)</li>
+</ul>
+<div>
+<h3>Other Links</h3>
+<ul>
+ 	<li><a href="http://gamelab.mit.edu/research/games-and-colonialism/">Games &amp; Colonialism</a> at the MIT Gamelab &#8211; a list of projects, workshops, and more.</li>
+ 	<li><a href="https://ludology.libsyn.com/ludology-episode-197-empires-up-in-arms">Ludology Episode 197: Empires Up in Arms</a> &#8211; podcast episode with Mikael Jakobsson and Rik Eberhardt of the MIT Gamelab as guests. (2019)</li>
+</ul>
+<div></div>
+<div><i>I&#8217;m using * to note entries where the creator / speaker / author is speaking as someone from a colonized culture. It might be true for some unmarked entries as well where </i><i>I&#8217;m just not aware of that fact</i><i>.</i></div>
+</div>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Kids and Board Games</title>
+		<link>https://rericreuss.com/2021/02/21/kids-and-board-games/</link>
+		
+		<dc:creator><![CDATA[Eric]]></dc:creator>
+		<pubDate>Sun, 21 Feb 2021 00:23:56 +0000</pubDate>
+				<category><![CDATA[Q&A]]></category>
+		<category><![CDATA[Thoughts]]></category>
+		<category><![CDATA[Kids]]></category>
+		<category><![CDATA[Playing Games]]></category>
+		<guid isPermaLink="false">https://rericreuss.com/?p=397</guid>
+
+					<description><![CDATA[Sometimes I get asked about kids &#38; boardgaming, for recommendations either of games or of how to approach games. While this isn&#8217;t a focus of mine, I can say a&#8230; ]]></description>
+										<content:encoded><![CDATA[		<div data-elementor-type="wp-post" data-elementor-id="397" class="elementor elementor-397">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-dd649d0 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="dd649d0" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2a6ea24" data-id="2a6ea24" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-54d2954 elementor-widget elementor-widget-text-editor" data-id="54d2954" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Sometimes I get asked about kids &amp; boardgaming, for recommendations either of games or of how to approach games. While this isn&#8217;t a focus of mine, I can say a few things based on my own parenting experience, on seeing friends&#8217; kids, and on my knowledge about games and how humans interact with them. (Combined with a dash of knowledge from a relative who works in early childhood education.)</p>
+<h4>The one constant</h4>
+<p>Children vary.</p>
+<p><i>&#8220;Nothing will teach you more about your first kid than having a second one&#8221;</i> is advice I got that proved incredibly true.&nbsp;Many things about our first child that I might have assumed were just how kids worked, or a function of our parenting / home environment, were, in fact, flukes of who that one child happened to be.</p>
+<p>So: some kids will take to boardgames in a hot second, while others will be completely disinterested &#8211; or interested but not have the focus &#8211; or interested but mostly because their older sibling is &#8211; or be more interested in hurling the pieces as hard against the window as they can. And then in a year or two, it might all be different.</p>
+<h4>Making up games</h4>
+<p>While any given kid may or may not take to <i>board</i> games, virtually all children play <i>games</i> of some sort &#8211; it&#8217;s one of the ways humans are wired to learn. Play-pretend, &#8220;how far can you jump?&#8221;, The Floor Is Lava, and a lot more.</p>
+<p>Kids are game designers. They&#8217;ll make up games on the spot &#8211; &#8220;see if you can do this thing!&#8221; &#8211; or, in the middle of a game, will change the rules without a second&#8217;s hesitation to make it more fun. (Usually for themselves &#8211; it&#8217;s developmentally normal for young kids to be centered on their own desires and experiences.)</p>
+<p>Their designs may or may not result in games that are fun for others, or which are replayable in other circumstances, but we don&#8217;t measure kids who are learning to walk by the yardstick of adult athletes; we shouldn&#8217;t judge kids making games as if they were adult game designers. They&#8217;re not doing it for the same purposes, and trying something a bunch and seeing what works &amp; what doesn&#8217;t is how you eventually get good at something.</p>
+<h4>Following the Rules</h4>
+<p>Kids &#8211; particularly younger ones &#8211; are apt to partly or completely ignore the rules of the game you&#8217;re trying to teach them.</p>
+<p>I&#8217;ve seen parents take a variety of approaches to this. Here&#8217;s the one which worked for me and my kids (YMMV!):</p>
+<ul>
+<li>I always made a clear distinction between &#8220;we&#8217;re playing this game!&#8221; and &#8220;we&#8217;re playing with the pieces of this game!&#8221;</li>
+<li>Neither was intrinsically better, we could (and did) happily do either together.</li>
+<li>But they were different activities, and if we wanted to shift from one to the other, everyone involved needed to be okay with the change.</li>
+</ul>
+<p>So when the inevitable &#8220;I&#8217;m going to start taking pieces from your board!&#8221; (or the like) began, I&#8217;d call out that that was a change, and (weighing both my own mood and my kid&#8217;s resilience at the time) decide whether I was okay with the shift, or if that change would mean I was done playing &#8211; not in a punishing way, just an &#8220;I don&#8217;t especially want to do this&#8221; way. If the latter, I&#8217;d explain this, and ask if we could keep the game on-track (and maybe play with the pieces after we were done?)</p>
+<p>Sometimes this worked wonderfully, sometimes there were meltdowns; but over time the basic presumption of &#8220;you need to check with people before changing the game on them&#8221; sunk in (which was also useful once we got to the concept of house rules). It undoubtedly helped that my kids were both strongly motivated to want to play games by seeing them played as a common household activity, so &#8220;Daddy doesn&#8217;t want to play if I behave this way&#8221; was a consequence they cared about.</p>
+<h4>Winning</h4>
+<p>I sometimes hear folks say that they never take it easy on kids when playing, or how they&#8217;ll never let <i>their</i> (future) kids win. That approach might work OK for some kids, but taken as a general rule it&#8217;s a pathological mistake, bad for both kids and the hobby. Kids vary <i>widely</i> in temperament, and while some will derive tremendous motivation from being beaten over and over again, others will derive equally tremendous <i>demotivation</i>&nbsp;from it, or conclude that they just don&#8217;t like board games. &#8220;That&#8217;s what my parents did, and it worked for me!&#8221; is evidence of nothing other than selection bias &#8211;&nbsp;<i>it worked for you</i>. <span style="font-weight: bold;">Children vary</span>.</p>
+<p>To put it another way: when I was a yellow belt in karate and I sparred against a black belt, I didn&#8217;t want the black belt to bring their A-game. It wouldn&#8217;t have taught me anything, and wouldn&#8217;t have been any fun. The best folks to spar with were either those at a roughly similar skill level, or people who were better than me&#8230; but good at scaling down that skill to create a match that was interesting for both of us and instructive for me.</p>
+<p>Dialing down your game when playing with kids doesn&#8217;t rob kids of &#8220;genuine victory&#8221;, because you don&#8217;t have to lie about how hard you&#8217;re playing. Once they&#8217;re past early toddlerhood, you can even ask them how hard they want you to play &#8211; they might want a challenge one day, and an easy fun time another.</p>
+<p>I&#8217;ve known folks who can&#8217;t enjoy board games because not-winning is so unpleasant, so I tried raising my kids to not invest too much desire into victory. At first, it worked great &#8211; my older child and I celebrated&nbsp;<i>anyone</i>&nbsp;winning the game, and having had a good time. But around age 4-5, they began to care really deeply about winning &#8211; I still don&#8217;t know why &#8211; and it&#8217;s been a slow road back to &#8220;try to win, but enjoy the game even if you don&#8217;t win&#8221;. For a while, they would only acquiesce to playing games if there was no winner: we would still try to score/do as well as possible, and we could even total points at the end and see who&nbsp;<i>would</i>&nbsp;have won, so long as no victor was <i>formally declared</i>.</p>
+<h4>Frustrating Classics</h4>
+<p>A variety of classic mass-market games are published for children during which you make basically no decisions. Some also last for an arbitrarily long time. For adults who like thinky games, these can be frustrating to play, but it&#8217;s worth remembering that they do have some merits:</p>
+<ol>
+<li>&#8220;Let&#8217;s see what happens!&#8221; is a totally valid source of pleasure. There can be joy in watching a pachinko ball, or a sports game, or reading a book with a compelling plot <i>just to find out how it goes</i>. Kids haven&#8217;t played Tic-Tac-Toe / Candyland / Chutes and Ladders enough for the experience to be burdened with a wearying over-familiarity.</li>
+<li>Games like this can still help teach basic skills like &#8220;how to wait for your turn&#8221; or &#8220;how to draw a card/roll a die then follow the instructions&#8221;</li>
+</ol>
+<p><b>The good news is that there are newer games which satisfy both of these things.</b> Some still offer minimal to no decisions (eg: My First Orchard), but are at least novel for the first play or two. And others (eg: many games by <a href="https://boardgamegeek.com/boardgamepublisher/5654/peaceable-kingdom">Peaceable Kingdom</a> or <a href="https://www.habausa.com/shop/games/">Haba</a>) do involve at least a little bit of thought &#8211; and can get a kid used to making <i>decisions</i> on their turn, however minor, which I suspect makes transitioning to other games a lot easier.</p>
+<h4>&#8220;Age Appropriate&#8221; on the box</h4>
+<p>So, you know how most board games have &#8220;For ages N and up&#8221; on the side of the box?</p>
+<p>For <i>most</i>&nbsp;(not all) hobby games, that number N has little to do with the complexity of the game.</p>
+<p>If a product is intended for kids, it falls under certain regulations designed to make sure that it&#8217;s safe. This means product testing, and product testing costs money. What &#8220;safe&#8221; means varies by age &#8211; the younger an age you want to say the game is okay for, the more rigorous testing it requires, and the more up-front money the publisher needs to spend on testing.</p>
+<p>For mass-market games that sell zillions of copies, this isn&#8217;t a huge deal: the one-time expense gets spread out over a very large number of copies. Eg, if product testing cost $20,000 <i>(a completely made-up cost)</i>, and 400,000 copies of the game were printed, that&#8217;s only $0.05 per game, which wouldn&#8217;t significantly boost the sales price or change the financial scope of the project. But the vast majority of hobby games have print-runs on the order of 2,000 to 10,000 copies. For 5,000 copies &#8211; a fairly standard print-run &#8211; that&#8217;d be $4 per game manufactured, which due to how pricing and distribution work would make the MSRP about $20 higher for the publisher <i>just to break even</i> &#8211; assuming they sold every single copy, and the higher price would make doing that more difficult! Unless a publisher is decently confident that the lower age on the box will prompt more sales than will be lost by the higher price &#8211; and has the liquidity to do the testing up-front &#8211; they&#8217;re pretty likely to just list it as &#8220;ages 13/14 and up&#8221;.</p>
+<p>There are exceptions, of course: the larger the print-run, the more financially feasible product testing becomes. Games which are hits (or the company has good reason to believe will sell well) can support testing better, as can companies with good financial reserves / stability. Testing for age 10+ isn&#8217;t nearly as rigorous / expensive as testing for 3+, so you&#8217;ll see it more often. Etc.</p>
+<h4>&#8220;Age Appropriate&#8221; for the kid</h4>
+<p>As any parent knows, every child is non-average in some ways &#8211; it&#8217;s strikingly unlikely that any specific kid falls&nbsp;<i>precisely</i> on the 50th percentile of every single measure of social, physical, and mental development.</p>
+<p>Also, playing board games is aided by a wide variety of skills<sup>1</sup>&nbsp;(including many which do not magically appear with age but require experience and practice to develop) as well as exposure to many different board games, so the brain can shorthand &#8220;oh, this game/mechanic works just like that other game/mechanic&#8221; (maybe &#8220;&#8230;with thus-and-such a difference&#8221;).</p>
+<p>And, most importantly: kids vary.</p>
+<p>Given all this, age recommendations can&#8217;t really be anything other than a very, very rough approximation.</p>
+<h4><span style="color: #333333; font-family: inherit; font-size: 22px;">Recs</span></h4>
+<p>There are a bazillion good kids&#8217; games out there, and I haven&#8217;t even heard of most of them, but here are some my kids have enjoyed. At the time of writing, my younger has just recently turned 6, and I&#8217;m not including games that only my older has played. These are listed in the rough order in which my kids encountered them (and didn&#8217;t bounce off), so the earlier ones are good for 3-year-olds while the later ones have been good for a 6-year-old with some games experience. (Which is very relevant; see the previous section.)</p>
+<ul>
+<li><a href="https://boardgamegeek.com/boardgame/41302/first-orchard"><b>First Orchard</b></a> &#8211; pretty much a &#8220;see what happens&#8221; game, but is designed for 2-year-olds and has these great chunky wooden fruits that are fun to play with completely apart from the game.</li>
+<li><a style="background-color: #ffffff;" href="https://boardgamegeek.com/boardgame/132322/snug-bug-rug"><b>Snug as a Bug in a Rug</b></a> &#8211; turn-based cooperative color/shape/number-matching game where you get to hide round flat bug pieces under the &#8220;rug&#8221; (board). Guaranteed to terminate in 24-27 turns or so. Decisions actually matter!</li>
+<li><a href="https://boardgamegeek.com/boardgame/1197/blink"><span style="font-weight: bold;">Blink</span></a>&nbsp;&#8211; quick (real-time) card game of matching color/number/shapes. Once a kid&#8217;s old enough to be playing at some sort of speed, it&#8217;s easy to handicap by giving unequal deck sizes.</li>
+<li><b><a href="https://boardgamegeek.com/boardgame/2453/blokus">Blokus</a></b>&nbsp;&#8211; adult game that works well for kids. Bright, colorful pieces, and only has 3 rules. <b>Not</b> good for toddlers (the pieces are a choking hazard, and the physical manipulation can be tricky), but fun once a kid&#8217;s past putting everything in their mouth.</li>
+<li><a href="https://boardgamegeek.com/boardgame/147370/robot-turtles"><b>Robot Turtles</b></a>&nbsp;&#8211; an adult-and-child kinda-game-kinda-activity that helps teach spatial / logical thought and action programming. I&#8217;m not sure we played this as an actual game more than a handful of times, but the kids had a lot of fun with it on their own as well.</li>
+<li><a href="https://boardgamegeek.com/boardgame/94483/hoot-owl-hoot"><b>Hoot Owl Hoot</b></a>&nbsp;&#8211; cooperative &#8220;get the owls back to their nest before daybreak&#8221; game. Decisions matter.</li>
+<li><a href="https://boardgamegeek.com/boardgame/8203/hey-s-my-fish"><b>Hey, That&#8217;s My Fish!</b></a> &#8211; penguins! A very clever abstract positional underneath a fun/wacky theme.</li>
+<li><a href="https://boardgamegeek.com/boardgame/112598/monster-factory"><b>Monster Factory</b></a>&nbsp;&#8211; while the scoring rules are a touch complex for young kids, the gameplay itself is gloriously straightforward, and <i>you get to make awesome-looking monsters</i>!</li>
+<li><a href="https://boardgamegeek.com/boardgame/229638/chiyawa"><b>Chiyawa</b></a>&nbsp;&#8211; a roll-and-move my kids took to. Once pieces enter the board, they&#8217;re moving in 2 dimensions, so there&#8217;s some thought and positioning, though it&#8217;s still pretty light.</li>
+<li><a href="https://boardgamegeek.com/boardgame/204583/kingdomino"><b>Kingdomino</b></a>&nbsp;&#8211; building a kingdom out of terrain-based domino tiles. <b>Incredibly</b> versatile in types of players it can please; I&#8217;ve enjoyed it with a 3-year-old and with boardgaming veterans. (Younger kids will definitely need help with scoring, though.)</li>
+<li><a href="https://boardgamegeek.com/boardgame/41916/magic-labyrinth"><b>The Magic Labyrinth</b></a>&nbsp;&#8211; a memory game where you&#8217;re traversing an invisible maze, and have to recall where the walls are. Very clever; uses magnets and a maze <i>beneath</i> the board.</li>
+<li><a href="https://boardgamegeek.com/boardgame/194655/santorini"><b>Santorini</b></a>&nbsp;&#8211; very simple game, very deep gameplay, and looks great on the table. Great introduction to variable player powers, the base game without them works fine, but the powers really spice things up.</li>
+<li><a href="https://boardgamegeek.com/boardgame/9674/ingenious"><b>Ingenious</b></a>&nbsp;&#8211; laying out colors into a common board, trying to make straight lines of color. Requires either good counting ability or an adult to score plays. Also sadly easy to jostle-scatter.</li>
+<li><a href="https://boardgamegeek.com/boardgame/16992/tsuro"><b>Tsuro</b></a>&nbsp;&#8211; very pretty, very quick (5-10 minute) game that, while it does have a bit of strategy/tactics, is more about enjoying the journey and seeing where you end up.</li>
+<li><a href="https://boardgamegeek.com/boardgame/236272/echidna-shuffle"><b>Echidna Shuffle</b></a>&nbsp;&#8211; echidnas picking up and delivering insects. Any player can move any echidna, so there&#8217;s the potential for players to throw problems at each other, but it&#8217;s always &#8220;delay&#8221;, not &#8220;destroy&#8221;.</li>
+<li><a style="background-color: #ffffff;" href="https://boardgamegeek.com/boardgame/125315/flowerfall"><b>Flowerfall</b></a>&nbsp;&#8211; dropping cards on a table from shoulder-height to try and score flowers. Built-in handicapping mechanism based on height!</li>
+<li><a href="https://boardgamegeek.com/boardgame/283155/calico"><b>Calico</b></a>&nbsp;&#8211; a pattern-making game about cats and quilts. The actual rules-other-than-scoring are incredibly simple, but it&#8217;s a very nice puzzley game for adults &#8211; you&#8217;re trying to satisfy three different desires (color, pattern, bonus tiles) with every placement. Rulebook has a family variant which omits the bonus tiles.</li>
+<li><a href="https://boardgamegeek.com/boardgame/302260/abandon-all-artichokes"><b>Abandon All Artichokes</b></a>&nbsp;&#8211; an Ascension-phenotype deck-wrecking game; your deck starts with 10 artichokes and you win when you draw a new hand with no artichokes in it.</li>
+</ul>
+<div><i>Addendum: from time to time I&#8217;ll edit this to add more games my kids have enjoyed:</i></div>
+<div>
+<ul>
+<li>1 year later: <a href="https://boardgamegeek.com/boardgame/131260/qwixx">Qwixx</a>, <a href="https://boardgamegeek.com/boardgame/251412/tour">On Tour</a> (requires being able to write numbers in a medium-small circle), <a href="https://boardgamegeek.com/boardgame/274093/quirky-circuits">Quirky Circuits</a>.</li>
+</ul>
+</div>
+<h4>Footnotes</h4>
+<p><sup>1</sup> From the basics of &#8220;taking turns&#8221; and &#8220;holding a hand of cards without destroying them&#8221; up through all manner of other skills infrequently called out but nonetheless highly relevant: parsing information presented on cards, looking-ahead to imagine future board states or the consequences of actions, remembering the names of components, recognizing common patterns like &#8220;infrastructure vs. victory&#8221;, weighing tradeoffs with imperfect understanding, learning rules from a teacher, learning rules from a rulebook, keeping &#8220;how do I/we win?&#8221; in the back of the head, and many more.</p>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Site is live!</title>
+		<link>https://rericreuss.com/2020/12/18/site-is-live/</link>
+		
+		<dc:creator><![CDATA[Eric]]></dc:creator>
+		<pubDate>Fri, 18 Dec 2020 19:31:56 +0000</pubDate>
+				<category><![CDATA[Site Updates]]></category>
+		<guid isPermaLink="false">https://rericreuss.com/?p=248</guid>
+
+					<description><![CDATA[It&#8217;s on the bare-bones side, but serves its basic purpose of being a central point for &#8220;here&#8217;s how to get in touch with me&#8221;, &#8220;what games have I made&#8221;, and&#8230; ]]></description>
+										<content:encoded><![CDATA[
+<p>It&#8217;s on the bare-bones side, but serves its basic purpose of being a central point for &#8220;here&#8217;s how to get in touch with me&#8221;, &#8220;what games have I made&#8221;, and linking to the signup form for email updates.</p>
+
+
+
+<p>Some things I hope to add: answers to frequently asked questions (about specific games and game design in general), links to interviews / podcasts I&#8217;ve done, links to game design resources and other recommendations.</p>
+
+
+
+<p>I don&#8217;t <em>think</em> I&#8217;m going to go full-on blogger about my game design in-process. As much as I&#8217;d love to build enthusiasm (in myself and others) by discussing what I&#8217;m working on, I already feel so constrained in the time I have to work that spending cycles on describing it seems unwise.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

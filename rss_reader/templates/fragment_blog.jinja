@@ -1,0 +1,4 @@
+<div id="blog-{{ blog.id }}">
+  <button hx-get="/blogs/{{ blog.id }}/edit" hx-target="#blog-{{ blog.id }}">Edit</button>
+  <a href="/posts?blog_id={{ blog.id }}">{{ blog.title }}</a>
+</div>

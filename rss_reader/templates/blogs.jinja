@@ -1,0 +1,11 @@
+{% extends "base.jinja" %}
+{% block body %}
+<ul>
+  {% for blog in blogs %} 
+    <li>
+      {% include "fragment_blog.jinja" %}
+    </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

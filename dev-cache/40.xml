@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://www.qword.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.qword.net/" rel="alternate" type="text/html" /><updated>2024-04-07T16:01:23-04:00</updated><id>https://www.qword.net/feed.xml</id><title type="html">QWORD</title><subtitle>Thoughts about how the world works, from a technologist.</subtitle><author><name>QWORD</name></author><entry><title type="html">You should write deliberately bad tools</title><link href="https://www.qword.net/2024/04/07/you-should-write-bad-tools.html" rel="alternate" type="text/html" title="You should write deliberately bad tools" /><published>2024-04-07T15:24:53-04:00</published><updated>2024-04-07T15:24:53-04:00</updated><id>https://www.qword.net/2024/04/07/you-should-write-bad-tools</id><content type="html" xml:base="https://www.qword.net/2024/04/07/you-should-write-bad-tools.html"><![CDATA[<blockquote>
+  <p>“One can waste years this way, systematically postponing precisely the things one cares about the most.”</p>
+</blockquote>
+
+<blockquote>
+  <p>Oliver Burkeman, Four Thousand Weeks: Time Management for Mortals</p>
+</blockquote>
+
+<p>I’ve been recently reading a little bit about time management. Time management philosophy is divided into two camps:</p>
+
+<ol>
+  <li>
+    <p>How can I get more done in each day? Show me the productivity hacks, calendar-juggling techniques, and methods to slay my to-do list.</p>
+  </li>
+  <li>
+    <p>I’m going to die some day so my time is limited. How can I avoid squandering it on stuff that doesn’t matter?</p>
+  </li>
+</ol>
+
+<p>Number 1 is the rise-and-grind <a href="https://www.youtube.com/watch?v=_o7qjN3KF8U">hustle approach</a> that’s you’ve likely heard of already. I’m not going to talk about it here. It’s the second approach that’s plenty more interesting –</p>
+
+<p>I first read Seneca’s “On The Shortness of Life” when I was much younger, and I mostly read it for entertainment. I recently looked at Four Thousand Weeks by Oliver Burkeman, which is an important and very recommended read in it’s own right but I’ll let you in on the core idea: Life is probably about 4000 weeks long if you live until 80, and then there’s no more time after that. Whatever attention you give your financial spending, you should give at least twice as much to your time.</p>
+
+<p>So, consider this interaction that I’ve seen in real life, several times:</p>
+
+<blockquote>
+  <p>Alice: Hey, could somebody fetch me the value for $VENDOR_API_KEY in production?</p>
+</blockquote>
+
+<blockquote>
+  <p>Bob: Yes, I sure can help you with that!</p>
+</blockquote>
+
+<ul>
+  <li>Bob navigates to the AWS console, where he is prompted to type in his password.</li>
+  <li>Bob types in his master password to unlock his password manager.</li>
+  <li>Bob’s password manager fills in his account credentials and he clicks login.</li>
+  <li>Bob then has to unlock his phone to accept his 2fa authentication from an app.</li>
+  <li>Bob, now signed into AWS, changes his account role to the appropriate one.</li>
+  <li>Bob navigates over to the AWS secrets manager, but has forgotten if the key is named $VENDOR_API_KEY or $API_KEY_VENDOR. Or is it $API-KEY-VENDOR?</li>
+  <li>Bob swaps over to Slack to copy the right name, then pastes it into the search.</li>
+  <li>Bob doesn’t find it. He thinks maybe Alice was mistaken about the excat name, so he does a few more searches and then does find that it’s named just a little differently.</li>
+  <li>Bob has the value now, but now needs to send it to Alice.</li>
+  <li>Bob fetches Alice’s SSH key off of github, and then encrypts the secret with <a href="https://github.com/FiloSottile/age">age</a> after first going through his shell history to figure out how he has done it before.</li>
+  <li>Bob pastes the encrypted secret to Alice over Slack. <em>“Here you go, it was no problem at all!”</em></li>
+</ul>
+
+<p>Bob is some sort of moron, but maybe it’s only apparent when written out like this. Time seems infinite when each day comes after the next, in the same manner that the Earth seems flat when observed a few metres at a time, and this task looks simple when thought of as one step at a time. It’s not really that simple.</p>
+
+<p>Perhaps I was a little bit unfair to Bob and they’re not truly the sort of person to go up the wrong-direction escalator for about three minutes before realizing it, but I really do see stuff like this so often. Typing in your password three times before you can get anything done, juggling things in your clipboard, <em>click-ops’ing</em> your way through tasks – if you have to do something like this manually, you ought to kick yourself the third time.</p>
+
+<p>Programming can be described as a lot of things, and one of those things is that it’s the <strong>replacement of human labour for compute</strong>.
+ Bob writes features and makes buttons bluer day-in and day-out, but easily forgets that they can make <em>computers do stuff</em> for them. And with only 4000 weeks or so of life, it’s plenty nice to have computers do stuff for me.</p>
+
+<p>So I kindly instructed Bob that it might make sense to write something to do these sorts of menial tasks on his behalf, and showed them this comic put together by XKCD:</p>
+
+<p><img src="https://imgs.xkcd.com/comics/is_it_worth_the_time.png" alt="XKCD comic" style="display:block; margin-left:auto; margin-right:auto" /></p>
+
+<p>You may have seen this table before – the implications of it are actually rather surprising. Firstly, clip all values by 20% assuming that you’ll only stay at a company for roughly four years instead of five, when most stock vest handcuffs come off. Also note that these are absolute lengths of time and not work-hours. Really study it and think about each value here.</p>
+
+<ul>
+  <li>
+    <p>The most surprising thing in my opinion is that you’re permitted to spend more than <em>six months</em> working on shaving off minutes from a CI pipeline that runs 50 builds a day.</p>
+  </li>
+  <li>
+    <p>The most common “rule” I’ve memorized from this is that tasks of ~5 minutes permit at least ~one work-day to eliminate, when done at least monthly.</p>
+  </li>
+  <li>
+    <p>Not all time is equal. Five minutes of active click-ops is not the same as waiting for a build for five minutes. There is a second dimension that I like to call “agony” that’s also important.</p>
+  </li>
+</ul>
+
+<p>This should be at least a little convincing, but “writing a tool is a project in of itself!”, cries Bob. XKCD is again poignant on this issue:</p>
+
+<p><img src="https://imgs.xkcd.com/comics/automation.png" alt="XKCD comic" style="display:block; margin-left:auto; margin-right:auto" /></p>
+
+<p>Bob takes your advice, and says “this would be a good opportunity to learn Rust or Haskell!” Cracking their knuckles, they download rustup, set up cargo, research into what IDE plugins there are – or install GHC and do the same–</p>
+
+<p>No, no NO <strong>NO</strong>! This isn’t the time to learn a language – especially not one that requires you to be precise with what you mean, or to really enjoy the task. OK, you can make <em>some</em> affordances, but the goal here is to <em>maximize your free time</em> and that likely means <a href="https://www.youtube.com/watch?v=uwajp0g-bY4">avoiding any brilliant languages</a> and picking those that align with writing <strong>the shittiest thing that is going to work</strong>, profiting as much as you can from open-source code others have written, and moving on with your life. The only difference between a script and a program is that scripts are deliberately bad.</p>
+
+<blockquote>
+  <p>“Oh,” Bob moans. “I’ll need an API key for this service, and they don’t have an SDK in Python so I’ll have to write one to make the API calls-“</p>
+</blockquote>
+
+<p>No. Get Selenium or Playwright. Automate some clicking. Ask a GPT to rewrite some CURLs into real request code. Move on.</p>
+
+<blockquote>
+  <p>“But,” Bob says, “I need to put this user and password into somewhere. I’ll set up Hashicorp Vault, put in the keys–”</p>
+</blockquote>
+
+<p><strong>No</strong>. Put it in a text file and throw it in <code class="language-plaintext highlighter-rouge">/tmp</code>.</p>
+
+<blockquote>
+  <p>“Okay, sometimes this thing crashes if it’s ran too long. I’ll take a heap dump, measure the memory–”</p>
+</blockquote>
+
+<p>Come on. Just restart it every hour with a cron. Next.</p>
+
+<p>For myself, I have a collection of embarrasingly bad tools that are unshareable and won’t really work for others. They handle all sorts of things that are otherwise papercuts, and it makes me smile when I run them and they <em>do things for me</em>. It doesn’t matter that they’re bad. It’s almost the point. I save my best work and energy for my actual projects.</p>
+
+<p>Life is only so long. I haven’t thought so far as what I’d really like to do with my limited time in my life, but I know that clicking around in dashboards and consoles isn’t it.</p>]]></content><author><name>QWORD</name></author><summary type="html"><![CDATA[“One can waste years this way, systematically postponing precisely the things one cares about the most.”]]></summary></entry><entry><title type="html">The use and abuse of the dev branch pattern</title><link href="https://www.qword.net/2023/10/22/the-use-and-abuse-of-the-dev-branch.html" rel="alternate" type="text/html" title="The use and abuse of the dev branch pattern" /><published>2023-10-22T00:24:53-04:00</published><updated>2023-10-22T00:24:53-04:00</updated><id>https://www.qword.net/2023/10/22/the-use-and-abuse-of-the-dev-branch</id><content type="html" xml:base="https://www.qword.net/2023/10/22/the-use-and-abuse-of-the-dev-branch.html"><![CDATA[<p>Have you ever wanted to make local changes to a repository for your own benefit, but don’t want to send them remotely? Maybe you’ve once wanted to:</p>
+
+<ul>
+  <li>Work around scripts insisting that you have a tool like <code class="language-plaintext highlighter-rouge">yarn</code> installed globally, but you correctly recognize that as being stupid and need to wrap it?</li>
+  <li>Add some Dockerfiles for more productive development on your end, but only want to keep them to your machine?</li>
+  <li>Append some extra helpful commands to a <code class="language-plaintext highlighter-rouge">package.json</code> to quickly rebuild or test things?</li>
+  <li>Change some invocation flags (e.g. configs, heap size, local web server ports) to make stuff work better on your own system?</li>
+  <li>Patch out the execution of long-running tests locally, and leave them to the CI instead?</li>
+  <li>Nix-ify the development environment so that installing the build tools won’t conflict with anything else on your system?</li>
+  <li>Develop on OSX but the rest of the team is on Linux so your build scripts need adjusting?</li>
+  <li>Make literally any kind of suit-tailored change for your own setup?</li>
+</ul>
+
+<p>You’ve probably had to do such things before and ended up with a small mess of untracked files, changes that you need to be ‘careful not to accidentally stage’, and loose-leaf changes scattered in places.</p>
+
+<p>We can do much better. You can productively accomplish all this and more with a pattern I like to use and abuse: the <code class="language-plaintext highlighter-rouge">dev</code> branch.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>The idea is simple. We’ll make a new branch called <code class="language-plaintext highlighter-rouge">dev</code>, configure git to not push commits from it anywhere, put all our custom tailorings in it, and then learn how to use it as our new base of operations when writing pull requests.</p>
+
+<p>Oh, yeah, if you’re not using git then I don’t know what to tell you. Stop reading here, I guess.</p>
+
+<h3 id="make-a-new-branch-off-of-main-and-call-it-dev">Make a new branch off of <code class="language-plaintext highlighter-rouge">main</code>, and call it <code class="language-plaintext highlighter-rouge">dev</code>.</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout main
+<span class="nv">$ </span>git checkout <span class="nt">-b</span> dev
+</code></pre></div></div>
+
+<p>This branch will be what we use all the time now. We’re almost never going to spend time on <code class="language-plaintext highlighter-rouge">main</code>. The <code class="language-plaintext highlighter-rouge">dev</code> branch is where we hang out now. Especially on the weekends, or if it’s raining.</p>
+
+<h3 id="set-up-pre-commit-githooks">Set up pre-commit githooks</h3>
+
+<p>We’re going to be adding our bespoke, tailor-made commits to this branch and we don’t want to share them with anybody else. We’ll use git hooks to prevent accidental sharing.</p>
+
+<p>Inside the <code class="language-plaintext highlighter-rouge">.git/hooks/</code> folder, there should be a <code class="language-plaintext highlighter-rouge">pre-push.sample</code> example of a pre-push hook. If you don’t have it, you can find it on github <a href="https://github.com/git/git/blob/8c7e5059506c6840bfbd4dd8d1730784a5689719/templates/hooks--pre-push.sample">here</a>.</p>
+
+<p>Copy it without the <code class="language-plaintext highlighter-rouge">.sample</code>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp</span> .git/hooks/pre-push.sample .git/hooks/pre-push
+</code></pre></div></div>
+
+<p>The example shows how to prevent pushing of commits that start with “WIP”. We’re going to edit it to prevent pushing commits that contain “nocommit” anywhere in the message. Apply this patch:</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -19,6 +19,9 @@</span>
+ # This sample shows how to prevent push of commits where the log message starts
+ # with "WIP" (work in progress).
+ 
+<span class="gi">+
++echo "Checking for 'nocommit' commits"
++
+</span> remote="$1"
+ url="$2"
+ 
+<span class="p">@@ -40,11 +43,11 @@</span>
+                        range="$remote_oid..$local_oid"
+                fi
+ 
+<span class="gd">-               # Check for WIP commit
+-               commit=$(git rev-list -n 1 --grep '^WIP' "$range")
+</span><span class="gi">+               # Check for NOCOMMIT commits
++               commit=$(git rev-list -n 1 --grep '.*nocommit.*' "$range")
+</span>                if test -n "$commit"
+                then
+<span class="gd">-                       echo &gt;&amp;2 "Found WIP commit in $local_ref, not pushing"
+</span><span class="gi">+                       echo &gt;&amp;2 "Found NOCOMMIT commit in $local_ref, not pushing"
+</span>                        exit 1
+                fi
+        fi
+<span class="err">
+</span></code></pre></div></div>
+<p>By putting it into a file and using it like this:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>patch .git/hooks/pre-push &lt; patchfile
+</code></pre></div></div>
+
+<h3 id="test-the-push-hook">Test the push hook</h3>
+
+<p>We’re now going to make an ‘empty’ commit, and try to push it. It should fail. If it succeeds – no harm done, nobody is going to really notice anything.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"sentinel - nocommit - sentinel"</span> <span class="nt">--allow-empty</span>
+<span class="nv">$ </span>git push origin dev
+</code></pre></div></div>
+
+<p>Git should refuse to push this. If so, then it worked. If it did push just fine, delete the remote branch, debug it and try again.</p>
+
+<p><strong>Be very careful about making sure the hook is present. It is not stored in git itself, but only on your local filesystem. Take care if you move your dev branch to another machine and push.</strong></p>
+
+<h3 id="make-all-the-tailorings-you-want">Make all the tailorings you want</h3>
+
+<p>This “sentinel commit” will refuse to be pushed. That also means that any commits you make on this branch afterwards will also be refused. You can now make whatever tailorings you’d like, and commit them safely onto <code class="language-plaintext highlighter-rouge">dev</code>. They don’t need to contain the magic <code class="language-plaintext highlighter-rouge">nocommit</code> keyword from our pre-push hook. Only the sentinel commit does, and we’ve taken care of that.</p>
+
+<p>Go ahead and change those port numbers or build commands. Add whatever scripts or Dockerfiles you like. Nix-ify the entire build. Go wild. Commit it all.</p>
+
+<h2 id="how-to-get-work-done">How to get work done</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">dev</code> branch is now your base of operations. You will no longer create topic branches off of <code class="language-plaintext highlighter-rouge">main</code>, but will do so off of <code class="language-plaintext highlighter-rouge">dev</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout dev
+<span class="nv">$ </span>git checkout <span class="nt">-b</span> my-new-feature
+<span class="c"># do some work</span>
+<span class="nv">$ </span>./run-my-secret-tests.sh
+<span class="nv">$ </span>git commit <span class="nt">-avm</span> <span class="s2">"fix thingy"</span>
+<span class="nv">$ </span>git push <span class="c"># uh oh, how do i push this up? fuck</span>
+</code></pre></div></div>
+
+<p>The workflow is almost the same, but you’ll find git won’t let you push your work up at the end. It contains all your tailorings, plus the feature!</p>
+
+<p>To get stuff done, we’ll have to become a little bit familiar with <code class="language-plaintext highlighter-rouge">git rebase</code>. Here’s the magic trick:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git rebase dev <span class="nt">--onto</span> main
+</code></pre></div></div>
+
+<p>This will take <code class="language-plaintext highlighter-rouge">my-new-feature</code>, slice off all the commits since the last tailoring you made on <code class="language-plaintext highlighter-rouge">dev</code>, and slide them over onto <code class="language-plaintext highlighter-rouge">main</code>. Think of it like lifting it off the dev stuff and plopping it down on main.</p>
+
+<p>This branch is now ready to push, with nobody the wiser.</p>
+
+<h3 id="pulling-down-other-peoples-branches">Pulling down other people’s branches</h3>
+
+<p>My colleague just pushed up their own <code class="language-plaintext highlighter-rouge">fixes-huge-bug</code>. I want to get all my tailorings back while I look at the branch. How do I do it?</p>
+
+<p>Another dash of <code class="language-plaintext highlighter-rouge">rebase</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout fixes-huge-bug
+<span class="nv">$ </span>git rebase dev
+<span class="c"># browse through the code however you like now</span>
+</code></pre></div></div>
+
+<p>This will put all our tailorings <em>underneath</em> the commits of <code class="language-plaintext highlighter-rouge">fixes-huge-bug</code>.</p>
+
+<p>When I said the <code class="language-plaintext highlighter-rouge">dev</code> branch will be our <em>base</em> of operations, I wasn’t kidding.</p>
+
+<h3 id="updating-the-dev-branch">Updating the dev branch</h3>
+
+<p>Your dev branch will have been made against a “snapshot” of main at the time it was put together.
+Work on main carries on, and we wish to have those changes incorporated. How do we do it?</p>
+
+<p>Captain <code class="language-plaintext highlighter-rouge">rebase</code> to the rescue:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout main
+<span class="nv">$ </span>git pull <span class="c"># get latest stuff</span>
+<span class="nv">$ </span>git checkout dev
+<span class="nv">$ </span>git rebase main
+<span class="c"># dev is now sitting atop the latest main</span>
+</code></pre></div></div>
+
+<p>This will take our tailorings and slide the newest <code class="language-plaintext highlighter-rouge">main</code> underneath. This could have merge conflicts, for instance if you’ve modified a local server port for yourself and then somebody did it for real in <code class="language-plaintext highlighter-rouge">main</code>.</p>
+
+<p>You’ll need to just resolve them if they happen.</p>
+
+<p>Once this is done, you may wish to update topic branches that you’ve made off <code class="language-plaintext highlighter-rouge">dev</code> too:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout my-great-fix
+<span class="nv">$ </span>git rebase dev
+</code></pre></div></div>
+
+<p>Again, this slides in the newest tailorings made on top of the newest <code class="language-plaintext highlighter-rouge">main</code> happenings, underneath the commits for <code class="language-plaintext highlighter-rouge">my-great-fix</code>.</p>
+
+<h3 id="adding-more-tailorings-later">Adding more tailorings later</h3>
+
+<p>You’re working on a feature, and you realize you want to add another change for yourself which would be really handy while writing this feature. How do you do it?</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout dev
+<span class="c"># add some more custom stuff for ourselves</span>
+<span class="nv">$ </span>git commit <span class="nt">-vm</span> <span class="s2">"added another great local thing"</span>
+<span class="nv">$ </span>git checkout - <span class="c"># dash goes back to the branch we were just on</span>
+<span class="nv">$ </span>git rebase dev
+</code></pre></div></div>
+
+<p>With this we can go back to our <code class="language-plaintext highlighter-rouge">dev</code> branch, add the additional tailoring, and then come back to our feature branch and slide in the latest <code class="language-plaintext highlighter-rouge">dev</code> work underneath. You’ll need to rebase each feature branch you have locally, in order to get the freshest tailorings incorporated into it.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>This is the <code class="language-plaintext highlighter-rouge">dev</code> branch pattern. I use it / abuse it literally all the time. Very few repositories go by without me wanting to make some sorts of adjustments for myself.</p>
+
+<p>I hope this trick helps you be a more productive engineer. Please use and abuse it.</p>]]></content><author><name>QWORD</name></author><summary type="html"><![CDATA[Have you ever wanted to make local changes to a repository for your own benefit, but don’t want to send them remotely? Maybe you’ve once wanted to:]]></summary></entry><entry><title type="html">Calculus rules everything around me</title><link href="https://www.qword.net/2023/06/11/calc-rules-everything.html" rel="alternate" type="text/html" title="Calculus rules everything around me" /><published>2023-06-11T00:24:53-04:00</published><updated>2023-06-11T00:24:53-04:00</updated><id>https://www.qword.net/2023/06/11/calc-rules-everything</id><content type="html" xml:base="https://www.qword.net/2023/06/11/calc-rules-everything.html"><![CDATA[<blockquote>
+  <p>Word up, know what I’m sayin’? Calculus rules everything around me, C.R.E.A.M.</p>
+</blockquote>
+
+<blockquote>
+  <p>– Wu-Tang Clan, “C.R.E.A.M” (but not actually).</p>
+</blockquote>
+
+<p>When I was maybe about seven or eight years old, my Dad decided he would regularly sit down with me after school and try to teach me additional math. He would teach me concepts that were a little bit ahead of the curve in school. One day I just couldn’t focus, felt like it was too hard, and had enough.</p>
+
+<blockquote>
+  <p>“I hate math! Why do I need any of this?! I’ll get by with just adding and subtracting stuff, that will be enough!”
+– Young, stupid qword</p>
+</blockquote>
+
+<p>I still remember exactly how sad he was to hear me say that, and he was rather silent for the rest of the day. He was an electrical engineer, and used math all the time for his job. Math was what helped him lift his immediate family out of poverty when growing up, and make a better life for them.</p>
+
+<p>I didn’t understand this when growing up, and I think many others in grade school didn’t either. I remember it often being insisted that it would be “important for my future,” but I didn’t know what a “future” <em>was</em>, and “you’ll understand when you’re older” was so common a hand-wave that grown-ups would say that it didn’t have any meaning at all.</p>
+
+<p>I once stayed up all night playing Metal Gear Solid on the PlayStation 2 all the way until 7am, when my dad woke up and lost his shit for me being up all night. I told him that I think I wanted to learn math again because they say you need it to make video games, and like games so that sounded cool. He forgave me and decided not to turn the PlayStation off (we couldn’t afford a memory card at the time, so it’d stay running all the time to not lose progress).</p>
+
+<p>I returned to doing math lessons with my dad, but they tapered off pretty quickly as he got busier with his work. My grades in math took a back-seat all the way until high school, and around then my prefrontal cortex started clicking together and it dawned on me that <em>getting rich</em> is important because <em>money</em> lets you make a better and more comfortable life for yourself. A good school leads to good money and my math grades need to be good enough to get in - so at the very least it was a means to an end, and that’s probably what everyone meant by “it’s important for your future.” I’m maybe thankful that so many other kids in my school didn’t care about math, because it makes knowing it that much more valuable.</p>
+
+<p>I was at least good enough to start a computer science career, and good enough to graduate with the degree. I thought that would probably have been the last use of math that would’ve happened in my life.</p>
+
+<p>Except it absolutely wasn’t.</p>
+
+<p>I honestly and truly use a lot of math, every day. And I don’t mean the “<em>well I program computers and programming is math so I’m doing math ha ha</em>“-argument (which is legitimate) - I use math both at work outside of programming, and in my daily life <strong>so often</strong> that I don’t even notice, and I think not knowing enough of it is a serious handicap. 
+I’ll even give you a few examples:</p>
+
+<ul>
+  <li>
+    <p><strong>Lottery tickets are dumb as fuck.</strong> Never buy them. You will not win. (But also have the sensibility to not insult people you know who do buy them).</p>
+  </li>
+  <li>
+    <p><strong>How much and when should I drink coffee?</strong></p>
+
+    <p>I was recently watching an interview with Matthew Walker, neuroscientist and author of <em>Why We Sleep</em>. Matthew himself is completely decaffeinated, and does not drink any caffeine whatsoever as it affects sleep quality for the worse. He says that if you were to have a coffee though, then do it no later than 14 hours before you’re going to bed.</p>
+
+    <p>If the half-life of caffeine in adults is 5 hours, how much caffeine is in your body 14 hours later?</p>
+
+    <p>After 5 hours, half of a cup of coffee would be in your blood. After 10, it’d be a quarter. 15 would be an eighth, which is overshooting 14 just by a little bit. The exact answer is to throw <code class="language-plaintext highlighter-rouge">2^(-14/5)</code> into Wolfram Alpha, which gives <code class="language-plaintext highlighter-rouge">0.14</code>, so about 14 percent of that coffee is still in me. That’s not too far from an eighth, so I’m going to modify his advice and say at least 12 hours is likely fine - it’s the first 10 hours that dump most of the caffeine.</p>
+
+    <p>What if I can power through the morning without coffee, but once I hit the afternoon I really just want a <em>bit</em> of a pick-me-up - but then I have to go to bed in nine hours. Could I make a cup of coffee but pour some of it out so that I’d not have too much caffeine in my blood later, trying to catch up to the 14-hour rule? How much do I need to pour out?</p>
+
+    <p>Turns out that dumping exactly half will put me on track if I have about nine hours until bed. <code class="language-plaintext highlighter-rouge">2^((-9/5)) * 1/2 = 2^(-14/5)</code>.</p>
+
+    <p>(Yes, I do actually do this. I’m trying to cut back first and then totally quit.)</p>
+  </li>
+  <li>
+    <p><strong>Do not watch stock prices second-to-second.</strong></p>
+
+    <p>If you have some stock that will average a 15% annual return, but with 10% of volatility - what’s the chance that you’re in the green (greater than 0% return) by the year end?</p>
+
+    <p>It’s 93%. Pretty good. I think you’re going to make some money.</p>
+
+    <p>How about per month?
+  With a normal distribution, <code class="language-plaintext highlighter-rouge">mean for a month = 15 / 12</code>, <code class="language-plaintext highlighter-rouge">stdev for a month = 10 / sqrt(12)</code>, and you grab the z-score for the <code class="language-plaintext highlighter-rouge">mean / stdev = ~0.43</code>, it’s about 67%.</p>
+
+    <p>What’s the chance that it’s in the green on any given <em>day</em> that you look (260 trading days a year)? 54%.</p>
+
+    <p>Per trading hour? 51.3%.</p>
+
+    <p>Per trading second? 50.02%. You’re almost flipping coins at this point, and red hurts a lot more than green pleases. So don’t look at it so often. You’re going to get a heart attack.</p>
+
+    <p>This is from <em>Fooled by Randomness</em>. Great book.</p>
+  </li>
+  <li>
+    <p><strong>A large pizza is always a better deal than the medium.</strong></p>
+
+    <p>(I’ve never seen this to be false, but run the numbers yourself with your local pizza place).</p>
+
+    <p>A standard medium here is 12”, and a large is 14”. How much more area does a large have compared to a medium? <code class="language-plaintext highlighter-rouge">14^2 / 12^2 = ~1.36</code>. A large pizza is <em>almost a third bigger</em> than a medium (but it sure doesn’t sound like it because two extra inches of diameter doesn’t seem like much)! If the large is more than 36% more expensive, then it’s a losing deal, but otherwise it’s better value. Of course, you may not actually want that much pizza or want to spent that much in total so there’s other things to consider.</p>
+  </li>
+  <li>
+    <p><strong>Trying to get cheap gas.</strong></p>
+
+    <p>There’s a gas station around me that has the best pricing, but isn’t open all the time. I try to calculate exactly how much volume to purchase at a more expensive but 24/7-establishment so that I can cover all the driving I need to do until the cheaper place is open the next day. My car at the time didn’t do any fancy calculations on my behalf or estimate mileage, so I’d do it myself and always be pleased when I nail it. My current car now does do estimations which is tons easier, but not as fun :(</p>
+  </li>
+</ul>
+
+<p>And those are just the most recent examples in real life that I can pull off the top of my head. At my day job, way more:</p>
+
+<ul>
+  <li>
+    <p><strong>De Morgan’s laws:</strong></p>
+
+    <p><code class="language-plaintext highlighter-rouge">if not (a or b)</code> is the same as <code class="language-plaintext highlighter-rouge">if (not a) and (not b)</code>
+  and also <code class="language-plaintext highlighter-rouge">if not (a and b)</code> is the same as <code class="language-plaintext highlighter-rouge">if (not a) or (not b)</code>.</p>
+
+    <p>This occasionally can make if-s easier to read, and is known as De Morgan’s laws.</p>
+
+    <p>You can also “force” a structure where this is applicable by <code class="language-plaintext highlighter-rouge">not</code>-ing twice. I use this trick every once in a while on more involved Boolean logic.
+  I’ve seen a lot of juniors not know this!</p>
+  </li>
+  <li>
+    <p><strong>The birthday paradox.</strong></p>
+
+    <p>This one is surprising. If you have 23 people in a room and every birthday of the year is equally likely, the likelihood any two people share a birthday is roughly 50%. This is probably higher in real life, because birthdays are not equally likely in practice.</p>
+
+    <p>We need to calculate a unique, random id per user for some purpose. If these ID are numbers, how many digits do we need such that the likelihood of a collision and re-roll is low?</p>
+
+    <p>With six digits, when generating 1178 ids there’ll be a 50% chance that one of them will collide with another. Seven digits will take 3724 ids, and ten digits will take 117742 ids.</p>
+  </li>
+  <li>
+    <p><strong>Job processing rates.</strong></p>
+
+    <p>We have a queue of stuff to do, that can be done in parallel on multiple machines. With one machine processing the whole queue, it’ll take all day to finish. With 100 machines, it’ll be done in a half-hour but the compute cost would be pretty expensive. We have six hours to complete it all - whats the optimal number of machines to pay the least for compute?</p>
+
+    <p>This one was the most fun to model, and involved a lot of calculus and optimization.</p>
+  </li>
+  <li>
+    <p>Oh yeah, I also write a lot of code so there’s that too. Sometimes I get to do some algorithmic stuff, like work with graphs.</p>
+  </li>
+</ul>
+
+<p>Pretty much, you ought to take math seriously. It lets you solve a lot of actual problems, and I think not knowing (enough of) it causes problems. My friend’s wife struggles to be able to calculate sales tax for things, and things like interest rates and mortgages are firmly beyond her - I think life takes advantage of her for this.</p>
+
+<p><em>This post is dedicated to my Dad, who aggressively tried to teach me a number of things I couldn’t appreciate until much later.</em></p>]]></content><author><name>QWORD</name></author><summary type="html"><![CDATA[Word up, know what I’m sayin’? Calculus rules everything around me, C.R.E.A.M.]]></summary></entry><entry><title type="html">Maybe you should store passwords in plaintext.</title><link href="https://www.qword.net/2023/04/30/maybe-you-should-store-passwords-in-plaintext.html" rel="alternate" type="text/html" title="Maybe you should store passwords in plaintext." /><published>2023-04-30T00:24:53-04:00</published><updated>2023-04-30T00:24:53-04:00</updated><id>https://www.qword.net/2023/04/30/maybe-you-should-store-passwords-in-plaintext</id><content type="html" xml:base="https://www.qword.net/2023/04/30/maybe-you-should-store-passwords-in-plaintext.html"><![CDATA[<blockquote>
+  <p>“Never, ever, think about something else when you should be thinking about the power of incentives.” – Charlie Munger, American billionaire investor.</p>
+</blockquote>
+
+<p>Okay, you probably shouldn’t store passwords in plaintext, but I’ve met a few who do. They don’t store their <em>own</em> passwords in plaintext and they use a password manager for those things, but they don’t hesitate to store credentials at <em>work</em> in plaintext.</p>
+
+<p>Huh? That’s obviously horrible. What gives?</p>
+
+<p>These people are either a little bit unusual, or maybe normal people are the unusual ones. And they don’t just store work passwords in plaintext, there’s other things as well.
+I first caught wind of their thinking when having just a gentle conversation about work stuff:</p>
+
+<blockquote>
+  <p>Me: “Yeah, so I saw that our login endpoint had a big security vulnerability. I found it, raised it as a big issue and got a few people together across teams to drive a fix. We had a good celebration over that.”</p>
+
+  <p>Them: “Huh? Why did you do that?”</p>
+
+  <p>Me: “What do you mean? I found an important problem and drove a fix for it. I think that was really good to do.”</p>
+
+  <p>Them: “Oh. Yeah, I mean, I guess. But what did you get out of it? Did they give you a bonus?”</p>
+
+  <p>Me: “N..o.. I didn’t get anything, but-“</p>
+
+  <p>Them: “So you did a bunch of extra work for nothing then? You’re a chump.”</p>
+</blockquote>
+
+<p>Are they right? Talking some more with people like this, I’ve come up with a list of opinions they have about their work:</p>
+
+<ol>
+  <li>
+    <p>One person is aware of almost 100k/mo in unnecessary spend on AWS. They don’t bother to care about it or fix it. They reason that they’ll be punished for fixing it by having to JIRA the issue, bring it into the sprint, discuss it in standup, and not be rewarded with any fraction of those savings financially. Worse yet, it may take longer than expected to fix and they may be punished for it on their performance review. They’ve known about this issue for almost eight months.</p>
+  </li>
+  <li>
+    <p>Another person simply doesn’t care about shipping code with bugs, and maybe even tries to. They get to shirk actual development duties by fixing their own broken code instead, and the fixes are celebrated. Not only that, but their management thinks that their work must be tricky <em>because</em> of the bugs that appear. <em>“I get paid the same whatever it is that I work on, so I’m going to try to keep my work relaxed and easy.”</em> They considered pretending to have very young children so they can opt out of the team’s on-call rotation that gives no extra pay, but thought that was going too far.</p>
+  </li>
+  <li>
+    <p>A third literally has about a hundred diffs stacked up that repair innocuous compiler warnings, and they send one or two of them out when they don’t feel like doing their regular work and claim they “stumbled on some issues and fixed them.” They say they figured this out after their last raise was below inflation, and say their new goal is to be “perfectly mediocre.” They’re now working on a plan to quit their job for a “sudden emergency leave” and then negotiate their rejoining at a proper salary increase in a month. They don’t care too much if that doesn’t work out, because they have a second full-time job.</p>
+  </li>
+  <li>
+    <p>Oh yeah, and <em>all</em> of these people store work credentials in plaintext and don’t care about writing secure code. <em>“A security breach isn’t my problem and avoiding one doesn’t get me anything.”</em></p>
+  </li>
+</ol>
+
+<p>Now, I would personally feel shame if I did these things. I pride myself on writing good code, on fixing bugs, on shipping things correctly and on time. Seeing bad code frustrates me, and working with bad engineers frustrates me even more. This group of people seem to have been like that at some point in time, and then turned to “misbehaving” in this manner.</p>
+
+<blockquote>
+  <p>“You don’t get rewarded for being extra. You don’t get any money when you save costs. You’re going to get a raise below inflation. You’re stupid for caring the way that you do. The business’ downside risk is not yours, and it’s profits are not yours either.”</p>
+</blockquote>
+
+<p>I’m not sure I can really come up with a good counter-argument to this, and maybe normal people are all the weird ones for not behaving like this. They’re right in that the incentive structure to perform well.. is missing if you think about it. One person pointed out that the vulnerability I found internally granted me a bonus of $0, whereas if an external researcher found it they’d have been paid a bounty easily in the tens of thousands of dollars. They’re right, and that does sting a little bit.</p>
+
+<p>Is there some way to correct this? How do you reward good behaviour here, and discourage “misbehavior” like this? Not being rewarded with money seems to be the common theme here, but financial incentives are tricky to get correct as evidenced by this Dilbert comic:</p>
+
+<p><img src="/assets/images/dilbert-bugs.gif" alt="Dilbert Comic Strip" /></p>
+
+<p>Steve Levitt, American economist and co-author of Freakonomics says to <em>not even bother</em> with financial incentives in this 15-year-old video (4:56 long):</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FdkQwQQWX9Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" style="display:block; margin-left:auto; margin-right:auto; margin-bottom: 2em;"></iframe>
+
+<blockquote>
+  <p>“I think the real answer, the real answer […] this is going to sound weird or bad – is to cajole or trick your employees into thinking that what they’re doing is important.”</p>
+</blockquote>
+
+<p>Doesn’t that … actually sound weird and bad? I’ve been thinking about this for a while, and maybe I really am a chump but it seems like the system says we should all store our passwords in plaintext too.</p>]]></content><author><name>QWORD</name></author><summary type="html"><![CDATA[“Never, ever, think about something else when you should be thinking about the power of incentives.” – Charlie Munger, American billionaire investor.]]></summary></entry><entry><title type="html">LSD: Not even once. Really.</title><link href="https://www.qword.net/2023/04/23/lsd-not-even-once-really.html" rel="alternate" type="text/html" title="LSD: Not even once. Really." /><published>2023-04-23T00:24:53-04:00</published><updated>2023-04-23T00:24:53-04:00</updated><id>https://www.qword.net/2023/04/23/lsd-not-even-once-really</id><content type="html" xml:base="https://www.qword.net/2023/04/23/lsd-not-even-once-really.html"><![CDATA[<blockquote>
+  <p>Taking LSD was a profound experience, one of the most important things in my life. […]
+– Steve Jobs, co-founder of Apple</p>
+</blockquote>
+
+<p>LSD is a hallucinogenic drug, promoted a lot in tech circles for both recreation and the expanse of creativity it grants you. In recent years it’s been getting a good name, with many of my tech peers encouraging me to try it, some of the “greats”, like Steve Jobs endorsing it, and all manner of reddit anecdata about how it (or psilocybin) had changed their lives for the better, and renewed therapeutic research interests being approved for the drug.</p>
+
+<p>I had dabbled a bit before with psilocybin, and don’t think it changed my life in any real manner other than showing me what mental illness is. I was mostly non-functional, wrapped up in blankets in my bed after eating three grams of the stuff, moving between fits of laughter and heavy bouts of anxiety while having my heart race at a million bpm the whole while. Coming back down to earth, puking all over the place, and remembering what my name was again, was the best part as it meant it was now all over.</p>
+
+<p>So, enter LSD. I had a reasonable idea of what I might expect, having done psilocybin once or twice before. I went on a small retreat with a few friends, and we shared a few tabs. About 160 µg later and it was similar to psilocybin: see-sawing between euphoria and dread, heart rate turned to 11, but now with cool visual effects.</p>
+
+<p>About six hours later, and it would be over. For most people.</p>
+
+<p>It turns out that if you’re very unlucky, <em>you’ll have strong negative side effects that may fuck you up for the rest of your life</em>.</p>
+
+<p>That’s me. I was very unlucky.</p>
+
+<hr />
+
+<p>Before we go further, have a look at the image below:</p>
+
+<p><img src="/assets/images/Red-blue-noise.gif" alt="Red blue noise" style="display:block; margin-left:auto; margin-right:auto" /></p>
+
+<p>Have you ever seen this? Take a look around you right now, maybe in a dark corner, or on a flat-colored wall. Look carefully. Do you see it?</p>
+
+<p>Maybe you don’t, or maybe it’s not so animated. Do you maybe see something like this instead, on a ‘cream colored’ wall?</p>
+
+<p><img src="/assets/images/creamwallvs.png" alt="Cream wall noise" style="display:block; margin-left:auto; margin-right:auto" /></p>
+
+<p>Maybe you see it now. Or maybe you don’t. It’s kinda like TV static, and the “dots” may be monochrome or colored, “moving” fast or slow or not at all. You might find it more noticeable in the dark, or in the bright. Or maybe only if you focus on it. Or, you might just not have it and that’s fine too.</p>
+
+<p>This is called <em>Visual Snow</em>. I’ve polled many people I know who have and haven’t tried drugs. On both sides, some have had it “since forever,” and others have no idea what I’m talking about. For those I know who do have it, it’s pretty delicate and doesn’t really cause problems. It’s unclear what visual snow exactly is, and what causes it.</p>
+
+<hr />
+
+<p>Halfway through my trip, about 4 hours in, visual snow started appearing on everything.</p>
+
+<p>It ramped up slowly, and at it’s final form it was crisp, sharp, colorful, full of motion, and a total distraction. All of the time. Always. Everywhere. I was panicking and just asking everybody:</p>
+
+<p>“Do you all see this too ?!”</p>
+
+<p>“Oh yeah, I have that. Don’t worry, you learn to live with it.”</p>
+
+<p>“LEARN TO LIVE WITH IT?! No way! WTF!”</p>
+
+<p>On top of that, the loudest tinnitus you could imagine. I have a rather quiet tinnitus that I’ve had since forever, and it really only bothers me at night. This was a <em>second tone</em>, high pitched, loud, and with some ringing in it. Closing my eyes left me with afterimages, and trying to read in the dark would basically blind me for real.</p>
+
+<p>So let’s sum up. There were a number of ways I was fucked up:</p>
+<ul>
+  <li>First, the visual snow. Frightening and painted over everything.</li>
+  <li>Loud tinnitus.</li>
+  <li>I couldn’t drink coffee anymore. I like coffee. But even a few sips would cause me to get very jittery and terrified over nothing in particular.</li>
+  <li>“Depersonalization.” I felt like I was experiencing life through a movie-theatre screen, and I was “trapped behind it” and unable to escape.</li>
+  <li>Continuous anxiety about literally nothing. I felt like a student who didn’t do their homework, and was dreading their teacher calling on them - for 24 hours a day.</li>
+  <li>Being really “suggestible.” I could think about things and they would appear as hallucinations in the corners of my vision. I could tell they weren’t real though, so it wasn’t exactly psychosis.</li>
+  <li>Oh yeah, I had to continue to hold down a job: coding, working with people, and pretending that I wasn’t brain-damaged and terrified.</li>
+</ul>
+
+<p>All of this added up to serious anxiety (read: right proper suicide and estate planning). I was pretty much convinced that I was going blind and deaf, that my life was over, and that one tiny tiny piece of paper can just fuck someone over permanently. Trying to find solace on the internet, I learned that this entire umbrella of problems was called “HPPD”, Hallucinogen Persisting Perception disorder.</p>
+
+<p>I also learned that it might never go away for some, but you might have a good shot if you cold-turkey quit all recreational drugs. So I quit everything, including alcohol and caffeine.</p>
+
+<hr />
+
+<p>I’m happy to say that today is roughly a year since that happened, and I’m basically 100% recovered. It took months, with good days and bad days, and now I’m just left with delicate visual snow that I’m pretty sure I’ve had since I was a kid, and is mostly ignorable unless I’m looking for it. Every other issue is gone, and I enjoy coffee on the regular again (and alcohol on the very occasional basis). I’ve quit every other recreational drug, and have given them all away, so I’ll be staying far away.</p>
+
+<p>It’s unclear how things turned out this way, but I think it’s certain that LSD has very real and unpredictable risks for some people. Reading reddit anecdata about how LSD has changed people’s lives for the better - and the army of comments that dogpile on, agreeing - makes me upset at their naiveity and harmful promotion, and I wish to just post this entire story right underneath them and scream from the rooftops about how a single dose can ruin you. If anything, I got lucky with my bad luck, and fully recovered. Some don’t, and have issues for the rest of their lives.</p>
+
+<p>And I didn’t even learn anything cool from the trip. Fuck you, Jobs.</p>]]></content><author><name>QWORD</name></author><summary type="html"><![CDATA[Taking LSD was a profound experience, one of the most important things in my life. […] – Steve Jobs, co-founder of Apple]]></summary></entry></feed>

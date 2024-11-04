@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>Josh Collinsworth</title>
+<description>Josh Collinsworth</description>
+<link>https://joshcollinsworth.com</link>
+<atom:link href="https://joshcollinsworth.com/api/rss.xml" rel="self" type="application/rss+xml"/>
+<item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/fire-matt</guid>
+<title>If WordPress is to survive, Matt Mullenweg must be removed</title>
+<link>https://joshcollinsworth.com/blog/fire-matt</link>
+<description>I believe Matt Mullenweg's abuses of his unilateral, unchecked powers prove that it is in the best interest of the entire WordPress community that he be removed from power immediately.</description>
+<pubDate>Fri, 27 Sep 2024 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/fwiw</guid>
+<title>For whatever it's worth: my advice on job hunting in tech</title>
+<link>https://joshcollinsworth.com/blog/fwiw</link>
+<description>A collection of things I've learned over my decade in the industry, on how and where to look for jobs, applying, interviewing, talking about yourself and your work, and all those other fun things. For whatever it's worth.</description>
+<pubDate>Fri, 07 Jun 2024 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/ten-years-of-code</guid>
+<title>A decade of code</title>
+<link>https://joshcollinsworth.com/blog/ten-years-of-code</link>
+<description>A personal (read: meandering) post inspired by the realization that I first began to learn HTML and CSS exactly ten years ago, reflecting on the lucky turning points that brought me to where I am today.</description>
+<pubDate>Fri, 10 May 2024 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/glove80-followup</guid>
+<title>Follow-up: the Glove80 after six months</title>
+<link>https://joshcollinsworth.com/blog/glove80-followup</link>
+<description>An update on my previous first impressions post, covering how it's been using the MoErgo Glove80 every day for the past six months, how it's affected my RSI, and whether I'd recommend it (short answer: yes).</description>
+<pubDate>Mon, 08 Apr 2024 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/devaluing-frontend</guid>
+<title>The quiet, pervasive devaluation of frontend</title>
+<link>https://joshcollinsworth.com/blog/devaluing-frontend</link>
+<description>I keep noticing those of us in the frontend field being treated much the same as nurses, paralegals, and executive assistants. Our work is seen as important, certainly, but just not the same as, or as important as, the “real” work.</description>
+<pubDate>Thu, 07 Mar 2024 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/copilot</guid>
+<title>I worry our Copilot is leaving some passengers behind</title>
+<link>https://joshcollinsworth.com/blog/copilot</link>
+<description>Why I worry about the effect GitHub Copilot is having and will continue to have on the accessibility of the web at scale.</description>
+<pubDate>Tue, 13 Feb 2024 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/enjoyed-in-2023</guid>
+<title>Things I enjoyed in 2023</title>
+<link>https://joshcollinsworth.com/blog/enjoyed-in-2023</link>
+<description>Things I watched, read, played, got into, enjoyed, or did and would do again, in 2023.</description>
+<pubDate>Sat, 30 Dec 2023 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/glove80-first-impressions</guid>
+<title>First impressions of the MoErgo Glove80 ergonomic keyboard</title>
+<link>https://joshcollinsworth.com/blog/glove80-first-impressions</link>
+<description>How does the Glove80 stack up against similar keyboards like the Moonlander and Ergodox? I share my impressions after the first few weeks of use.</description>
+<pubDate>Tue, 24 Oct 2023 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/layoffs-are-bullshit</guid>
+<title>A message from the Captain of the S.S. Layoff</title>
+<link>https://joshcollinsworth.com/blog/layoffs-are-bullshit</link>
+<description>Indeed, there's plenty to go around, thanks largely to all of you. But the fastest way to make the numbers better is to stop feeding and sheltering people and their families. Nothing personal.</description>
+<pubDate>Wed, 04 Oct 2023 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/tailwind-is-smart-steering</guid>
+<title>Classic rock, Mario Kart, and why we can't agree on Tailwind</title>
+<link>https://joshcollinsworth.com/blog/tailwind-is-smart-steering</link>
+<description>It's popular to say we can’t agree on Tailwind, but I posit we actually already do. I think what we actually disagree on isn’t the details of this (or any) specific software; it's in what we value, and how we each define assets and liabilities.</description>
+<pubDate>Tue, 26 Sep 2023 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/antiquated-react</guid>
+<title>Things you forgot (or never knew) because of React</title>
+<link>https://joshcollinsworth.com/blog/antiquated-react</link>
+<description>If you don't often look beyond established comfortable defaults, you might be surprised to learn just how far the world of frontend has moved away from React, and how big that gap continues to grow.</description>
+<pubDate>Fri, 04 Aug 2023 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/alfred-raycast</guid>
+<title>Alfred vs. Raycast: my constant debate</title>
+<link>https://joshcollinsworth.com/blog/alfred-raycast</link>
+<description>After a year or so of using Raycast, I'm switching back to Alfred. This is what prompted me to make that decision, and why I may or may not stick with it.</description>
+<pubDate>Mon, 24 Jul 2023 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/sveltekit-page-transitions</guid>
+<title>Adding page transitions in SvelteKit</title>
+<link>https://joshcollinsworth.com/blog/sveltekit-page-transitions</link>
+<description>Transitions, easing, and routing are all baked into SvelteKit. This makes utilizing page transition effects in SvelteKit sites and apps as easy as adding just a few lines of code.</description>
+<pubDate>Wed, 01 Mar 2023 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/great-transitions</guid>
+<title>Ten tips for better CSS transitions and animations</title>
+<link>https://joshcollinsworth.com/blog/great-transitions</link>
+<description>Creating high-quality, polished web animations is both a science and an art. This post covers the best things I've learned over the last decade of crafting web UIs.</description>
+<pubDate>Tue, 28 Feb 2023 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/easing-curves</guid>
+<title>Understanding easing and cubic-bezier curves in CSS</title>
+<link>https://joshcollinsworth.com/blog/easing-curves</link>
+<description>The easing curve can make or break any animation on the web. Let's look at the science of CSS cubic-bezier curves, and the art of using them to make the best web animations possible.</description>
+<pubDate>Wed, 22 Feb 2023 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/moonlander</guid>
+<title>Impressions of the ZSA Moonlander at one month</title>
+<link>https://joshcollinsworth.com/blog/moonlander</link>
+<description>My thoughts, experience, and advice after using the Moonlander as my main keyboard for both personal and work projects for a full month</description>
+<pubDate>Tue, 24 Jan 2023 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/never-use-px-for-font-size</guid>
+<title>Why you should never use px to set font-size in CSS</title>
+<link>https://joshcollinsworth.com/blog/never-use-px-for-font-size</link>
+<description>Many developers seem to believe there's no difference between px and other CSS units. Let's dispel that myth, for the sake of better accessibility.</description>
+<pubDate>Fri, 28 Oct 2022 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/42-for-42</guid>
+<title>Forty-two</title>
+<link>https://joshcollinsworth.com/blog/42-for-42</link>
+<description>I'm 42 years old today. This is a personal post about where I am now, what's going on in my head, and 42 things I've learned (or at least, think I've learned).</description>
+<pubDate>Wed, 26 Oct 2022 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/sveltekit-breaking-changes</guid>
+<title>Breaking changes in SvelteKit, August 2022</title>
+<link>https://joshcollinsworth.com/blog/sveltekit-breaking-changes</link>
+<description>SvelteKit introduced breaking changes to its routing and data loading in August 2022. Learn how to convert from the old way of doing things to the new.</description>
+<pubDate>Wed, 17 Aug 2022 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/self-fulfilling-prophecy-of-react</guid>
+<title>The self-fulfilling prophecy of React</title>
+<link>https://joshcollinsworth.com/blog/self-fulfilling-prophecy-of-react</link>
+<description>The only thing React is better at than other front-end frameworks is being popular. So how long will that self-perpetuating cycle continue?</description>
+<pubDate>Wed, 27 Jul 2022 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/announcing-hondo</guid>
+<title>Announcing Hondo</title>
+<link>https://joshcollinsworth.com/blog/announcing-hondo</link>
+<description>Updating Quina to version 2.0 filled my head with new ideas that I just couldn't walk away from. Eventually, those ideas took the shape of a whole new word game, named Hondo.</description>
+<pubDate>Thu, 14 Jul 2022 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/accessible-toggle-buttons</guid>
+<title>Building accessible toggle buttons (with examples for Svelte, Vue, and React)</title>
+<link>https://joshcollinsworth.com/blog/accessible-toggle-buttons</link>
+<description>Toggle buttons might be the biggest missing native HTML element. This post will help you code them right, for all users, in any (or no) framework.</description>
+<pubDate>Thu, 19 May 2022 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/debugging-ios-on-mac</guid>
+<title>Debugging iOS Safari (when all you have is a Mac)</title>
+<link>https://joshcollinsworth.com/blog/debugging-ios-on-mac</link>
+<description>Debugging iOS Safari is a challenge (and possibly expensive) when you don't have access to an iPhone. Here are a few options to get around that problem.</description>
+<pubDate>Tue, 10 May 2022 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/css-grid-bar-charts</guid>
+<title>Creating dynamic bar charts with CSS grid</title>
+<link>https://joshcollinsworth.com/blog/css-grid-bar-charts</link>
+<description>How to use CSS grid to make a responsive, adaptable bar chart with no math or external library required!</description>
+<pubDate>Thu, 24 Mar 2022 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/build-static-sveltekit-markdown-blog</guid>
+<title>Let's learn SvelteKit by building a static Markdown blog from scratch</title>
+<link>https://joshcollinsworth.com/blog/build-static-sveltekit-markdown-blog</link>
+<description>Learn the fundamentals of SvelteKit by building a statically generated blog from scratch, with Markdown support, Sass, an API, and an RSS feed.</description>
+<pubDate>Mon, 27 Dec 2021 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/add-blog-comments-static-site</guid>
+<title>Adding blog comments to your static site with utterances</title>
+<link>https://joshcollinsworth.com/blog/add-blog-comments-static-site</link>
+<description>The web world is full of tradeoffs. Going from a CMS to a static site keeps things simple—but that simplicity comes with costs. Luckily, giving up comments on your blog doesn't have to be one of them.</description>
+<pubDate>Sat, 06 Nov 2021 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/converting-from-gridsome-to-sveltekit</guid>
+<title>Converting from Gridsome to SvelteKit</title>
+<link>https://joshcollinsworth.com/blog/converting-from-gridsome-to-sveltekit</link>
+<description>I've been a fan of Svelte for years, but never had the opportunity to use it on a serious project before. So when I found myself looking for a new platform for this site as SvelteKit entered open beta, it seemed like perfect timing.</description>
+<pubDate>Mon, 04 Oct 2021 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/introducing-svelte-comparing-with-react-vue</guid>
+<title>Introducing Svelte, and Comparing Svelte with React and Vue</title>
+<link>https://joshcollinsworth.com/blog/introducing-svelte-comparing-with-react-vue</link>
+<description>Svelte is a new style of framework for building sites and apps. Let's dive into what makes it different, why it's so enjoyable, and how it's able to ship such tiny, fast apps.</description>
+<pubDate>Fri, 01 Oct 2021 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/goodbye-wordpress</guid>
+<title>Goodbye, WordPress</title>
+<link>https://joshcollinsworth.com/blog/goodbye-wordpress</link>
+<description>WordPress was potentially the most impactful and empowering technology I've yet encountered. It transformed my career path and enabled me to do anything I wanted at every point in my journey. So why leave it now?</description>
+<pubDate>Mon, 01 Feb 2021 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/announcing-quina-my-first-app</guid>
+<title>Announcing Quina (My First App)!</title>
+<link>https://joshcollinsworth.com/blog/announcing-quina-my-first-app</link>
+<description>The story of building Quina, a word game Progressive Web App built with Nuxt, and launched on the Google Play Store.</description>
+<pubDate>Thu, 10 Dec 2020 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/creating-custom-gutenberg-blocks-with-the-block-lab-plugin</guid>
+<title>How to Create Custom Editor Blocks with Block Lab</title>
+<link>https://joshcollinsworth.com/blog/creating-custom-gutenberg-blocks-with-the-block-lab-plugin</link>
+<description>Block Lab is a WordPress plugin that simplifies the process of creating custom blocks to use in the block editor, AKA Gutenberg, the new content editor in WordPress 5.0. This post explains how to use it, even if you only know basic HTML.</description>
+<pubDate>Sun, 14 Jun 2020 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/a-new-headless-site-with-gridsome</guid>
+<title>A New Headless Site with Gridsome</title>
+<link>https://joshcollinsworth.com/blog/a-new-headless-site-with-gridsome</link>
+<description>A lengthy write-up diving into what headless means, its advantages and disadvantages, some of the techniques and gotchas involved, and, finally, the new design of this site specifically.</description>
+<pubDate>Sat, 06 Jun 2020 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/goodbye-instagram</guid>
+<title>This isn't the Time, But it's the Perfect Time; Goodbye, Instagram</title>
+<link>https://joshcollinsworth.com/blog/goodbye-instagram</link>
+<description>…Lately, I’ve been wondering whether I can actually continue supporting Instagram and the company behind it, however passively or at whatever seemingly insignificant scale. And while I was zeroing in on this answer anyway, the events of the last couple of weeks have clearly cemented in my mind that the answer—for me, at least—is an unequivocal “no.”</description>
+<pubDate>Wed, 03 Jun 2020 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/how-to-connect-local-with-codekit</guid>
+<title>How to Connect Local with CodeKit</title>
+<link>https://joshcollinsworth.com/blog/how-to-connect-local-with-codekit</link>
+<description>Enjoy all the convenience of easy local WordPress development with Local, plus build tools with CodeKit, without any of the tricky command line setup.</description>
+<pubDate>Fri, 21 Feb 2020 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/confirm-all-ids-are-unique-in-an-array-of-javascript-objects-using-map-and-sets</guid>
+<title>How to Check Uniqueness in an Array of Objects in JavaScript</title>
+<link>https://joshcollinsworth.com/blog/confirm-all-ids-are-unique-in-an-array-of-javascript-objects-using-map-and-sets</link>
+<description>Working with arrays of objects in JavaScript can be difficult. This post covers how to ensure all object keys (IDs) are unique, and how to find non-unique values.</description>
+<pubDate>Mon, 17 Feb 2020 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/adding-gutenberg-full-and-wide-width-image-support-to-your-wordpress-theme</guid>
+<title>Adding Gutenberg Full- and Wide-Width Image Support to Your WordPress Theme</title>
+<link>https://joshcollinsworth.com/blog/adding-gutenberg-full-and-wide-width-image-support-to-your-wordpress-theme</link>
+<description>Gutenberg brings with it the ability to set image blocks as full-width or wide-width. This article talks about how to enable support for that feature in your theme, and one way to write the CSS that makes it work.</description>
+<pubDate>Sat, 16 Mar 2019 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/lets-learn-css-variables</guid>
+<title>Let's Learn CSS Variables!</title>
+<link>https://joshcollinsworth.com/blog/lets-learn-css-variables</link>
+<description>CSS variables (otherwise known as CSS custom properties) give previously impossible superpowers to CSS developers. This post covers what they are, how they work, and a couple of nifty ways you can implement them on your own website.</description>
+<pubDate>Sun, 25 Feb 2018 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/new-site-new-theme-for-2018</guid>
+<title>New Site, New Theme for 2018</title>
+<link>https://joshcollinsworth.com/blog/new-site-new-theme-for-2018</link>
+<description>Building a WordPress theme (and a new brand) from scratch.</description>
+<pubDate>Tue, 02 Jan 2018 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/five-ways-to-become-a-better-designer-that-arent-design</guid>
+<title>Five Ways to Become a Better Designer (That Aren't Design)</title>
+<link>https://joshcollinsworth.com/blog/five-ways-to-become-a-better-designer-that-arent-design</link>
+<description>There’s vast world of design learning and opportunity right in front of us constantly. All we need to do is take the time to notice it and learn from it.</description>
+<pubDate>Sat, 04 Feb 2017 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/essential-tools-wordpress-development</guid>
+<title>My Essential Tools for WordPress Development</title>
+<link>https://joshcollinsworth.com/blog/essential-tools-wordpress-development</link>
+<description>Some of these apps, resources and tools aren’t directly WordPress-related, or even necessarily development-related; some have to do with productivity or just make life a little easier. That’s by design. Part of being a developer is learning to work and use your tools as efficiently and with as little wasted time and mental energy as possible.</description>
+<pubDate>Sat, 25 Jun 2016 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/the-five-things-i-wish-somebody-had-told-me-as-a-design-student</guid>
+<title>The Five Things I Wish Somebody Had Told Me as a Design Student</title>
+<link>https://joshcollinsworth.com/blog/the-five-things-i-wish-somebody-had-told-me-as-a-design-student</link>
+<description>Your worst instructor as a design student will lay out clear goals and expectations which will not change; this is not a given with clients.</description>
+<pubDate>Sun, 21 Feb 2016 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/wordpress-child-theme-explanation</guid>
+<title>WordPress Child Theme Explanation and Walkthrough</title>
+<link>https://joshcollinsworth.com/blog/wordpress-child-theme-explanation</link>
+<description>When you’re just starting out with WordPress, it’s easy to think that you can just open up the style.css file included with your theme and begin making alterations. And that will work—at least for a while—but it won’t be a good idea…</description>
+<pubDate>Thu, 31 Dec 2015 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/why-designers-shouldnt-remake-other-designers-logos</guid>
+<title>Why Designers Shouldn't "Fix" Other Designers' Logos</title>
+<link>https://joshcollinsworth.com/blog/why-designers-shouldnt-remake-other-designers-logos</link>
+<description>No matter how simple the end product, design is hard work. To come up with something that looks good, something people like, is at best tangential to the main point. The question is: does it succeed at meeting the project goals? And you don’t know how to answer that question.</description>
+<pubDate>Fri, 04 Sep 2015 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/8-student-portfolio-mistakes</guid>
+<title>8 Mistakes to Avoid in Your Student Design Portfolio</title>
+<link>https://joshcollinsworth.com/blog/8-student-portfolio-mistakes</link>
+<description>Consider this post a guide on how to avoid the most common mistakes young designers make when assembling their portfolios.</description>
+<pubDate>Thu, 20 Aug 2015 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/profit-is-not-a-value</guid>
+<title>Profit is Not a Value</title>
+<link>https://joshcollinsworth.com/blog/profit-is-not-a-value</link>
+<description>Any executive or business owner will say their company values integrity, and virtually every company claims that they reward and value their employees exhibiting their brand values. But is that really accurate?</description>
+<pubDate>Wed, 05 Aug 2015 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/filetypes</guid>
+<title>Understanding the Difference Between Image and Vector File Types</title>
+<link>https://joshcollinsworth.com/blog/filetypes</link>
+<description>If you’re like me, you’ve probably spent some time wondering (and Googling) about the differences between various popular format types commonly used for graphic design applications. So I decided I’d create a resource that’s hopefully a handy reference on the matter of discerning file type supports and behavior.</description>
+<pubDate>Thu, 11 Jun 2015 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/pantone</guid>
+<title>Pantone, Color, and What I Wish I Had Known Sooner as a Designer</title>
+<link>https://joshcollinsworth.com/blog/pantone</link>
+<description>One of the most difficult things for me to learn in my transition from the classroom to a professional branding agency was how to properly handle color output. So I decided to write this post in the hope of saving you some from some of the pitfalls that I failed to avoid.</description>
+<pubDate>Wed, 01 Apr 2015 00:00:00 GMT</pubDate>
+</item><item>
+<guid isPermaLink="true">https://joshcollinsworth.com/blog/12-things</guid>
+<title>Social Media, Compulsion, and the 12 Things I Learned on My Break from Facebook</title>
+<link>https://joshcollinsworth.com/blog/12-things</link>
+<description>I’m beginning to believe that becoming more connected with everyone is making me less connected with anyone.</description>
+<pubDate>Fri, 27 Mar 2015 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

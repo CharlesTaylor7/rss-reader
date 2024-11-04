@@ -1,0 +1,366 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>mrale.ph</title>
+  <link href="http://mrale.ph"/>
+  <link type="application/atom+xml" rel="self" href="http://mrale.ph/atom.xml"/>
+  <updated>2024-10-10T11:56:41+00:00</updated>
+  <id>http://mrale.ph/</id>
+  <author>
+    <name>Vyacheslav Egorov</name>
+    <email>me@mrale.ph</email>
+  </author>
+
+  
+  <entry>
+    <id>http://mrale.ph/blog/2021/01/21/microbenchmarking-dart-part-1</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2021/01/21/microbenchmarking-dart-part-1.html"/>
+    <title>Micro&#8203;benchmarking Dart (Part 1)</title>
+    <published>2021-01-21T00:00:00+00:00</published>
+    <updated>2021-01-21T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2021/01/21/microbenchmarking-dart-part-1.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2018/02/03/maybe-you-dont-need-rust-to-speed-up-your-js</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2018/02/03/maybe-you-dont-need-rust-to-speed-up-your-js.html"/>
+    <title>Maybe you don't need Rust and WASM to speed up your JS</title>
+    <published>2018-02-03T00:00:00+00:00</published>
+    <updated>2018-02-03T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2018/02/03/maybe-you-dont-need-rust-to-speed-up-your-js.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2017/01/08/the-fear-of-dart-mirrors</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2017/01/08/the-fear-of-dart-mirrors.html"/>
+    <title>The fear of dart:mirrors</title>
+    <published>2017-01-08T00:00:00+00:00</published>
+    <updated>2017-01-08T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2017/01/08/the-fear-of-dart-mirrors.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2016/11/23/making-less-dart-faster</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html"/>
+    <title>Adventures in the land of substrings and RegExps.</title>
+    <published>2016-11-23T00:00:00+00:00</published>
+    <updated>2016-11-23T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2015/11/02/crankshaft-vs-arguments-object</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2015/11/02/crankshaft-vs-arguments-object.html"/>
+    <title>Crankshaft vs arguments object</title>
+    <published>2015-11-02T00:00:00+00:00</published>
+    <updated>2015-11-02T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2015/11/02/crankshaft-vs-arguments-object.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2015/04/12/jsunderhood</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2015/04/12/jsunderhood.html"/>
+    <title>jsunderhood digest (in Russian)</title>
+    <published>2015-04-12T00:00:00+00:00</published>
+    <updated>2015-04-12T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2015/04/12/jsunderhood.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2015/03/29/browser-as-an-interactive-disassembler</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2015/03/29/browser-as-an-interactive-disassembler.html"/>
+    <title>Browser as an Interactive Disassembler</title>
+    <published>2015-03-29T00:00:00+00:00</published>
+    <updated>2015-03-29T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2015/03/29/browser-as-an-interactive-disassembler.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2015/01/11/whats-up-with-monomorphism</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2015/01/11/whats-up-with-monomorphism.html"/>
+    <title>What's up with monomorphism?</title>
+    <published>2015-01-11T00:00:00+00:00</published>
+    <updated>2015-01-11T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2015/01/11/whats-up-with-monomorphism.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2014/12/24/array-length-caching</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2014/12/24/array-length-caching.html"/>
+    <title>How the Grinch stole array.length access</title>
+    <published>2014-12-24T00:00:00+00:00</published>
+    <updated>2014-12-24T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2014/12/24/array-length-caching.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2014/07/30/constructor-vs-objectcreate</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2014/07/30/constructor-vs-objectcreate.html"/>
+    <title>new Fn(...) vs. Object.create(P)</title>
+    <published>2014-07-30T00:00:00+00:00</published>
+    <updated>2014-07-30T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2014/07/30/constructor-vs-objectcreate.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2014/02/23/the-black-cat-of-microbenchmarks</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2014/02/23/the-black-cat-of-microbenchmarks.html"/>
+    <title>The Black Cat of Microbenchmarks</title>
+    <published>2014-02-23T00:00:00+00:00</published>
+    <updated>2014-02-23T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2014/02/23/the-black-cat-of-microbenchmarks.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2014/01/28/prerelease-irhydra2</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2014/01/28/prerelease-irhydra2.html"/>
+    <title>(Pre)release IRHydra 2.0</title>
+    <published>2014-01-28T00:00:00+00:00</published>
+    <updated>2014-01-28T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2014/01/28/prerelease-irhydra2.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2013/08/14/hidden-classes-vs-jsperf</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2013/08/14/hidden-classes-vs-jsperf.html"/>
+    <title>Hidden classes vs jsPerf</title>
+    <published>2013-08-14T00:00:00+00:00</published>
+    <updated>2013-08-14T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2013/08/14/hidden-classes-vs-jsperf.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2013/04/29/performance-tuning-as-weather-forecast</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2013/04/29/performance-tuning-as-weather-forecast.html"/>
+    <title>Performance tuning as the art of weather forecast</title>
+    <published>2013-04-29T00:00:00+00:00</published>
+    <updated>2013-04-29T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2013/04/29/performance-tuning-as-weather-forecast.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2013/03/28/why-asmjs-bothers-me</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2013/03/28/why-asmjs-bothers-me.html"/>
+    <title>Why asm.js bothers me</title>
+    <published>2013-03-28T00:00:00+00:00</published>
+    <updated>2013-03-28T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2013/03/28/why-asmjs-bothers-me.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2013/02/17/release-the-irhydra</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2013/02/17/release-the-irhydra.html"/>
+    <title>Release the IRHydra!</title>
+    <published>2013-02-17T00:00:00+00:00</published>
+    <updated>2013-02-17T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2013/02/17/release-the-irhydra.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2012/12/15/microbenchmarks-fairy-tale</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2012/12/15/microbenchmarks-fairy-tale.html"/>
+    <title>microbenchmarks fairy tale</title>
+    <published>2012-12-15T00:00:00+00:00</published>
+    <updated>2012-12-15T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2012/12/15/microbenchmarks-fairy-tale.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2012/11/25/shaky-diagramming</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2012/11/25/shaky-diagramming.html"/>
+    <title>Shaky diagramming</title>
+    <published>2012-11-25T00:00:00+00:00</published>
+    <updated>2012-11-25T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2012/11/25/shaky-diagramming.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2012/11/18/jsconfeu2012-talk</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2012/11/18/jsconfeu2012-talk.html"/>
+    <title>My JSConf EU 2012 talk</title>
+    <published>2012-11-18T00:00:00+00:00</published>
+    <updated>2012-11-18T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2012/11/18/jsconfeu2012-talk.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2012/09/23/grokking-v8-closures-for-fun</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2012/09/23/grokking-v8-closures-for-fun.html"/>
+    <title>Grokking V8 closures for fun (and profit?)</title>
+    <published>2012-09-23T00:00:00+00:00</published>
+    <updated>2012-09-23T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2012/09/23/grokking-v8-closures-for-fun.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2012/06/21/v8s-flags-and-chrome-on-windows</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2012/06/21/v8s-flags-and-chrome-on-windows.html"/>
+    <title>V8's --trace-* flags and Chrome on Windows</title>
+    <published>2012-06-21T00:00:00+00:00</published>
+    <updated>2012-06-21T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2012/06/21/v8s-flags-and-chrome-on-windows.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2012/06/03/explaining-js-vms-in-js-inline-caches</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2012/06/03/explaining-js-vms-in-js-inline-caches.html"/>
+    <title>Explaining JavaScript VMs in JavaScript - Inline Caches</title>
+    <published>2012-06-03T00:00:00+00:00</published>
+    <updated>2012-06-03T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2012/06/03/explaining-js-vms-in-js-inline-caches.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2012/04/07/jsconf2012</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2012/04/07/jsconf2012.html"/>
+    <title>My JSConf 2012 talk</title>
+    <published>2012-04-07T00:00:00+00:00</published>
+    <updated>2012-04-07T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2012/04/07/jsconf2012.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2011/12/18/v8-optimization-checklist</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2011/12/18/v8-optimization-checklist.html"/>
+    <title>I-want-to-optimize-my-JS-application-on-V8 checklist</title>
+    <published>2011-12-18T00:00:00+00:00</published>
+    <updated>2011-12-18T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2011/12/18/v8-optimization-checklist.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2011/11/05/the-trap-of-the-performance-sweet-spot</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2011/11/05/the-trap-of-the-performance-sweet-spot.html"/>
+    <title>The trap of the performance sweet spot</title>
+    <published>2011-11-05T00:00:00+00:00</published>
+    <updated>2011-11-05T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2011/11/05/the-trap-of-the-performance-sweet-spot.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2011/05/12/dangers-of-cross-language-benchmark-games</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2011/05/12/dangers-of-cross-language-benchmark-games.html"/>
+    <title>Dangers of cross language benchmark games</title>
+    <published>2011-05-12T00:00:00+00:00</published>
+    <updated>2011-05-12T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2011/05/12/dangers-of-cross-language-benchmark-games.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+  <entry>
+    <id>http://mrale.ph/blog/2011/03/30/external-arrays-and-nodejs</id>
+    <link type="text/html" rel="alternate" href="http://mrale.ph/blog/2011/03/30/external-arrays-and-nodejs.html"/>
+    <title>Improved V8 external arrays support and nodejs Buffer type</title>
+    <published>2011-03-30T00:00:00+00:00</published>
+    <updated>2011-03-30T00:00:00+00:00</updated>
+    <author>
+      <name>Vyacheslav Egorov</name>
+      <uri>http://mrale.ph</uri>
+    </author>
+    <content type="html">&lt;a href="http://mrale.ph/blog/2011/03/30/external-arrays-and-nodejs.html"&gt;read it here&lt;/a&gt;</content>
+  </entry>
+  
+</feed>

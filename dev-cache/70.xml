@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    
+    <title>UnderCoding</title>
+    
+    
+    <description>This blog is mainly about Kotlin compiler, wasm, JavaScript, and their ecosystems.</description>
+    
+    <link>https://jsmonk.github.io/</link>
+    <atom:link href="https://jsmonk.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    
+    
+      <item>
+        <title>The last days of my type checker for JavaScript</title>
+        <description>
+          
+          TL;DR Last year, I started to work on the 2.0 version of my static type checker for JavaScript written in Rust, but, unfortunately, I see that nowadays, TypeScript won. The idea of strict type-checking for JavaScript is less popular than in 2019. Additionally, another way to bring stricter types into...
+        </description>
+        <pubDate>Mon, 29 Jan 2024 00:00:00 +0100</pubDate>
+        <link>https://jsmonk.github.io/2024-01-29-last-days-of-hegel/</link>
+        <guid isPermaLink="true">https://jsmonk.github.io/2024-01-29-last-days-of-hegel/</guid>
+      </item>
+    
+  </channel>
+</rss>

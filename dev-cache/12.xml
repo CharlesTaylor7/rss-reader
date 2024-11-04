@@ -1,0 +1,1712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ <title>The Third Bit</title>
+ <link href="https://third-bit.com/atom.xml" rel="self"/>
+ <link href="/"/>
+ <updated>2024-10-28T00:00:00Z</updated>
+ <id>https://third-bit.com/</id>
+ <author>
+   <name>Greg Wilson</name>
+   <email>gvwilson@third-bit.com</email>
+ </author>
+ 
+ <entry>
+   <title>What Would Be in a New AOSA?</title>
+   <link href="https://third-bit.com/2024/10/28/what-would-be-in-a-new-aosa/"/>
+   <updated>2024-10-28T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/10/28/what-would-be-in-a-new-aosa/</id>
+   <content type="html">&lt;p&gt;My desktop background says &amp;ldquo;no new projects&amp;rdquo;
+but that doesn&amp;rsquo;t mean I can&amp;rsquo;t dream.
+It has been twelve years since we published the first two volumnes of
+&lt;a href=&#34;https://aosabook.org/&#34;&gt;&lt;em&gt;The Architecture of Open Source Applications&lt;/em&gt;&lt;/a&gt;:
+if someone was going to put together a sequel with chapter-length descriptions of
+the architectures of open source projects that have risen to prominence since then,
+what would you want it to include?
+Candidates so far include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://dagster.io/&#34;&gt;dagster&lt;/a&gt; and/or &lt;a href=&#34;https://metaflow.org/&#34;&gt;Metaflow&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dash.plotly.com/&#34;&gt;Dash&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://deno.com/&#34;&gt;deno&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.discourse.org/&#34;&gt;Discourse&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://duckdb.org/&#34;&gt;duckdb&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dvc.org/&#34;&gt;DVC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://flask.palletsprojects.com/&#34;&gt;Flask&lt;/a&gt; and/or &lt;a href=&#34;https://fastapi.tiangolo.com/&#34;&gt;FastAPI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gleam.run/&#34;&gt;Gleam&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.haiku-os.org/&#34;&gt;Haiku&lt;/a&gt; and/or &lt;a href=&#34;https://serenityos.org/&#34;&gt;SerenityOS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://immich.app/&#34;&gt;Immich&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://jellyfin.org/&#34;&gt;Jellyfin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kafka.apache.org/&#34;&gt;Kafka&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://joinmastodon.org/&#34;&gt;Mastodon&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.nushell.sh/&#34;&gt;Nushell&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://opentelemetry.io/&#34;&gt;OpenTelemetry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pola.rs/&#34;&gt;Polars&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pytorch.org/&#34;&gt;PyTorch&lt;/a&gt; or &lt;a href=&#34;https://www.tensorflow.org/&#34;&gt;tensorflow&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.astral.sh/ruff/&#34;&gt;ruff&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://tauri.app/&#34;&gt;Tauri&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://vuejs.org/&#34;&gt;Vue.js&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Two things stand out for me:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;There&amp;rsquo;s a definite bias toward Python in this list,
+    and a lamentable lack of distributed/fault-tolerant projects.
+    Both are reflections of my biases and the biases of my circle of online acquaintances.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I think this would be a great collection,
+    but I&amp;rsquo;m just as interested in a book on
+    the architecture of open source &lt;em&gt;organizations&lt;/em&gt;.
+    People talk about &amp;ldquo;the&amp;rdquo; open source community,
+    but in practice we are hundreds or thousands of intersecting collections of people
+    who have evolved many different ways to organize ourselves.
+    I would love to read a collection of case studies of those different models,
+    including commercial models.
+    (Full disclore:
+    my &lt;a href=&#34;https://plotly.com/&#34;&gt;current employer&lt;/a&gt; is an open-core company,
+    but our particular model is just one of many.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I don&amp;rsquo;t think I&amp;rsquo;ll ever put either book together,
+but if you&amp;rsquo;re interested,
+I&amp;rsquo;d be happy to offer advice.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>A Wish List</title>
+   <link href="https://third-bit.com/2024/10/20/wish-list/"/>
+   <updated>2024-10-20T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/10/20/wish-list/</id>
+   <content type="html">&lt;p&gt;Earlier this year I wrote &lt;a href=&#34;https://third-bit.com/2024/02/25/my-last-to-dont-list/&#34;&gt;my last to-don&amp;rsquo;t list&lt;/a&gt;.
+As the leaves turn and the days get shorter,
+here&amp;rsquo;s a list of things I hope I &lt;em&gt;will&lt;/em&gt; get to do.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Dive the &lt;a href=&#34;https://en.wikipedia.org/wiki/Great_Blue_Hole&#34;&gt;Great Blue Hole&lt;/a&gt; in Belize with my wife.
+    We both love diving,
+    but we&amp;rsquo;ve never done it together.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Visit &lt;a href=&#34;https://bcparks.ca/cape-scott-park/&#34;&gt;Cape Scott National Park&lt;/a&gt; with my family.
+    I grew up on Vancouver Island but have never been further north than Alert Bay;
+    we were planning to go a couple of years ago
+    but spent the week in bed with COVID instead.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Revisit Japan, also with my family.
+    I had a week in Kyoto back in 1993,
+    but I spent most of it in a basement,
+    and I&amp;rsquo;ve always regretted that.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Spend a year or two programming with and for young scientists.
+    It would be nice if something from this turned into an open source package
+    that other people picked up,
+    but that would be a bonus;
+    what I want most is just to feel useful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Publish some books for young readers.
+    I&amp;rsquo;ve been working on several for years;
+    I&amp;rsquo;ll be disappointed if I&amp;rsquo;m remaindered before any of them are on the shelf.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Play Semisonic&amp;rsquo;s &lt;a href=&#34;https://www.youtube.com/watch?v=xGytDsqkQY8&#34;&gt;&lt;em&gt;Closing Time&lt;/em&gt;&lt;/a&gt; on stage in a band,
+    mostly for the practice sessions beforehand—I miss jamming with friends.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Eat a meal at a fancy restaurant that was prepared by my daughter.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Celebrate my fortieth wedding anniversary.
+    I&amp;rsquo;d like to see my fiftieth,
+    but I&amp;rsquo;m trying to be realistic…&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bring my wife tea in the morning every day until that anniversary
+    and for many years afterward.
+    (I&amp;rsquo;d like to bring tea to my daughter every day as well,
+    but I expect she&amp;rsquo;ll want to move out at some point.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Leave this world believing that it&amp;rsquo;s going to be OK.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Student Project Proposals</title>
+   <link href="https://third-bit.com/2024/10/18/student-project-proposals/"/>
+   <updated>2024-10-18T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/10/18/student-project-proposals/</id>
+   <content type="html">&lt;p&gt;My laptop screensaver says &amp;ldquo;no new projects&amp;rdquo; but I&amp;rsquo;d make an exception
+to supervise a team of 2-4 undergraduates who wanted to tackle one of
+the challenges described below. If you are teaching an undergraduate
+capstone course and might be interested, please reach out.&lt;/p&gt;
+&lt;h2&gt;Browsercast&lt;/h2&gt;
+&lt;p&gt;Tools like PowerPoint aren&amp;rsquo;t web-friendly.  When you export a
+slideshow to present on the web, what you actually get is a bunch of
+images.  There&amp;rsquo;s no text, just pixels arranged in the shapes of
+letters; no hyperlinks; and nothing search engines or disability aids
+can read.  What&amp;rsquo;s worse, if you want something people can replay, you
+have to make a screencast, which are just as opaque to search engines
+and disability aids and probably several times larger than the
+original slides.&lt;/p&gt;
+&lt;p&gt;Browsercast is our solution to this problem.  It plays snippets of
+audio in your browser as you move through your slides.  &amp;ldquo;View Source&amp;rdquo;,
+links, CSS, screen readers, and search work as they should because
+it&amp;rsquo;s all still web-native HTML.  And since it&amp;rsquo;s just text and audio,
+it&amp;rsquo;s a fraction of the size of a video, which makes it ideal for
+mobile devices.&lt;/p&gt;
+&lt;p&gt;Our prototype uses just 5kb of JavaScript and is available under the
+MIT License. There are many open questions; we are looking for a team
+of 2-4 students with strong JavaScript skills and an interest in user
+experience design to explore ways we can make it better.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/gvwilson/browsercast&#34;&gt;Browsercast&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Marimo and H5P&lt;/h2&gt;
+&lt;p&gt;Marimo is a next-generation computational notebook that enables data
+scientists to mix code, discussion, and results in a reproducible way.
+Its plugin system relies on AnyWidget, which specifies a simple
+contract between extensions and Marimo&amp;rsquo;s rendering and execution
+engine.&lt;/p&gt;
+&lt;p&gt;The aim of this project is to design, build, and test a set of Marimo
+plugins that can be used for classroom exercises similar to those in
+the H5P toolkit: multiple choice, fill in the blanks, and so on. We
+are looking for a team of 2-4 students with both JavaScript and Python
+skills who have an interest in both user experience design and
+teaching.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://marimo.io/&#34;&gt;Marimo Notebook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://anywidget.dev/&#34;&gt;AnyWidget&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://h5p.org/content-types-and-applications&#34;&gt;H5P Content Types&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Dragnet&lt;/h2&gt;
+&lt;p&gt;One type of exercise that H5P &lt;em&gt;doesn&amp;rsquo;t&lt;/em&gt; support is adding labels to
+diagrams. &lt;a href=&#34;https://iezer.github.io/dragnet/&#34;&gt;This prototype&lt;/a&gt; takes an SVG with some
+specially-marked labels, moves those labels to the side, and then lets
+the user try to drag them back into the right places.  A deployable
+version would need to do a lot more, such as dealing with scaling
+transformations; the goal of this project is to turn the demo into
+something a classroom teacher could use.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://iezer.github.io/dragnet/&#34;&gt;Dragnet&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;A Tutorial Simulation of Network Protocols&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://third-bit.com/sdxpy/&#34;&gt;&lt;em&gt;Software Design by Example in Python&lt;/em&gt;&lt;/a&gt; deliberately ignored
+concurrency, partial failure, and everything else associated with
+modern distributed applications. The aim of this project is to (start
+to) fix that by building scale models of real network protocols such
+as TCP and the BitTorrent protocol using either &lt;a href=&#34;https://pydes.readthedocs.io/&#34;&gt;Py-DES&lt;/a&gt; or
+&lt;a href=&#34;https://simpy.readthedocs.io/&#34;&gt;SimPy&lt;/a&gt;. The tutorials will use simulators so that the
+accompanying lessons could illustrate edge cases in reproducible ways;
+making the implementations work on a real network as well will be a
+good stretch goal.&lt;/p&gt;
+&lt;h2&gt;Software Design by Example in Gleam&lt;/h2&gt;
+&lt;p&gt;For decades, functional programming (FP) has offered an alternative to
+the imperative, procedural model used by most languages. As highly
+concurrent systems have become the norm, FP&amp;rsquo;s promise of preventing
+entire classes of bugs by avoiding mutable state has led a growing
+number of programmers to re-examine it, but there is still often a
+gulf between the kinds of examples language designers find
+interesting and the kinds of things most working programmers build.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://gleam.run/&#34;&gt;Gleam&lt;/a&gt; is a modern functional language that runs on the
+&lt;a href=&#34;https://www.erlang.org/&#34;&gt;Erlang/OTP&lt;/a&gt; platform (and can also be compiled to
+JavaScript). The aim of this project is to translate examples from
+&lt;a href=&#34;https://third-bit.com/sdxpy/&#34;&gt;&lt;em&gt;Software Design by Example in Python&lt;/em&gt;&lt;/a&gt; into Gleam to help
+people coming from Python and other mainstream languages understand
+how to use FP in practice.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Case Studies in Open X</title>
+   <link href="https://third-bit.com/2024/10/14/case-studies-in-open-x/"/>
+   <updated>2024-10-14T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/10/14/case-studies-in-open-x/</id>
+   <content type="html">&lt;p&gt;Over the weekend I read Kevin Young&amp;rsquo;s book
+&lt;a href=&#34;https://abolishingfossilfuels.com/&#34;&gt;&lt;em&gt;Abolishing Fossil Fuels: Lessons from Movements That Won&lt;/em&gt;&lt;/a&gt;.
+The first couple of chapters are an opinionated look at
+the current state of fossil fuel politics in the United States;
+the next few dive deep into four grassroots victories in US history
+(the abolition of slavery, unionization, civil rights, and clean air).&lt;/p&gt;
+&lt;p&gt;Young&amp;rsquo;s contention is that most popular and scholarly accounts of those victories misrepresent them.
+In all four cases,
+the people striving for change did not have the majority on their side
+until well after they won,
+and did not achieve their aims through the ballot box.
+Instead,
+they succeeded by bringing economic pressure to bear.
+(Young quotes one abolitionist as writing,
+&amp;ldquo;The quickest way to a white man&amp;rsquo;s conscience is through his pocketbook.&amp;rdquo;)
+The lesson Young draws from this is that
+present-day attempts to elect environmentally-minded politicians are unlikely to make a difference.
+Instead,
+decarbonization advocates&amp;rsquo; successes have come from targeting banks and businesses
+in ways that make fossil fuels economically risky.&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t know enough of the history to judge Young&amp;rsquo;s arguments,
+and I suspect 99% of readers won&amp;rsquo;t either.
+(Union organizers of the 1930s are hardly household names.)
+His version of history rings true, though,
+and leaves me wishing for a book like this one
+about the successes and failures of the open source, open science, and open data movements.
+I don&amp;rsquo;t want polemics, advocacy, or how-to guides:
+I&amp;rsquo;ve read (and written) enough of those.
+What I want,
+and what I think our movements are ready for,
+is a set of critical, historically-informed case studies
+that analyze how and why specific initiatives won or lost.
+If anyone is working on something like this,
+please let me know how I can help and thank you in advance&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Browsercast Revisited</title>
+   <link href="https://third-bit.com/2024/10/12/browsercast-revisited/"/>
+   <updated>2024-10-12T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/10/12/browsercast-revisited/</id>
+   <content type="html">&lt;p&gt;Shakespeare wrote sonnets;
+we write PowerPoint
+A lot of people blame it for bad presentations,
+but that&amp;rsquo;s like blaming fountain pens for bad poetry.
+The real problem with tools like PowerPoint is that they aren&amp;rsquo;t web-friendly.
+When you export a slideshow to present on the web,
+what you actually get is a bunch of images.
+There&amp;rsquo;s no text,
+just pixels arranged in the shapes of letters;
+no hyperlinks;
+and nothing search engines or disability aids can read.
+What&amp;rsquo;s worse,
+if you want something people can replay,
+you have to make a screencast.
+These are just as opaque to search engines and disability aids,
+and probably several times larger than the original slides.&lt;/p&gt;
+&lt;p&gt;A decade ago,
+we built a solution called Browsercast
+that played audio in sync with an HTML slideshow.
+&amp;ldquo;View Source&amp;rdquo;, links, CSS, screen readers, and search worked as they should
+because everything was web-native HTML.
+And since it was just text and audio,
+it was a fraction of the size of a video,
+which made it ideal for mobile devices.&lt;/p&gt;
+&lt;p&gt;Browsercast never caught on,
+but I&amp;rsquo;m hoping &lt;a href=&#34;https://gvwilson.github.io/browsercast/&#34;&gt;this new version&lt;/a&gt; will.
+It&amp;rsquo;s just 5kb of JavaScript and 1.5kb of CSS,
+and,
+like its predecessor,
+is available under the MIT License.
+However,
+there&amp;rsquo;s still a lot to do:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The first challenge is to find a better way to manage replay.
+    If the &lt;code&gt;audio&lt;/code&gt; element on the first slide doesn&amp;rsquo;t display controls,
+    browsers refuse to play any of the sound clips
+    because the user hasn&amp;rsquo;t interacted with the page.
+    (Try removing &lt;code&gt;control=true&lt;/code&gt; from the first &lt;code&gt;audio&lt;/code&gt; element
+    and then check the error messages in browser&amp;rsquo;s console log to confirm this.)
+    This behavior prevents pop-up audio ads,
+    but in this case it makes for a poor user experience.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Second, we need a better way to manage the audio clips themselves.
+    It&amp;rsquo;s easiest for a person to record their presentation as a single audio file,
+    but the &lt;code&gt;audio&lt;/code&gt; elements in the slides would then need start and end time markers,
+    which are annoying to find and copy into the browsercast file.
+    On the other hand,
+    splitting one file into a couple of dozens short clips
+    or recording the presentation in a couple of dozen bursts
+    is equally annoying.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This prototype replays narration every time a slide comes into view,
+    which means the audience hears a clip repeated
+    when the presenter backs up to a previous slide.
+    The JavaScript could keep track of which clips have already played
+    and not replay them unless asked to,
+    but should that be controlled by hot keys?
+    Or should the audio control on the first slide be repeated on subsequent slides?
+    Or should we approach this problem in some other way entirely?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;a href=&#34;https://yihui.org/en/2023/09/snap-slides/&#34;&gt;snap-scroll technique&lt;/a&gt; for presenting slides
+    does not behave gracefully when a slide is too tall to fit on the screen.
+    We would like to clip slides to fit the viewport
+    and to report clipped slides to authors as they are developing slideshows,
+    but need ways to implement and present this.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finally [sic],
+    we need to think about captioning and internationalization.
+    Transcripts in different languages can easily be added to slides in hidden elements;
+    how should the accompanying audio clips be added,
+    and how should users indicate which set of clips they want to hear?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;My thanks to David Seifried,
+Jeremy Banks,
+David Wolever,
+Gabriel Ivanica,
+and Rémi Emonet for their work on Version 1,
+and to Yihui Xie for inventing the &lt;a href=&#34;https://yihui.org/en/2023/09/snap-slides/&#34;&gt;snap-scroll technique&lt;/a&gt;.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>How to Be Interviewed</title>
+   <link href="https://third-bit.com/2024/10/11/how-to-be-interviewed/"/>
+   <updated>2024-10-11T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/10/11/how-to-be-interviewed/</id>
+   <content type="html">&lt;p&gt;Earlier this week
+I gave a short presentation to some undergrads at the University of Toronto
+on how to be interviewed for internships.
+The points I made are listed below;
+as always, I&amp;rsquo;d be grateful for feedback.&lt;/p&gt;
+&lt;h2&gt;Why Should You Listen to Me?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Worked at six universities, a dozen companies, and a non-profit over 40 years&lt;/li&gt;
+&lt;li&gt;Supervised over 20 undergraduate interns and hired that many again for other people&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Why Shouldn&amp;rsquo;t You Listen to Me?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;I graduated in a tech boom 40 years ago — you are facing the toughest job market I&amp;rsquo;ve ever seen&lt;/li&gt;
+&lt;li&gt;You&amp;rsquo;re probably not a middle-aged straight white guy&lt;/li&gt;
+&lt;li&gt;You&amp;rsquo;re probably not applying for the same jobs I would&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;The Pipeline (Fall 2024 Edition)&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align: left;&#34;&gt;Step&lt;/th&gt;
+&lt;th style=&#34;text-align: right;&#34;&gt;Count&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align: left;&#34;&gt;Ad online (days)&lt;/td&gt;
+&lt;td style=&#34;text-align: right;&#34;&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align: left;&#34;&gt;Applications&lt;/td&gt;
+&lt;td style=&#34;text-align: right;&#34;&gt;1776&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align: left;&#34;&gt;After first manual screen&lt;/td&gt;
+&lt;td style=&#34;text-align: right;&#34;&gt;289&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align: left;&#34;&gt;After second manual screen&lt;/td&gt;
+&lt;td style=&#34;text-align: right;&#34;&gt;45&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align: left;&#34;&gt;After HR screening call&lt;/td&gt;
+&lt;td style=&#34;text-align: right;&#34;&gt;28&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align: left;&#34;&gt;After 1/2 hr with me&lt;/td&gt;
+&lt;td style=&#34;text-align: right;&#34;&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align: left;&#34;&gt;After coding interview&lt;/td&gt;
+&lt;td style=&#34;text-align: right;&#34;&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align: left;&#34;&gt;Offers&lt;/td&gt;
+&lt;td style=&#34;text-align: right;&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;Before We Talk to You&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;If you don&amp;rsquo;t meet the legal criteria, please don&amp;rsquo;t apply&lt;/li&gt;
+&lt;li&gt;Page 1 is the only page that matters&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t waste space on &amp;ldquo;I&amp;rsquo;m a hard worker, quick to adapt, and a good team player&amp;rdquo;&lt;ul&gt;
+&lt;li&gt;Because nobody says &amp;ldquo;I&amp;rsquo;m lazy, stubborn, and anti-social&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Tell me your GPA&lt;ul&gt;
+&lt;li&gt;I&amp;rsquo;ll wonder about it if you don&amp;rsquo;t&lt;/li&gt;
+&lt;li&gt;But note that I prefer consistency (B-B-B-B) to inconsistency (A-C-A-D)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;If you say &amp;ldquo;42.3% improvement in customer retention&amp;rdquo;, I&amp;rsquo;ll ask for details…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;On &lt;strike&gt;the Phone&lt;/strike&gt; Zoom&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;First screen is 15 minutes with HR&lt;ul&gt;
+&lt;li&gt;If they find out you have misrepresented yourself, the conversation is over&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Second is 30 minutes with me&lt;/li&gt;
+&lt;li&gt;Then a 50-minute coding interview&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;My Script&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Introductions&lt;/li&gt;
+&lt;li&gt;Icebreaker (2 min)&lt;ul&gt;
+&lt;li&gt;What was your favorite course and why?&lt;/li&gt;
+&lt;li&gt;What about your least favorite?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Walk me through the most complicated thing you&amp;rsquo;ve built (5-10 min)&lt;ul&gt;
+&lt;li&gt;Tech stack&lt;/li&gt;
+&lt;li&gt;Tech decisions you had to make and how you made them&lt;/li&gt;
+&lt;li&gt;How did you know it actually worked?&lt;/li&gt;
+&lt;li&gt;What would you do differently if you had to do it again?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Design question (5-10 min)&lt;ul&gt;
+&lt;li&gt;Initially present a simple problem with a straightforward solution&lt;/li&gt;
+&lt;li&gt;Then add a wrinkle that might require a change to that solution&lt;/li&gt;
+&lt;li&gt;Add another complication that definitely requires backing up and re-thinking&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Plotly (3-5 min)&lt;ul&gt;
+&lt;li&gt;What we build&lt;/li&gt;
+&lt;li&gt;How we&amp;rsquo;re organized&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Positions and projects&lt;ul&gt;
+&lt;li&gt;Four open positions (Jan-Aug 2025)&lt;/li&gt;
+&lt;li&gt;Probably work on 2-3 projects in that time&lt;/li&gt;
+&lt;li&gt;Probably just one team, but who knows?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Questions?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;What I&amp;rsquo;m Looking For&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Can you explain technical details?&lt;ul&gt;
+&lt;li&gt;If it&amp;rsquo;s on your resume, I&amp;rsquo;m allowed to drill down&lt;/li&gt;
+&lt;li&gt;If you dodge, I&amp;rsquo;ll definitely drill down&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Can you explain why you built something as you did?&lt;/li&gt;
+&lt;li&gt;Can you think aloud / think with me?&lt;/li&gt;
+&lt;li&gt;Do you have interesting questions?&lt;/li&gt;
+&lt;li&gt;I.e., have you looked at my company&amp;rsquo;s website?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Coding Interview&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Your CV tells me that you can write code&lt;/li&gt;
+&lt;li&gt;But can you debug?&lt;ul&gt;
+&lt;li&gt;A better indicator than LeetCode exercises&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;We send a hundred-line program with some bugs and watch the candidate find them&lt;/li&gt;
+&lt;li&gt;They are allowed to use web search, AI, etc.&lt;ul&gt;
+&lt;li&gt;We want to see how they actually code&lt;/li&gt;
+&lt;li&gt;But we have to be able to see everything they&amp;rsquo;re doing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;What we&amp;rsquo;re looking for&lt;ul&gt;
+&lt;li&gt;How methodical are they?&lt;/li&gt;
+&lt;li&gt;How well do they use their tools?&lt;ul&gt;
+&lt;li&gt;Prefer debugger to print() or console.log()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Bonus marks if they create a test case without being prompted&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Do they ask for clarification when they need it?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;How You Can Help Each Other&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Read and critique each other&amp;rsquo;s CVs&lt;/li&gt;
+&lt;li&gt;Practice Q&amp;amp;A with each other&lt;/li&gt;
+&lt;li&gt;Learn to use your tools well&lt;/li&gt;
+&lt;li&gt;Build a personal website&lt;ul&gt;
+&lt;li&gt;GitHub Pages is fine&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Be kind&lt;ul&gt;
+&lt;li&gt;You are not really each other&amp;rsquo;s competition&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;How to Improve Your Chances of Getting Re-hired&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Learn &lt;a href=&#34;https://www.youtube.com/watch?v=PtewOjRy-1U&#34;&gt;how to participate in a status meeting&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;Progress, plans, and problems go up&lt;/li&gt;
+&lt;li&gt;Context and priorities come down&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Learn how to review code software designs&lt;/li&gt;
+&lt;li&gt;Learn how to estimate how long things will take&lt;ul&gt;
+&lt;li&gt;Optimists are tiring…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Learn (about) the other 90% of the business&lt;ul&gt;
+&lt;li&gt;Ask to have a coffee with DevOps, Product Management, Customer Success, etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Be kind&lt;/li&gt;
+&lt;/ul&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>First Draft of the Webonomicon</title>
+   <link href="https://third-bit.com/2024/09/27/first-draft-of-webonomicon/"/>
+   <updated>2024-09-27T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/09/27/first-draft-of-webonomicon/</id>
+   <content type="html">&lt;p&gt;A few months ago I mused about what might go into a lesson on &lt;a href=&#34;https://third-bit.com/2024/06/14/human-scale-software/&#34;&gt;human-scale software&lt;/a&gt;.
+&lt;a href=&#34;https://ikasten.io/&#34;&gt;Juanan Pereira&lt;/a&gt; and I have now sketched a rough outline,
+tentatively titled &lt;a href=&#34;https://lessonomicon.github.io/webonomicon/&#34;&gt;The Webonomicon&lt;/a&gt;.
+The sections below shows the learner persona,
+the technologies we discuss,
+and the order of topics,
+while &lt;a href=&#34;https://github.com/lessonomicon/webonomicon&#34;&gt;the repository&lt;/a&gt; has working code.
+There&amp;rsquo;s a lot left to do,
+but we&amp;rsquo;d be grateful for feedback:
+issues in &lt;a href=&#34;https://github.com/lessonomicon/webonomicon&#34;&gt;the repo&lt;/a&gt; are the best way to reach us.&lt;/p&gt;
+&lt;h2&gt;Learner Persona&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Sabina, 28, has a master&amp;rsquo;s degree in animal physiology
+    and now works for a mid-sized veterinary pharmaceutical company.&lt;/li&gt;
+&lt;li&gt;She learned a bit of R in an undergraduate biostatistics course,
+    then picked up Python in grad school.
+    She spends several hours a week analyzing data with [Pandas][pandas]
+    and visualizing it with [Plotly Express][plotly-express],
+    and is comfortable with basic Git commands.&lt;/li&gt;
+&lt;li&gt;Sabina recently became responsible for maintaining a dashboard application built with [Dash][dash].
+    She believes a better understanding of how web applications work in general
+    will help her debug and extend it.&lt;/li&gt;
+&lt;li&gt;Sabina has tried doing asynchronous online courses a couple of times,
+    but strongly prefers learning in real time with other people.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Technologies&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Package&lt;/th&gt;
+&lt;th&gt;Purpose&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://alpinejs.dev/&#34;&gt;Alpine.js&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;dynamic HTML&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://beautiful-soup-4.readthedocs.io/&#34;&gt;Beautiful Soup&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;HTML manipulation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://deno.com/&#34;&gt;deno&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;JavaScript&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.fastht.ml/&#34;&gt;FastHTML&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;web framework&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://flask.palletsprojects.com/&#34;&gt;Flask&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;web server&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://frappe.io/charts/docs&#34;&gt;Frappe Charts&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;charts&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://pypi.org/project/html5validator/&#34;&gt;html5validator&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;validation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://htmx.org/&#34;&gt;htmx&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;interaction&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.python-httpx.org/&#34;&gt;httpx&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;HTTP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://jinja.palletsprojects.com/&#34;&gt;Jinja2&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;HTML templating&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/JSON_Web_Token&#34;&gt;JWT&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;authentication&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://pola.rs/&#34;&gt;Polars&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;tabular data&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://pypi.org/project/prettytable/&#34;&gt;PrettyTable&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;formatting&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://pypika.readthedocs.io/&#34;&gt;PyPika&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;query builder&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://docs.pytest.org/&#34;&gt;pytest&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;testing&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://pypi.org/project/selenium/&#34;&gt;Selenium&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;testing&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/lessonomicon/snailz&#34;&gt;snailz&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;synthetic data&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://www.sqlite.org/&#34;&gt;SQLite&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;database&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;https://svgjs.dev/&#34;&gt;SVG.js&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;graphics&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;Topics&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Introduction: what we will learn, how to set up, and the data we will use&lt;/li&gt;
+&lt;li&gt;HTTP: how browsers and server talk to each other&lt;/li&gt;
+&lt;li&gt;A Server: building a server with &lt;a href=&#34;https://flask.palletsprojects.com/&#34;&gt;Flask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Using a Database: getting data from &lt;a href=&#34;https://www.sqlite.org/&#34;&gt;SQLite&lt;/a&gt; using &lt;a href=&#34;https://pypika.readthedocs.io/&#34;&gt;PyPika&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Testing the Server: testing the server with &lt;a href=&#34;https://docs.pytest.org/&#34;&gt;pytest&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Serving HTML: generating HTML with &lt;a href=&#34;https://jinja.palletsprojects.com/&#34;&gt;Jinja&lt;/a&gt; templates&lt;/li&gt;
+&lt;li&gt;Using Forms: sending data to a server&lt;/li&gt;
+&lt;li&gt;An Hour of JavaScript: variables, loops, functions, and callbacks&lt;/li&gt;
+&lt;li&gt;JavaScript in the Browser: using the language in its native habitat&lt;/li&gt;
+&lt;li&gt;Using HTMX: letting the &lt;a href=&#34;https://htmx.org/&#34;&gt;htmx&lt;/a&gt; library do the hard work&lt;/li&gt;
+&lt;li&gt;Database Migration: managing database schema changes&lt;/li&gt;
+&lt;li&gt;Permissions: representing and checking who can do what&lt;/li&gt;
+&lt;li&gt;Authentication: checking the user&amp;rsquo;s identity&lt;/li&gt;
+&lt;li&gt;Encryption: keeping secrets safe&lt;/li&gt;
+&lt;li&gt;Testing in the Browser: using &lt;a href=&#34;https://pypi.org/project/selenium/&#34;&gt;Selenium&lt;/a&gt; to test the user interface&lt;/li&gt;
+&lt;li&gt;Dynamic Graphics: drawing pictures with &lt;a href=&#34;https://svgjs.dev/&#34;&gt;SVG.js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;A Graphical User Interface: handling interactivity in the browser&lt;/li&gt;
+&lt;li&gt;Accessibility: because everyone should be comfortable&lt;/li&gt;
+&lt;li&gt;Internationalization: because everyone should be welcome&lt;/li&gt;
+&lt;li&gt;Logging and Auditing: keeping of track of what&amp;rsquo;s happened&lt;/li&gt;
+&lt;li&gt;Session: persistent sessions and &lt;a href=&#34;https://en.wikipedia.org/wiki/JSON_Web_Token&#34;&gt;JWT&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;FastHTML: bringing it all together&lt;/li&gt;
+&lt;li&gt;Designing a Workflow: thinking before coding&lt;/li&gt;
+&lt;/ol&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>A Bag of Hippos</title>
+   <link href="https://third-bit.com/2024/09/23/a-bag-of-hippos/"/>
+   <updated>2024-09-23T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/09/23/a-bag-of-hippos/</id>
+   <content type="html">&lt;p&gt;&lt;img class=&#34;centered&#34; src=&#34;https://third-bit.com/files/2024/pink-hippo.jpg&#34; alt=&#34;pink hippo&#34; width=&#34;25%&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Back when I was teaching at the University of Toronto,
+I used to give little pink hippos to my students as prizes:
+I had purchased a bag of 200 for reasons that aren&amp;rsquo;t worth going into,
+and this seemed like the best way to get rid of them.&lt;/p&gt;
+&lt;p&gt;I had a couple or three dozen left by the time I left that job,
+so I put them in a bag in my knapsack.
+Whenever I saw a kid being unhappy on the streetcar I asked their adult if it was OK to offer them a hippo.
+Sometimes the answer was &amp;ldquo;no&amp;rdquo;,
+but more often it was &amp;ldquo;Sure, thank you, anything.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;One day—I think it was the summer of 2011 but I&amp;rsquo;m not sure—there was a boy of four or five
+who was particularly unhappy
+and whose mother looked like she was having a particularly stressful day.
+I pulled out a hippo and said,
+&amp;ldquo;Would this help?&amp;rdquo;
+The kid&amp;rsquo;s eyes lit up and his mom said, &amp;ldquo;Sure, thank you.&amp;rdquo;
+As he started playing with it on the seat she thanked me again and said,
+&amp;ldquo;Of course, he&amp;rsquo;ll lose it as soon as I turn around.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;No problem,&amp;rdquo; I said,
+and I handed her the bag with the remaining hippos
+and got off the streetcar without looking back.&lt;/p&gt;
+&lt;p&gt;Time to make another cup of tea.
+If you came in peace, be welcome;
+if not, be damned with you.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Labels for Technical Writing Projects</title>
+   <link href="https://third-bit.com/2024/09/12/writing-project-labels-revisited/"/>
+   <updated>2024-09-12T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/09/12/writing-project-labels-revisited/</id>
+   <content type="html">&lt;p&gt;&lt;em&gt;(Originally posted in the &lt;a href=&#34;https://ropensci.org/blog/2024/09/12/labels-writing-projects/&#34;&gt;rOpenSci blog&lt;/a&gt;—my thanks to &lt;a href=&#34;https://yabellini.netlify.app/&#34;&gt;Yanina Bellini Saibene&lt;/a&gt; for editing.)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Over the past thirty years I have written five technical books,
+co-written three others,
+and edited a further six.
+Since 2007 they have all lived in GitHub repositories,
+as did the first versions of the &lt;a href=&#34;https://carpentries.org/&#34;&gt;Software Carpentry&lt;/a&gt; lessons that I helped to write.&lt;/p&gt;
+&lt;p&gt;A few months ago I wrote about &lt;a href=&#34;https://third-bit.com/2024/03/07/labels/&#34;&gt;the GitHub issue labels I use&lt;/a&gt;
+for writing projects like these.
+As I put that post together,
+I realized that I wasn&amp;rsquo;t actually using all of the labels I had created,
+and that the problem of choosing good labels for a mixture of code and prose
+is more complicated than it seems.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;GitHub only allows one set of labels per project,
+    which means that the labels you would want to apply to issues
+    are in the same pile as labels you&amp;rsquo;d want to apply to pull requests (PRs).
+    This overlap quickly leads to confusion:
+    &amp;ldquo;bug&amp;rdquo; is the right label for an issue reporting a problem,
+    but doesn&amp;rsquo;t feel appropriate for the PR that fixes the problem.
+    (&amp;ldquo;Wait, is this PR adding a bug?&amp;rdquo;)
+    Most projects use two different labels (e.g., &amp;ldquo;bug&amp;rdquo; and &amp;ldquo;fix&amp;rdquo;),
+    but after going back and forth,
+    I&amp;rsquo;ve settled on &amp;ldquo;fix&amp;rdquo; to mean both &amp;ldquo;Please fix this&amp;rdquo; (in an issue)
+    and &amp;ldquo;This contains a fix&amp;rdquo; (in a PR).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;By default,
+    GitHub provides nine labels for issues and PRs.
+    Fully a third of these—&lt;code&gt;duplicate&lt;/code&gt;, &lt;code&gt;invalid&lt;/code&gt;, and &lt;code&gt;wontfix&lt;/code&gt;—describe reasons to close an issue
+    or discard a PR.
+    That seems excessive to me,
+    and I feel it&amp;rsquo;s polite to add a sentence or two of explanation as a comment.
+    (You have to do this anyway when marking an issue or PR as &lt;code&gt;duplicate&lt;/code&gt; to point at what it&amp;rsquo;s duplicating.)&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: I find it a bit ironic that GitHub provides three ways to say &amp;ldquo;no&amp;rdquo; but none for saying &amp;ldquo;yes&amp;rdquo;.
+If I was going to use labels to mark closed issues,
+I would include &amp;ldquo;resolved&amp;rdquo; and/or &amp;ldquo;merged&amp;rdquo;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also note: English doesn&amp;rsquo;t have an antonym for &amp;ldquo;mistake&amp;rdquo;, i.e., we don&amp;rsquo;t have a single word
+that means, &amp;ldquo;A thing done well.&amp;rdquo;
+We sometimes say &amp;ldquo;a score&amp;rdquo; or &amp;ldquo;a win&amp;rdquo; to mean this,
+but those are the outcome, not the act itself.
+I sometimes wonder what this absence says about English speakers&amp;rsquo; view of the world…&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When you create a new project on GitHub,
+    you can select any of several widely-used licenses.
+    However,
+    all of those licenses apply to code:
+    the &lt;a href=&#34;https://creativecommons.org/&#34;&gt;Creative Commons&lt;/a&gt; licenses for prose (written work) aren&amp;rsquo;t offered.
+    I always wind up writing &lt;a href=&#34;https://github.com/gvwilson/sql-tutorial/blob/main/LICENSE.md&#34;&gt;a custom &lt;code&gt;LICENSE.md&lt;/code&gt;&lt;/a&gt; to say that
+    all of the written material is made available under the CC-BY-NC-4.0 license
+    while the software is made available under the MIT License.&lt;/p&gt;
+&lt;p&gt;I mention this here because I find other things missing as well for writing projects.
+One of GitHub&amp;rsquo;s default issue labels is &amp;ldquo;documentation&amp;rdquo;,
+but I don&amp;rsquo;t think the prose in a lesson or chapter is documentation of code:
+the code is there to support the writing.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So here&amp;rsquo;s what I&amp;rsquo;m using in my current writing projects:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Purpose&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;add&lt;/td&gt;
+&lt;td&gt;(request for) new feature&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;change&lt;/td&gt;
+&lt;td&gt;exists but could be better&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;code&lt;/td&gt;
+&lt;td&gt;in software&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;discussion&lt;/td&gt;
+&lt;td&gt;questions and conversations&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;fix&lt;/td&gt;
+&lt;td&gt;something is broken&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;good first issue&lt;/td&gt;
+&lt;td&gt;good for newcomers&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;governance&lt;/td&gt;
+&lt;td&gt;meta-discussion of project management&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;prose&lt;/td&gt;
+&lt;td&gt;in written content&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;task&lt;/td&gt;
+&lt;td&gt;one-off task&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tooling&lt;/td&gt;
+&lt;td&gt;infrastructure&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;In more detail:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;add&lt;/code&gt;, &lt;code&gt;change&lt;/code&gt;, and &lt;code&gt;fix&lt;/code&gt; are meant to be mutually exclusive&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;code&lt;/code&gt; and &lt;code&gt;prose&lt;/code&gt; can be used together (e.g., a new lesson adds both)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;discussion&lt;/code&gt; and &lt;code&gt;governance&lt;/code&gt; are for project management&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tooling&lt;/code&gt; is used for the build system, page templates, etc.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;task&lt;/code&gt; is something that needs to be done once (e.g., &amp;ldquo;publish a release&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;good first issue&lt;/code&gt; is there because we want people to feel welcome&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I&amp;rsquo;d enjoy hearing about what you&amp;rsquo;re using—please &lt;a href=&#34;mailto:gvwilson@third-bit.com&#34;&gt;email me&lt;/a&gt;
+if you&amp;rsquo;d like to start a conversation.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Later: someone mailed to ask why I use the &amp;ldquo;NC&amp;rdquo; (non-commercial) clause in my license.
+The answer is that I don&amp;rsquo;t think it&amp;rsquo;s sustainable for companies to take lesson material that people have made public
+and profit from it without compensating the authors of that material.
+If you, as an academic, want to re-use my notes and slides, you are very welcome to do so;
+if Elsevier wants to bundle them up in a book and charge students €60 for it,
+I want to be able to say &amp;ldquo;no&amp;rdquo;,
+or to say, &amp;ldquo;yes, but you have to give me some of that so that I can keep producing this material&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;The NC clause is also part of my deal with my publisher (CRC Press):
+they are OK with me putting an HTML version of &lt;a href=&#34;https://third-bit.com/sdxpy/&#34;&gt;&lt;em&gt;Software Design by Example&lt;/em&gt;&lt;/a&gt; and other books online
+for people to read for free,
+but would &lt;em&gt;not&lt;/em&gt; be OK with some other for-profit publisher taking that and republishing it without permission.
+I think that&amp;rsquo;s a fair bargain:
+people who can&amp;rsquo;t afford to buy the book can read it,
+and the publisher can make money from the printed, PDF, and EPUB versions
+as compensation for the effort they put into editing and publicizing the book.&lt;/p&gt;
+&lt;p&gt;Later: a collaborator pointed out an interesting inconsistency.
+I follow &lt;a href=&#34;https://www.conventionalcommits.org/&#34;&gt;Conventional Commits&lt;/a&gt; style in my Git commit messages,
+so the title line of each commit starts with a single word like &amp;ldquo;fix&amp;rdquo;,
+&amp;ldquo;feat&amp;rdquo; (short for &amp;ldquo;feature&amp;rdquo;),
+or &amp;ldquo;publish&amp;rdquo; (when all I&amp;rsquo;m doing is rebuilding the HTML version of the lesson).
+These words don&amp;rsquo;t line up with the labels I use for issues and PRs:
+I don&amp;rsquo;t have a label for &amp;ldquo;publish&amp;rdquo;,
+and I use &amp;ldquo;feat&amp;rdquo; instead of &amp;ldquo;add&amp;rdquo; for something new.
+I&amp;rsquo;m embarrassed that I didn&amp;rsquo;t notice this before,
+and now I need to think about what to do about it…&lt;/p&gt;
+&lt;/blockquote&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>How I Explain Code</title>
+   <link href="https://third-bit.com/2024/09/06/how-i-explain-code/"/>
+   <updated>2024-09-06T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/09/06/how-i-explain-code/</id>
+   <content type="html">&lt;p&gt;I recently built a very small static site generator because…
+well, the reasons don&amp;rsquo;t matter (and aren&amp;rsquo;t actually compelling),
+but sharing it with someone gave me an opportunity to think about
+how I explain my code to someone else.
+The explanation is below and the code follows;
+I hope it&amp;rsquo;s useful.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Start with the &lt;code&gt;main()&lt;/code&gt; function&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Parse command-line arguments and store the result in &lt;code&gt;opt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Create an &lt;code&gt;Environment&lt;/code&gt; for loading templates (explained below)&lt;/li&gt;
+&lt;li&gt;Create a set called &lt;code&gt;skip&lt;/code&gt; of top-level directories to ignore&lt;/li&gt;
+&lt;li&gt;Find all the files that need to be rendered or just copied&lt;/li&gt;
+&lt;li&gt;For each file:&lt;ul&gt;
+&lt;li&gt;If it&amp;rsquo;s a Markdown file, render it&lt;/li&gt;
+&lt;li&gt;Otherwise, copy it&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;So what&amp;rsquo; an &amp;ldquo;environment&amp;rdquo;?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This program uses Jinja2 to stuff content into HTML templates&lt;/li&gt;
+&lt;li&gt;Jinja2 needs to know where to find the HTML templates&lt;/li&gt;
+&lt;li&gt;So we create an &lt;code&gt;Environment&lt;/code&gt; with a &lt;code&gt;FileSystemLoader&lt;/code&gt;
+    and tell that &lt;code&gt;FileSystemLoader&lt;/code&gt; where to look&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;opt&lt;/code&gt; holds the result of parsing command-line arguments,
+    and &lt;code&gt;opt.templates&lt;/code&gt; is the path to the templates directory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now let&amp;rsquo;s take a look at &lt;code&gt;find_files()&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It returns a dictionary whose keys are file paths
+    and whose values are the contents of those files&lt;/li&gt;
+&lt;li&gt;It uses a dictionary comprehension to do this instead of a loop&lt;ul&gt;
+&lt;li&gt;First line of the comprehension specifies key and value&lt;/li&gt;
+&lt;li&gt;Second line is what to look at&lt;/li&gt;
+&lt;li&gt;Third is the condition for inclusion&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;We use &lt;code&gt;read_file()&lt;/code&gt; to read a file&lt;ul&gt;
+&lt;li&gt;If the file is a text file, use &lt;code&gt;read_text()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Otherwise, use &lt;code&gt;read_bytes()&lt;/code&gt; (e.g., for images)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;To find files we &lt;em&gt;might&lt;/em&gt; be interested in we use a &amp;ldquo;glob&amp;rdquo;&lt;ul&gt;
+&lt;li&gt;The name is short for &amp;ldquo;global&amp;rdquo; and is old-fashioned Unix terminology&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;opt.root&lt;/code&gt; is the root directory of our project&lt;/li&gt;
+&lt;li&gt;The pattern &lt;code&gt;**/*.*&lt;/code&gt; matches everything in subdirectories (&lt;code&gt;**/&lt;/code&gt;)
+    with a two-part name (&lt;code&gt;*.*&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The condition in the dictionary comprehension uses a function
+    &lt;code&gt;is_interesting_file()&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;If you&amp;rsquo;re not a file, you&amp;rsquo;re not interesting&lt;/li&gt;
+&lt;li&gt;If your name starts with &lt;code&gt;.&lt;/code&gt; (as in &lt;code&gt;.gitignore&lt;/code&gt;),
+    you&amp;rsquo;re not interesting&lt;/li&gt;
+&lt;li&gt;If your suffixes isn&amp;rsquo;t in &lt;code&gt;SUFFIXES&lt;/code&gt; (defined at the top of the file),
+    you&amp;rsquo;re not interesting&lt;/li&gt;
+&lt;li&gt;If your parent directory&amp;rsquo;s name starts with &lt;code&gt;.&lt;/code&gt; (as in &lt;code&gt;.git&lt;/code&gt;),
+    you&amp;rsquo;re not interesting&lt;/li&gt;
+&lt;li&gt;If we have a set of things to skip
+    and your path starts with one of those things,
+    you&amp;rsquo;re not interesting&lt;/li&gt;
+&lt;li&gt;Otherwise, OK, fine, you&amp;rsquo;re interesting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Back to &lt;code&gt;main()&lt;/code&gt; and the loop over files&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If the file &lt;em&gt;isn&amp;rsquo;t&lt;/em&gt; Markdown, we just copy it&lt;/li&gt;
+&lt;li&gt;…after making sure the output directory exists&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;And finally, &lt;code&gt;render_markdown()&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use a library function &lt;code&gt;markdown()&lt;/code&gt; to convert Markdown to HTML&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;MARKDOWN_EXTENSIONS&lt;/code&gt; (defined at the top of the file)
+    is a list of extra features we want to enable,
+    such as Markdown tables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Next, load the &lt;code&gt;page.html&lt;/code&gt; template&lt;ul&gt;
+&lt;li&gt;A more sophisticated tool would allow authors to specify a template
+    in the header of the Markdown file or as a command-line argument&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Then ask the template to take the HTML produced from the Markdown
+    and stuff it into the HTML template we just loaded&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;page.html&lt;/code&gt; has a placeholder to show where&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;We could stop here, but we want to fix up the generated HTML a bit&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;So we parse the HTML produced by Jinja2 using Beautiful Soup
+    to get a tree of objects in memory (as opposed to a great big string)&lt;/li&gt;
+&lt;li&gt;And then apply several functions to it in order&lt;/li&gt;
+&lt;li&gt;Each of these functions take the current document tree
+    and returns a modified one&lt;/li&gt;
+&lt;li&gt;Once that&amp;rsquo;s done, we make sure the output directory exists
+    and then write the document tree as HTML text&lt;ul&gt;
+&lt;li&gt;Potentially renaming it from upper case to lower case&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;So what are these transformations?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;do_markdown_links()&lt;/code&gt; finds hyperlinks to &lt;code&gt;.md&lt;/code&gt; files
+    and turns them into hyperlinks to &lt;code&gt;.html&lt;/code&gt; files&lt;ul&gt;
+&lt;li&gt;We write hyperlinks to &lt;code&gt;.md&lt;/code&gt; files in the source
+    so that files will inter-link correctly when viewed on GitHub&lt;/li&gt;
+&lt;li&gt;But our final website will have &lt;code&gt;.html&lt;/code&gt; files,
+    so we need to convert&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;do_root_path_prefix()&lt;/code&gt; looks for links whose names start with &lt;code&gt;https://third-bit.com&lt;/code&gt;
+    and turn them into relative links up to the root directory of the project&lt;ul&gt;
+&lt;li&gt;For example, &lt;code&gt;https://third-bit.com/static/page.css&lt;/code&gt; becomes &lt;code&gt;./static/page.css&lt;/code&gt;
+    if the Markdown file in in the root directory of the project
+    but &lt;code&gt;../../static/page.css&lt;/code&gt; if the file is two levels down&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;do_title()&lt;/code&gt; finds the &lt;code&gt;H1&lt;/code&gt; heading in the HTML page
+    and copies its contents into the &lt;code&gt;&amp;lt;title&amp;gt;&lt;/code&gt; element of the page&lt;/li&gt;
+&lt;li&gt;We can easily add more transformation functions&lt;ul&gt;
+&lt;li&gt;And in fact the full version of this program has transformers
+    to handle bibliography citations and glossary references&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In answer to a couple of questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I organize code more-or-less alphabetically out of habit;
+    I know people who try to organize in calling order,
+    but that breaks down as soon as you have utility functions that are called in multiple places.&lt;/li&gt;
+&lt;li&gt;I &lt;em&gt;explain&lt;/em&gt; code more or less in execution order&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Convert a pile of Markdown files to HTML.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;argparse&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;bs4&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BeautifulSoup&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;jinja2&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Environment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;FileSystemLoader&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;markdown&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;markdown&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pathlib&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;
+
+
+&lt;span class=&#34;n&#34;&gt;MARKDOWN_EXTENSIONS&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;attr_list&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;def_list&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;fenced_code&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;md_in_html&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;tables&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;SUFFIXES_BIN&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;.ico&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.jpg&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.png&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;SUFFIXES_SRC&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;.css&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.html&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.js&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.py&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.sh&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.txt&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;SUFFIXES_TXT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SUFFIXES_SRC&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;.csv&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.json&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.svg&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;SUFFIXES&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SUFFIXES_BIN&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SUFFIXES_TXT&lt;/span&gt;
+
+&lt;span class=&#34;n&#34;&gt;RENAMES&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;quot;CODE_OF_CONDUCT.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;code_of_conduct.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;quot;CONTRIBUTING.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;contributing.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;quot;LICENSE.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;license.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;quot;README.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;index.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Main driver.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;opt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;parse_args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;env&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Environment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;loader&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FileSystemLoader&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;templates&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;skips&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;templates&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;files&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;find_files&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;skips&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;files&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;items&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;suffix&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;render_markdown&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;env&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;copy_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;copy_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;output_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Copy a file verbatim.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;output_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;make_output_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;output_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;output_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mkdir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parents&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;exist_ok&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;write_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;output_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;do_markdown_links&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;doc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Fix .md links in HTML.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;node&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;doc&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;a[href]&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;node&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;href&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endswith&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+            &lt;span class=&#34;n&#34;&gt;node&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;href&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;node&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;href&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.html&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lower&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;do_root_path_prefix&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;doc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Fix https://third-bit.com links in HTML.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;depth&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;prefix&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;./&amp;quot;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;depth&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;../&amp;quot;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;depth&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;targets&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;a[href]&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;href&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;link[href]&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;href&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;script[src]&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;src&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;selector&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;attr&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;targets&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;node&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;doc&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;selector&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;https://third-bit.com/&amp;quot;&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;node&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;attr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]:&lt;/span&gt;
+                &lt;span class=&#34;n&#34;&gt;node&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;attr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;node&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;attr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;https://third-bit.com/&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;prefix&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;do_title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;doc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Make sure title element is filled in.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;doc&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;doc&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;h1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;find_files&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;skips&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Collect all interesting files.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;read_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;opt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;glob&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;**/*.*&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;is_interesting_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;skips&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;is_interesting_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;skips&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Is this file worth checking?&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;is_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;startswith&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;suffix&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SUFFIXES&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;startswith&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;skips&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;any&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;startswith&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;skips&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;make_output_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;output_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Build output path.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RENAMES&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RENAMES&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;.md&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;.html&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;output_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;parse_args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Parse command-line arguments.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;parser&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;argparse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ArgumentParser&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;parser&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add_argument&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;--out&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;default&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;docs&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;help&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;output directory&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;parser&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add_argument&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;--root&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;default&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;help&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;root directory&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;parser&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add_argument&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;--templates&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;default&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;templates&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;help&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;templates directory&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;parser&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parse_args&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;read_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Read file as bytes or text.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;suffix&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SUFFIXES_TXT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read_text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read_bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;render_markdown&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;env&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;output_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Convert Markdown to HTML.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;html&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;markdown&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;extensions&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MARKDOWN_EXTENSIONS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;template&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;env&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_template&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;page.html&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;html&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;template&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;render&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;transformers&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;do_markdown_links&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;do_title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;do_root_path_prefix&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# must be last&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;doc&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BeautifulSoup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;html.parser&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;transformers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;n&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;doc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+    &lt;span class=&#34;n&#34;&gt;output_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;make_output_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;output_dir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;output_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mkdir&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;parents&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;exist_ok&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;output_path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write_text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;doc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;write_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;sd&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Write file as bytes or text.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;suffix&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SUFFIXES_TXT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write_text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filepath&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write_bytes&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;__name__&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Teaching Workshop in September 2024</title>
+   <link href="https://third-bit.com/2024/08/21/teaching-workshop-september-2024/"/>
+   <updated>2024-08-21T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/08/21/teaching-workshop-september-2024/</id>
+   <content type="html">&lt;p&gt;I am planning to run a &lt;a href=&#34;https://third-bit.com/t3/&#34;&gt;Teaching Tech Together workshop&lt;/a&gt; online in September 2024.
+If you would like to take part,
+please &lt;a href=&#34;mailto:gvwilson@third-bit.com&#34;&gt;email me&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;When: 12:30-16:00 Eastern time on &lt;a href=&#34;https://www.timeanddate.com/worldclock/meetingtime.html?iso=20240918&amp;amp;p1=152&amp;amp;p2=771&amp;amp;p3=107&amp;amp;p4=204&amp;amp;p5=136&amp;amp;p6=51&amp;amp;p7=250&amp;amp;p8=202&#34;&gt;Wednesday, September 18&lt;/a&gt; and &lt;a href=&#34;https://www.timeanddate.com/worldclock/meetingtime.html?month=9&amp;amp;day=19&amp;amp;year=2024&amp;amp;p1=152&amp;amp;p2=771&amp;amp;p3=107&amp;amp;p4=204&amp;amp;p5=136&amp;amp;p6=51&amp;amp;p7=250&amp;amp;p8=202&amp;amp;iv=0&#34;&gt;Thursday, September 19&lt;/a&gt;, 2024.&lt;/li&gt;
+&lt;li&gt;Where: Zoom (link will be shared with participants).&lt;/li&gt;
+&lt;li&gt;Content: &lt;a href=&#34;https://drive.google.com/drive/folders/1LVcmp48Ym0c6pA9GOT6TrCa47RU1ugaV&#34;&gt;these slides&lt;/a&gt; based on the book &lt;a href=&#34;https://teachtogether.tech/&#34;&gt;&lt;em&gt;Teaching Tech Together&lt;/em&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Topics:&lt;ul&gt;
+&lt;li&gt;creating learner personas&lt;/li&gt;
+&lt;li&gt;why novices, competent practitioners, and experts need different lessons&lt;/li&gt;
+&lt;li&gt;managing cognitive load&lt;/li&gt;
+&lt;li&gt;formative and summative assessment&lt;/li&gt;
+&lt;li&gt;what motivates and demotivates learners&lt;/li&gt;
+&lt;li&gt;teaching as a performance art&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Cost: pay what you can (e.g., the price of dinner for two wherever you call home)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;100% of the money raised will go to &lt;a href=&#34;https://www.rainbowrailroad.org/&#34;&gt;Rainbow Railroad&lt;/a&gt;,
+a global nonprofit organization that helps at-risk LGTBQI+ people get to safety worldwide.
+Since its founding it has helped almost 10,000 LGBTQI+ individuals find safety
+through emergency relocation, crisis response, cash assistance, and other forms of aid.&lt;/p&gt;
+&lt;/blockquote&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Tutorials I Would Like to Attend</title>
+   <link href="https://third-bit.com/2024/08/12/tutorials-i-would-like-to-attend/"/>
+   <updated>2024-08-12T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/08/12/tutorials-i-would-like-to-attend/</id>
+   <content type="html">&lt;p&gt;I have maintained &lt;a href=&#34;https://third-bit.com/not-on-the-shelves/&#34;&gt;a list of unwritten books&lt;/a&gt; for over 25 years
+(see &lt;a href=&#34;https://third-bit.com/not-on-the-shelves/2024/&#34;&gt;this page&lt;/a&gt; for the latest version).
+It has only recently occurred to me that I should put together
+a list of tutorials I would like to attend that apparently don&amp;rsquo;t yet exist.
+If you are delivering one of these any time soon,
+please let me know;
+if you&amp;rsquo;re not,
+but might be interested in creating one of them,
+please &lt;a href=&#34;mailto:gvwilson@third-bit.com&#34;&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;How to Build a Dashboard Engine&lt;/em&gt;
+    shows learners how to create tools like &lt;a href=&#34;https://dash.plotly.com/&#34;&gt;Dash&lt;/a&gt; and &lt;a href=&#34;https://shiny.posit.co/&#34;&gt;Shiny&lt;/a&gt;
+    that let data scientists build interactive dashboards without writing JavaScript themselves.
+    Along the way,
+    the tutorial introduces some important ideas about real-world web development:
+    for example,
+    how to manage long-running server-side processes without the browser freezing up.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;How to Build a Laboratory Information Management System&lt;/em&gt;
+    isn&amp;rsquo;t really about building a LIMS—it&amp;rsquo;s about all the design decisions that have to be made along the way,
+    from handling authentication and access control
+    to representing human workflows in software.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;How to Build an Integrated Development Environment&lt;/em&gt;
+    has participants create a tool using &lt;a href=&#34;https://www.textualize.io/&#34;&gt;Textualize&lt;/a&gt;
+    that includes an editor, a breakpointing debugger, and a file browser,
+    which will help them understand and use their actual IDE more proficiently.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Similarly,
+    &lt;em&gt;A Web Browser in a Day&lt;/em&gt; is a stripped-down version of &lt;a href=&#34;https://browser.engineering/&#34;&gt;this excellent tutorial&lt;/a&gt;,
+    and helps participants understand how their actual browser works.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;NumPy from the Ground Up&lt;/em&gt;
+    builds a (very) simple version of &lt;a href=&#34;https://numpy.org/&#34;&gt;NumPy&lt;/a&gt; from scratch
+    to give learners a better understanding of how the real thing works.
+    Low-level data manipulation could be done in C or Rust,
+    or using something like &lt;a href=&#34;https://pypi.org/project/bitarray/&#34;&gt;bitarray&lt;/a&gt; or the &lt;a href=&#34;https://docs.python.org/3/library/array.html&#34;&gt;array&lt;/a&gt; module from Python&amp;rsquo;s standard library
+    to be more accessible.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;And speaking of Rust,
+    &lt;em&gt;Rust for Python Programmers&lt;/em&gt; is an introduction to a language that might,
+    if its community can shed its cryptocurrency baggage,
+    be the most important systems programming language of the next twenty years.
+    This workshop culminates with participants building a small Python extension in Rust
+    and turning it into a shareable package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;What Every Data Scientist Needs to Know About Deploying an Application&lt;/em&gt;
+    addresses the same need as &lt;a href=&#34;https://gvwilson.github.io/sys-tutorial/&#34;&gt;this unfinished tutorial&lt;/a&gt;:
+    what do people who &lt;em&gt;aren&amp;rsquo;t&lt;/em&gt; sys admins need to know in order to put an application into production?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Product Management for Open Source&lt;/em&gt;
+    teaches exactly that.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finally,
+    &lt;em&gt;Organizational Change for Software Developers&lt;/em&gt; also teaches exactly what the title says.
+    As I&amp;rsquo;ve said many, many times before,
+    open source and open science can&amp;rsquo;t win unless and until we figure out
+    how to change the organizations we&amp;rsquo;re in,
+    and we don&amp;rsquo;t need to figure that out from scratch.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Python Software Foundation Board Nomination</title>
+   <link href="https://third-bit.com/2024/07/01/psf-board-nomination/"/>
+   <updated>2024-07-01T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/07/01/psf-board-nomination/</id>
+   <content type="html">&lt;p&gt;&lt;em&gt;Update: congratulations to Tania Allard, KwonHan Bae, and Cristián Maureira-Fredes on being elected to the PSF Board.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I have put myself forward as a candidate for election to the board of
+the &lt;a href=&#34;https://www.python.org/psf-landing/&#34;&gt;Python Software Foundation&lt;/a&gt;.
+My pitch is below;
+no matter what happens,
+I hope I&amp;rsquo;ll be able to continue to serve the community that has given me so much over so many years.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Python has been an important part of my life for a quarter of a century,
+so I would be grateful for a chance to serve its community as a member of the PSF board.
+I believe my experience has prepared me for doing so effectively:
+I co-authored the PEP that added sets to the language,
+am a Fellow of the PSF,
+helped make Python the first-year teaching language at Canada&amp;rsquo;s largest university,
+and have written several books showing how to apply it to real-world problems.&lt;/p&gt;
+&lt;p&gt;I also launched and then led a non-profit organization called Software Carpentry
+that now has thousands of instructors running workshops on basic computing skills in dozens of countries.
+Building that gave me first-hand experience of the challenges that non-profit organizations face;
+I hope that what I learned about fundraising, governance, community management, committee work,
+and managing changes in leadership
+will allow me to contribute to the PSF in meaningful ways.&lt;/p&gt;
+&lt;p&gt;My other reason for nominating myself is that I don&amp;rsquo;t like to leave things half-done.
+The first generation of open source contributors proved that
+volunteers working together can create world-class infrastructure and tools,
+but we are still struggling to make such work a viable career.
+Many people struggle to balance their desire to contribute with their need to pay their bills,
+while other simply burn out.
+If elected,
+I hope to help the PSF take the lead in tackling the sustainability crisis,
+and by doing so,
+help ensure that the Python community grows and thrives. &lt;/p&gt;
+&lt;/blockquote&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Human-Scale Software</title>
+   <link href="https://third-bit.com/2024/06/14/human-scale-software/"/>
+   <updated>2024-06-14T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/06/14/human-scale-software/</id>
+   <content type="html">&lt;p&gt;I recently posted on Mastodon:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;I&amp;rsquo;m going to write another tech book.&lt;/li&gt;
+&lt;li&gt;If I do, it will be about evidence-based software engineering and/or how big tech companies operate like drug cartels.&lt;/li&gt;
+&lt;li&gt;But I&amp;rsquo;m still thinking about &amp;ldquo;Human-Scale Software: A Guide for the 99.9% of Developers Who Don&amp;rsquo;t Need Scalability&amp;rdquo;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So what would I use for #3?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://sqlite.org/&#34;&gt;SQLite&lt;/a&gt; for storage.
+    (&lt;a href=&#34;https://duckdb.org/&#34;&gt;DuckDB&lt;/a&gt; is cool, but I&amp;rsquo;m being deliberately conservative in my choices.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I wouldn&amp;rsquo;t use an object-relational mapper:
+    I&amp;rsquo;ve used &lt;a href=&#34;https://www.sqlalchemy.org/&#34;&gt;SQLAlchemy&lt;/a&gt; for years,
+    but I think embedded SQL is easier to debug than an ORM for small-to-medium use cases.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://bottlepy.org/&#34;&gt;Bottle&lt;/a&gt; on the back end
+    because it has stayed small while &lt;a href=&#34;https://flask.palletsprojects.com/&#34;&gt;Flask&lt;/a&gt; keeps growing.
+    Note that I wouldn&amp;rsquo;t use type hints in the Python code:
+    if I wanted to write Java, I&amp;rsquo;d write Java.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.dmulholl.com/docs/ibis/master/&#34;&gt;Ibis&lt;/a&gt; templates because they&amp;rsquo;re simpler than &lt;a href=&#34;https://jinja.palletsprojects.com/&#34;&gt;Jinja&lt;/a&gt;.
+    (See also &lt;a href=&#34;https://third-bit.com/2024/02/25/community-norms/&#34;&gt;this post&lt;/a&gt;.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mamba.readthedocs.io/&#34;&gt;mamba&lt;/a&gt;, &lt;a href=&#34;https://docs.astral.sh/ruff/&#34;&gt;ruff&lt;/a&gt;, and &lt;a href=&#34;https://github.com/astral-sh/uv&#34;&gt;uv&lt;/a&gt; for Python tooling.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://alpinejs.dev/&#34;&gt;Alpine.js&lt;/a&gt; as a front-end framework
+    because &lt;a href=&#34;https://htmx.org/&#34;&gt;htmx&lt;/a&gt; feels a bit left-field
+    and &lt;a href=&#34;https://react.dev/&#34;&gt;React&lt;/a&gt; and &lt;a href=&#34;https://vuejs.org/&#34;&gt;Vue&lt;/a&gt; seem bent on cosplaying Enterprise Java.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.npmjs.com/&#34;&gt;npm&lt;/a&gt;, &lt;a href=&#34;https://vitejs.dev/&#34;&gt;Vite&lt;/a&gt;, and &lt;a href=&#34;https://standardjs.com/&#34;&gt;StandardJS&lt;/a&gt; for JavaScript tooling.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://ui.mantine.dev/&#34;&gt;Mantine&lt;/a&gt; for the UI,
+    though I could be persuaded to stick to &lt;a href=&#34;https://getbootstrap.com/&#34;&gt;Bootstrap&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://pa11y.org/&#34;&gt;Pa11y&lt;/a&gt; for accessibility testing
+    (because &lt;a href=&#34;https://wave.webaim.org/standalone&#34;&gt;the standalone version of WebAIM WAVE&lt;/a&gt; costs US$4000/year).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.netlify.com/&#34;&gt;Netlify&lt;/a&gt; for deployment.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This list deliberately isn&amp;rsquo;t &lt;a href=&#34;https://third-bit.com/2024/04/18/a-new-stack/&#34;&gt;an entirely new stack&lt;/a&gt;,
+but it&amp;rsquo;s also not entirely conservative.
+I know it should include a security auditing tool to sit beside Pa11y,
+but while I&amp;rsquo;ve watched people use &lt;a href=&#34;https://snyk.io/&#34;&gt;Snyk&lt;/a&gt;
+I don&amp;rsquo;t have any experience with it or alternatives.&lt;/p&gt;
+&lt;p&gt;So much for tools:
+what would I teach?
+My learner persona is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Carter has a BSc in bioinformatics
+    and now works as a data scientist for a mid-sized therapeutics company.&lt;/li&gt;
+&lt;li&gt;They know Python well enough to analyze data for their colleagues
+    and build dashboards using &lt;a href=&#34;https://dash.plotly.com/&#34;&gt;Dash&lt;/a&gt;,
+    but only ever did a couple of assignments using JavaScript.&lt;/li&gt;
+&lt;li&gt;Carter wants to build something to replace their company&amp;rsquo;s aging PHP-based record keeping tools.&lt;/li&gt;
+&lt;li&gt;Carter has an &lt;a href=&#34;https://en.wikipedia.org/wiki/Essential_tremor&#34;&gt;idiopathic tremor&lt;/a&gt;
+    that sometimes makes fine motor control difficult.
+    As a result,
+    they find many websites awkward or impossible to use
+    and strongly prefer typing to using a mouse or a touch screen,&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The motivating example would be a &lt;em&gt;laboratory information management system&lt;/em&gt; (LIMS)
+    designed to handle field samples and laboratory experiments.
+    Luckily,
+    I already have &lt;a href=&#34;https://github.com/gvwilson/snailz&#34;&gt;a synthetic data generator for this&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Database schema design&lt;/em&gt;:
+    I&amp;rsquo;d start with something simple and extend it chapter by chapter.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;…which means the list above should have included a &lt;em&gt;database migration&lt;/em&gt; tool like &lt;a href=&#34;https://sqitch.org/&#34;&gt;Sqitch&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Building a &lt;em&gt;command-line user interface&lt;/em&gt; (CLUI) for administration, batch operations, and testing.
+    (Crap, that means adding &lt;a href=&#34;https://docs.pytest.org/&#34;&gt;pytest&lt;/a&gt; and &lt;a href=&#34;https://click.palletsprojects.com/&#34;&gt;Click&lt;/a&gt; to the list of tools.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Authentication&lt;/em&gt;:
+    it&amp;rsquo;s straightforward to add this to the CLUI,
+    but will require something like &lt;a href=&#34;https://flask-login.readthedocs.io/&#34;&gt;Flask-Login&lt;/a&gt; for the web UI.
+    I don&amp;rsquo;t know of a framework-agnostic alternative,
+    so I might have to revisit my decision to use Bottle.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Routing URLs&lt;/em&gt; to handler functions
+    (and redirecting when authentication is needed).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Permissions&lt;/em&gt;,
+    which means &lt;em&gt;user roles&lt;/em&gt;.
+    Again,
+    &lt;a href=&#34;https://flask-user.readthedocs.io/&#34;&gt;Flask-User&lt;/a&gt; does this and I don&amp;rsquo;t know of a framework-agnostic alternative,
+    so yeah, Flask…&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Generating pages from templates&lt;/em&gt; and &lt;em&gt;form handling&lt;/em&gt;.
+    I hope we&amp;rsquo;ve all outgrown single-page applications,
+    so &lt;em&gt;site architecture design&lt;/em&gt; as a complement to schema design will need to be here.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Paging&lt;/em&gt; for displaying large data sets and &lt;em&gt;plotting&lt;/em&gt; for displaying data graphically.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Responsive web design&lt;/em&gt; because most a lot of people use their phones more than their laptops
+    (particularly when they&amp;rsquo;re in the field).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Accessibility&lt;/em&gt; because I&amp;rsquo;d be ashamed not to
+    and because &lt;a href=&#34;https://educate.elsevier.com/book/details/9780128044674&#34;&gt;I&amp;rsquo;m not getting any younger&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Security&lt;/em&gt; is a hard one.
+    &lt;a href=&#34;https://en.wikipedia.org/wiki/Cross-origin_resource_sharing&#34;&gt;CORS&lt;/a&gt;, &lt;a href=&#34;https://en.wikipedia.org/wiki/Cross-site_request_forgery&#34;&gt;CSRF&lt;/a&gt;, &lt;a href=&#34;https://en.wikipedia.org/wiki/SQL_injection&#34;&gt;SQL injection&lt;/a&gt;, authentication, site certificates, and password management
+    are all must-haves,
+    but as &lt;a href=&#34;https://exple.tive.org/blarg/&#34;&gt;Mike Hoye&lt;/a&gt; has observed,
+    what we really need to teach people is things like,
+    &amp;ldquo;How to build websites that can&amp;rsquo;t be exploited by abusive domestic partners.&amp;rdquo;
+    I really don&amp;rsquo;t know what I could do here that wouldn&amp;rsquo;t require a second book;
+    I would try crowdsourcing it like &lt;a href=&#34;https://aosabook.org/&#34;&gt;&lt;em&gt;The Architecture of Open Source Applications&lt;/em&gt;&lt;/a&gt;,
+    but that didn&amp;rsquo;t go anywhere &lt;a href=&#34;https://third-bit.com/2024/01/23/the-votes-are-in/&#34;&gt;the last time I tried it&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This book will probably never happen,
+but probably isn&amp;rsquo;t the same as definitely.
+If you think of anything else that ought to be included,
+please &lt;a href=&#34;mailto:gvwilson@third-bit.com&#34;&gt;let me know&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Later:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Irving Reid pointed out that running the application is as important as building it,
+    and suggested the lessons should include creating and restoring backups,
+    deploying updates,
+    and observability
+    (which involves more than creating log messages that are findable, comprehensible, and informative,
+    but that would be a good start).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Someone else (name unknown) felt that dependency maintenance should be on the list as well,
+    i.e.,
+    that there should be a lesson about vulnerability scans and automating checks for dependency updates.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Someone else (name also unknown) suggested that there ought to be a lesson on debugging full-stack applications,
+    and that the lessons should show how to create good pull requests and how to review them.
+    I strongly agree,
+    but teaching verbs is a lot harder than teaching nouns,
+    and this is already far too ambitious for something that would already take a year of unpaid work.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Narconomics and Big Tech</title>
+   <link href="https://third-bit.com/2024/06/14/narconomics-and-big-tech/"/>
+   <updated>2024-06-14T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/06/14/narconomics-and-big-tech/</id>
+   <content type="html">&lt;p&gt;I really enjoyed Wainwright&amp;rsquo;s &lt;em&gt;&lt;a href=&#34;https://www.hachettebookgroup.com/titles/tom-wainwright/narconomics/9781610397704/&#34;&gt;Narconomics&lt;/a&gt;&lt;/em&gt;,
+which explores the economics of the illegal drug trade.
+It turns out that (for example) HR is more of a problem than you&amp;rsquo;d think:
+good accountants know they can actually make more money on Wall Street where crime is legal.
+Marketing, dispute resolution, quality control: it&amp;rsquo;s a very fun read.
+But it sparked a thought:
+I think a book comparing Big Tech to drug cartels would be awesome.
+Both make money from selling addictive products and shrugging off externalities;
+both needed new offerings to bring in new revenue (AI is to Google what meth was to the Juarez cartel);
+both regard the legal system as merely an operating cost;
+and both tend to be run by egomaniacal sociopaths.
+(I expect Musk and Escobar would have gotten on well.)
+If I knew enough, I&amp;rsquo;d start writing today;
+if you do, please start writing tomorrow.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Why Are You Still Working?</title>
+   <link href="https://third-bit.com/2024/06/02/why-are-you-still-working/"/>
+   <updated>2024-06-02T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/06/02/why-are-you-still-working/</id>
+   <content type="html">&lt;p&gt;Someone asked me yesterday how &lt;a href=&#34;https://third-bit.com/2024/04/29/new-job-at-plotly/&#34;&gt;my new job at Plotly&lt;/a&gt; was going.
+I said, &amp;ldquo;Well, I think,&amp;rdquo;
+and they then asked why I took the job instead of retiring or going back to teaching full-time.
+Part of my answer was,
+&amp;ldquo;I still have a child to put through college,&amp;rdquo;
+but the other part was that I hate leaving things half-done.
+My generation proved that open source software works—that
+we can create reliable computing infrastructure at scale by giving things away.
+What we didn&amp;rsquo;t do was prove we can do this sustainably,
+i.e.,
+that programmers can make as good a living from being generous as they can from building things that erode privacy,
+amplify hate,
+and foster monopolies.
+What I&amp;rsquo;m looking forward to most in my new role is helping to figure that out.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Micro NWIT</title>
+   <link href="https://third-bit.com/2024/06/02/micro-nwit/"/>
+   <updated>2024-06-02T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/06/02/micro-nwit/</id>
+   <content type="html">&lt;p&gt;From 2011 to 2023,
+&lt;a href=&#34;https://neverworkintheory.org/&#34;&gt;&lt;em&gt;It Will Never Work in Theory&lt;/em&gt;&lt;/a&gt; tried to bridge the gulf between theory and practice in software engineering
+by publishing short summaries of empirical software engineering research and hosting talks by their authors.
+Our &lt;a href=&#34;https://www.computer.org/csdl/magazine/so/5555/01/10424425/1Ulj1Qa8tJ6&#34;&gt;post-mortem&lt;/a&gt; describes that effort and analyzes its failure;
+&lt;a href=&#34;https://third-bit.com/ideas/nwit/&#34;&gt;this page&lt;/a&gt; reprints very short summaries I&amp;rsquo;ve posted on Mastodon since NWIT shut down.
+I will update it sporadically;
+each time I do,
+I will dream of a world in which every undergraduate software engineering student
+is taught how to do studies like these
+so that they can evaluate and apply these findings.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Pirates</title>
+   <link href="https://third-bit.com/2024/05/18/pirates/"/>
+   <updated>2024-05-18T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/05/18/pirates/</id>
+   <content type="html">&lt;p&gt;My younger brother had Hodgkin&amp;rsquo;s lymphoma when he was 19.
+As part of the treatment the glands under his jaw were removed,
+leaving him with a pair of fairly prominent scars.
+He grew a beard to cover them up,
+but years later,
+after he was married and had kids,
+it started to turn gray,
+so he shaved it off.&lt;/p&gt;
+&lt;p&gt;His children had never his scars before.
+The youngest shrugged it off,
+but the oldest was a bit freaked out.
+&amp;ldquo;What happened?&amp;rdquo; he asked.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Pirates,&amp;rdquo;
+my brother said.&lt;/p&gt;
+&lt;p&gt;My nephew was just old enough to be skeptical.
+&amp;ldquo;Really?&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Luckily,
+our father was visiting.
+Without missing a beat he pulled up his shirt
+to show the scars he had from two rounds of heart surgery.
+&amp;ldquo;Absolutely,&amp;rdquo;
+he said,
+straight-faced.
+&amp;ldquo;Look what they did to me.&amp;rdquo;
+And for a little while at least,
+my nephew was a believer.&lt;/p&gt;
+&lt;p&gt;Time to make another cup of tea.
+If you came in peace, be welcome;
+if not, be damned with you.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Reviews Are Coming In</title>
+   <link href="https://third-bit.com/2024/05/12/sdxpy-reviews/"/>
+   <updated>2024-05-12T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/05/12/sdxpy-reviews/</id>
+   <content type="html">&lt;p&gt;Reviews of the Python version of &lt;a href=&#34;https://third-bit.com/sdxpy/&#34;&gt;&lt;em&gt;Software Design by Example&lt;/em&gt;&lt;/a&gt; have been coming in:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I&amp;rsquo;ve been using this book to teach software design to an undergraduate class of 250 students, and the students and I love it! The real-world examples are perfect: practically relevant to the students and simple yet challenging enough to engage deeply with critical design decisions. The positive impact of the book is evident from the improvements in student grades and the quality of their practical assignments, reflecting the substantial learning that&amp;rsquo;s taking place. I am thrilled by how the book demystifies the implementation of programmers&amp;rsquo; tools. This approach is enlightening and empowering for my students, who get a sense of capability that I haven&amp;rsquo;t seen sparked by any other text. It&amp;rsquo;s been a joy to see them feel so equipped and inspired!&lt;/p&gt;
+&lt;p&gt;— &lt;a href=&#34;https://sback.it/&#34;&gt;Alberto Bacchelli&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Greg Wilson&amp;rsquo;s &amp;ldquo;Software Design by Example&amp;rdquo; is my new favorite book on the art of writing software. There is so much  to like about it - the way it leads the reader to explore and develop their understanding, the choice of projects and examples, the clarity of the instruction, the Creative Commons license, and much more. It will be my first recommendation for people looking to really learn professional development, either on their own or in a classroom setting.&lt;/p&gt;
+&lt;p&gt;— &lt;a href=&#34;https://naomiceder.tech/&#34;&gt;Naomi Ceder&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This is the book I wish I had for teaching CS101 courses. It seamlessly bridges the gap between an easily accessible introduction to computer science taught in Python while diving into the details of lower level programming that 101 courses  often miss. Blending computer science with sound software engineering practices (with citations!) is difficult enough on its own, but this book guides the reader through practical design patterns that they can put into practice. The addition of historic anecdotes gives readers extra context for what they&amp;rsquo;ve learned and brings theory back to practice. I highly recommend this book for prospective developers, computer scientists, and anyone looking for a informative and intuitive refresher for software engineering best practices!&lt;/p&gt;
+&lt;p&gt;— &lt;a href=&#34;https://www.juliaferraioli.com/&#34;&gt;Julia Ferraioli&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The book is an excellent guide for anyone going from &amp;ldquo;just programming&amp;rdquo; to building larger, long-term software projects. It&amp;rsquo;s like a choose-your-own adventure, but the adventure is learning to build very complex software as a composition of much simpler patterns. Greg Wilson pulls back the curtain and shows you what all the pieces are, so you can see how they fit together.&lt;/p&gt;
+&lt;p&gt;— &lt;a href=&#34;https://jenniferplusplus.com/&#34;&gt;Jennifer Moore&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The Python edition of Software Design By Example is both a great refresher if you’ve not worked with Python in a long time, or your next textbook if you know just enough Python to be a little dangerous and want to level up. The exercises being tool-based means the experience gained will instantly feel applicable to whatever you end up using the language for, either at work or your next personal project.&lt;/p&gt;
+&lt;p&gt;— &lt;a href=&#34;https://jennschiffer.com/&#34;&gt;Jenn Schiffer&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m so glad to have an exemplar in tried and tested learning practices in these Software Design by Example books. I know I can share them with folk in the confidence that they&amp;rsquo;ll get a guided experience that&amp;rsquo;s both accessible and comprehensive, leaving them with real world software skills. Teaching using examples makes the techniques meaningful and tangible to the learner which is in itself a great motivator, and the use of tooling examples gives these books a bonus illustrative benefit!&lt;/p&gt;
+&lt;p&gt;— &lt;a href=&#34;https://www.benormal.info/&#34;&gt;Sue Smith&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Rather than stacking up software syntax in isolated examples divorced from their practical use cases, Greg teaches concepts the way we use them: in collaboration with one another, to accomplish tasks. Each chapter tells a story about how to build a familiar tool, and the skills from each chapter build on the previous ones. Filled with both pragmatic advice and juicy historical nuggets, this book just might manage to do the thing I&amp;rsquo;ve tried to do in classrooms for half a decade: transfer basic engineering skills while also conveying what it might be like for students to manage complex software projects.&lt;/p&gt;
+&lt;p&gt;— &lt;a href=&#34;https://chelseatroy.com/&#34;&gt;Chelsea Troy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This is an absolutely marvelous book; it is already a top recommendation from me and will remain so for the foreseeable future. Very rarely do the combination of insightful visual diagrams, contentious syntax disambiguation, and thoughtful attention to how humans learn and absorb information come together in a coherent package like this. In this book, you&amp;rsquo;ll find short chapters, relevant exercises, and iterative deepening of concepts that draw the reader in and take them on a journey of understanding and exploration; it&amp;rsquo;s a delight to read through or in any order one chooses. If that wasn&amp;rsquo;t enough, it takes a measured approach towards introducing relevant topics for professional software engineering: testing, designing for evolution, version control, and more. This is exactly the sort of book I wish I would&amp;rsquo;ve had at the start of my programming journey; it would&amp;rsquo;ve saved me from countless lessons learned the hard way.&lt;/p&gt;
+&lt;p&gt;— &lt;a href=&#34;https://hazelweakly.me/&#34;&gt;Hazel Weakly&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Volume Two</title>
+   <link href="https://third-bit.com/2024/05/11/volume-2/"/>
+   <updated>2024-05-11T00:00:00Z</updated>
+   <id>https://third-bit.com/2024/05/11/volume-2/</id>
+   <content type="html">&lt;p&gt;I don&amp;rsquo;t think there will ever be a second volume of &lt;a href=&#34;https://third-bit.com/sdxpy/&#34;&gt;&lt;em&gt;Software Design by Example in Python&lt;/em&gt;&lt;/a&gt;,
+but if there is,
+I&amp;rsquo;d like it to include the examples listed below.
+What I&amp;rsquo;d like even more is if a handful of software engineering professors
+used some chapters from the existing book in their course,
+then assigned one of these topics to their students as a final project
+and share the results with me.
+I&amp;rsquo;d be very happy to combine and edit the results,
+and I think that having a chapter with their name on it in a published book
+would be a pretty cool achievement for an undergrad.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;em&gt;file compressor&lt;/em&gt;
+    because compression algorithms are both important and cool.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;em&gt;fuzz tester&lt;/em&gt;.
+    If you haven&amp;rsquo;t read &lt;a href=&#34;https://www.fuzzingbook.org/&#34;&gt;&lt;em&gt;The Fuzzing Book&lt;/em&gt;&lt;/a&gt; yet, you really should.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;em&gt;discrete event simulator&lt;/em&gt; like &lt;a href=&#34;https://simpy.readthedocs.io/&#34;&gt;SimPy&lt;/a&gt; (but much simpler),
+    mostly to show how co-operative multi-tasking works.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;An &lt;em&gt;object-relational mapper&lt;/em&gt; that targets a very simple subset of SQL
+    (but which does show how to implement foreign key relationships).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Dynamic autocompletion&lt;/em&gt;.
+    Showing possible continuations of what&amp;rsquo;s been typed so far is straightforward;
+    showing how to update the tree of possibilities as new things are typed is a lot more fun.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A simple &lt;em&gt;search engine&lt;/em&gt;.
+    I&amp;rsquo;d like something more sophisticated than &lt;a href=&#34;https://en.wikipedia.org/wiki/Tf%E2%80%93idf&#34;&gt;TF-IDF&lt;/a&gt;,
+    but I don&amp;rsquo;t know what that would be.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;em&gt;continuous integration system&lt;/em&gt; that runs jobs and reports results on each commit to version control.
+    Its real purpose would be to show people how to manage processes,
+    e.g.,
+    how to interrupt a job if another commit occurs before the job completes
+    and how to limit the time each job is allowed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;An &lt;em&gt;issue tracker&lt;/em&gt; with authentication and workflow management.
+    (The issues are just there to motivate authentication and workflow as objects.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Speaking of authentication, &lt;a href=&#34;https://en.wikipedia.org/wiki/OAuth&#34;&gt;OAuth&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;em&gt;message queue&lt;/em&gt; like &lt;a href=&#34;https://docs.celeryq.dev/&#34;&gt;Celery&lt;/a&gt; or &lt;a href=&#34;https://zeromq.org/&#34;&gt;ZeroMQ&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;em&gt;fault-tolerant virtual machine&lt;/em&gt; like &lt;a href=&#34;https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)&#34;&gt;BEAM&lt;/a&gt;.
+    (The existing book has a simple VM; perhaps this could extend it?)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&#34;&gt;TCP&lt;/a&gt;&lt;/em&gt;,
+    because the lack of networking in the &lt;a href=&#34;https://third-bit.com/sdxpy/&#34;&gt;current book&lt;/a&gt; is its biggest weakness.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Domain_Name_System&#34;&gt;DNS&lt;/a&gt;&lt;/em&gt;,
+    for the same reason
+    (though I doubt I could make anything as fun as &lt;a href=&#34;https://jvns.ca/&#34;&gt;Julia Evans&lt;/a&gt;&amp;rsquo;s &lt;a href=&#34;https://messwithdns.net/&#34;&gt;Mess With DNS&lt;/a&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A scale model of &lt;em&gt;&lt;a href=&#34;https://docs.docker.com/compose/&#34;&gt;Docker Compose&lt;/a&gt; or &lt;a href=&#34;https://kubernetes.io/&#34;&gt;Kubernetes&lt;/a&gt;&lt;/em&gt;,
+    which wouldn&amp;rsquo;t have to be much more complicated than
+    &lt;a href=&#34;https://third-bit.com/2024/02/17/concurrent-examples/&#34;&gt;this tool for running concurrent examples&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;em&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Virtual_private_network&#34;&gt;VPN&lt;/a&gt;&lt;/em&gt;.
+    (Remember, these are scale models with only a fraction of the functionality of the real thing.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content>
+ </entry>
+ 
+</feed>
