@@ -1,29 +1,25 @@
-CREATE TABLE "blogs" (
+CREATE TABLE blogs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  blog_id INTEGER
+  title TEXT NOT NULL,
+  xml_url TEXT NOT NULL UNIQUE
 ) WITHOUT ROWID;
 
-@orm.model("blogs")
-class Blog:
-    id: int = orm.field(pk=True)
-    title: str
-    xml_url: str
+CREATE TABLE posts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  blog_id INTEGER NOT NULL,
+  external_id TEXT NOT NULL UNIQUE,
+  title TEXT NOT NULL,
+  url TEXT NOT NULL,
+  published_at TEXT NOT NULL,
+  favorite BOOL,
+  read_at TEXT,
+  FOREIGN KEY (blog_id) REFERENCES blogs.id
+) WITHOUT ROWID;
 
-@orm.model("posts")
-class Post:
-    id: str = orm.field(pk=True)
-    blog_id: int = orm.field(fk="blogs")
-    external_id: str
-    title: str
-    url: str 
-    published_at: Optional[str] = None
-    # dt.datetime
-    favorite: bool = False
-    read_at: Optional[dt.datetime] = None
-
-@orm.model("feeds")
-class Feed:
-    blog_id: int = orm.field(fk="blogs")
-    hash: str
-    etag: str
-    last_modified: dt.datetime
+CREATE TABLE feeds (
+  blog_id INTEGER PRIMARY KEY,
+  hash TEXT NOT NULL,
+  etag TEXT,
+  last_modified TEXT NOT NULL,
+  FOREIGN KEY (blog_id) REFERENCES blogs.id
+) WITHOUT ROWID;
