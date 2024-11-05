@@ -1,14 +1,11 @@
-- [ ] Figure out deployments
-    - need to decide on docker image to use
-    - External dep on sqlite
-    - migrations?
-        - in order to simplify, we'll develop locally and just copy the local db file to prod.
-
 ## MVP
+- [x] Deployments
 - [x] Edit a blog name
 - [x] Sync a blog's rss feed
 - [x] nav
 - [x] filter posts by blog
+- [ ] separate volume for sqlite files
+- [ ] migrations
 - [ ] Fix saving title of a blog (escape characters)
 - [ ] Save a new blog
 - [ ] Parse published timestamps
