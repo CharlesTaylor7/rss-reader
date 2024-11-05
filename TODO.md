@@ -15,6 +15,12 @@
 - [ ] Sort blogs by last published
 - [ ] Save feed meta data to avoid annoying retries
 
+## Tech debt
+- replace ormlite
+    - hand craft sql
+    - use named tuples
+    - work out a migration system
+
 ## Future
 - [ ] favorite button
 - [ ] Auth 

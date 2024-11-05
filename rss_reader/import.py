@@ -1,1 +1,0 @@
-# open `~/Downloads/Inoreader Feeds 20241104.xml` | get content.1.content.attributes | reject text type | rename title xml_url html_url | enumerate | each { |row| $row.item | insert id $row.index } | into sqlite chuck.db --table-name=blogs

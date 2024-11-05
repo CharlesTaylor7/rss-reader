@@ -1,25 +1,21 @@
 from defusedxml import ElementTree as Xml
 import requests
-import sqlite3
 import ormlite as orm
 from rss_reader.models import Post, Feed
 from rss_reader.db import connect
 
-db = connect()
-db.row_factory = sqlite3.Row
-
 def run():
-    # sync({"id": 1, "xml_url": "https://paravoce.bearblog.dev/feed/"})
     main()
 
 def main():
+    db = connect()
     for row in db.execute(
-    "SELECT * FROM blogs left join feeds on blogs.id == feeds.blog_id"
+        "SELECT * FROM blogs left join feeds on blogs.id == feeds.blog_id"
     ):
-        sync(row)
+        sync(db, row)
 
 
-def sync(blog):
+def sync(db, blog):
     id = blog["id"]
     try:
         with open(f"dev-cache/{id}.xml", "r") as file:
@@ -31,13 +27,13 @@ def sync(blog):
 
     xml = Xml.fromstring(content)
     for post in xml.iter('entry'):
-        sync_post(blog, post)
+        sync_post(db, blog, post)
 
     for post in xml.iter('item'):
-        sync_post(blog, post)
+        sync_post(db, blog, post)
 
 
-def sync_post(blog, tag):
+def sync_post(db, blog, tag):
     post = { 'blog_id': blog['id'] }
     for child in tag.iter():
         if child.tag == "title":
