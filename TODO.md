@@ -4,7 +4,8 @@
 - [x] Sync a blog's rss feed
 - [x] nav
 - [x] filter posts by blog
-- [ ] separate volume for sqlite files
+- [x] separate volume for sqlite files
+- [ ] import opml button
 - [ ] migrations
 - [ ] Fix saving title of a blog (escape characters)
 - [ ] Save a new blog
@@ -16,6 +17,5 @@
 
 ## Future
 - [ ] favorite button
-- [ ] import opml button
 - [ ] Auth 
 - [ ] multi-user
