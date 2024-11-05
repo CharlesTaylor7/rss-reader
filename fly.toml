@@ -23,3 +23,10 @@ primary_region = 'iad'
 
 [deploy]
 strategy = "immediate"
+
+[mounts]
+source="rss_reader"
+destination="/data"
+
+[env]
+VOLUME="/data"

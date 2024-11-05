@@ -3,9 +3,9 @@ import requests
 import sqlite3
 import ormlite as orm
 from rss_reader.models import Post, Feed
+from rss_reader.db import connect
 
-
-db = orm.connect_to_sqlite("chuck.db")
+db = connect()
 db.row_factory = sqlite3.Row
 
 def run():

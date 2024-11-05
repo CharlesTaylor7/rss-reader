@@ -3,3 +3,5 @@
 **/dist
 .venv/**/*
 fly.toml
+data/
+dev-cache/

@@ -1,6 +1,7 @@
+import argparse
 from waitress import serve
 from rss_reader.app import app
-import argparse
+from rss_reader import migrate, sync
 
 parser = argparse.ArgumentParser()
 parser.add_argument("command")
@@ -16,15 +17,14 @@ if command == "dev-server":
     app.run(debug=True, **spec)
 
 elif command =="prod-server":
+    migrate.run()
     serve(app, **spec)
 
 elif command == "migrate":
-    from rss_reader.migrate import run
-    run()
+    migrate.run()
 
 elif command == "sync":
-    from rss_reader.sync import run
-    run()
+    sync.run()
 
 else:
     print(f"unknown command {command}")
