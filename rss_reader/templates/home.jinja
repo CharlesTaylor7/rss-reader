@@ -1,4 +1,7 @@
 {% extends "base.jinja" %}
 {% block body %}
 Welcome to my RSS reader
+<!-- https://htmx.org/examples/file-upload/ -->
+<input type='file' name='file' accept="text/xml" hx-encoding='multipart/form-data' hx-post='/import'>
+  
 {% endblock %}

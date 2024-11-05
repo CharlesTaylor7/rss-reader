@@ -1,4 +1,5 @@
 from flask import Flask
+from defusedxml import ElementTree as Xml
 import flask
 import ormlite as orm
 
@@ -43,3 +44,16 @@ def posts():
 def post_view(id):
     print(id)
     return ""
+
+@app.route("/import", methods=["POST"])
+def import_():
+    tree = Xml.parse(flask.request.files['file'].stream)
+    root = tree.getroot()
+    blogs = [Blog(title=blog.attrib['title'], xml_url=blog.attrib['xmlUrl']) for blog in root.iter('outline') ]
+    db = orm.connect_to_sqlite("chuck.db")
+    orm.upsert(db, blogs)
+
+    ## TODO: import
+    print(root)
+    return ""
+             

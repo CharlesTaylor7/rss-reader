@@ -42,3 +42,7 @@ open `Inoreader Feeds 20241104.xml` | get content.content.1.attributes | select 
 - [ormlite](https://ormlite.readthedocs.io/en/latest/ormlite.html#module-ormlite)
 - [sqlite3](https://docs.python.org/3/library/sqlite3.html#sqlite3-reference)
 - [eml.etree](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree)
+
+## Deployments
+https://hynek.me/articles/docker-uv/
+fly.io
