@@ -8,10 +8,11 @@
 - [x] Edit a blog name
 - [x] Sync a blog's rss feed
 - [x] nav
+- [x] filter posts by blog
+- [ ] Fix saving title of a blog (escape characters)
 - [ ] Save a new blog
 - [ ] Parse published timestamps
 - [ ] Save read_at timestamp for posts
-- [ ] filter posts by blog
 - [ ] sort posts by published and unread
 - [ ] Sort blogs by last published
 - [ ] Save feed meta data to avoid annoying retries
@@ -20,4 +21,4 @@
 - [ ] favorite button
 - [ ] import opml button
 - [ ] Auth 
-- [ ] multi-tenant
+- [ ] multi-user
