@@ -195,7 +195,7 @@ dependencies = [
     { name = "defusedxml" },
     { name = "flask" },
     { name = "requests" },
-    { name = "waitress" },
+    { name = "uwsgi" },
 ]
 
 [package.metadata]
@@ -203,7 +203,7 @@ requires-dist = [
     { name = "defusedxml", specifier = ">=0.7.1" },
     { name = "flask", specifier = ">=3.0.3" },
     { name = "requests", specifier = ">=2.32.3" },
-    { name = "waitress", specifier = ">=3.0.1" },
+    { name = "uwsgi", specifier = ">=2.0.28" },
 ]
 
 [[package]]
@@ -216,13 +216,10 @@ wheels = [
 ]
 
 [[package]]
-name = "waitress"
-version = "3.0.1"
+name = "uwsgi"
+version = "2.0.28"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/cb/0b/5920c63f93c17f9b04117f271f97619a74e087bf3de0aeed2cfd28510194/waitress-3.0.1.tar.gz", hash = "sha256:ef0c1f020d9f12a515c4ec65c07920a702613afcad1dbfdc3bcec256b6c072b3", size = 180560 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/77/7a/e3d9728774c66c84cdab509955539720fc0dc55781b8d79b299665752749/waitress-3.0.1-py3-none-any.whl", hash = "sha256:26cdbc593093a15119351690752c99adc13cbc6786d75f7b6341d1234a3730ac", size = 56678 },
-]
+sdist = { url = "https://files.pythonhosted.org/packages/24/c2/d58480aadc9a1f420dd96fc43cf0dcd8cb5ededb95cab53743529c23b6cd/uwsgi-2.0.28.tar.gz", hash = "sha256:79ca1891ef2df14508ab0471ee8c0eb94bd2d51d03f32f90c4bbe557ab1e99d0", size = 816212 }
 
 [[package]]
 name = "werkzeug"

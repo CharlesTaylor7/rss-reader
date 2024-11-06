@@ -1,5 +1,4 @@
 import argparse
-from waitress import serve
 from rss_reader.app import app
 from rss_reader import migrate, sync
 
@@ -15,10 +14,6 @@ spec = {
 
 if command == "dev-server":
     app.run(debug=True, **spec)
-
-elif command =="prod-server":
-    migrate.run()
-    serve(app, **spec)
 
 elif command == "migrate":
     migrate.run()

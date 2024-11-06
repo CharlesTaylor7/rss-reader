@@ -33,7 +33,7 @@ def sync(db, blog):
         sync_post(db, blog, post)
 
 def parse_date(date: str):
-    dt.datetime.strptime(date, "%a, %d %b %Y %Z") or dt.datetime.strptime(date, "%m/%d;%Y")
+    return date
 
 def sync_post(db, blog, tag):
     post = { 'blog_id': blog['id'], 'published_at': None }

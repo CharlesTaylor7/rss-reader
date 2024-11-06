@@ -1,1 +1,2 @@
-python -m rss_reader prod-server
+python -m rss_reader migrate
+uwsgi uwsgi.ini
