@@ -1,10 +1,8 @@
 from flask import Flask
 from defusedxml import ElementTree as Xml
 import flask
-import ormlite as orm
 
 from rss_reader.db import connect
-from rss_reader.models import Post, Blog
 
 app = Flask(__name__)
 
@@ -21,30 +19,26 @@ def blogs():
 @app.route("/blogs/<id>/edit")
 def blog_edit(id):
     db = connect()
-    blogs = orm.select(Blog).where(id=id).models(db)
-    return flask.render_template("fragment_blog_edit.jinja", blog=blogs[0])
+    blog = db.execute("select * from blogs where blogs.id = :id", {'id': id}).fetchone()
+    return flask.render_template("fragment_blog_edit.jinja", blog=blog)
 
-@app.route("/blogs/<id>/save", methods=["POST"])
-def blog_save(id):
-    blog = Blog(**flask.request.form)
+@app.route("/blogs/save", methods=["POST"])
+def blog_save():
+    blog = flask.request.form
     db = connect()
-    orm.upsert(db, [blog], update=["title", "xml_url"])
+    db.execute("UPDATE blogs SET title=:title,xml_url=:xml_url WHERE id = :id", blog)
     return flask.render_template("fragment_blog.jinja", blog=blog)
 
 @app.route("/posts")
 def posts():
     db = connect()
     blog_id = flask.request.args.get('blog_id')
-    query = orm.select(Post)
-    if blog_id:
-        query = query.where(blog_id=blog_id)
-    posts = query.models(db)
-    return flask.render_template("posts.jinja", posts=posts)
+    if blog_id is not None:
+        posts = db.execute("SELECT * FROM posts WHERE blog_id = :blog_id", flask.request.args)
+    else:
+        posts = db.execute("SELECT * FROM posts")
 
-@app.route("/posts/<id>/view")
-def post_view(id):
-    print(id)
-    return ""
+    return flask.render_template("posts.jinja", posts=posts)
 
 @app.route("/import", methods=["POST"])
 def import_():

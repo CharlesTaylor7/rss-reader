@@ -1,7 +1,5 @@
 from defusedxml import ElementTree as Xml
 import requests
-import ormlite as orm
-from rss_reader.models import Post, Feed
 from rss_reader.db import connect
 
 def run():
@@ -50,8 +48,15 @@ def sync_post(db, blog, tag):
 
         elif child.tag == "guid":
             post['external_id'] = child.text
-            post['id'] = str(blog['id']) + '#' + post['external_id']
 
-    
-    orm.upsert(db, [Post(**post)], update=["title", "url", "published_at"])
+    db.execute("""
+        INSERT INTO posts(external_id, title, url, published_at) 
+        VALUES(:external_id, :title, :url, :published_at)
+        ON CONFLICT DO UPDATE
+            title=excluded.title,
+            url=excluded.url,
+            published_at=excluded.published_at
+    """,
+    post
+    )
 

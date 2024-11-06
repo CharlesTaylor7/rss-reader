@@ -173,15 +173,6 @@ wheels = [
 ]
 
 [[package]]
-name = "ormlite"
-version = "0.2.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/cb/b8/3a7f638c23338fa80045956c61d968012ec41eeb4cc707e9f1ecedbad9de/ormlite-0.2.1.tar.gz", hash = "sha256:7c7781a416dd70963ad65c450866c2d06a8e18338d9eea0f2a706a139e54a8b3", size = 13807 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/06/4f/4990d6d6eee5176c4de9f2c01bf75942013b91569f5ada6fe541e264edf6/ormlite-0.2.1-py3-none-any.whl", hash = "sha256:c670700cbb65b54ee657e8c655307b9f4093e23ab5c1342a5b4d6886bdb4fee9", size = 11978 },
-]
-
-[[package]]
 name = "requests"
 version = "2.32.3"
 source = { registry = "https://pypi.org/simple" }
@@ -203,7 +194,6 @@ source = { editable = "." }
 dependencies = [
     { name = "defusedxml" },
     { name = "flask" },
-    { name = "ormlite" },
     { name = "requests" },
     { name = "waitress" },
 ]
@@ -212,7 +202,6 @@ dependencies = [
 requires-dist = [
     { name = "defusedxml", specifier = ">=0.7.1" },
     { name = "flask", specifier = ">=3.0.3" },
-    { name = "ormlite", specifier = ">=0.2.1" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "waitress", specifier = ">=3.0.1" },
 ]

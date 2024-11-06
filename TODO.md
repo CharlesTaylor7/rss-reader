@@ -18,8 +18,6 @@
 ## Tech debt
 - replace ormlite
     - hand craft sql
-    - use named tuples
-    - work out a migration system
 
 ## Future
 - [ ] favorite button

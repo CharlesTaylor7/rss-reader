@@ -1,4 +1,4 @@
-<form hx-post="/blogs/{{ blog.id }}/save" hx-swap="outerHTML" >
+<form hx-post="/blogs/save" hx-swap="outerHTML" >
   <button>Save</button>
   <input type="hidden" name="id" value={{ blog.id }}></input>
   <input type="text" name="title" value="{{ blog.title }}"></input>
