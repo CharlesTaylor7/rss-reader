@@ -34,9 +34,9 @@ def posts():
     db = connect()
     blog_id = flask.request.args.get('blog_id')
     if blog_id is not None:
-        posts = db.execute("SELECT * FROM posts WHERE blog_id = :blog_id", flask.request.args)
+        posts = db.execute("SELECT * FROM posts WHERE blog_id = :blog_id ORDER BY published_at DESC", flask.request.args)
     else:
-        posts = db.execute("SELECT * FROM posts")
+        posts = db.execute("SELECT * FROM posts ORDER BY read, published_at DESC")
 
     return flask.render_template("posts.jinja", posts=posts)
 

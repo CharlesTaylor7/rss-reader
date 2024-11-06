@@ -32,6 +32,8 @@ def sync(db, blog):
     for post in xml.iter('item'):
         sync_post(db, blog, post)
 
+def parse_date(date: str):
+    dt.datetime.strptime(date, "%a, %d %b %Y %Z") or dt.datetime.strptime(date, "%m/%d;%Y")
 
 def sync_post(db, blog, tag):
     post = { 'blog_id': blog['id'], 'published_at': None }
@@ -40,10 +42,10 @@ def sync_post(db, blog, tag):
             post['title'] = child.text
 
         elif child.tag == "pubDate":
-            post['published_at'] = child.text
+            post['published_at'] = parse_date(child.text)
 
         elif child.tag == "published":
-            post['published_at'] = child.text
+            post['published_at'] = parse_date(child.text)
 
         elif child.tag == "link":
             post['url'] = child.text
@@ -54,7 +56,6 @@ def sync_post(db, blog, tag):
             VALUES(:blog_id, :title, :url, :published_at)
             ON CONFLICT DO UPDATE SET
                 title=excluded.title,
-                url=excluded.url,
                 published_at=excluded.published_at
         """,
             post

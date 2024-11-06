@@ -9,10 +9,10 @@ CREATE TABLE posts (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   blog_id INTEGER NOT NULL,
   title TEXT NOT NULL,
-  url TEXT NOT NULL,
+  url TEXT NOT NULL UNIQUE,
   published_at TEXT,
   favorite BOOL,
-  read_at TEXT,
+  read BOOL,
   FOREIGN KEY (blog_id) REFERENCES blogs(id)
 );
 
