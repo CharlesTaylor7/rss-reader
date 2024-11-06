@@ -1,12 +1,15 @@
 import uwsgi
 from rss_reader.app import app as application
-from rss_reader import sync
 from rss_reader import migrate
+from rss_reader.sync import Sync
 
 migrate.run()
+Sync().run()
 
+# fly.io stops machines that are idle, so this signal will usually not run.
+# unless I disable auto stop machine
 def sync_feeds(_signum: int):
-    sync.run()
+    Sync().run()
 
 # sync every 24 hours
 SIGNUM = 1

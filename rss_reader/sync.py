@@ -4,70 +4,68 @@ from rss_reader.db import connect
 import datetime as dt
 import os
 
-
-def run():
-    main()
-
-def main():
-    db = connect()
-    for row in db.execute(
-        "SELECT * FROM blogs left join feeds on blogs.id == feeds.blog_id"
-    ):
-        sync(db, row)
-
-        
-def read_feed(blog: dict):
-    if not os.environ.get("DEV_CACHE"):
-        return requests.get(blog["xml_url"]).text
-
-    id = blog['id']
-    try:
-        with open(f"dev-cache/{id}.xml", "r") as file:
-            return file.read()
-    except FileNotFoundError:
-        content = requests.get(blog["xml_url"]).text
-        with open(f"dev-cache/{id}.xml", "w") as file:
-            file.write(content)
-        return content
-
-
-def sync(db, blog):
-    content = read_feed(blog)
-    xml = Xml.fromstring(content)
-    for post in xml.iter('entry'):
-        sync_post(db, blog, post)
-
-    for post in xml.iter('item'):
-        sync_post(db, blog, post)
-
 def parse_date(date: str):
     return date
 
-def sync_post(db, blog, tag):
-    post = { 'blog_id': blog['id'], 'published_at': None }
-    for child in tag.iter():
-        if child.tag == "title":
-            post['title'] = child.text
+class Sync:
+    def __init__(self, use_cache: bool = False):
+        self.use_cache = use_cache
+        self.db = connect()
 
-        elif child.tag == "pubDate":
-            post['published_at'] = parse_date(child.text)
+    def run(self):
+        for row in self.db.execute(
+            "SELECT * FROM blogs left join feeds on blogs.id == feeds.blog_id"
+        ):
+            self.sync(row)
 
-        elif child.tag == "published":
-            post['published_at'] = parse_date(child.text)
+            
+    def read_feed(self, blog: dict):
+        if not self.use_cache:
+            return requests.get(blog["xml_url"]).text
 
-        elif child.tag == "link":
-            post['url'] = child.text
+        id = blog['id']
+        try:
+            with open(f"dev-cache/{id}.xml", "r") as file:
+                return file.read()
+        except FileNotFoundError:
+            content = requests.get(blog["xml_url"]).text
+            with open(f"dev-cache/{id}.xml", "w") as file:
+                file.write(content)
+            return content
 
-    try:
-        db.execute("""
-            INSERT INTO posts(blog_id, title, url, published_at) 
-            VALUES(:blog_id, :title, :url, :published_at)
-            ON CONFLICT DO UPDATE SET
-                title=excluded.title,
-                published_at=excluded.published_at
-        """,
-            post
-        )
-    except Exception as e:
-        print(f"skipping post: {post}\n{e}")
+    def sync(self, blog):
+        content = self.read_feed(blog)
+        xml = Xml.fromstring(content)
+        for post in xml.iter('entry'):
+            self.sync_post(blog, post)
 
+        for post in xml.iter('item'):
+            self.sync_post(blog, post)
+
+    def sync_post(db, blog, tag):
+        post = { 'blog_id': blog['id'], 'published_at': None }
+        for child in tag.iter():
+            if child.tag == "title":
+                post['title'] = child.text
+
+            elif child.tag == "pubDate":
+                post['published_at'] = parse_date(child.text)
+
+            elif child.tag == "published":
+                post['published_at'] = parse_date(child.text)
+
+            elif child.tag == "link":
+                post['url'] = child.text
+
+        try:
+            db.execute("""
+                INSERT INTO posts(blog_id, title, url, published_at) 
+                VALUES(:blog_id, :title, :url, :published_at)
+                ON CONFLICT DO UPDATE SET
+                    title=excluded.title,
+                    published_at=excluded.published_at
+            """,
+                post
+            )
+        except Exception as e:
+            print(f"skipping post: {post}\n{e}")
