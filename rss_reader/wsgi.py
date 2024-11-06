@@ -1,6 +1,9 @@
 import uwsgi
 from rss_reader.app import app as application
 from rss_reader import sync
+from rss_reader import migrate
+
+migrate.run()
 
 def sync_feeds(_signum: int):
     sync.run()

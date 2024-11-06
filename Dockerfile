@@ -29,4 +29,5 @@ ENV PATH="/app/.venv/bin:$PATH"
 # Reset the entrypoint, don't invoke `uv`
 ENTRYPOINT []
 
+# start server 
 CMD ["uwsgi", "uwsgi.ini"]
