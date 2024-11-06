@@ -1,7 +1,17 @@
 {% extends "base.jinja" %}
 {% block body %}
-Welcome to my RSS reader
+<p>
+  Welcome to my RSS reader
+</p>
+
 <!-- https://htmx.org/examples/file-upload/ -->
-<input type='file' name='file' accept="text/xml" hx-encoding='multipart/form-data' hx-post='/import'>
+<input type='file' name='file' accept="text/xml" form="upload">
+
+<form id="upload" hx-post="/import" enctype="multipart/form-data" hx-target="#feedback">
+  <button>Upload</button>
+</form>
+
+<p id="feedback">
+</p>
   
 {% endblock %}

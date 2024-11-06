@@ -7,6 +7,6 @@ def run():
     cursor = db.execute("""
         CREATE TABLE IF NOT EXISTS migrations(
         ) WITHOUT ROWID;
-    """
+    """)
     pass
 

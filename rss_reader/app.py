@@ -15,7 +15,7 @@ def home():
 @app.route("/blogs")
 def blogs():
     db = connect()
-    blogs = orm.select(Blog).models(db)
+    blogs = db.execute("select * from blogs")
     return flask.render_template("blogs.jinja", blogs=blogs)
 
 @app.route("/blogs/<id>/edit")
@@ -50,11 +50,15 @@ def post_view(id):
 def import_():
     tree = Xml.parse(flask.request.files['file'].stream)
     root = tree.getroot()
-    blogs = [Blog(title=blog.attrib['title'], xml_url=blog.attrib['xmlUrl']) for blog in root.iter('outline') ]
+    blogs = [{'title': blog.attrib['title'], 'xml_url': blog.attrib['xmlUrl']} for blog in root.iter('outline') ]
     db = connect()
-    orm.upsert(db, blogs)
+    db.executemany("""
+        INSERT INTO blogs(title, xml_url) 
+        VALUES(:title, :xml_url)
+        ON CONFLICT DO UPDATE
+        SET title=excluded.title
+    """, blogs
+    )
 
-    ## TODO: import
-    print(root)
-    return ""
+    return f"Imported {len(blogs)} blogs!"
              
