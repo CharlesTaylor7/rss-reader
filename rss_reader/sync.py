@@ -1,6 +1,8 @@
 from defusedxml import ElementTree as Xml
 import requests
 from rss_reader.db import connect
+import datetime as dt
+
 
 def run():
     main()
@@ -32,7 +34,7 @@ def sync(db, blog):
 
 
 def sync_post(db, blog, tag):
-    post = { 'blog_id': blog['id'] }
+    post = { 'blog_id': blog['id'], 'published_at': None }
     for child in tag.iter():
         if child.tag == "title":
             post['title'] = child.text
@@ -46,17 +48,17 @@ def sync_post(db, blog, tag):
         elif child.tag == "link":
             post['url'] = child.text
 
-        elif child.tag == "guid":
-            post['external_id'] = child.text
-
-    db.execute("""
-        INSERT INTO posts(external_id, title, url, published_at) 
-        VALUES(:external_id, :title, :url, :published_at)
-        ON CONFLICT DO UPDATE
-            title=excluded.title,
-            url=excluded.url,
-            published_at=excluded.published_at
-    """,
-    post
-    )
+    try:
+        db.execute("""
+            INSERT INTO posts(blog_id, title, url, published_at) 
+            VALUES(:blog_id, :title, :url, :published_at)
+            ON CONFLICT DO UPDATE SET
+                title=excluded.title,
+                url=excluded.url,
+                published_at=excluded.published_at
+        """,
+            post
+        )
+    except Exception as e:
+        print(f"skipping post: {post}\n{e}")
 

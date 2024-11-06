@@ -7,7 +7,7 @@
 - [x] separate volume for sqlite files
 - [x] import opml button
 - [x] migrations
-- [ ] Fix saving title of a blog or post (escape characters)
+- [x] Fix saving title of a blog or post (escape characters)
 - [ ] Add a new blog button
 - [ ] Parse published timestamps
 - [ ] Save read_at timestamp for posts
@@ -15,9 +15,6 @@
 - [ ] Sort blogs by last published
 - [ ] Save feed meta data to avoid annoying retries
 
-## Tech debt
-- replace ormlite
-    - hand craft sql
 
 ## Future
 - [ ] favorite button
