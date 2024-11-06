@@ -2,6 +2,7 @@ from defusedxml import ElementTree as Xml
 import requests
 from rss_reader.db import connect
 import datetime as dt
+import os
 
 
 def run():
@@ -14,17 +15,24 @@ def main():
     ):
         sync(db, row)
 
+        
+def read_feed(blog: dict):
+    if not os.environ.get("DEV_CACHE"):
+        return requests.get(blog["xml_url"]).text
 
-def sync(db, blog):
-    id = blog["id"]
+    id = blog['id']
     try:
         with open(f"dev-cache/{id}.xml", "r") as file:
-            content = file.read()
+            return file.read()
     except FileNotFoundError:
         content = requests.get(blog["xml_url"]).text
         with open(f"dev-cache/{id}.xml", "w") as file:
             file.write(content)
+        return content
 
+
+def sync(db, blog):
+    content = read_feed(blog)
     xml = Xml.fromstring(content)
     for post in xml.iter('entry'):
         sync_post(db, blog, post)
