@@ -17,12 +17,4 @@ def connect_to_sqlite(file_name: str) -> sqlite3.Connection:
     )
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA foreign_keys = ON;")
-    dir = pathlib.Path(__file__).parent.resolve()
-    print(dir)
-    with open(f"{dir}/migrations/000-initial.sql") as f:
-        try:
-            db.executescript(f.read())
-        except Exception as e:
-            print(e)
-
     return db

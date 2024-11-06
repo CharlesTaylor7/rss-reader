@@ -4,6 +4,7 @@ CREATE TABLE blogs (
   xml_url TEXT NOT NULL UNIQUE
 );
 
+
 CREATE TABLE posts (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   blog_id INTEGER NOT NULL,
@@ -13,7 +14,7 @@ CREATE TABLE posts (
   published_at TEXT NOT NULL,
   favorite BOOL,
   read_at TEXT,
-  FOREIGN KEY (blog_id) REFERENCES blogs.id
+  FOREIGN KEY (blog_id) REFERENCES blogs(id)
 );
 
 CREATE TABLE feeds (
@@ -21,5 +22,5 @@ CREATE TABLE feeds (
   hash TEXT NOT NULL,
   etag TEXT,
   last_modified TEXT NOT NULL,
-  FOREIGN KEY (blog_id) REFERENCES blogs.id
+  FOREIGN KEY (blog_id) REFERENCES blogs(id)
 ) WITHOUT ROWID;

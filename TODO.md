@@ -5,10 +5,10 @@
 - [x] nav
 - [x] filter posts by blog
 - [x] separate volume for sqlite files
-- [ ] import opml button
-- [ ] migrations
-- [ ] Fix saving title of a blog (escape characters)
-- [ ] Save a new blog
+- [x] import opml button
+- [x] migrations
+- [ ] Fix saving title of a blog or post (escape characters)
+- [ ] Add a new blog button
 - [ ] Parse published timestamps
 - [ ] Save read_at timestamp for posts
 - [ ] sort posts by published and unread
