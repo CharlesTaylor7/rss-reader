@@ -8,11 +8,11 @@
 - [x] import opml button
 - [x] migrations
 - [x] Fix saving title of a blog or post (escape characters)
+- [ ] Sort blogs by last published
 - [ ] Add a new blog button
 - [ ] Parse published timestamps
-- [ ] Save read_at timestamp for posts
+- [ ] Save read flags for posts
 - [ ] sort posts by published and unread
-- [ ] Sort blogs by last published
 - [ ] Save feed meta data to avoid annoying retries
 
 
@@ -20,3 +20,4 @@
 - [ ] favorite button
 - [ ] Auth 
 - [ ] multi-user
+- [ ] 
