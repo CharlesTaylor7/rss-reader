@@ -1,11 +1,9 @@
 from defusedxml import ElementTree as Xml
 import requests
 from rss_reader.db import connect
+from rss_reader.date import parse_date
 import datetime as dt
 import os
-
-def parse_date(date: str):
-    return date
 
 class Sync:
     def __init__(self, use_cache: bool = False):
@@ -42,7 +40,7 @@ class Sync:
         for post in xml.iter('item'):
             self.sync_post(blog, post)
 
-    def sync_post(db, blog, tag):
+    def sync_post(self, blog, tag):
         post = { 'blog_id': blog['id'], 'published_at': None }
         for child in tag.iter():
             if child.tag == "title":
@@ -58,7 +56,7 @@ class Sync:
                 post['url'] = child.text
 
         try:
-            db.execute("""
+            self.db.execute("""
                 INSERT INTO posts(blog_id, title, url, published_at) 
                 VALUES(:blog_id, :title, :url, :published_at)
                 ON CONFLICT DO UPDATE SET

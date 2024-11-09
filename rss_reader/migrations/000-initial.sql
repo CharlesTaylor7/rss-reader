@@ -10,16 +10,17 @@ CREATE TABLE posts (
   blog_id INTEGER NOT NULL,
   title TEXT NOT NULL,
   url TEXT NOT NULL UNIQUE,
-  published_at TEXT,
+  -- utc epoch
+  published_at INTEGER,
   favorite BOOL,
   read BOOL,
   FOREIGN KEY (blog_id) REFERENCES blogs(id)
 );
 
-CREATE TABLE feeds (
-  blog_id INTEGER PRIMARY KEY,
-  hash TEXT NOT NULL,
-  etag TEXT,
-  last_modified TEXT NOT NULL,
-  FOREIGN KEY (blog_id) REFERENCES blogs(id)
-) WITHOUT ROWID;
+-- CREATE TABLE feeds (
+--   blog_id INTEGER PRIMARY KEY,
+--   hash TEXT NOT NULL,
+--   etag TEXT,
+--   last_modified TEXT NOT NULL,
+--   FOREIGN KEY (blog_id) REFERENCES blogs(id)
+-- ) WITHOUT ROWID;

@@ -8,16 +8,17 @@
 - [x] import opml button
 - [x] migrations
 - [x] Fix saving title of a blog or post (escape characters)
+- [x] Parse published timestamps
+- [ ] Convert timestamps to and from ints for storage
 - [ ] Sort blogs by last published
-- [ ] Add a new blog button
-- [ ] Parse published timestamps
+- [ ] "Add a blog" button
 - [ ] Save read flags for posts
 - [ ] sort posts by published and unread
 - [ ] Save feed meta data to avoid annoying retries
 
 
 ## Future
-- [ ] favorite button
+- [ ] "favorite" button
 - [ ] Auth 
 - [ ] multi-user
-- [ ] 
+- [ ] Chrome extension?

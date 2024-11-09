@@ -3,7 +3,7 @@
 - have better performance than InoReader, my current client
 - have better visibility into data
 - With more customizibility
-- Secure from the start
+- Secure 
 - be really simple
 
 ## Tech Stack
@@ -13,7 +13,6 @@
 - sqlite
 - htmx
 - fly.io for hosting
-- cron for fetching feed state
 
 ## Feature set
 - cron job runs nightly to check rss feeds
