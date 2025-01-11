@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RssReader;
 
-public partial class ChuckContext : DbContext
+public partial class AppContext : DbContext
 {
-    public ChuckContext() { }
+    public AppContext() { }
 
-    public ChuckContext(DbContextOptions<ChuckContext> options)
+    public AppContext(DbContextOptions<AppContext> options)
         : base(options) { }
 
     public virtual DbSet<Blog> Blogs { get; set; }
