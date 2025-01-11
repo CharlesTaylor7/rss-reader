@@ -2,5 +2,8 @@
 @model IndexModel
 
 <div class="text-center">
-    BlogCount: @Model.Blogs.Count
+    @foreach (var blog in Model.Blogs)
+    {
+      <li><a href=@blog.XmlUrl>@blog.Title</a></li>
+    }
 </div>

@@ -22,7 +22,8 @@ public class IndexModel : PageModel
         _logger.LogInformation("OnGet");
         using (var context = new RssReaderContext())
         {
-            context.Blogs.Add(new Blog { Title = "Test blog", XmlUrl = " test url" });
+            context.Blogs.Add(new Blog { Title = "Test another", XmlUrl = "else url" });
+            context.SaveChanges();
         }
     }
 
