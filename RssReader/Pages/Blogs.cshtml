@@ -1,0 +1,9 @@
+﻿@page
+@model BlogsModel
+
+<div class="text-center">
+    @foreach (var blog in Model.Blogs)
+    {
+        <li><a href=@blog.XmlUrl>@blog.Title</a></li>
+    }
+</div>
