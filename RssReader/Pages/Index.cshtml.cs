@@ -31,6 +31,7 @@ public class IndexModel : PageModel
             return Page();
         }
 
+        var imported = 0;
         using (var transaction = await _context.Database.BeginTransactionAsync())
         using (var stream = Import.OpenReadStream())
         using (var reader = XmlReader.Create(stream, new XmlReaderSettings { Async = true }))
@@ -57,16 +58,18 @@ public class IndexModel : PageModel
                     {
                         blog.Title = title;
                     }
+                    imported++;
                 }
 
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
+                UploadMessage = $"Imported {imported} blogs successfully!";
             }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-
                 _logger.LogError($"Opml import failed:\n{ex.Message}");
+                UploadMessage = "Import failed";
             }
         }
 
