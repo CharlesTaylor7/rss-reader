@@ -1,13 +1,14 @@
 ## Goals
-- Demonstrate proficiency with a .net stack acquire a job
+- Demonstrate proficiency with .net stack.
 
 ## Tech Stack
-- ASP.NET
+- ASP.NET Core
 - Entitiy Framework Core
-- Server side rendering
+- Razor pages
 - React Router
 - Fly.IO deployments
 - sqlite
+- Blazor?
 
 ## Feature set
 - sync button to check all rss feeds
@@ -25,6 +26,8 @@ open `Inoreader Feeds 20241104.xml` | get content.content.1.attributes | select 
 https://learn.microsoft.com/en-us/ef/core/get-started/overview/first-app?tabs=netcore-cli
 https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/?tabs=dotnet-core-cli
 https://learn.microsoft.com/en-us/dotnet/standard/data/sqlite/connection-strings
+https://learn.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-9.0&WT.mc_id=dotnet-35129-website&tabs=visual-studio
+https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-9.0
 
 ### Rss & Atom spec
 - [Rachel by the bay](https://rachelbythebay.com/w/2024/08/17/hash/)
