@@ -45,3 +45,11 @@ open `Inoreader Feeds 20241104.xml` | get content.content.1.attributes | select 
 ## Deployments
 https://hynek.me/articles/docker-uv/
 fly.io
+
+
+## Scripts
+Run dev server or dev command
+- `uv run python -m rss_reader <dev-server|migrate|sync>`
+
+Run prod server (locally)
+- `uv run uwsgi uwsgi.ini`
