@@ -9,8 +9,6 @@
 - [x] migrations
 - [x] Fix saving title of a blog or post (escape characters)
 - [x] Parse published timestamps
-- [ ] Convert timestamps to and from ints for storage
-- [ ] Sort blogs by last published
 - [ ] "Add a blog" button
 - [ ] Save read flags for posts
 - [ ] sort posts by published and unread
@@ -22,3 +20,5 @@
 - [ ] Auth 
 - [ ] multi-user
 - [ ] Chrome extension?
+- [ ] Sort blogs by last published
+- [ ] iframe for posts

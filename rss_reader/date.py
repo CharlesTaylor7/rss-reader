@@ -1,4 +1,5 @@
 import re
+import datetime as dt
 
 patterns = [
     re.compile(pattern) for pattern in [
@@ -34,16 +35,15 @@ months = {
     'December': 12,
 }
 
-def parse_date(raw: str):
+def parse_date(raw: str) -> str:
     match = first_match(raw)
     if match is None:
         print(raw)
         return raw
-    year = match['year']
-    month = months[match['month']]
-    day = match['day']
-    iso = f'{year}-{month}-{day}'
-    return iso
+    year = int(match['year'])
+    month = int(months[match['month']])
+    day = int(match['day'])
+    return f'{year}-{month:02d}-{day:02d}'
 
     
 def first_match(raw: str):

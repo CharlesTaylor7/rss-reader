@@ -13,8 +13,13 @@ def home():
 @app.route("/blogs")
 def blogs():
     db = connect()
-    blogs = db.execute("select * from blogs")
+    blogs = db.execute("select blogs.id, blogs.title from blogs")
     return flask.render_template("blogs.jinja", blogs=blogs)
+
+@app.route("/blogs/new")
+def blogs_new():
+    return flask.render_template("fragment_blog_new.jinja")
+
 
 @app.route("/blogs/<id>/edit")
 def blog_edit(id):
@@ -38,6 +43,7 @@ def posts():
     else:
         posts = db.execute("SELECT * FROM posts ORDER BY read, published_at DESC")
 
+    posts = list(posts)
     return flask.render_template("posts.jinja", posts=posts)
 
 @app.route("/import", methods=["POST"])
