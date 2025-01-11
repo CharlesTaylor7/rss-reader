@@ -1,11 +1,6 @@
 ﻿@page
 @model IndexModel
-@{
-//    ViewData["Title"] = new IndexModel().Db.Blogs.OrderBy(b => b.Title).First().Title;
-}
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    @ViewData["Title"] 
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    BlogCount: @Model.Blogs.Count
 </div>

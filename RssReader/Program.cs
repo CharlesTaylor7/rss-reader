@@ -1,10 +1,30 @@
+using System.Net;
+using Microsoft.Extensions.Hosting;
 using RssReader.Models;
+using Serilog;
+using Serilog.Enrichers.CallerInfo;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure Serilog
+builder.Host.UseSerilog();
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    // .Enrich.WithCallerInfo()
+    .WriteTo.Console(
+        outputTemplate: "{Timestamp:HH:mm:ss} [{Level:u3}] {Message} (Method: {Caller}){NewLine}{Exception}"
+    )
+    .CreateLogger();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<RssReaderContext>();
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Listen(IPAddress.Any, 8080);
+});
 
 var app = builder.Build();
 

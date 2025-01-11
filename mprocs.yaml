@@ -1,0 +1,10 @@
+procs:
+  DotNet:
+    cwd: RssReader
+    shell: watchexec -rc -e cs,cshtml,csproj -- dotnet run
+
+  Flask:
+    cwd: ../flask-rss-reader/
+    shell: uv run python -m rss_reader dev-server
+    autostart: false
+
