@@ -23,6 +23,8 @@ open `Inoreader Feeds 20241104.xml` | get content.content.1.attributes | select 
 
 ## Resources
 https://learn.microsoft.com/en-us/ef/core/get-started/overview/first-app?tabs=netcore-cli
+https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/?tabs=dotnet-core-cli
+https://learn.microsoft.com/en-us/dotnet/standard/data/sqlite/connection-strings
 
 ### Rss & Atom spec
 - [Rachel by the bay](https://rachelbythebay.com/w/2024/08/17/hash/)
