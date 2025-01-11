@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RssReader;
 
-public partial class AppContext : DbContext
+public partial class RssReaderContext : DbContext
 {
-    public AppContext() { }
+    public RssReaderContext() { }
 
-    public AppContext(DbContextOptions<AppContext> options)
+    public RssReaderContext(DbContextOptions<RssReaderContext> options)
         : base(options) { }
 
     public virtual DbSet<Blog> Blogs { get; set; }
