@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RssReader;
+namespace RssReader.Models;
 
 public partial class Blog
 {
     public int Id { get; set; }
 
-    public string Title { get; set; } = null!;
+    public required string Title { get; init; }
 
-    public string XmlUrl { get; set; } = null!;
+    public required string XmlUrl { get; init; }
 
     public virtual Feed? Feed { get; set; }
 

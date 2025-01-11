@@ -1,4 +1,4 @@
-using RssReader;
+using RssReader.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RssReader;
+namespace RssReader.Models;
 
 public partial class Post
 {

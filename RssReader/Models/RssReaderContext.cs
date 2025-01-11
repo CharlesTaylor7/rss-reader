@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace RssReader;
+namespace RssReader.Models;
 
 public partial class RssReaderContext : DbContext
 {
@@ -14,8 +14,6 @@ public partial class RssReaderContext : DbContext
     public virtual DbSet<Blog> Blogs { get; set; }
 
     public virtual DbSet<Feed> Feeds { get; set; }
-
-    public virtual DbSet<Migration> Migrations { get; set; }
 
     public virtual DbSet<Post> Posts { get; set; }
 
@@ -51,14 +49,6 @@ public partial class RssReaderContext : DbContext
                 .WithOne(p => p.Feed)
                 .HasForeignKey<Feed>(d => d.BlogId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
-        });
-
-        modelBuilder.Entity<Migration>(entity =>
-        {
-            entity.ToTable("migrations");
-
-            entity.Property(e => e.Id).ValueGeneratedNever().HasColumnName("id");
-            entity.Property(e => e.Name).HasColumnName("name");
         });
 
         modelBuilder.Entity<Post>(entity =>
