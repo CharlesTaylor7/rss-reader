@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace RssReader.Models;
 
-namespace RssReader.Models;
-
-public partial class Post
+public class Post
 {
     public int Id { get; set; }
 
     public int BlogId { get; set; }
 
-    public string Title { get; set; } = null!;
+    public required string Title { get; set; }
 
-    public string Url { get; set; } = null!;
+    public required string Url { get; set; }
 
     public DateOnly? PublishedAt { get; set; }
 
@@ -19,5 +16,5 @@ public partial class Post
 
     public bool? Read { get; set; }
 
-    public virtual Blog Blog { get; set; } = null!;
+    public virtual required Blog Blog { get; set; }
 }

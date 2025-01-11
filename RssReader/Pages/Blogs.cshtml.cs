@@ -17,7 +17,5 @@ public class BlogsModel : PageModel
         _db = db;
     }
 
-    public void OnGet() { }
-
-    public List<Blog> Blogs => _db.Blogs.OrderBy(b => b.Title).ToList();
+    public IEnumerable<Blog> Blogs => _db.Blogs.OrderBy(b => b.Title);
 }

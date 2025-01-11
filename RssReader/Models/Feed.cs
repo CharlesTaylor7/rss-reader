@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace RssReader.Models;
 
-namespace RssReader.Models;
-
-public partial class Feed
+public class Feed
 {
-    public int BlogId { get; set; }
+    public int BlogId { get; init; }
 
-    public required string Hash { get; init; }
+    public required string Hash { get; set; }
 
     public string? Etag { get; set; }
 
-    public required string LastModified { get; init; }
+    public required string LastModified { get; set; }
 
     public virtual required Blog Blog { get; init; }
 }

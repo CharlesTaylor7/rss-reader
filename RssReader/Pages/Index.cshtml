@@ -2,5 +2,14 @@
 @model IndexModel
 
 <div class="text-center">
-  Welcome to my RSS reader
+  <p>Welcome to my RSS reader</p>
+
+  <p>Import your feed in OPML format</p>
+  <input required type="file" name="Import" accept="text/xml" form="upload">
+  <form id="upload" method="post" enctype="multipart/form-data"> 
+    <button>Upload</button>
+  </form>
+
+  @Model.UploadMessage
+
 </div>

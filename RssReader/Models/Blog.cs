@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace RssReader.Models;
 
-namespace RssReader.Models;
-
-public partial class Blog
+public class Blog
 {
     public int Id { get; set; }
 
-    public required string Title { get; init; }
+    public required string Title { get; set; }
 
     public required string XmlUrl { get; init; }
 

@@ -77,3 +77,4 @@ public partial class RssReaderContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+// blogs = [{'title': blog.attrib['title'], 'xml_url': blog.attrib['xmlUrl']} for blog in root.iter('outline') ]
