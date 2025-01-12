@@ -1,10 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RssReader.Models;
 
+[Table("posts")]
 public class Post
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+
+    [Required]
+    public int UserId { get; set; }
 
     [Required]
     public int BlogId { get; set; }
@@ -22,6 +29,9 @@ public class Post
 
     public bool Read { get; set; }
 
-    [Required]
+    [ForeignKey("BlogId")]
     public virtual Blog Blog { get; set; }
+
+    [ForeignKey("UserId")]
+    public virtual User User { get; set; }
 }

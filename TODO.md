@@ -17,3 +17,6 @@
 - [ ] "favorite" button
 - [ ] Sort blogs by last published
 - [ ] iframe for posts
+
+## out of scope
+- db per user is a nice idea for performance, but not easy with EF core

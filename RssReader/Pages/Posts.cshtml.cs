@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RssReader.Models;
-using RssReader.Models;
+using RssReader.Services;
 
 namespace RssReader.Pages;
 
@@ -12,11 +12,17 @@ public class PostsModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
     private readonly RssReaderContext _context;
+    private readonly ISyncFeedService _syncService;
 
-    public PostsModel(ILogger<IndexModel> logger, RssReaderContext context)
+    public PostsModel(
+        ILogger<IndexModel> logger,
+        RssReaderContext context,
+        ISyncFeedService service
+    )
     {
         _logger = logger;
         _context = context;
+        _syncService = service;
     }
 
     public IEnumerable<Post> Posts => _context.Posts.OrderBy(p => p.PublishedAt);
@@ -24,32 +30,10 @@ public class PostsModel : PageModel
     [BindProperty]
     public int? SyncBlogId { get; set; }
 
-    public async Task OnPostAsync()
+    public async Task<PageResult> OnPostAsync()
     {
-        if (SyncBlogId is null)
-            return;
-
-        using (var transaction = await _context.Database.BeginTransactionAsync())
-        {
-            // LEFT JOIN
-            /*
-            var query =
-                from blog in _context.Blogs
-                join feed in _context.Feeds on blog.Id equals feed.BlogId into ordersGroup
-                from order in ordersGroup.DefaultIfEmpty()
-                select new { Feed = feed, Blog = blog };
-            */
-            foreach (var blog in _context.Blogs.Include(blog => blog.Feed))
-            {
-                /*var feed = blog.Feed ?? new Feed {*/
-                /*    BlogId = blog.Id,*/
-                /*    Blog = blog,*/
-                /*    Hash*/
-                /**/
-                /*}*/
-                _logger.LogInformation(blog.Feed.Etag);
-            }
-            await transaction.CommitAsync();
-        }
+        if (SyncBlogId is not null)
+            await _syncService.SyncFeed(SyncBlogId.Value);
+        return Page();
     }
 }

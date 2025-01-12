@@ -1,5 +1,6 @@
 using System.Net;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using RssReader.Models;
 using RssReader.Services;
 using Serilog;
@@ -26,8 +27,17 @@ builder.Host.UseSerilog(
             )
 );
 
-// Dependency injection
 builder.Services.AddRazorPages();
+builder
+    .Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login";
+    });
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+});
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<ISyncFeedService>(client =>
 {
@@ -39,14 +49,6 @@ builder.Services.AddHttpClient<ISyncFeedService>(client =>
 builder.Services.AddDbContext<RssReaderContext>();
 builder.Services.AddScoped<IBlogImportService, BlogImportService>();
 builder.Services.AddScoped<ISyncFeedService, SyncFeedService>();
-builder
-    .Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        // Set the login path for redirecting users when they aren't authenticated
-        options.LoginPath = "/Account/Login";
-        options.AccessDeniedPath = "/Account/AccessDenied"; // Access denied page
-    });
 
 builder.WebHost.ConfigureKestrel(options =>
 {

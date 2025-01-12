@@ -32,13 +32,10 @@ public class SyncFeedService : ISyncFeedService
     public async Task SyncFeed(int BlogId)
     {
         using var transaction = await _dbContext.Database.BeginTransactionAsync();
-        var blog = await _dbContext
-            .Blogs.Include(blog => blog.Feed)
-            .FirstOrDefaultAsync(blog => blog.Id == BlogId);
+        var blog = await _dbContext.Blogs.FirstOrDefaultAsync(blog => blog.Id == BlogId);
         if (blog is null)
             throw new Exception("Blog doesn't exist");
 
-        var feed = blog.Feed ?? new Feed { Blog = blog };
         var body = await _httpClient.GetStreamAsync(blog.XmlUrl);
 
         using var reader = XmlReader.Create(body, new XmlReaderSettings { Async = true });
@@ -53,7 +50,7 @@ public class SyncFeedService : ISyncFeedService
             {
                 case "item":
                 case "entry":
-                    post = new Post { Blog = blog };
+                    post = new Post { User = blog.User, Blog = blog };
                     break;
 
                 case "title":

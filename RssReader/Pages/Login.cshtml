@@ -1,0 +1,23 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<main>
+  <h2>Welcome to my RSS reader</h2>
+
+<form method="post">
+<h2>Login</h2>
+    <div class="form-group">
+        <label for="Username">Username:</label>
+        <input type="text" id="Username" name="Username" class="form-control" required autocomplete="username" />
+    </div>
+    <div class="form-group">
+        <label for="Password">Password:</label>
+        <input type="password" id="Password" name="Password" class="form-control" required autocomplate="password" />
+    </div>
+    <button type="submit" class="btn btn-primary">Login / Signup</button>
+</form>
+
+</main>
