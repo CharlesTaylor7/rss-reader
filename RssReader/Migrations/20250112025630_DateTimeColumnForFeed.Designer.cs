@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RssReader.Models;
 
@@ -10,9 +11,11 @@ using RssReader.Models;
 namespace RssReader.Migrations
 {
     [DbContext(typeof(RssReaderContext))]
-    partial class RssReaderContextModelSnapshot : ModelSnapshot
+    [Migration("20250112025630_DateTimeColumnForFeed")]
+    partial class DateTimeColumnForFeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");

@@ -6,5 +6,3 @@ procs:
   Flask:
     cwd: ../flask-rss-reader/
     shell: uv run python -m rss_reader dev-server
-    autostart: false
-

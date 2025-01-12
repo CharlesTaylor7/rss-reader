@@ -1,0 +1,10 @@
+﻿@page
+@model PostsModel
+
+<div class="text-center">
+    <button type="submit" name="Sync" value="Sync">Sync</button>
+    @foreach (var post in Model.Posts)
+    {
+        <li><a href=@post.Url>@post.Title</a></li>
+    }
+</div>

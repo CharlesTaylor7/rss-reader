@@ -1,4 +1,5 @@
 using System.Xml;
+using EFCore.BulkExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RssReader.Models;
@@ -16,8 +17,6 @@ public class IndexModel : PageModel
         _context = context;
     }
 
-    public void OnGet() { }
-
     [BindProperty]
     public IFormFile? Import { get; set; }
 
@@ -31,7 +30,9 @@ public class IndexModel : PageModel
             return Page();
         }
 
-        var imported = 0;
+        var blogs = new List<Blog>();
+        var renames = 0;
+        var duplicates = 0;
         using (var transaction = await _context.Database.BeginTransactionAsync())
         using (var stream = Import.OpenReadStream())
         using (var reader = XmlReader.Create(stream, new XmlReaderSettings { Async = true }))
@@ -52,18 +53,33 @@ public class IndexModel : PageModel
 
                     if (blog is null)
                     {
-                        _context.Blogs.Add(new Blog { XmlUrl = xmlUrl, Title = title });
+                        blogs.Add(new Blog { XmlUrl = xmlUrl, Title = title });
+                    }
+                    else if (blog.Title == title)
+                    {
+                        duplicates++;
                     }
                     else
                     {
                         blog.Title = title;
+                        renames++;
                     }
-                    imported++;
                 }
-
                 await _context.SaveChangesAsync();
+                await _context.BulkInsertAsync(blogs);
                 await transaction.CommitAsync();
-                UploadMessage = $"Imported {imported} blogs successfully!";
+                if (blogs.Count == 0 && renames == 0)
+                    UploadMessage =
+                        $"No blogs found in uploaded file. Are you sure the xml is opml format?";
+
+                if (blogs.Count > 0)
+                    UploadMessage += $"Imported {blogs.Count} blogs.\n";
+
+                if (renames > 0)
+                    UploadMessage += $"Renamed {renames} blogs.\n";
+
+                if (renames > 0)
+                    UploadMessage += $"Found {duplicates} duplicates.\n";
             }
             catch (Exception ex)
             {
