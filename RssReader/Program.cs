@@ -1,5 +1,6 @@
 using System.Net;
 using RssReader.Models;
+using RssReader.Services;
 using Serilog;
 using Serilog.Enrichers.CallerInfo;
 
@@ -21,9 +22,11 @@ Log.Logger = new LoggerConfiguration()
     )
     .CreateLogger();
 
-// Add services to the container.
+// Dependency injection
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<RssReaderContext>();
+builder.Services.AddScoped<IBlogImportService, BlogImportService>();
+builder.Services.AddScoped<ISyncFeedService, SyncFeedService>();
 
 builder.WebHost.ConfigureKestrel(options =>
 {

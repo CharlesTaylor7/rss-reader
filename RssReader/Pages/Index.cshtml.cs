@@ -10,17 +10,23 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
     private readonly RssReaderContext _context;
+    private readonly IBlogImportService _blogImportService;
 
-    public IndexModel(ILogger<IndexModel> logger, RssReaderContext context)
+    public IndexModel(
+        ILogger<IndexModel> logger,
+        RssReaderContext context,
+        IBlogImportService blogImportService
+    )
     {
         _logger = logger;
         _context = context;
+        _blogImportService = blogImportService;
     }
 
     [BindProperty]
     public IFormFile? Import { get; set; }
 
-    public string UploadMessage { get; set; }
+    public string? UploadMessage { get; set; }
 
     public async Task<IActionResult> OnPostAsync()
     {
@@ -29,66 +35,36 @@ public class IndexModel : PageModel
             UploadMessage = "No file selected";
             return Page();
         }
-
-        var blogs = new List<Blog>();
-        var renames = 0;
-        var duplicates = 0;
-        using (var transaction = await _context.Database.BeginTransactionAsync())
-        using (var stream = Import.OpenReadStream())
-        using (var reader = XmlReader.Create(stream, new XmlReaderSettings { Async = true }))
+        try
         {
-            try
-            {
-                while (await reader.ReadAsync())
-                {
-                    if (reader.NodeType != XmlNodeType.Element || reader.Name != "outline")
-                        continue;
-
-                    reader.MoveToAttribute("title");
-                    var title = reader.Value;
-
-                    reader.MoveToAttribute("xmlUrl");
-                    var xmlUrl = reader.Value;
-                    var blog = _context.Blogs.FirstOrDefault(blog => blog.XmlUrl == xmlUrl);
-
-                    if (blog is null)
-                    {
-                        blogs.Add(new Blog { XmlUrl = xmlUrl, Title = title });
-                    }
-                    else if (blog.Title == title)
-                    {
-                        duplicates++;
-                    }
-                    else
-                    {
-                        blog.Title = title;
-                        renames++;
-                    }
-                }
-                await _context.SaveChangesAsync();
-                await _context.BulkInsertAsync(blogs);
-                await transaction.CommitAsync();
-                if (blogs.Count == 0 && renames == 0)
-                    UploadMessage =
-                        $"No blogs found in uploaded file. Are you sure the xml is opml format?";
-
-                if (blogs.Count > 0)
-                    UploadMessage += $"Imported {blogs.Count} blogs.\n";
-
-                if (renames > 0)
-                    UploadMessage += $"Renamed {renames} blogs.\n";
-
-                if (renames > 0)
-                    UploadMessage += $"Found {duplicates} duplicates.\n";
-            }
-            catch (Exception ex)
-            {
-                await transaction.RollbackAsync();
-                _logger.LogError($"Opml import failed:\n{ex.Message}");
-                UploadMessage = "Import failed";
-            }
+            var importResult = await _blogImportService.ImportBlogsAsync(Import);
+            UploadMessage = GenerateUploadMessage(importResult);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Opml import failed:\n{ex.Message}");
+            UploadMessage = "Import failed";
         }
 
         return Page();
+    }
+
+    private string GenerateUploadMessage(ImportResult result)
+    {
+        var message = "";
+
+        if (result.Imported == 0 && result.Renamed == 0 && result.Duplicates == 0)
+            message = "No blogs found in uploaded file. Are you sure the XML is in OPML format?";
+
+        if (result.Imported > 0)
+            message += $"Imported {result.Imported} blogs.\n";
+
+        if (result.Renamed > 0)
+            message += $"Renamed {result.Renamed} blogs.\n";
+
+        if (result.Duplicates > 0)
+            message += $"Found {result.Duplicates} duplicates.\n";
+
+        return message;
     }
 }

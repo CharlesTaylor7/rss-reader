@@ -4,8 +4,10 @@ using RssReader.Models;
 
 public interface IBlogImportService
 {
-    Task<string> ImportBlogsAsync(IFormFile file);
+    Task<ImportResult> ImportBlogsAsync(IFormFile file);
 }
+
+public record class ImportResult(int Imported, int Renamed, int Duplicates);
 
 public class BlogImportService : IBlogImportService
 {
@@ -18,11 +20,8 @@ public class BlogImportService : IBlogImportService
         _logger = logger;
     }
 
-    public async Task<string> ImportBlogsAsync(IFormFile file)
+    public async Task<ImportResult> ImportBlogsAsync(IFormFile file)
     {
-        if (file == null)
-            return "No file selected";
-
         var blogs = new List<Blog>();
         var renames = 0;
         var duplicates = 0;
@@ -31,66 +30,38 @@ public class BlogImportService : IBlogImportService
         using (var stream = file.OpenReadStream())
         using (var reader = XmlReader.Create(stream, new XmlReaderSettings { Async = true }))
         {
-            try
+            while (await reader.ReadAsync())
             {
-                while (await reader.ReadAsync())
+                if (reader.NodeType != XmlNodeType.Element || reader.Name != "outline")
+                    continue;
+
+                reader.MoveToAttribute("title");
+                var title = reader.Value;
+
+                reader.MoveToAttribute("xmlUrl");
+                var xmlUrl = reader.Value;
+                var blog = _context.Blogs.FirstOrDefault(blog => blog.XmlUrl == xmlUrl);
+
+                if (blog is null)
                 {
-                    if (reader.NodeType != XmlNodeType.Element || reader.Name != "outline")
-                        continue;
-
-                    reader.MoveToAttribute("title");
-                    var title = reader.Value;
-
-                    reader.MoveToAttribute("xmlUrl");
-                    var xmlUrl = reader.Value;
-                    var blog = _context.Blogs.FirstOrDefault(blog => blog.XmlUrl == xmlUrl);
-
-                    if (blog is null)
-                    {
-                        blogs.Add(new Blog { XmlUrl = xmlUrl, Title = title });
-                    }
-                    else if (blog.Title == title)
-                    {
-                        duplicates++;
-                    }
-                    else
-                    {
-                        blog.Title = title;
-                        renames++;
-                    }
+                    blogs.Add(new Blog { XmlUrl = xmlUrl, Title = title });
                 }
-
-                await _context.SaveChangesAsync();
-                await _context.BulkInsertAsync(blogs);
-                await transaction.CommitAsync();
-
-                return GenerateUploadMessage(blogs.Count, renames, duplicates);
+                else if (blog.Title == title)
+                {
+                    duplicates++;
+                }
+                else
+                {
+                    blog.Title = title;
+                    renames++;
+                }
             }
-            catch (Exception ex)
-            {
-                await transaction.RollbackAsync();
-                _logger.LogError($"Opml import failed:\n{ex.Message}");
-                return "Import failed";
-            }
+
+            await _context.SaveChangesAsync();
+            await _context.BulkInsertAsync(blogs);
+            await transaction.CommitAsync();
+
+            return new(Imported: blogs.Count, Renamed: renames, Duplicates: duplicates);
         }
-    }
-
-    private string GenerateUploadMessage(int imported, int renamed, int duplicates)
-    {
-        var message = "";
-
-        if (imported == 0 && renamed == 0)
-            message = "No blogs found in uploaded file. Are you sure the XML is in OPML format?";
-
-        if (imported > 0)
-            message += $"Imported {imported} blogs.\n";
-
-        if (renamed > 0)
-            message += $"Renamed {renamed} blogs.\n";
-
-        if (duplicates > 0)
-            message += $"Found {duplicates} duplicates.\n";
-
-        return message;
     }
 }

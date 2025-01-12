@@ -1,3 +1,22 @@
 namespace RssReader.Services;
 
-// public class SyncService : IService { }
+public interface ISyncFeedService
+{
+    Task SyncFeed(int BlogId);
+    Task SyncAllFeeds();
+}
+
+public class SyncFeedService : ISyncFeedService
+{
+    public SyncFeedService(ILogger logger, Se
+    public async Task SyncFeed(int BlogId)
+    {
+
+        //
+    }
+
+    public async Task SyncAllFeeds()
+    {
+        //
+    }
+}
