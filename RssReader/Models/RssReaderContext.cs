@@ -18,7 +18,7 @@ public partial class RssReaderContext : DbContext
     public virtual DbSet<Post> Posts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder.UseSqlite("DataSource=../data/rss-reader.db");
+        optionsBuilder.UseSqlite("DataSource=../volume/rss-reader.db");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

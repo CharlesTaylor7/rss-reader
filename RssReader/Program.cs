@@ -19,7 +19,7 @@ builder.Host.UseSerilog(
                 filePathDepth: 3,
                 excludedPrefixes: []
             )
-            .WriteTo.File("logs/app.log", rollingInterval: RollingInterval.Day) // Output logs to a file
+            .WriteTo.File("../logs/app.log", rollingInterval: RollingInterval.Day) // Output logs to a file
             .WriteTo.Console(
                 outputTemplate: "{Timestamp:HH:mm:ss} [{Level:u3}] {Message} (Method: {Caller}){NewLine}{Exception}"
             )
@@ -27,9 +27,6 @@ builder.Host.UseSerilog(
 
 // Dependency injection
 builder.Services.AddRazorPages();
-builder.Services.AddDbContext<RssReaderContext>();
-builder.Services.AddScoped<IBlogImportService, BlogImportService>();
-builder.Services.AddScoped<ISyncFeedService, SyncFeedService>();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<ISyncFeedService>(client =>
 {
@@ -38,6 +35,9 @@ builder.Services.AddHttpClient<ISyncFeedService>(client =>
         "application/xml, application/rss+xml, application/atom+xml"
     );
 });
+builder.Services.AddDbContext<RssReaderContext>();
+builder.Services.AddScoped<IBlogImportService, BlogImportService>();
+builder.Services.AddScoped<ISyncFeedService, SyncFeedService>();
 
 builder.WebHost.ConfigureKestrel(options =>
 {
