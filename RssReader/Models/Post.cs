@@ -1,20 +1,27 @@
-﻿namespace RssReader.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RssReader.Models;
 
 public class Post
 {
     public int Id { get; set; }
 
+    [Required]
     public int BlogId { get; set; }
 
-    public required string Title { get; set; }
+    [Required]
+    public string Title { get; set; }
 
-    public required string Url { get; set; }
+    [Required]
+    public string Url { get; set; }
 
-    public DateOnly? PublishedAt { get; set; }
+    [Required]
+    public DateTime PublishedAt { get; set; }
 
-    public bool? Favorite { get; set; }
+    public bool Favorite { get; set; }
 
-    public bool? Read { get; set; }
+    public bool Read { get; set; }
 
-    public virtual required Blog Blog { get; set; }
+    [Required]
+    public virtual Blog Blog { get; set; }
 }
