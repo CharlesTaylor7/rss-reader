@@ -1,4 +1,5 @@
 using System.Net;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using RssReader.Models;
 using RssReader.Services;
 using Serilog;
@@ -38,6 +39,14 @@ builder.Services.AddHttpClient<ISyncFeedService>(client =>
 builder.Services.AddDbContext<RssReaderContext>();
 builder.Services.AddScoped<IBlogImportService, BlogImportService>();
 builder.Services.AddScoped<ISyncFeedService, SyncFeedService>();
+builder
+    .Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        // Set the login path for redirecting users when they aren't authenticated
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied"; // Access denied page
+    });
 
 builder.WebHost.ConfigureKestrel(options =>
 {
@@ -58,6 +67,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
