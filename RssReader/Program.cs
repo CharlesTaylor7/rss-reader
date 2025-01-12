@@ -7,20 +7,23 @@ using Serilog.Enrichers.CallerInfo;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure Serilog
-builder.Host.UseSerilog();
-Log.Logger = new LoggerConfiguration()
-    .Enrich.FromLogContext()
-    .Enrich.WithCallerInfo(
-        includeFileInfo: true,
-        assemblyPrefix: "RssReader.",
-        prefix: "",
-        filePathDepth: 3,
-        excludedPrefixes: []
-    )
-    .WriteTo.Console(
-        outputTemplate: "{Timestamp:HH:mm:ss} [{Level:u3}] {Message} (Method: {Caller}){NewLine}{Exception}"
-    )
-    .CreateLogger();
+builder.Host.UseSerilog(
+    (context, services, configuration) =>
+        configuration
+            .ReadFrom.Configuration(context.Configuration)
+            .Enrich.FromLogContext()
+            .Enrich.WithCallerInfo(
+                includeFileInfo: true,
+                assemblyPrefix: "RssReader.",
+                prefix: "",
+                filePathDepth: 3,
+                excludedPrefixes: []
+            )
+            .WriteTo.File("logs/app.log", rollingInterval: RollingInterval.Day) // Output logs to a file
+            .WriteTo.Console(
+                outputTemplate: "{Timestamp:HH:mm:ss} [{Level:u3}] {Message} (Method: {Caller}){NewLine}{Exception}"
+            )
+);
 
 // Dependency injection
 builder.Services.AddRazorPages();
