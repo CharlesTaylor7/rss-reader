@@ -1,9 +1,7 @@
 using System.Net;
-using Microsoft.Extensions.Hosting;
 using RssReader.Models;
 using Serilog;
 using Serilog.Enrichers.CallerInfo;
-using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
 Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
-    // .Enrich.WithCallerInfo()
+    .Enrich.WithCallerInfo(
+        includeFileInfo: true,
+        assemblyPrefix: "RssReader.",
+        prefix: "",
+        filePathDepth: 3,
+        excludedPrefixes: []
+    )
     .WriteTo.Console(
         outputTemplate: "{Timestamp:HH:mm:ss} [{Level:u3}] {Message} (Method: {Caller}){NewLine}{Exception}"
     )

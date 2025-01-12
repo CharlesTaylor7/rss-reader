@@ -22,11 +22,11 @@ public class PostsModel : PageModel
     public IEnumerable<Post> Posts => _context.Posts.OrderBy(p => p.PublishedAt);
 
     [BindProperty]
-    public string Sync { get; set; }
+    public int? SyncBlogId { get; set; }
 
     public async Task OnPostAsync()
     {
-        if (Sync is null)
+        if (SyncBlogId is null)
             return;
 
         using (var transaction = await _context.Database.BeginTransactionAsync())
