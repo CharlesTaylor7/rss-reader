@@ -27,6 +27,13 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<RssReaderContext>();
 builder.Services.AddScoped<IBlogImportService, BlogImportService>();
 builder.Services.AddScoped<ISyncFeedService, SyncFeedService>();
+builder.Services.AddHttpClient<ISyncFeedService>(client =>
+{
+    client.DefaultRequestHeaders.Add(
+        "Accept",
+        "application/xml, application/rss+xml, application/atom+xml"
+    );
+});
 
 builder.WebHost.ConfigureKestrel(options =>
 {
