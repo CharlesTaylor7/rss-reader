@@ -11,9 +11,6 @@ public class Blog
     public int Id { get; set; }
 
     [Required]
-    public int UserId { get; set; }
-
-    [Required]
     public string Title { get; set; }
 
     [Required]
@@ -25,7 +22,5 @@ public class Blog
 
     public DateTime LastModified { get; set; }
 
-    [ForeignKey(nameof(UserId))]
-    public virtual User User { get; set; }
     public virtual ICollection<Post> Posts { get; set; } = [];
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RssReader.Models;
 
@@ -10,9 +11,11 @@ using RssReader.Models;
 namespace RssReader.Migrations
 {
     [DbContext(typeof(RssReaderContext))]
-    partial class RssReaderContextModelSnapshot : ModelSnapshot
+    [Migration("20250113035715_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
@@ -36,11 +39,16 @@ namespace RssReader.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("XmlUrl")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("blogs");
                 });
@@ -71,9 +79,14 @@ namespace RssReader.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BlogId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("posts");
                 });
@@ -97,6 +110,17 @@ namespace RssReader.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("RssReader.Models.Blog", b =>
+                {
+                    b.HasOne("RssReader.Models.User", "User")
+                        .WithMany("Blogs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("RssReader.Models.Post", b =>
                 {
                     b.HasOne("RssReader.Models.Blog", "Blog")
@@ -105,11 +129,26 @@ namespace RssReader.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("RssReader.Models.User", "User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Blog");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("RssReader.Models.Blog", b =>
                 {
+                    b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("RssReader.Models.User", b =>
+                {
+                    b.Navigation("Blogs");
+
                     b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618

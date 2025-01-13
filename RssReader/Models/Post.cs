@@ -11,9 +11,6 @@ public class Post
     public int Id { get; set; }
 
     [Required]
-    public int UserId { get; set; }
-
-    [Required]
     public int BlogId { get; set; }
 
     [Required]
@@ -31,7 +28,4 @@ public class Post
 
     [ForeignKey("BlogId")]
     public virtual Blog Blog { get; set; }
-
-    [ForeignKey("UserId")]
-    public virtual User User { get; set; }
 }

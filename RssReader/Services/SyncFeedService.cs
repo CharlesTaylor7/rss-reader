@@ -50,7 +50,7 @@ public class SyncFeedService : ISyncFeedService
             {
                 case "item":
                 case "entry":
-                    post = new Post { User = blog.User, Blog = blog };
+                    post = new Post { Blog = blog };
                     break;
 
                 case "title":
