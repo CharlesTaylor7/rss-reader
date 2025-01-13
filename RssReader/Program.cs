@@ -34,10 +34,13 @@ builder
     {
         options.LoginPath = "/Login";
     });
+
+/* FIXME: implement auth
 builder.Services.AddAuthorization(options =>
 {
     options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 });
+*/
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<ISyncFeedService>(client =>
 {
