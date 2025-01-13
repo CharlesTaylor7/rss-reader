@@ -2,6 +2,8 @@ procs:
   DotNet:
     cwd: RssReader
     shell: watchexec -rc --stop-signal SIGKILL -e cs,cshtml,csproj,json -- dotnet run
+    env:
+      VOLUME: "../data"
 
   Flask:
     cwd: ../flask-rss-reader/

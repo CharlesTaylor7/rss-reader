@@ -4,8 +4,6 @@ namespace RssReader.Models;
 
 public partial class RssReaderContext : DbContext
 {
-    public RssReaderContext() { }
-
     public RssReaderContext(DbContextOptions<RssReaderContext> options)
         : base(options) { }
 
@@ -16,5 +14,7 @@ public partial class RssReaderContext : DbContext
     public virtual DbSet<Post> Posts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder.UseSqlite($"DataSource=../volume/rss-reader.db");
+        optionsBuilder.UseSqlite(
+            $"DataSource={Path.Join(Environment.GetEnvironmentVariable("VOLUME"), "rss-reader.db")}"
+        );
 }
