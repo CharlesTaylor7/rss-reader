@@ -5,6 +5,10 @@ procs:
     env:
       VOLUME: "../data"
 
+  Client:
+    cwd: frontend
+    shell: npm run dev
+
   Flask:
     cwd: ../flask-rss-reader/
     shell: uv run python -m rss_reader dev-server
