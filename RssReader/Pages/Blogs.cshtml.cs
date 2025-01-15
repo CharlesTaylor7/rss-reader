@@ -8,12 +8,12 @@ namespace RssReader.Pages;
 public class BlogsModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
-    private readonly RssReaderContext _context;
+    private readonly RssReaderDbContext _context;
     private readonly ISyncFeedService _syncService;
 
     public BlogsModel(
         ILogger<IndexModel> logger,
-        RssReaderContext context,
+        RssReaderDbContext context,
         ISyncFeedService syncService
     )
     {

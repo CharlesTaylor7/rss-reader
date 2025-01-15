@@ -9,12 +9,12 @@ namespace RssReader.Pages;
 public class LoginModel : PageModel
 {
     private readonly ILogger<LoginModel> _logger;
-    private readonly RssReaderContext _context;
+    private readonly RssReaderDbContext _context;
     private readonly IBlogImportService _blogImportService;
 
     public LoginModel(
         ILogger<LoginModel> logger,
-        RssReaderContext context,
+        RssReaderDbContext context,
         IBlogImportService blogImportService
     )
     {

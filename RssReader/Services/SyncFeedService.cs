@@ -15,12 +15,12 @@ public interface ISyncFeedService
 public class SyncFeedService : ISyncFeedService
 {
     private readonly ILogger<SyncFeedService> _logger;
-    private readonly RssReaderContext _dbContext;
+    private readonly RssReaderDbContext _dbContext;
     private readonly HttpClient _httpClient;
 
     public SyncFeedService(
         ILogger<SyncFeedService> logger,
-        RssReaderContext dbContext,
+        RssReaderDbContext dbContext,
         HttpClient httpClient
     )
     {

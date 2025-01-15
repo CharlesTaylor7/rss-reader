@@ -10,7 +10,7 @@ using RssReader.Models;
 
 namespace RssReader.Migrations
 {
-    [DbContext(typeof(RssReaderContext))]
+    [DbContext(typeof(RssReaderDbContext))]
     [Migration("20250113040923_RemoveUserFK2")]
     partial class RemoveUserFK2
     {

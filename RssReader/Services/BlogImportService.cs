@@ -11,10 +11,10 @@ public record class ImportResult(int Imported, int Renamed, int Duplicates);
 
 public class BlogImportService : IBlogImportService
 {
-    private readonly RssReaderContext _dbContext;
+    private readonly RssReaderDbContext _dbContext;
     private readonly ILogger<BlogImportService> _logger;
 
-    public BlogImportService(RssReaderContext context, ILogger<BlogImportService> logger)
+    public BlogImportService(RssReaderDbContext context, ILogger<BlogImportService> logger)
     {
         _dbContext = context;
         _logger = logger;

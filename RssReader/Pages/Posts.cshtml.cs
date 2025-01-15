@@ -11,12 +11,12 @@ namespace RssReader.Pages;
 public class PostsModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
-    private readonly RssReaderContext _context;
+    private readonly RssReaderDbContext _context;
     private readonly ISyncFeedService _syncService;
 
     public PostsModel(
         ILogger<IndexModel> logger,
-        RssReaderContext context,
+        RssReaderDbContext context,
         ISyncFeedService service
     )
     {

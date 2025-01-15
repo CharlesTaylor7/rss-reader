@@ -50,7 +50,7 @@ builder.Services.AddHttpClient<ISyncFeedService>(client =>
         "application/xml, application/rss+xml, application/atom+xml"
     );
 });
-builder.Services.AddDbContext<RssReaderContext>();
+builder.Services.AddDbContext<RssReaderDbContext>();
 builder.Services.AddScoped<IBlogImportService, BlogImportService>();
 builder.Services.AddScoped<ISyncFeedService, SyncFeedService>();
 
@@ -64,7 +64,7 @@ var app = builder.Build();
 // Apply migrations automatically on startup
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<RssReaderContext>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<RssReaderDbContext>();
     dbContext.Database.Migrate();
 }
 
@@ -80,7 +80,9 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapStaticAssets();
+
+// app.MapStaticAssets();
+app.MapControllers();
 app.MapRazorPages().WithStaticAssets();
 
 app.Run();

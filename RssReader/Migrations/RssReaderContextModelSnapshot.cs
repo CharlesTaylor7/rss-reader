@@ -9,7 +9,7 @@ using RssReader.Models;
 
 namespace RssReader.Migrations
 {
-    [DbContext(typeof(RssReaderContext))]
+    [DbContext(typeof(RssReaderDbContext))]
     partial class RssReaderContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

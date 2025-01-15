@@ -2,9 +2,9 @@
 
 namespace RssReader.Models;
 
-public partial class RssReaderContext : DbContext
+public partial class RssReaderDbContext : DbContext
 {
-    public RssReaderContext(DbContextOptions<RssReaderContext> options)
+    public RssReaderDbContext(DbContextOptions<RssReaderDbContext> options)
         : base(options) { }
 
     public virtual DbSet<User> Users { get; set; }
