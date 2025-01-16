@@ -1,17 +1,14 @@
 ## Goals
 - Demonstrate proficiency with .net stack.
-- complete an app with a dotnet backend for the sake of talking confidently about it.
+- complete an app with a dotnet backend + React frontend the sake of talking confidently about it.
 
-## non-goal
-- React. I should do a followup project with react. I'm going to try to stick it out with razor pages
 
 ## Tech Stack
-- ASP.NET Core
-- Entity Framework Core
-- Razor pages
+- ASP.NET 
+- Entity Framework 
+- React
 - Fly.IO deployments
 - sqlite
-- Blazor?
 
 ## Feature set
 - sync button to check all rss feeds
