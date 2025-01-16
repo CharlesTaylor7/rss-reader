@@ -17,6 +17,7 @@ public class Post
     public string Title { get; set; }
 
     [Required]
+    [Index()]
     public string Url { get; set; }
 
     [Required]

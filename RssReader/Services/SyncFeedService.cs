@@ -31,7 +31,6 @@ public class SyncFeedService : ISyncFeedService
 
     public async Task SyncFeed(int BlogId)
     {
-        using var transaction = await _dbContext.Database.BeginTransactionAsync();
         var blog = await _dbContext.Blogs.FirstOrDefaultAsync(blog => blog.Id == BlogId);
         if (blog is null)
             throw new Exception("Blog doesn't exist");
@@ -52,7 +51,7 @@ public class SyncFeedService : ISyncFeedService
                 case "entry":
                     // save previous entity
                     if (post is not null)
-                        _dbContext.Posts.Add(post);
+                        await Save(post);
                     post = new Post { Blog = blog };
                     break;
 
@@ -79,11 +78,9 @@ public class SyncFeedService : ISyncFeedService
             }
         }
         if (post is not null)
-            _dbContext.Posts.Add(post);
+            await Save(post);
 
-        _logger.LogDebug($"Posts: {_dbContext.Posts.Count().ToString()}");
         await _dbContext.SaveChangesAsync();
-        await transaction.CommitAsync();
     }
 
     public async Task SyncAllFeeds()
@@ -91,6 +88,22 @@ public class SyncFeedService : ISyncFeedService
         await foreach (var blog in _dbContext.Blogs)
         {
             await SyncFeed(blog.Id);
+        }
+    }
+
+    /// <summary>
+    /// tries to save post, logs errors instead of crashing
+    /// </summary>
+    private async Task Save(Post post)
+    {
+        try
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            _dbContext.Posts.Remove(post);
         }
     }
 }

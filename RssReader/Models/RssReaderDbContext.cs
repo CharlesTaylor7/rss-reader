@@ -17,4 +17,11 @@ public partial class RssReaderDbContext : DbContext
         optionsBuilder.UseSqlite(
             $"DataSource={Path.Join(Environment.GetEnvironmentVariable("VOLUME"), "rss-reader.db")}"
         );
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Post>().HasIndex(e => new { e.Url });
+
+        modelBuilder.Entity<Blog>().HasIndex(e => new { e.XmlUrl });
+    }
 }
