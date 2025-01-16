@@ -27,13 +27,9 @@ public class PostsModel : PageModel
 
     public IEnumerable<Post> Posts => _context.Posts.OrderBy(p => p.PublishedAt);
 
-    [BindProperty]
-    public int? SyncBlogId { get; set; }
-
     public async Task<PageResult> OnPostAsync()
     {
-        if (SyncBlogId is not null)
-            await _syncService.SyncFeed(SyncBlogId.Value);
+        await _syncService.SyncAllFeeds();
         return Page();
     }
 }

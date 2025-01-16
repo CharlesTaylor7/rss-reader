@@ -2,7 +2,10 @@
 @model PostsModel
 
 <div class="text-center">
+
+    <form method="post">
     <button type="submit" name="Sync" value="Sync">Sync</button>
+    </form>
     @foreach (var post in Model.Posts)
     {
         <li><a href=@post.Url>@post.Title</a></li>

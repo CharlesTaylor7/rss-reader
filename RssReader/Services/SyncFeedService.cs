@@ -2,13 +2,13 @@ using System.Xml;
 using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 using RssReader.Models;
-using RssReader.Models;
 
 namespace RssReader.Services;
 
 public interface ISyncFeedService
 {
-    Task SyncFeed(int BlogId);
+    Task SyncFeed(int id);
+    public Task SyncFeed(Blog blog);
     Task SyncAllFeeds();
 }
 
@@ -29,15 +29,23 @@ public class SyncFeedService : ISyncFeedService
         _httpClient = httpClient;
     }
 
-    public async Task SyncFeed(int BlogId)
+    public async Task SyncFeed(int id)
     {
-        var blog = await _dbContext.Blogs.FirstOrDefaultAsync(blog => blog.Id == BlogId);
+        var blog = await _dbContext.Blogs.FirstOrDefaultAsync(blog => blog.Id == id);
         if (blog is null)
             throw new Exception("Blog doesn't exist");
 
-        var body = await _httpClient.GetStreamAsync(blog.XmlUrl);
+        await SyncFeed(blog);
+    }
 
-        using var reader = XmlReader.Create(body, new XmlReaderSettings { Async = true });
+    public async Task SyncFeed(Blog blog)
+    {
+        _logger.LogInformation($"Syncing: {blog.XmlUrl}");
+        var body = await _httpClient.GetStreamAsync(blog.XmlUrl);
+        using var reader = XmlReader.Create(
+            body,
+            new XmlReaderSettings { Async = true, DtdProcessing = DtdProcessing.Ignore }
+        );
 
         Post? post = null;
         while (await reader.ReadAsync())
@@ -51,7 +59,7 @@ public class SyncFeedService : ISyncFeedService
                 case "entry":
                     // save previous entity
                     if (post is not null)
-                        await Save(post);
+                        await Upsert(post);
                     post = new Post { Blog = blog };
                     break;
 
@@ -78,24 +86,25 @@ public class SyncFeedService : ISyncFeedService
             }
         }
         if (post is not null)
-            await Save(post);
+            await Upsert(post);
 
         await _dbContext.SaveChangesAsync();
     }
 
     public async Task SyncAllFeeds()
     {
-        await foreach (var blog in _dbContext.Blogs)
-        {
-            await SyncFeed(blog.Id);
-        }
+        await Task.WhenAll(_dbContext.Blogs.Select(blog => SyncFeed(blog.Id)));
     }
 
     /// <summary>
-    /// tries to save post, logs errors instead of crashing
+    /// tries to upsert post, logs errors instead of crashing
     /// </summary>
-    private async Task Save(Post post)
+    private async Task Upsert(Post post)
     {
+        var existing = await _dbContext.Posts.FirstOrDefaultAsync(p => p.Url == post.Url);
+        if (existing is not null)
+            post.Id = existing.Id;
+
         _dbContext.Posts.Add(post);
         try
         {
