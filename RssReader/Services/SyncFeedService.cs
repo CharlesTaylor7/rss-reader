@@ -40,7 +40,7 @@ public class SyncFeedService : ISyncFeedService
 
         using var reader = XmlReader.Create(body, new XmlReaderSettings { Async = true });
 
-        Post post = null!;
+        Post? post = null;
         while (await reader.ReadAsync())
         {
             if (reader.NodeType != XmlNodeType.Element)
@@ -50,19 +50,22 @@ public class SyncFeedService : ISyncFeedService
             {
                 case "item":
                 case "entry":
+                    // save previous entity
+                    if (post is not null)
+                        _dbContext.Posts.Add(post);
                     post = new Post { Blog = blog };
                     break;
 
-                case "title":
+                case "title" when post is not null:
                     post.Title = await reader.ReadElementContentAsStringAsync();
                     break;
 
-                case "link":
+                case "link" when post is not null:
                     post.Url = await reader.ReadElementContentAsStringAsync();
                     break;
 
-                case "pubDate":
-                case "published":
+                case "pubDate" when post is not null:
+                case "published" when post is not null:
                     var dateString = await reader.ReadElementContentAsStringAsync();
                     if (DateTime.TryParse(dateString, out var parsed))
                     {
@@ -75,7 +78,12 @@ public class SyncFeedService : ISyncFeedService
                     break;
             }
         }
+        if (post is not null)
+            _dbContext.Posts.Add(post);
+
+        _logger.LogDebug($"Posts: {_dbContext.Posts.Count().ToString()}");
         await _dbContext.SaveChangesAsync();
+        await transaction.CommitAsync();
     }
 
     public async Task SyncAllFeeds()

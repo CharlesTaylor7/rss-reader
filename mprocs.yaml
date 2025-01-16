@@ -3,6 +3,7 @@ procs:
     cwd: RssReader
     shell: watchexec -rc --stop-signal SIGKILL -e cs,cshtml,csproj,json -- dotnet run
     env:
+      ASPNETCORE_ENVIRONMENT: Development
       VOLUME: "../data"
 
   Client:

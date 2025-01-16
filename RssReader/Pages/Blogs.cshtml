@@ -4,6 +4,11 @@
 <div class="text-center">
     @foreach (var blog in Model.Blogs)
     {
-        <li><a href=@blog.XmlUrl>@blog.Title</a><button type="submit" name="SyncBlogId" value="@blog.Id">Sync</button></li>
+    <li>
+        <a href=@blog.XmlUrl>@blog.Title</a>
+        <form style="display:inline-block" method="post">
+            <button type="submit" name="SyncBlogId" value="@blog.Id">Sync</button>
+        </form>
+    </li>
     }
 </div>
