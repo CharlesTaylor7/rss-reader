@@ -10,7 +10,7 @@ using RssReader.Models;
 namespace RssReader.Migrations
 {
     [DbContext(typeof(RssReaderDbContext))]
-    partial class RssReaderContextModelSnapshot : ModelSnapshot
+    partial class RssReaderDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,8 @@ namespace RssReader.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("XmlUrl");
 
                     b.ToTable("blogs");
                 });
@@ -75,6 +77,8 @@ namespace RssReader.Migrations
 
                     b.HasIndex("BlogId");
 
+                    b.HasIndex("Url");
+
                     b.ToTable("posts");
                 });
 
@@ -94,7 +98,7 @@ namespace RssReader.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("RssReader.Models.Post", b =>

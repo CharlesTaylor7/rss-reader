@@ -11,8 +11,8 @@ using RssReader.Models;
 namespace RssReader.Migrations
 {
     [DbContext(typeof(RssReaderDbContext))]
-    [Migration("20250113040923_RemoveUserFK2")]
-    partial class RemoveUserFK2
+    [Migration("20250116152727_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,8 @@ namespace RssReader.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("XmlUrl");
 
                     b.ToTable("blogs");
                 });
@@ -78,6 +80,8 @@ namespace RssReader.Migrations
 
                     b.HasIndex("BlogId");
 
+                    b.HasIndex("Url");
+
                     b.ToTable("posts");
                 });
 
@@ -97,7 +101,7 @@ namespace RssReader.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("RssReader.Models.Post", b =>

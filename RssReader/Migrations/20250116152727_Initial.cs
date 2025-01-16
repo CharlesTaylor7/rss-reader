@@ -12,26 +12,11 @@ namespace RssReader.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    HashedPassword = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "blogs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     XmlUrl = table.Column<string>(type: "TEXT", nullable: false),
                     Hash = table.Column<string>(type: "TEXT", nullable: true),
@@ -41,12 +26,20 @@ namespace RssReader.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_blogs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_blogs_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    HashedPassword = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,7 +48,6 @@ namespace RssReader.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
                     BlogId = table.Column<int>(type: "INTEGER", nullable: false),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Url = table.Column<string>(type: "TEXT", nullable: false),
@@ -67,12 +59,6 @@ namespace RssReader.Migrations
                 {
                     table.PrimaryKey("PK_posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_posts_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_posts_blogs_BlogId",
                         column: x => x.BlogId,
                         principalTable: "blogs",
@@ -81,9 +67,9 @@ namespace RssReader.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_blogs_UserId",
+                name: "IX_blogs_XmlUrl",
                 table: "blogs",
-                column: "UserId");
+                column: "XmlUrl");
 
             migrationBuilder.CreateIndex(
                 name: "IX_posts_BlogId",
@@ -91,9 +77,9 @@ namespace RssReader.Migrations
                 column: "BlogId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_posts_UserId",
+                name: "IX_posts_Url",
                 table: "posts",
-                column: "UserId");
+                column: "Url");
         }
 
         /// <inheritdoc />
@@ -103,10 +89,10 @@ namespace RssReader.Migrations
                 name: "posts");
 
             migrationBuilder.DropTable(
-                name: "blogs");
+                name: "users");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "blogs");
         }
     }
 }
