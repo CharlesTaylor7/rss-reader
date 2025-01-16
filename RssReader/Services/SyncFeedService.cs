@@ -96,13 +96,14 @@ public class SyncFeedService : ISyncFeedService
     /// </summary>
     private async Task Save(Post post)
     {
+        _dbContext.Posts.Add(post);
         try
         {
             await _dbContext.SaveChangesAsync();
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            _logger.LogError(e.ToString());
             _dbContext.Posts.Remove(post);
         }
     }

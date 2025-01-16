@@ -20,8 +20,7 @@ public partial class RssReaderDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Post>().HasIndex(e => new { e.Url });
-
-        modelBuilder.Entity<Blog>().HasIndex(e => new { e.XmlUrl });
+        modelBuilder.Entity<Post>().HasIndex(e => new { e.Url }).IsUnique();
+        modelBuilder.Entity<Blog>().HasIndex(e => new { e.XmlUrl }).IsUnique();
     }
 }

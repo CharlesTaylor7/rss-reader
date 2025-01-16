@@ -42,7 +42,8 @@ namespace RssReader.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("XmlUrl");
+                    b.HasIndex("XmlUrl")
+                        .IsUnique();
 
                     b.ToTable("blogs");
                 });
@@ -77,7 +78,8 @@ namespace RssReader.Migrations
 
                     b.HasIndex("BlogId");
 
-                    b.HasIndex("Url");
+                    b.HasIndex("Url")
+                        .IsUnique();
 
                     b.ToTable("posts");
                 });

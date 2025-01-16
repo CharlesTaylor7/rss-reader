@@ -11,7 +11,7 @@ using RssReader.Models;
 namespace RssReader.Migrations
 {
     [DbContext(typeof(RssReaderDbContext))]
-    [Migration("20250116152727_Initial")]
+    [Migration("20250116153318_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -45,7 +45,8 @@ namespace RssReader.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("XmlUrl");
+                    b.HasIndex("XmlUrl")
+                        .IsUnique();
 
                     b.ToTable("blogs");
                 });
@@ -80,7 +81,8 @@ namespace RssReader.Migrations
 
                     b.HasIndex("BlogId");
 
-                    b.HasIndex("Url");
+                    b.HasIndex("Url")
+                        .IsUnique();
 
                     b.ToTable("posts");
                 });

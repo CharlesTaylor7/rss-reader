@@ -69,7 +69,8 @@ namespace RssReader.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_blogs_XmlUrl",
                 table: "blogs",
-                column: "XmlUrl");
+                column: "XmlUrl",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_posts_BlogId",
@@ -79,7 +80,8 @@ namespace RssReader.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_posts_Url",
                 table: "posts",
-                column: "Url");
+                column: "Url",
+                unique: true);
         }
 
         /// <inheritdoc />
