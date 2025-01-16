@@ -34,21 +34,4 @@ public class BlogsModel : PageModel
             await _syncService.SyncFeed(SyncBlogId.Value);
         return Page();
     }
-
-    [BindProperty]
-    public int? RenameBlogId { get; set; }
-
-    [BindProperty]
-    public string BlogTitle { get; set; }
-
-    public async Task<PageResult> OnPutAsync()
-    {
-        if (RenameBlogId is not null)
-        {
-            _context
-                .Blogs.Where(blog => blog.Id == RenameBlogId)
-                .ExecuteUpdate(e => e.SetProperty(e => e.Title, BlogTitle));
-        }
-        return Page();
-    }
 }

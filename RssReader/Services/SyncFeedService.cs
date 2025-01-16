@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Xml;
 using System.Xml;
@@ -45,21 +46,35 @@ public class SyncFeedService : ISyncFeedService
     {
         _logger.LogInformation($"Syncing: {blog.XmlUrl}");
 
-        using var response = await _httpClient.GetAsync(
-            blog.XmlUrl,
+        var request = new HttpRequestMessage(HttpMethod.Get, blog.XmlUrl);
+        if (blog.Etag is not null)
+            request.Headers.Add("If-None-Match", blog.Etag);
+
+        using var response = await _httpClient.SendAsync(
+            request,
             HttpCompletionOption.ResponseHeadersRead
         );
 
-        if (!response.IsSuccessStatusCode)
+        if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NotModified)
         {
             _logger.LogError($"Request failed with status code: {response.StatusCode}");
             return;
+        }
+
+        var etag = response.Headers.GetValues("ETag").FirstOrDefault();
+        if (etag is not null)
+        {
+            blog.Etag = etag;
+            _dbContext.SaveChanges();
         }
 
         foreach (var header in response.Headers)
         {
             _logger.LogCritical($"{header.Key}: {string.Join(", ", header.Value)}");
         }
+
+        if (response.StatusCode == HttpStatusCode.NotModified)
+            return;
 
         using var stream = await response.Content.ReadAsStreamAsync();
         using var reader = XmlReader.Create(
@@ -107,8 +122,6 @@ public class SyncFeedService : ISyncFeedService
         }
         if (post is not null)
             Upsert(post);
-
-        await _dbContext.SaveChangesAsync();
     }
 
     public async Task SyncAllFeeds()
@@ -136,7 +149,7 @@ public class SyncFeedService : ISyncFeedService
         }
         _dbContext.Database.ExecuteSqlRaw(
             @"
-            INSERT INTO posts(blogId, url, title, publishedAt) values ({0}, {1}, {2}, {3})
+            INSERT INTO posts(blogId, url, title, publishedAt, favorite, read) values ({0}, {1}, {2}, {3}, false, false)
             ON CONFLICT (url) DO UPDATE
             SET 
                 title = excluded.title,

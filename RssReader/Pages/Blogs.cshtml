@@ -4,13 +4,8 @@
 <div class="text-center">
   @foreach (var blog in Model.Blogs)
   {
-  <li>
+  <li style="display: flex; gap:10px">
     <a href=@blog.XmlUrl>@blog.Title</a>
-    <form method="put">
-      <input type="text" name="BlogTitle" value="@blog.Title">
-
-      <button type="submit" name="RenameBlogId" value="@blog.Id">Rename</button>
-    </form> 
     <form method="delete">
       <button type="submit" name="DeleteBlogId" value="@blog.Id">Delete</button>
     </form>
