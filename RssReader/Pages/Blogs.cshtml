@@ -2,13 +2,21 @@
 @model BlogsModel
 
 <div class="text-center">
-    @foreach (var blog in Model.Blogs)
-    {
-    <li>
-        <a href=@blog.XmlUrl>@blog.Title</a>
-        <form style="display:inline-block" method="post">
-            <button type="submit" name="SyncBlogId" value="@blog.Id">Sync</button>
-        </form>
-    </li>
-    }
+  @foreach (var blog in Model.Blogs)
+  {
+  <li>
+    <a href=@blog.XmlUrl>@blog.Title</a>
+    <form method="put">
+      <input type="text" name="BlogTitle" value="@blog.Title">
+
+      <button type="submit" name="RenameBlogId" value="@blog.Id">Rename</button>
+    </form> 
+    <form method="delete">
+      <button type="submit" name="DeleteBlogId" value="@blog.Id">Delete</button>
+    </form>
+    <form style="display:inline-block" method="post">
+      <button type="submit" name="SyncBlogId" value="@blog.Id">Sync</button>
+    </form>
+  </li>
+  }
 </div>
