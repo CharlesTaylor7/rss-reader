@@ -55,26 +55,28 @@ public class SyncFeedService : ISyncFeedService
             HttpCompletionOption.ResponseHeadersRead
         );
 
-        if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NotModified)
-        {
-            _logger.LogError($"Request failed with status code: {response.StatusCode}");
-            return;
-        }
-
-        var etag = response.Headers.GetValues("ETag").FirstOrDefault();
-        if (etag is not null)
-        {
-            blog.Etag = etag;
-            _dbContext.SaveChanges();
-        }
-
+        // debug
         foreach (var header in response.Headers)
-        {
             _logger.LogCritical($"{header.Key}: {string.Join(", ", header.Value)}");
+
+        if (response.IsSuccessStatusCode || response.StatusCode == HttpStatusCode.NotModified)
+        {
+            var etag = response.Headers.GetValues("ETag").FirstOrDefault();
+            if (etag is not null)
+            {
+                blog.Etag = etag;
+                _dbContext.SaveChanges();
+            }
         }
 
         if (response.StatusCode == HttpStatusCode.NotModified)
             return;
+
+        if (!response.IsSuccessStatusCode)
+        {
+            _logger.LogError($"Request failed with status code: {response.StatusCode}");
+            return;
+        }
 
         using var stream = await response.Content.ReadAsStreamAsync();
         using var reader = XmlReader.Create(

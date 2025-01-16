@@ -1,12 +1,11 @@
 ## MVP
-- [x] nav
-- [x] import opml button
-- [x] migrations
-- [ ] Deployments
-- [ ] Edit a blog name
+- [x] import opml 
+- [x] Sync button Rss feeds
+- [ ] "Edit a blog" name
 - [ ] "Add a blog" button
+- [ ] "favorite a post" button
 - [ ] Sort posts by published and unread
-- [ ] Sync button for Rss feeds
+- [ ] Favorited posts page
 - [ ] Auth & multi user support
 
 
