@@ -59,8 +59,8 @@ public class SyncFeedService : ISyncFeedService
                 case "entry":
                     // save previous entity
                     if (post is not null)
-                        await Upsert(post);
-                    post = new Post { Blog = blog };
+                        Upsert(post);
+                    post = new Post { BlogId = blog.Id };
                     break;
 
                 case "title" when post is not null:
@@ -86,34 +86,48 @@ public class SyncFeedService : ISyncFeedService
             }
         }
         if (post is not null)
-            await Upsert(post);
+            Upsert(post);
 
         await _dbContext.SaveChangesAsync();
     }
 
     public async Task SyncAllFeeds()
     {
-        await Task.WhenAll(_dbContext.Blogs.Select(blog => SyncFeed(blog.Id)));
+        foreach (var blog in await _dbContext.Blogs.ToListAsync())
+            try
+            {
+                await SyncFeed(blog);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.ToString());
+            }
     }
 
     /// <summary>
     /// tries to upsert post, logs errors instead of crashing
     /// </summary>
-    private async Task Upsert(Post post)
+    private void Upsert(Post post)
     {
-        var existing = await _dbContext.Posts.FirstOrDefaultAsync(p => p.Url == post.Url);
-        if (existing is not null)
-            post.Id = existing.Id;
+        if (post.Url == null)
+        {
+            _logger.LogError($"No url for post: {post}");
+            return;
+        }
+        _dbContext.Database.ExecuteSqlRaw(
+            @"
+            INSERT INTO posts(blogId, url, title, publishedAt) values ({0}, {1}, {2}, {3})
+            ON CONFLICT (url) DO UPDATE
+            SET 
+                title = excluded.title,
+                publishedAt = excluded.publishedAt
+            ;
 
-        _dbContext.Posts.Add(post);
-        try
-        {
-            await _dbContext.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-            _logger.LogError(e.ToString());
-            _dbContext.Posts.Remove(post);
-        }
+        ",
+            post.BlogId,
+            post.Url,
+            post.Title,
+            post.PublishedAt
+        );
     }
 }

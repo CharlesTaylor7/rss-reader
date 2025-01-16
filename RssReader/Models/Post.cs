@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json;
 
 namespace RssReader.Models;
 
@@ -22,5 +23,5 @@ public class Post
 
     public bool Read { get; set; }
 
-    public virtual Blog Blog { get; set; }
+    public override string ToString() => JsonSerializer.Serialize(this);
 }

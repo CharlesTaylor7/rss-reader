@@ -11,7 +11,7 @@ using RssReader.Models;
 namespace RssReader.Migrations
 {
     [DbContext(typeof(RssReaderDbContext))]
-    [Migration("20250116153318_Initial")]
+    [Migration("20250116170210_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -108,13 +108,11 @@ namespace RssReader.Migrations
 
             modelBuilder.Entity("RssReader.Models.Post", b =>
                 {
-                    b.HasOne("RssReader.Models.Blog", "Blog")
+                    b.HasOne("RssReader.Models.Blog", null)
                         .WithMany("Posts")
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Blog");
                 });
 
             modelBuilder.Entity("RssReader.Models.Blog", b =>

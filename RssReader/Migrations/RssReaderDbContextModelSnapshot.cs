@@ -105,13 +105,11 @@ namespace RssReader.Migrations
 
             modelBuilder.Entity("RssReader.Models.Post", b =>
                 {
-                    b.HasOne("RssReader.Models.Blog", "Blog")
+                    b.HasOne("RssReader.Models.Blog", null)
                         .WithMany("Posts")
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Blog");
                 });
 
             modelBuilder.Entity("RssReader.Models.Blog", b =>
