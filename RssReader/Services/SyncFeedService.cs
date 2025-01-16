@@ -1,3 +1,6 @@
+using System;
+using System.Net.Http;
+using System.Xml;
 using System.Xml;
 using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
@@ -41,9 +44,26 @@ public class SyncFeedService : ISyncFeedService
     public async Task SyncFeed(Blog blog)
     {
         _logger.LogInformation($"Syncing: {blog.XmlUrl}");
-        var body = await _httpClient.GetStreamAsync(blog.XmlUrl);
+
+        using var response = await _httpClient.GetAsync(
+            blog.XmlUrl,
+            HttpCompletionOption.ResponseHeadersRead
+        );
+
+        if (!response.IsSuccessStatusCode)
+        {
+            _logger.LogError($"Request failed with status code: {response.StatusCode}");
+            return;
+        }
+
+        foreach (var header in response.Headers)
+        {
+            _logger.LogCritical($"{header.Key}: {string.Join(", ", header.Value)}");
+        }
+
+        using var stream = await response.Content.ReadAsStreamAsync();
         using var reader = XmlReader.Create(
-            body,
+            stream,
             new XmlReaderSettings { Async = true, DtdProcessing = DtdProcessing.Ignore }
         );
 
