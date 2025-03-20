@@ -15,7 +15,7 @@ elif command == "migrate":
 
 elif command == "sync":
     from rss_reader.sync import Sync
-    Sync(use_cache=True).run()
+    Sync().run()
 
 else:
     print(f"unknown command {command}")

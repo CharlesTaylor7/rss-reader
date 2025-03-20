@@ -1,6 +1,5 @@
 <form hx-post="/blogs/save" hx-swap="outerHTML" >
   <button>Save</button>
-  <input type="hidden" name="id" value={{ blog.id }}></input>
   <input type="text" name="title" value="{{ blog.title }}"></input>
   <input type="text" name="xml_url" value="{{ blog.xml_url }}"></input>
 </form>

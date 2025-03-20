@@ -1,4 +1,7 @@
 <li>
-  <button hx-get="/blogs/{{ blog.id }}/edit" hx-target="#blog-{{ blog.id }}">Edit</button>
-  <a hx-boost="true" href="/posts?blog_id={{ blog.id }}">{{ blog.title }}</a>
+  <form hx-post="/blogs/save" hx-target="outerHTML">
+    <input type="url" name="xml_url"> 
+    <input type="text" name="title"> 
+    <button type="submit">Save</a>
+  </form>
 </div>

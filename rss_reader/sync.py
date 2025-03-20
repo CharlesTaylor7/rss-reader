@@ -6,8 +6,8 @@ import datetime as dt
 import os
 
 class Sync:
-    def __init__(self, use_cache: bool = False):
-        self.use_cache = use_cache
+    def __init__(self):
+        self.use_cache = os.environ.get('DEV_CACHE', False)
         self.db = connect()
 
     def run(self):

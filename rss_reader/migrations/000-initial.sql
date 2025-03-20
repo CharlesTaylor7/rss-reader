@@ -1,11 +1,11 @@
-CREATE TABLE blogs (
+CREATE TABLE IF NOT EXISTS blogs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT NOT NULL,
   xml_url TEXT NOT NULL UNIQUE
-);
+) WITHOUT ROWID;
 
 
-CREATE TABLE posts (
+CREATE TABLE IF NOT EXISTS posts (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   blog_id INTEGER NOT NULL,
   title TEXT NOT NULL,
@@ -15,12 +15,12 @@ CREATE TABLE posts (
   favorite BOOL,
   read BOOL,
   FOREIGN KEY (blog_id) REFERENCES blogs(id)
-);
+) WITHOUT ROWID;
 
--- CREATE TABLE feeds (
---   blog_id INTEGER PRIMARY KEY,
---   hash TEXT NOT NULL,
---   etag TEXT,
---   last_modified TEXT NOT NULL,
---   FOREIGN KEY (blog_id) REFERENCES blogs(id)
--- ) WITHOUT ROWID;
+CREATE TABLE IF NOT EXISTS feeds (
+  blog_id INTEGER PRIMARY KEY,
+  hash TEXT NOT NULL,
+  etag TEXT,
+  last_modified TEXT NOT NULL,
+  FOREIGN KEY (blog_id) REFERENCES blogs(id)
+) WITHOUT ROWID;

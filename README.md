@@ -53,3 +53,7 @@ Run dev server or dev command
 
 Run prod server (locally)
 - `uv run uwsgi uwsgi.ini`
+
+
+## Export opml from Inoreader
+https://www.inoreader.com/reader/subscriptions/export?download=1

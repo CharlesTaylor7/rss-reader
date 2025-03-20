@@ -9,6 +9,7 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return flask.render_template("home.jinja")
+            
 
 @app.route("/blogs")
 def blogs():
@@ -20,7 +21,22 @@ def blogs():
 def blogs_new():
     return flask.render_template("fragment_blog_new.jinja")
 
+@app.route("/blogs/import", methods=["POST"])
+def import_blogs():
+    tree = Xml.parse(flask.request.files['file'].stream)
+    root = tree.getroot()
+    blogs = [{'title': blog.attrib['title'], 'xml_url': blog.attrib['xmlUrl']} for blog in root.iter('outline') ]
+    db = connect()
+    db.executemany("""
+        INSERT INTO blogs(title, xml_url) 
+        VALUES(:title, :xml_url)
+        ON CONFLICT DO UPDATE
+        SET title=excluded.title
+    """, blogs
+    )
 
+    return f"Imported {len(blogs)} blogs!"
+ 
 @app.route("/blogs/<id>/edit")
 def blog_edit(id):
     db = connect()
@@ -31,7 +47,12 @@ def blog_edit(id):
 def blog_save():
     blog = flask.request.form
     db = connect()
-    db.execute("UPDATE blogs SET title=:title,xml_url=:xml_url WHERE id = :id", blog)
+    db.execute("""
+        INSERT INTO blogs (xml_url, title) 
+        VALUES(:xml_url, :title)
+        ON CONFLICT DO UPDATE SET 
+            title=excluded.title
+    """, blog)
     return flask.render_template("fragment_blog.jinja", blog=blog)
 
 @app.route("/posts")
@@ -46,19 +67,7 @@ def posts():
     posts = list(posts)
     return flask.render_template("posts.jinja", posts=posts)
 
-@app.route("/import", methods=["POST"])
-def import_():
-    tree = Xml.parse(flask.request.files['file'].stream)
-    root = tree.getroot()
-    blogs = [{'title': blog.attrib['title'], 'xml_url': blog.attrib['xmlUrl']} for blog in root.iter('outline') ]
-    db = connect()
-    db.executemany("""
-        INSERT INTO blogs(title, xml_url) 
-        VALUES(:title, :xml_url)
-        ON CONFLICT DO UPDATE
-        SET title=excluded.title
-    """, blogs
-    )
-
-    return f"Imported {len(blogs)} blogs!"
-             
+@app.route("/posts/sync", methods=["POST"])
+def sync_posts():
+    from rss_reader.sync import Sync
+    Sync().run()
