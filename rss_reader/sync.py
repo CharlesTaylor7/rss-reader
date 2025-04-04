@@ -12,7 +12,7 @@ class Sync:
 
     def run(self):
         for row in self.db.execute(
-            "SELECT * FROM blogs left join feeds on blogs.id == feeds.blog_id"
+            "SELECT * FROM blogs left JOIN feeds on blogs.id == feeds.blog_id"
         ):
             self.sync(row)
 
@@ -34,9 +34,12 @@ class Sync:
     def sync(self, blog):
         content = self.read_feed(blog)
         xml = Xml.fromstring(content)
+
+        # for atom feeds
         for post in xml.iter('entry'):
             self.sync_post(blog, post)
 
+        # for rss feeds
         for post in xml.iter('item'):
             self.sync_post(blog, post)
 
@@ -46,14 +49,17 @@ class Sync:
             if child.tag == "title":
                 post['title'] = child.text
 
+            elif child.tag == "link":
+                post['url'] = child.text
+
+            # rss-only feeds
             elif child.tag == "pubDate":
                 post['published_at'] = parse_date(child.text)
 
+            # atom-only feeds
             elif child.tag == "published":
                 post['published_at'] = parse_date(child.text)
 
-            elif child.tag == "link":
-                post['url'] = child.text
 
         try:
             self.db.execute("""

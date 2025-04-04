@@ -9,7 +9,7 @@
 - [x] migrations
 - [x] Fix saving title of a blog or post (escape characters)
 - [x] Parse published timestamps
-- [ ] "Add a blog" button
+- [x] "Add a blog" button
 - [ ] Save read flags for posts
 - [ ] sort posts by published and unread
 - [ ] Save feed meta data to avoid annoying retries
