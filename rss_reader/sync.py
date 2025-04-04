@@ -7,29 +7,16 @@ import os
 
 class Sync:
     def __init__(self):
-        self.use_cache = os.environ.get('DEV_CACHE', False)
         self.db = connect()
 
     def run(self):
-        for row in self.db.execute(
-            "SELECT * FROM blogs left JOIN feeds on blogs.id == feeds.blog_id"
-        ):
+        query = "SELECT * FROM blogs LEFT JOIN feeds ON blogs.id == feeds.blog_id"
+        for row in self.db.execute(query):
             self.sync(row)
 
-            
     def read_feed(self, blog: dict):
-        if not self.use_cache:
-            return requests.get(blog["xml_url"]).text
-
-        id = blog['id']
-        try:
-            with open(f"dev-cache/{id}.xml", "r") as file:
-                return file.read()
-        except FileNotFoundError:
-            content = requests.get(blog["xml_url"]).text
-            with open(f"dev-cache/{id}.xml", "w") as file:
-                file.write(content)
-            return content
+        response = requests.get(blog["xml_url"])
+        return response.text
 
     def sync(self, blog):
         content = self.read_feed(blog)
@@ -44,6 +31,9 @@ class Sync:
             self.sync_post(blog, post)
 
     def sync_post(self, blog, tag):
+        """
+        Syncs a post from an rss or atom feed.
+        """
         post = { 'blog_id': blog['id'], 'published_at': None }
         for child in tag.iter():
             if child.tag == "title":

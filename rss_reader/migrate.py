@@ -34,7 +34,7 @@ def run():
         for sql in script.split(";"):
             db.execute(sql)
         db.execute("""
-            INSERT INTO migrations(id, name) values(:id, :name)
+            INSERT INTO migrations(id, name) VALUES(:id, :name)
         """, { 'id': id, 'name': name})
         db.execute("""END TRANSACTION""")
 

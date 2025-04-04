@@ -14,7 +14,7 @@ def home():
 @app.route("/blogs")
 def blogs():
     db = connect()
-    blogs = db.execute("select blogs.id, blogs.title from blogs")
+    blogs = db.execute("SELECT blogs.id, blogs.title FROM blogs")
     return flask.render_template("blogs.jinja", blogs=blogs)
 
 @app.route("/blogs/new")
@@ -40,7 +40,7 @@ def import_blogs():
 @app.route("/blogs/<id>/edit")
 def blog_edit(id):
     db = connect()
-    blog = db.execute("select * from blogs where blogs.id = :id", {'id': id}).fetchone()
+    blog = db.execute("SELECT * FROM blogs WHERE blogs.id = :id", {'id': id}).fetchone()
     return flask.render_template("fragment_blog_edit.jinja", blog=blog)
 
 @app.route("/blogs/save", methods=["POST"])
