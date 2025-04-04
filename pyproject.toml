@@ -8,6 +8,7 @@ dependencies = [
     "defusedxml>=0.7.1",
     "flask>=3.0.3",
     "requests>=2.32.3",
+    "sqlalchemy>=2.0.40",
     "uwsgi>=2.0.28",
 ]
 [build-system]
