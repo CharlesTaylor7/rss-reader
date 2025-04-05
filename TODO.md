@@ -13,7 +13,7 @@
 - [ ] Save read flags for posts
 - [ ] sort posts by published and unread
 - [ ] Save feed meta data to avoid annoying retries
-
+- [ ] github action for ci/cd
 
 ## Future
 - [ ] "favorite" button
