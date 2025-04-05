@@ -1,0 +1,5 @@
+These are the key development scripts:
+- run tests: uvx pytest 
+- check type errors: uvx pyright
+- check lint errors: uvx ruff check
+- format code: uvx ruff format

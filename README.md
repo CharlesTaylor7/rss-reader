@@ -25,6 +25,7 @@ This project is using `uv` to manage python versions, packages and development t
 - Format code: `uvx ruff format`
 - Lint code: `uvx ruff check`
 - Typecheck code: `uvx pyright`
+- Run test suite: `uvx pytest`
 
 ## Export from 3rd party rss reader
 Every atom/atom rss reader under the sun uses the [OPML](https://en.wikipedia.org/wiki/OPML) file format for import & export of feeds.

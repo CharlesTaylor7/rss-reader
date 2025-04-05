@@ -10,6 +10,11 @@ dependencies = [
   "requests>=2.32.3",
   "uwsgi>=2.0.28",
 ]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+]
 [build-system]
 requires = ["flit_core >= 3.4"]
 build-backend = "flit_core.buildapi"

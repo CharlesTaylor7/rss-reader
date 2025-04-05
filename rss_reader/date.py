@@ -1,12 +1,16 @@
 import re
 import datetime as dt
-from typing import Optional, List, Dict, Tuple, Pattern, Any
-
+from typing import Optional, List, Dict, Tuple, Pattern
 
 DATE_PATTERNS: List[Pattern[str]] = [
     re.compile(pattern)
     for pattern in [
+        # rfc 822
         r"^(?P<day_of_week>[a-zA-Z]{3}), (?P<day>(\d{1,2})) (?P<month>[a-zA-Z]+) (?P<year>\d{4})",
+        # iso 8601
+        r"^(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})$",
+
+        # misc
         r"^(?P<day_of_week>\w{3}), (?P<month>[a-zA-Z]+) (?P<day>(\d{1,2})) (?P<year>\d{4})",
         r"^(?P<day>\d{2}) (?P<month>[a-zA-Z]+) (?P<year>\d{4})$",
     ]
@@ -39,16 +43,15 @@ MONTHS: Dict[str, int] = {
 }
 
 
-# TODO: make this optional, store both raw date and parsed date
-def parse_date(raw: str) -> str:
+def parse_date(raw: str) -> Optional[str]:
     """
     Rss feeds are the wild west when it comes to date formats.
     This attempts to parse the formats that I've encountered so far.
     """
     result = first_match(raw)
     if result is None:
-        print("Encountered unknown date format:", raw)
-        return raw
+        print(f"Encountered unknown date format: {raw}")
+        return None
 
     match_dict, _ = result
     try:
@@ -57,9 +60,9 @@ def parse_date(raw: str) -> str:
         day = int(match_dict["day"])
         dt.date(year, month, day)
         return f"{year}-{month:02d}-{day:02d}"
-    except (ValueError, KeyError) as e:
-        print(f"Invalid date: {e}")
-        return raw
+    except Exception as e:
+        print(f"Encountered unknown date format: {raw}")
+        return None
 
 
 def first_match(raw: str) -> Optional[Tuple[Dict[str, str], Pattern[str]]]:
