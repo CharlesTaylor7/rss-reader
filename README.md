@@ -55,5 +55,9 @@ Run prod server (locally)
 - `uv run uwsgi uwsgi.ini`
 
 
-## Export opml from Inoreader
+## Export from 3rd part rss reader
+
+Every atom/atom rss reader under the sun uses the [OPML](https://en.wikipedia.org/wiki/OPML) file format for import & export of feeds.
+
+For Inoreader, exporting is as simple as hitting this url while logged in:
 https://www.inoreader.com/reader/subscriptions/export?download=1
