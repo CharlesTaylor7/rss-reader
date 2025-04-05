@@ -9,7 +9,6 @@ DATE_PATTERNS: List[Pattern[str]] = [
         r"^(?P<day_of_week>[a-zA-Z]{3}), (?P<day>(\d{1,2})) (?P<month>[a-zA-Z]+) (?P<year>\d{4})",
         # iso 8601
         r"^(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})$",
-
         # misc
         r"^(?P<day_of_week>\w{3}), (?P<month>[a-zA-Z]+) (?P<day>(\d{1,2})) (?P<year>\d{4})",
         r"^(?P<day>\d{2}) (?P<month>[a-zA-Z]+) (?P<year>\d{4})$",
@@ -76,4 +75,4 @@ def first_match(raw: str) -> Optional[Tuple[Dict[str, str], Pattern[str]]]:
     return None
 
 
-__all__ = ['parse_date']
+__all__ = ["parse_date"]

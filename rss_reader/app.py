@@ -92,4 +92,4 @@ def sync_posts():
     from rss_reader.sync import Sync
 
     Sync().run()
-    return flask.redirect(flask.url_for('posts'))
+    return flask.redirect(flask.url_for("posts"))
