@@ -17,7 +17,7 @@
 ## Development Scripts
 - Run dev server: `uv run python -m rss_reader dev-server`
 - Sync all feeds: `uv run python -m rss_reader sync`
-- Run migrations: `uv run python -m migrate`
+- Run migrations: `uv run python -m rss_reader migrate`
 - Run prod server (locally): `uv run uwsgi uwsgi.ini`
 
 ## Export from 3rd party rss reader

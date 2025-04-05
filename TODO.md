@@ -10,15 +10,19 @@
 - [x] Fix saving title of a blog or post (escape characters)
 - [x] Parse published timestamps
 - [x] "Add a blog" button
-- [ ] Save read flags for posts
-- [ ] sort posts by published and unread
+- [ ] configure ruff for linting & formatting
 - [ ] Save feed meta data to avoid annoying retries
+- [ ] sort posts by published and unread
+- [ ] use pydantic for data validation
+- [ ] mypy or pyright
 - [ ] github action for ci/cd
+- [ ] Save read flags for posts
+- [ ] opml export
+- [ ] Auth 
+- [ ] multi-tenant separate file per user
 
 ## Future
 - [ ] "favorite" button
-- [ ] Auth 
-- [ ] multi-user
 - [ ] Chrome extension?
 - [ ] Sort blogs by last published
 - [ ] iframe for posts
