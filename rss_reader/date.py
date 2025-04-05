@@ -1,7 +1,9 @@
 import re
 import datetime as dt
 
-patterns = [
+__all__ = [parse_date]
+
+DATE_PATTERNS: re.Pattern = [
     re.compile(pattern)
     for pattern in [
         r"^(?P<day_of_week>[a-zA-Z]{3}), (?P<day>(\d{1,2})) (?P<month>[a-zA-Z]+) (?P<year>\d{4})",
@@ -10,7 +12,7 @@ patterns = [
     ]
 ]
 
-months = {
+MONTHS: dict[string, int] = {
     "Jan": 1,
     "January": 1,
     "Feb": 2,
@@ -38,18 +40,23 @@ months = {
 
 
 def parse_date(raw: str) -> str:
+    """
+    Rss feeds are the wild west when it comes to date formats.
+    This attempts to parse the formats that I've encountered so far.
+    """
     match = first_match(raw)
     if match is None:
-        print(raw)
+        print("Encountered unknown date format:", raw)
         return raw
+
     year = int(match["year"])
-    month = int(months[match["month"]])
+    month = int(MONTHS[match["month"]])
     day = int(match["day"])
     return f"{year}-{month:02d}-{day:02d}"
 
 
 def first_match(raw: str):
-    for pat in patterns:
-        match = pat.match(raw)
+    for pattern in DATE_PATTERNS:
+        match = pattern.match(raw)
         if match is not None:
             return match.groupdict()
