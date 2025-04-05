@@ -17,10 +17,10 @@
 # Development 
 This project is using `uv` to manage python versions, packages and development tools. [uv installation](https://docs.astral.sh/uv/getting-started/installation/)
 ## scripts
-- Run dev server: `uv run python -m rss_reader dev-server`
-- Sync all feeds: `uv run python -m rss_reader sync`
-- Run migrations: `uv run python -m rss_reader migrate`
-- Run prod server (locally): `uv run uwsgi uwsgi.ini`
+- Run dev server (w/ live reloading): `uv run rss_reader dev-server`
+- Sync all feeds: `uv run rss_reader sync`
+- Run migrations: `uv run rss_reader migrate`
+- Run prod server: `uv run uwsgi uwsgi.ini`
 - Add dependency: `uv add <dep>`
 - Format code: `uvx run ruff format`
 - Lint code: `uvx run ruff check`
