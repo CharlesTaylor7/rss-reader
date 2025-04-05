@@ -13,22 +13,22 @@
 - sqlite
 - htmx
 - fly.io for hosting
+  
+## Development Scripts
+- Run dev server: `uv run python -m rss_reader dev-server`
+- Sync all feeds: `uv run python -m rss_reader sync`
+- Run migrations: `uv run python -m migrate`
+- Run prod server (locally): `uv run uwsgi uwsgi.ini`
 
-## Feature set
-- cron job runs nightly to check rss feeds
-- you can also manually refresh a blog
-- you can add a new blog
-- no embedded posts view, read posts on host blog
-- can favorite posts
-- import opml rss feeds
-I did this one manually for my existing feed using some nushell. But maybe make this feature so others can use my reader more easily?
- ```nu
-open `Inoreader Feeds 20241104.xml` | get content.content.1.attributes | select title xmlUrl htmlUrl | save feeds.json
-```
+## Export from 3rd party rss reader
+Every atom/atom rss reader under the sun uses the [OPML](https://en.wikipedia.org/wiki/OPML) file format for import & export of feeds.
+
+For Inoreader, exporting is as simple as hitting this url while logged in:
+https://www.inoreader.com/reader/subscriptions/export?download=1
 
 ## Resources
 
-### Rss & Atom spec
+### Rss & Atom implementation notes
 - [Rachel by the bay](https://rachelbythebay.com/w/2024/08/17/hash/)
 
 ### Misc
@@ -38,26 +38,5 @@ open `Inoreader Feeds 20241104.xml` | get content.content.1.attributes | select 
 ### Python
 - [flask](https://flask.palletsprojects.com/en/stable/quickstart/)
 - [requests](https://pypi.org/project/requests/)
-- [ormlite](https://ormlite.readthedocs.io/en/latest/ormlite.html#module-ormlite)
 - [sqlite3](https://docs.python.org/3/library/sqlite3.html#sqlite3-reference)
 - [eml.etree](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree)
-
-## Deployments
-https://hynek.me/articles/docker-uv/
-fly.io
-
-
-## Scripts
-Run dev server or dev command
-- `uv run python -m rss_reader <dev-server|migrate|sync>`
-
-Run prod server (locally)
-- `uv run uwsgi uwsgi.ini`
-
-
-## Export from 3rd party rss reader
-
-Every atom/atom rss reader under the sun uses the [OPML](https://en.wikipedia.org/wiki/OPML) file format for import & export of feeds.
-
-For Inoreader, exporting is as simple as hitting this url while logged in:
-https://www.inoreader.com/reader/subscriptions/export?download=1
