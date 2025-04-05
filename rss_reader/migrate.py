@@ -21,6 +21,8 @@ def run():
     migrations = path.join(dir, "migrations")
     for filename in listdir(migrations):
         match = regex.match(filename)
+        if match is None:
+            continue
         id = int(match.group("id"))
         name = match.group("name")
 

@@ -18,3 +18,7 @@ build-backend = "flit_core.buildapi"
 fixable = []
 
 [tool.ruff.format]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"

@@ -28,6 +28,8 @@ def blogs_new():
 def import_blogs():
     tree = Xml.parse(flask.request.files["file"].stream)
     root = tree.getroot()
+    if root is None:
+        raise ValueError("Failed to parse XML file")
     blogs = [
         {"title": blog.attrib["title"], "xml_url": blog.attrib["xmlUrl"]}
         for blog in root.iter("outline")
@@ -90,3 +92,4 @@ def sync_posts():
     from rss_reader.sync import Sync
 
     Sync().run()
+    return flask.redirect(flask.url_for('posts'))
