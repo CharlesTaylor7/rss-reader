@@ -22,10 +22,10 @@ This project is using `uv` to manage python versions, packages and development t
 - Run migrations: `uv run python -m rss_reader migrate`
 - Run prod server (locally): `uv run uwsgi uwsgi.ini`
 - Add dependency: `uv add <dep>`
-- Format code: `uvx ruff format`
-- Lint code: `uvx ruff check`
-- Typecheck code: `uvx pyright`
-- Run test suite: `uvx pytest`
+- Format code: `uvx run ruff format`
+- Lint code: `uvx run ruff check`
+- Typecheck code: `uv run pyright`
+- Run test suite: `uv run pytest`
 
 ## Export from 3rd party rss reader
 Every atom/atom rss reader under the sun uses the [OPML](https://en.wikipedia.org/wiki/OPML) file format for import & export of feeds.
