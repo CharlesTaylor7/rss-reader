@@ -1,7 +1,5 @@
 import re
-import datetime as dt
 
-__all__ = [parse_date]
 
 DATE_PATTERNS: re.Pattern = [
     re.compile(pattern)
@@ -12,7 +10,7 @@ DATE_PATTERNS: re.Pattern = [
     ]
 ]
 
-MONTHS: dict[string, int] = {
+MONTHS: dict[str, int] = {
     "Jan": 1,
     "January": 1,
     "Feb": 2,
@@ -60,3 +58,6 @@ def first_match(raw: str):
         match = pattern.match(raw)
         if match is not None:
             return match.groupdict()
+
+
+__all__ = [parse_date]

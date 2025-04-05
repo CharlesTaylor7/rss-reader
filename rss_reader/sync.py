@@ -2,8 +2,6 @@ from defusedxml import ElementTree as Xml
 import requests
 from rss_reader.db import connect
 from rss_reader.date import parse_date
-import datetime as dt
-import os
 
 
 class Sync:
