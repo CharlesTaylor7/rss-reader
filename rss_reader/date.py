@@ -8,7 +8,7 @@ DATE_PATTERNS: List[Pattern[str]] = [
         # rfc 822
         r"^(?P<day_of_week>[a-zA-Z]{3}), (?P<day>(\d{1,2})) (?P<month>[a-zA-Z]+) (?P<year>\d{4})",
         # iso 8601
-        r"^(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})$",
+        r"^(?P<year>\d{4})-(?P<month>\d{1,2})-(?P<day>\d{1,2})$",
         # misc
         r"^(?P<day_of_week>\w{3}), (?P<month>[a-zA-Z]+) (?P<day>(\d{1,2})) (?P<year>\d{4})",
         r"^(?P<day>\d{2}) (?P<month>[a-zA-Z]+) (?P<year>\d{4})$",
@@ -42,7 +42,7 @@ MONTHS: Dict[str, int] = {
 }
 
 
-def parse_date(raw: str) -> Optional[str]:
+def parse_date(raw: str) -> Optional[dt.date]:
     """
     Rss feeds are the wild west when it comes to date formats.
     This attempts to parse the formats that I've encountered so far.
@@ -50,17 +50,22 @@ def parse_date(raw: str) -> Optional[str]:
     result = first_match(raw)
     if result is None:
         print(f"Encountered unknown date format: {raw}")
+        print("Didn't match any known patterns")
         return None
 
-    match_dict, _ = result
+    match_dict, pattern = result
+
     try:
         year = int(match_dict["year"])
-        month = int(MONTHS[match_dict["month"]])
+        raw_month = match_dict["month"]
+        month = int(raw_month) if raw_month.isdigit() else MONTHS[raw_month]
         day = int(match_dict["day"])
-        dt.date(year, month, day)
-        return f"{year}-{month:02d}-{day:02d}"
-    except Exception as e:
+        date = dt.date(year, month, day)
+        return date
+
+    except Exception:
         print(f"Encountered unknown date format: {raw}")
+        print(f"Matched pattern: {pattern}")
         return None
 
 
