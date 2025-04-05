@@ -55,7 +55,7 @@ Run prod server (locally)
 - `uv run uwsgi uwsgi.ini`
 
 
-## Export from 3rd part rss reader
+## Export from 3rd party rss reader
 
 Every atom/atom rss reader under the sun uses the [OPML](https://en.wikipedia.org/wiki/OPML) file format for import & export of feeds.
 
