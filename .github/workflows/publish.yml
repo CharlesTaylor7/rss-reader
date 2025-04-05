@@ -32,8 +32,11 @@ jobs:
         run: |
           uvx ruff check
           uvx ruff format --check
-          uvx pyright
           uvx pytest
+
+          uv venv
+          source .venv/bin/activate
+          uvx pyright
 
 
       - name: Deploy
