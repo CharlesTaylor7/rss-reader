@@ -2,8 +2,9 @@ import os
 import pathlib
 import sqlite3
 
+
 def connect():
-    volume = os.environ.get('VOLUME', "data")
+    volume = os.environ.get("VOLUME", "data")
     return connect_to_sqlite(f"{volume}/chuck.db")
 
 
