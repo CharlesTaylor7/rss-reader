@@ -7,8 +7,10 @@ requires-python = ">=3.13"
 dependencies = [
   "defusedxml>=0.7.1",
   "flask>=3.0.3",
+  "flask-login>=0.6.3",
   "requests>=2.32.3",
   "uwsgi>=2.0.28",
+  "werkzeug>=3.0.1",  # for password hashing
 ]
 
 [dependency-groups]

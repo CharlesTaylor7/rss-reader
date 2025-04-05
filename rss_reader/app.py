@@ -1,14 +1,66 @@
 from flask import Flask
 from defusedxml import ElementTree as Xml
 import flask
+from flask_login import login_user, logout_user, login_required, current_user
+from rss_reader.auth import login_manager, User
 
 from rss_reader.db import connect
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your-secret-key'  # Change this to a secure secret key
+login_manager.init_app(app)
 
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if flask.request.method == "POST":
+        email = flask.request.form.get("email")
+        password = flask.request.form.get("password")
+        if not email or not password:
+            flask.flash("Email and password are required")
+            return flask.redirect(flask.url_for("login"))
+        
+        user = User.get_by_email(email)
+        if user is None or not user.check_password(password):
+            flask.flash("Invalid email or password")
+            return flask.redirect(flask.url_for("login"))
+        
+        login_user(user)
+        next_page = flask.request.args.get("next")
+        if not next_page or not next_page.startswith("/"):
+            next_page = flask.url_for("index")
+        return flask.redirect(next_page)
+    
+    return flask.render_template("login.jinja")
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if flask.request.method == "POST":
+        email = flask.request.form.get("email")
+        password = flask.request.form.get("password")
+        if not email or not password:
+            flask.flash("Email and password are required")
+            return flask.redirect(flask.url_for("register"))
+        
+        user = User.create(email, password)
+        if user is None:
+            flask.flash("Email already registered")
+            return flask.redirect(flask.url_for("register"))
+        
+        login_user(user)
+        return flask.redirect(flask.url_for("index"))
+    
+    return flask.render_template("register.jinja")
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return flask.redirect(flask.url_for("login"))
 
 @app.route("/")
-def home():
+@login_required
+def index():
     return flask.render_template("home.jinja")
 
 
