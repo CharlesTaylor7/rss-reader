@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 
 login_manager = LoginManager()
-login_manager.login_view = 'get_login'
+login_manager.login_view = 'app.get_login'
 
 class User(UserMixin):
     def __init__(self, id: int, email: str, password_hash: str):
