@@ -39,12 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # Local apps
-    'rss_reader.apps.users.apps.UsersConfig',
     'rss_reader.apps.feeds.apps.FeedsConfig',
 ]
 
 # Use our custom user model
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'auth.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,3 +126,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+"""Jinja2 environment configuration."""
+from django.templatetags.static import static
+from django.urls import reverse
+
+from jinja2 import Environment
+
+
+def environment(**options):
+    """Configure Jinja2 environment for Django."""
+    env = Environment(**options)
+    
+    # Add Django functions to Jinja2 globals
+    env.globals.update({
+        'static': static,
+        'url': reverse,
+    })
+    
+    return env
