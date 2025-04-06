@@ -1,4 +1,5 @@
 from typing import Optional
+from rss_reader.db import connect
 from flask_login import LoginManager, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
@@ -14,7 +15,6 @@ class User(UserMixin):
     @staticmethod
     def get_by_email(email: str) -> Optional['User']:
         """Get a user by email"""
-        from rss_reader.db import connect
         db = connect()
         row = db.execute(
             "SELECT id, email, password_hash FROM users WHERE email = ?",
@@ -27,7 +27,6 @@ class User(UserMixin):
     @staticmethod
     def get_by_id(user_id: int) -> Optional['User']:
         """Get a user by ID"""
-        from rss_reader.db import connect
         db = connect()
         row = db.execute(
             "SELECT id, email, password_hash FROM users WHERE id = ?",
@@ -40,7 +39,6 @@ class User(UserMixin):
     @staticmethod
     def create(email: str, password: str) -> Optional['User']:
         """Create a new user"""
-        from rss_reader.db import connect
         db = connect()
         password_hash = generate_password_hash(password)
         try:
