@@ -117,3 +117,8 @@ Django uses its own template engine by default, but can use Jinja2. We have two 
 6. Update templates
 7. Implement authentication
 8. Test and debug
+
+
+
+## Uv with django
+https://blog.pecar.me/uv-with-django

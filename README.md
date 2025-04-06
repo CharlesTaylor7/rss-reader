@@ -17,15 +17,13 @@
 # Development 
 This project is using `uv` to manage python versions, packages and development tools. [uv installation](https://docs.astral.sh/uv/getting-started/installation/)
 ## scripts
-- Run dev server (w/ live reloading): `uv run rss_reader dev-server`
-- Sync all feeds: `uv run rss_reader sync`
-- Run migrations: `uv run rss_reader migrate`
 - Run prod server: `uv run uwsgi uwsgi.ini`
 - Add dependency: `uv add <dep>`
 - Format code: `uvx run ruff format`
 - Lint code: `uvx run ruff check`
 - Typecheck code: `uv run pyright`
 - Run test suite: `uv run pytest`
+- Any django admin command: `uv run django-admin <subcommand>`
 
 ## Export from 3rd party rss reader
 Every atom/atom rss reader under the sun uses the [OPML](https://en.wikipedia.org/wiki/OPML) file format for import & export of feeds.

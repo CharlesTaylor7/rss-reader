@@ -3,3 +3,4 @@ These are the key development scripts:
 - check type errors: uv run pyright
 - check lint errors: uv run ruff check
 - format code: uv run ruff format
+
