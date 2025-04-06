@@ -23,7 +23,11 @@ This project is using `uv` to manage python versions, packages and development t
 - Lint code: `uvx run ruff check`
 - Typecheck code: `uv run pyright`
 - Run test suite: `uv run pytest`
-- Any django admin command: `uv run django-admin <subcommand>`
+All [django-admin](https://docs.djangoproject.com/en/5.1/ref/django-admin/#available-commands) commands are available. Most important ones:
+
+All manage.py commands available
+- Run migrations: `uv run manage.py migrate`
+- Start dev server: `uv run manage.py runserver`
 
 ## Export from 3rd party rss reader
 Every atom/atom rss reader under the sun uses the [OPML](https://en.wikipedia.org/wiki/OPML) file format for import & export of feeds.
