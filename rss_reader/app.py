@@ -3,7 +3,6 @@ from defusedxml import ElementTree as Xml
 import flask
 from flask_login import login_user, logout_user, login_required, current_user
 from rss_reader.auth import login_manager, User
-
 from rss_reader.db import connect
 
 app = Flask(__name__)
