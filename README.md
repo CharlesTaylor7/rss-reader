@@ -1,15 +1,15 @@
 ## Goals
 - learn the RSS spec
-- have better performance than InoReader, my current client
-- have better visibility into data
-- With more customizibility
-- Secure 
+- better customizability
+- better performance than InoReader, my current client
 - be really simple
+
 
 ## Tech Stack
 - Python
 - Flask
-- Jinja2 (comes with Flask)
+- Jinja2
+- Bootstrap 
 - sqlite
 - htmx
 - fly.io for hosting
