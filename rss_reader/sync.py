@@ -17,7 +17,7 @@ class Sync:
         response = requests.get(blog["xml_url"])
         return response.text
 
-    def sync(self, blog):
+    def sync(self, blog: dict):
         content = self.read_feed(blog)
         xml = Xml.fromstring(content)
 
@@ -57,7 +57,7 @@ class Sync:
                 ON CONFLICT DO UPDATE SET
                     title=excluded.title,
                     published_at=excluded.published_at
-            """,
+                """,
                 post,
             )
         except Exception as e:
