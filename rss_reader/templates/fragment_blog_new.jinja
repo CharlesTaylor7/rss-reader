@@ -1,7 +1,5 @@
-<li>
-  <form hx-post="/blogs/save" hx-target="outerHTML">
-    <input type="url" name="xml_url"> 
-    <input type="text" name="title"> 
-    <button type="submit">Save</a>
-  </form>
-</div>
+<form hx-post="/blogs/save" hx-target="outerHTML">
+  <button class="btn btn-primary btn-sm" type="submit">Save</button>
+  <input type="url" name="xml_url" placeholder="XML Feed URL"> 
+  <input type="text" name="title" placeholder="Blog Title"> 
+</form>

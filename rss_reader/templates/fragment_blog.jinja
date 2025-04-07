@@ -1,4 +1,4 @@
 <div id="blog-{{ blog.id }}">
-  <button hx-get="/blogs/{{ blog.id }}/edit" hx-target="#blog-{{ blog.id }}">Edit</button>
-  <a hx-boost="true" href="/posts?blog_id={{ blog.id }}">{{ blog.title }}</a>
+  <button class="btn btn-light btn-sm" hx-get="/blogs/{{ blog.id }}/edit" hx-target="#blog-{{ blog.id }}">Edit</button>
+  <a class="link-dark" hx-boost="true" href="/posts?blog_id={{ blog.id }}">{{ blog.title }}</a>
 </div>
