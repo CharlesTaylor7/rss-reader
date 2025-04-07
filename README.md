@@ -1,4 +1,4 @@
-## Goals
+## Project Goals
 - learn the RSS spec
 - better customizability
 - better performance than InoReader, my current client
@@ -27,8 +27,8 @@ This project is using `uv` to manage python versions, packages and development t
 - Typecheck code: `uv run pyright`
 - Run test suite: `uv run pytest`
 
-## Export from 3rd party rss reader
-Every atom/atom rss reader under the sun uses the [OPML](https://en.wikipedia.org/wiki/OPML) file format for import & export of feeds.
+## Import my feeds from another rss reader
+Nearly every atom/atom rss reader under the sun uses the [OPML](https://en.wikipedia.org/wiki/OPML) file format for import & export of feeds. You'll have to locate the export button.
 
 For Inoreader, exporting is as simple as hitting this url while logged in:
 https://www.inoreader.com/reader/subscriptions/export?download=1
