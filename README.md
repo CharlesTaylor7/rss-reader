@@ -22,8 +22,8 @@ This project is using `uv` to manage python versions, packages and development t
 - Run migrations: `uv run rss_reader migrate`
 - Run prod server: `uv run uwsgi uwsgi.ini`
 - Add dependency: `uv add <dep>`
-- Format code: `uvx run ruff format`
-- Lint code: `uvx run ruff check`
+- Format code: `uv run ruff format`
+- Lint code: `uv run ruff check`
 - Typecheck code: `uv run pyright`
 - Run test suite: `uv run pytest`
 
