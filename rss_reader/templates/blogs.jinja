@@ -1,6 +1,6 @@
 {% extends "base.jinja" %}
 {% block body %}
-<button hx-target="ul" hx-swap="beforebegin" hx-get="/blogs/new">New Blog</button>
+<button class="btn btn-primary" hx-target="next" hx-swap="beforebegin" hx-get="/blogs/new">New Blog</button>
 <ul>
   {% for blog in blogs %} 
     <li>

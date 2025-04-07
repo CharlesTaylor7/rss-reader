@@ -4,15 +4,17 @@
   Welcome to my RSS reader
 </p>
 
-<label for="file-input">Import an OPML file to get started</label>
+<div class="d-flex gap-2 flex-column align-items-start justify-content-center">
+<label class="form-label" for="file-input">Import an OPML file to get started</label>
 
-<input id="file-input" required type='file' name='file' accept="text/xml" form="upload">
+<input class="form-control form-control-sm" class="btn btn-info" id="file-input" required type='file' name='file' accept="text/xml" form="upload">
 
 <form id="upload" hx-post="/blogs/import" enctype="multipart/form-data" hx-target="#feedback">
-  <button>Upload</button>
+  <button class="btn btn-primary">Upload</button>
 </form>
 
 <p id="feedback">
 </p>
+</div>
   
 {% endblock %}
