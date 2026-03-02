@@ -12,6 +12,7 @@ export default define.page(function Home(ctx) {
     <div class="px-4 py-8 mx-auto fresh-gradient min-h-screen">
       <Head>
         <title>Fresh counter</title>
+        <link rel="manifest" href="manifest.json" />
       </Head>
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
         <img
