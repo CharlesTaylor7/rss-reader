@@ -1,0 +1,25 @@
+import type { Signal } from "@preact/signals";
+import { Button } from "@/components/Button.tsx";
+
+interface ArticleProps {
+}
+
+export default function (props: ArticleProps) {
+  return (
+    <div class="card card-side bg-base-100 shadow-sm">
+      <figure>
+        <img
+          src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+          alt="Movie"
+        />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">New movie is released!</h2>
+        <p>Click the button to watch on Jetflix app.</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary">Watch</button>
+        </div>
+      </div>
+    </div>
+  );
+}

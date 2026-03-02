@@ -1,4 +1,5 @@
 ## MVP
+
 - [x] Deployments
 - [x] Edit a blog name
 - [x] Sync a blog's rss feed
@@ -14,11 +15,12 @@
 - [x] github action for ci/cd
 - [ ] Save feed meta data to avoid annoying retries
 - [ ] sort posts by published and unread
-- [ ] debug feed syncing (doesn't work for all my feeds); 
-      use pydantic for data validation
-- [ ] users and Auth 
+- [ ] debug feed syncing (doesn't work for all my feeds); use pydantic for data
+      validation
+- [ ] users and Auth
 
 ## Future
+
 - [ ] opml export
 - [ ] Save read flags for posts
 - [ ] "favorite" button
