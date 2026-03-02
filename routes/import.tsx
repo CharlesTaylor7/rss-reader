@@ -25,8 +25,6 @@ export default function () {
           Upload
         </button>
       </form>
-
-      <p id="feedback"></p>
     </div>
   );
 }

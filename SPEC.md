@@ -8,7 +8,6 @@
 ## Home View
   - [ ] Visiting the site should kick off a sync and then redirect to posts view.
   - [ ] spamming refreshes shouldn't refetch feeds multiple times
-  - [ ] track both a last_global_sync time and  
 
 ## Posts View
 - [ ] search posts 
@@ -21,26 +20,19 @@
 
 
 ## Blogs View
+- [ ] Show most newly added blogs first.  ("sort_order" desc)
 - [ ] Subscribe to a new blog
 - [ ] Edit a blog's title, url.
 - [ ] Archive a blog (stop fetching, and hide by default)
 - [ ] Button to sync a blog's rss feed
 - [ ] default sort order is by last published
+Stretch goal:
+- manually sorted blog list
+  - the "Trello way", sparse integer indexes 1000 apart, and inserts average the neighbors.
+  - the "figma way", fractional lexicographic ordering. Use unbounded text columns. "midpoint" between "a", and "b" is "am". Append more letters ad infinitum. Also called "CRDT" way.
 
 ## Import view
-- [ ] Import OPML button. 
-  - select a file and import when i
-
-
-## API
-- /sync?blogId=
-  sync one blog
-- /sync-all
-  sync all blogs
-
-## RSS Feed Reading 
-- [ ] Use ETAGS and last modified dates
-
+- [x] Import OPML button. 
 
 
 ## Browser Extension
