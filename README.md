@@ -16,6 +16,12 @@ deno task dev
 
 This will watch the project directory and restart as necessary.
 
+### LINKS
+- https://neon.com/docs/auth/quick-start/react
+- https://console.neon.tech/app/projects/autumn-mountain-82950676/branches/br-floral-wildflower-aiumw2tv
+- https://deno-postgres.com/#/?id=clients-vs-connection-pools
+- https://fresh.deno.dev/docs/advanced
+
 ### Product & Tech spec
 
 Rss reader
@@ -57,7 +63,7 @@ Stack
 - Daisyui
 - Deno deploy
 - Deno fresh (preact)
-- Google oauth (sso)
+- Google oauth (sso)/ neon auth?
 - Postgres (neondb)
 
 Db tables Users
