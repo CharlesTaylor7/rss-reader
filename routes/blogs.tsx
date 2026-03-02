@@ -1,10 +1,11 @@
 import { define } from "@/server/define.ts";
 
-export default define.page(async function Home(ctx) {
+export default define.page(async function (ctx) {
   const blogs = await ctx.state.sql`
     select title, xml_url, html_url 
     from blogs 
     order by sort_order desc
+    limit 10
   `;
 
   return (
@@ -18,7 +19,7 @@ export default define.page(async function Home(ctx) {
               </h2>
               <div class="card-actions justify-end">
                 <button type="button" class="btn btn-primary">
-                  Buy Now
+                  Edit
                 </button>
               </div>
             </div>

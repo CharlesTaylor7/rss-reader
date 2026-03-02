@@ -1,4 +1,5 @@
 import { define } from "@/server/define.ts";
+import Sync from "@/islands/Sync.tsx";
 
 export default define.page(function App({ Component }) {
   return (
@@ -11,6 +12,7 @@ export default define.page(function App({ Component }) {
       </head>
       <body>
         <Component />
+        <Sync />
       </body>
     </html>
   );

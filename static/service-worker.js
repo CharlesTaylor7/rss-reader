@@ -1,4 +1,4 @@
-const APP_VERSION = "3";
+const APP_VERSION = "8";
 const ASSETS = ["/", "/manifest.json"];
 
 self.addEventListener("install", (event) => {

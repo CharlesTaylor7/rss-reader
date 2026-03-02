@@ -6,8 +6,12 @@
   - Login/Logout
 
 ## Home View
-  - [ ] Visiting the site should kick off a sync and then redirect to posts view.
+  - [ ] Home page should redirect to /posts
+  - [ ] Visiting any part site should kick off a sync. 
   - [ ] spamming refreshes shouldn't refetch feeds multiple times
+      - mechanism, set a last refresh date in localstorage.
+      - allow refreshing once an hour.
+      - use middleware on the views
 
 ## Posts View
 - [ ] search posts 
@@ -21,6 +25,7 @@
 
 ## Blogs View
 - [ ] Show most newly added blogs first.  ("sort_order" desc)
+- [ ] Show's site favicon. 
 - [ ] Subscribe to a new blog
 - [ ] Edit a blog's title, url.
 - [ ] Archive a blog (stop fetching, and hide by default)

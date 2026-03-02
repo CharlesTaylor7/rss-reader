@@ -1,4 +1,6 @@
-export default function () {
+import { define } from "@/server/define.ts";
+
+export default define.page(function () {
   return (
     <div class="d-flex gap-2 flex-column align-items-start justify-content-center">
       <label class="form-label" for="file-input">
@@ -27,4 +29,4 @@ export default function () {
       </form>
     </div>
   );
-}
+});
