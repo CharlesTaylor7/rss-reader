@@ -1,4 +1,5 @@
 import { define } from "@/utils.ts";
+import ServiceWorker from "@/islands/ServiceWorker";
 
 export default define.page(function App({ Component }) {
   return (
@@ -11,6 +12,7 @@ export default define.page(function App({ Component }) {
       </head>
       <body>
         <Component />
+        <ServiceWorker />
       </body>
     </html>
   );

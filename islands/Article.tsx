@@ -2,6 +2,7 @@ import type { Signal } from "@preact/signals";
 import { Button } from "@/components/Button.tsx";
 
 function openInNewTab(url) {
+  console.log(url)
   window.open(url, "_blank").focus();
 }
 
