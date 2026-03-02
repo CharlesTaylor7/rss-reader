@@ -1,8 +1,7 @@
 import { useSignal } from "@preact/signals";
-import { Head } from "fresh/runtime";
-import { define } from "@/utils.ts";
-import Counter from "@/islands/Counter.tsx";
+import { define } from "@/server/define.ts";
 import Article from "@/islands/Article.tsx";
+import Login from "@/islands/Login.tsx";
 
 export default define.page(function Home(ctx) {
   const count = useSignal(3);
@@ -15,7 +14,7 @@ export default define.page(function Home(ctx) {
           description="description 1"
           url="https://www.youtube.com"
         />
-        <Article title="title 2" description="description 2" />
+        <Login />
       </div>
     </div>
   );

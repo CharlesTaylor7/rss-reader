@@ -1,5 +1,5 @@
-import { define } from "@/utils.ts";
-import ServiceWorker from "@/islands/ServiceWorker";
+import { define } from "@/server/define.ts";
+import ServiceWorker from "@/islands/ServiceWorker.tsx";
 
 export default define.page(function App({ Component }) {
   return (

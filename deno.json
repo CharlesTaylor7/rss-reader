@@ -20,7 +20,8 @@
   ],
   "imports": {
     "@/": "./",
-    "@db/postgres": "jsr:@db/postgres@^0.19.5",
+    "@neon/serverless": "jsr:@neon/serverless@^1.0.1",
+    "@neondatabase/neon-js": "npm:@neondatabase/neon-js@^0.2.0-beta.1",
     "daisyui": "npm:daisyui@^5.5.19",
     "fresh": "jsr:@fresh/core@^2.2.0",
     "preact": "npm:preact@^10.27.2",

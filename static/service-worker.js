@@ -1,8 +1,5 @@
-const APP_VERSION = "2";
-const ASSETS = [
-  "/",
-  "/manifest.json",
-];
+const APP_VERSION = "3";
+const ASSETS = ["/", "/manifest.json"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

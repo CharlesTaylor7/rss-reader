@@ -1,9 +1,8 @@
 import type { Signal } from "@preact/signals";
 import { Button } from "@/components/Button.tsx";
 
-function openInNewTab(url) {
-  console.log(url)
-  window.open(url).focus();
+function openInNewTab(url: string) {
+  globalThis.open(url)?.focus();
 }
 
 interface ArticleProps {
