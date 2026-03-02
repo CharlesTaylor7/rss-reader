@@ -13,7 +13,7 @@ export default define.page(function Home(ctx) {
         <Article
           title="title 1"
           description="description 1"
-          url="www.google.com"
+          url="https://www.youtube.com"
         />
         <Article title="title 2" description="description 2" />
       </div>

@@ -3,7 +3,7 @@ import { Button } from "@/components/Button.tsx";
 
 function openInNewTab(url) {
   console.log(url)
-  window.open(url, "_blank").focus();
+  window.open(url).focus();
 }
 
 interface ArticleProps {
@@ -16,7 +16,7 @@ export default function (props: ArticleProps) {
   return (
     <div
       class="card card-side bg-base-100 shadow-sm"
-      onClick={() => openInNewTab("https://www.google.com")}
+      onClick={() => openInNewTab(props.url)}
     >
       <img
         src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
