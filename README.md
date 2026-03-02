@@ -16,10 +16,12 @@ deno task dev
 
 This will watch the project directory and restart as necessary.
 
-### LINKS
-- https://neon.com/docs/auth/quick-start/react
+### Dashboard
+- https://console.deno.com/charlestaylor/rss-reader
 - https://console.neon.tech/app/projects/autumn-mountain-82950676/branches/br-floral-wildflower-aiumw2tv
-- https://deno-postgres.com/#/?id=clients-vs-connection-pools
+
+### Docs
+- https://neon.com/docs/auth/quick-start/react
 - https://fresh.deno.dev/docs/advanced
 
 ### Product & Tech spec
