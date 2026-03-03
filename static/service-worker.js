@@ -1,4 +1,4 @@
-const APP_VERSION = "9";
+const APP_VERSION = "16";
 const ASSETS = ["/", "/manifest.json"];
 
 self.addEventListener("install", (event) => {
@@ -19,7 +19,7 @@ self.addEventListener("activate", (event) => {
             return caches.delete(key);
           }
         }),
-      ),
+      )
     ),
   );
   self.clients.claim();
@@ -28,7 +28,7 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
+      return response || fetch(event.request, { redirect: "follow" });
     }),
   );
 });

@@ -1,16 +1,13 @@
-import { NeonQueryHandle } from "@/server/define.ts";
+import { QueryFunc } from "@/server/define.ts";
 import { parseXmlStreamFromBytes, type XmlEventCallbacks } from "@std/xml";
 
 type Blog = Partial<{ title: string; xml_url: string; html_url: string }>;
 export default async function (
-  sql: NeonQueryHandle,
+  sql: QueryFunc,
   fileStream: AsyncIterable<Uint8Array>,
 ): Promise<void> {
   // Get the form data from the request
 
-  // title
-  // xmlUrl
-  // htmlUrl
   const blogsToImport: Array<Blog> = [];
   let rawBlog: Map<string, string> = new Map();
   const xmlCallbacks: XmlEventCallbacks = {

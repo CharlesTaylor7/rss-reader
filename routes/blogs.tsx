@@ -1,13 +1,25 @@
 import { define } from "@/server/define.ts";
 import SyncBlogButton from "@/islands/SyncBlogButton.tsx";
 
+type Blog = {
+  id: number;
+  title: string;
+  xml_url: string;
+  html_url: string;
+};
 export default define.page(async function (ctx) {
-  const blogs = await ctx.state.sql`
+  const sql = ctx.state.sql;
+  const query = ctx.url.searchParams.get("q");
+
+  const likeQuery = `%${query}%`;
+  const filter = sql`where b.title ilike ${likeQuery}`;
+  const blogs = (await sql`
     select id, title, xml_url, html_url 
-    from blogs 
+    from blogs b
+    ${query ? filter : sql``}
     order by sort_order desc
     limit 10
-  `;
+  `) as Blog[];
 
   return (
     <div class="px-4 py-8 mx-auto fresh-gradient min-h-screen">

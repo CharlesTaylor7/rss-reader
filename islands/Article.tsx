@@ -1,6 +1,3 @@
-import type { Signal } from "@preact/signals";
-import { Button } from "@/components/Button.tsx";
-
 function openInNewTab(url: string) {
   globalThis.open(url)?.focus();
 }

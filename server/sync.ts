@@ -1,6 +1,12 @@
-import { NeonQueryHandle } from "@/server/define.ts";
+import { QueryFunc } from "@/server/define.ts";
 import { md5 } from "@takker/md5";
 import { encodeHex } from "jsr:@std/encoding@1/hex";
+import {
+  parse as parseXml,
+  parseXmlStream,
+  parseXmlStreamFromBytes,
+  type XmlEventCallbacks,
+} from "@std/xml";
 
 type Feed = {
   xml_url: string;
@@ -9,10 +15,7 @@ type Feed = {
   hash?: string;
 };
 
-export default async function (
-  sql: NeonQueryHandle,
-  blogId: number,
-): Promise<void> {
+export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
   const feed: Feed = (
     await sql`
     select b.xml_url, f.etag, f.last_modified, f.hash
@@ -36,21 +39,103 @@ export default async function (
   });
 
   const body = await response.text();
+  // no updates on a not modified
+  if (response.status === 304) {
+    return;
+  }
+
   const hash = encodeHex(md5(body));
-  const shouldUpdateFeed = feed.hash != hash;
+  const shouldUpdatePosts = feed.hash != hash;
   feed.hash = hash;
   feed.etag = response.headers.get("etag")!;
   feed.last_modified = response.headers.get("last-modified")!;
   await sql`
     insert into feeds(blog_id, hash, etag, last_modified)
-    values ${feed.hash} ${feed.etag} ${feed.last_modified}
+    values (${blogId}, ${feed.hash}, ${feed.etag}, ${feed.last_modified})
     on conflict(blog_id) do update set
       hash = excluded.hash,
       etag = excluded.etag,
       last_modified = excluded.last_modified
   `;
 
-  if (shouldUpdateFeed) {
+  if (shouldUpdatePosts) {
     updatePosts(sql, blogId, body);
   }
+}
+
+type Post = {
+  title: string;
+  url: string;
+  published_at_text: string;
+  thumbnail: string;
+};
+
+export async function force_sync(
+  sql: QueryFunc,
+  blogId: number,
+): Promise<void> {
+  const feed = (
+    await sql`
+    select b.xml_url
+    from blogs b 
+    where b.id = ${blogId}
+  `
+  )[0].xml_url as string;
+  const response = await fetch(feed);
+  const body = await response.text();
+  updatePosts(sql, blogId, body);
+}
+
+async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
+  let post: Partial<Post> = {};
+  let el: string = "";
+  const xmlCallbacks: XmlEventCallbacks = {
+    async onEndElement(name) {
+      if (name == "entry" || name == "item") {
+        await sql`
+          insert into posts(blog_id, title, url, published_at_text, thumbnail)
+          values (${blogId}, ${post.title}, ${post.url}, ${post.published_at_text}, thumbnail)
+          on conflict (url) do update
+          set 
+            title=excluded.title,
+            thumbnail=excluded.thumbnail
+        `;
+      }
+    },
+
+    onStartElement(name, _, __, attributes) {
+      el = name;
+      if (name == "entry" || name == "item") {
+        post = {};
+      } else if (name == "link") {
+        for (let i = 0; i < attributes.count; i++) {
+          if (attributes.getName(i) == "href") {
+            post.url = attributes.getValue(i);
+          }
+        }
+      } else if (name == "thumbnail") {
+        for (let i = 0; i < attributes.count; i++) {
+          if (attributes.getName(i) == "url") {
+            post.thumbnail = attributes.getValue(i);
+          }
+        }
+      }
+    },
+
+    onText(text) {
+      if (el == "title") {
+        post.title = text;
+      } else if (el == "link") {
+        post.url = text;
+      } else if (el == "published" || el == "pubDate") {
+        post.published_at_text = text;
+      }
+    },
+  };
+
+  await parseXmlStream(intoStream(body), xmlCallbacks);
+}
+
+async function* intoStream(body: string) {
+  yield body;
 }

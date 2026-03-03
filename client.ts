@@ -18,8 +18,8 @@ function sync() {
 
   const ONE_HOUR_MS = 60 * 60 * 1000;
 
-  const shouldSync =
-    lastSyncRaw === null || now - Number(lastSyncRaw) > ONE_HOUR_MS;
+  const shouldSync = lastSyncRaw === null ||
+    now - Number(lastSyncRaw) > ONE_HOUR_MS;
 
   if (shouldSync) {
     console.log("Sync");
