@@ -1,8 +1,9 @@
 import { define } from "@/server/define.ts";
+import SyncBlogButton from "@/islands/SyncBlogButton.tsx";
 
 export default define.page(async function (ctx) {
   const blogs = await ctx.state.sql`
-    select title, xml_url, html_url 
+    select id, title, xml_url, html_url 
     from blogs 
     order by sort_order desc
     limit 10
@@ -18,9 +19,7 @@ export default define.page(async function (ctx) {
                 <a href={b.html_url}>{b.title}</a>
               </h2>
               <div class="card-actions justify-end">
-                <button type="button" class="btn btn-primary">
-                  Edit
-                </button>
+                <SyncBlogButton blogId={b.id} />
               </div>
             </div>
           </div>
