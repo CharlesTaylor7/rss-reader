@@ -1,5 +1,5 @@
-const APP_VERSION = "19";
-const ASSETS = ["/manifest.json", "pwa-icon.webp"];
+const APP_VERSION = "20";
+const ASSETS = ["/manifest.json", "/pwa-icon.webp"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -19,7 +19,7 @@ self.addEventListener("activate", (event) => {
             return caches.delete(key);
           }
         }),
-      )
+      ),
     ),
   );
   self.clients.claim();
@@ -28,7 +28,7 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      return response || fetch(event.request, { redirect: "follow" });
+      return response || fetch(event.request);
     }),
   );
 });

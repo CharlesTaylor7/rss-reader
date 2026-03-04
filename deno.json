@@ -2,7 +2,7 @@
   "nodeModulesDir": "manual",
   "tasks": {
     "check": "deno fmt --check . && deno lint . && deno check",
-    "dev": "vite --host localhost --port 3000",
+    "dev": "deno run -A --unstable-kv -- vite --host localhost --port 3000",
     "build": "vite build",
     "start": "deno serve -A _fresh/server.js",
     "update": "deno run -A -r jsr:@fresh/update ."
@@ -10,7 +10,7 @@
   "lint": { "rules": { "tags": ["fresh", "recommended"] } },
   "exclude": ["**/_fresh/*", ".nvim/", "old/", "debug/"],
   "imports": {
-    "@/": "./",
+    "@/": "./src/",
     "@neon/serverless": "jsr:@neon/serverless@^1.0.1",
     "@neondatabase/neon-js": "npm:@neondatabase/neon-js@^0.2.0-beta.1",
     "@std/xml": "jsr:@std/xml@^0.1.0",
@@ -25,7 +25,13 @@
     "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.2.1"
   },
   "compilerOptions": {
-    "lib": ["dom", "dom.asynciterable", "dom.iterable", "deno.ns"],
+    "lib": [
+      "dom",
+      "dom.asynciterable",
+      "dom.iterable",
+      "deno.ns",
+      "deno.unstable"
+    ],
     "jsx": "precompile",
     "jsxImportSource": "preact",
     "jsxPrecompileSkipElements": [

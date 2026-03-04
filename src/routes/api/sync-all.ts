@@ -1,5 +1,4 @@
 import { define } from "@/server/define.ts";
-import { sync } from "@/server/sync.ts";
 
 export const handler = define.handlers({
   async POST(ctx) {
@@ -9,12 +8,9 @@ export const handler = define.handlers({
       left join feeds f on b.id = f.blog_id
       order by f.last_successful_sync
     `;
+    using kv = await Deno.openKv();
     for (const b of blogs) {
-      try {
-        await sync(ctx.state.sql, b.id);
-      } catch (e) {
-        console.error(e);
-      }
+      kv.enqueue({ sync_blog: b.id });
     }
     return new Response(`Done`);
   },

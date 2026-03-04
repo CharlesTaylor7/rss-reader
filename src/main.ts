@@ -1,6 +1,7 @@
 import { App, staticFiles } from "fresh";
 import { type QueryFunc, type State } from "@/server/define.ts";
 import { neon } from "@neon/serverless";
+import { sync } from "@/server/sync.ts";
 
 function redirect(path: string): Response {
   return new Response("", {
@@ -30,3 +31,12 @@ app.use((ctx) => {
   return ctx.next();
 });
 app.fsRoutes();
+
+async function startQueue() {
+  const kv = await Deno.openKv();
+
+  kv.listenQueue(async (msg: { sync_blog: number }) => {
+    await sync(sql, msg.sync_blog);
+  });
+}
+startQueue();

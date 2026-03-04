@@ -27,8 +27,8 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
   if (success) {
     await sql`
       update feeds f
-      where f.blog_id = ${blogId}
       set f.last_successful_sync = now() 
+      where f.blog_id = ${blogId}
     `;
   }
 }
@@ -37,11 +37,11 @@ async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
   console.log(feed.xml_url);
   if (!Deno.env.get("DENO_DEPLOY")) {
     try {
-      return await Deno.readTextFile(`debug/${feed.blog_id}.xml`);
+      return await Deno.readTextFile(`./debug/${feed.blog_id}.xml`);
     } catch {
       const response = await fetch(feed.xml_url);
       const body = await response.text();
-      await Deno.writeTextFile(`debug/${feed.blog_id}.xml`, body);
+      await Deno.writeTextFile(`./debug/${feed.blog_id}.xml`, body);
       console.log(feed.blog_id);
       return body;
     }
