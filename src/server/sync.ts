@@ -2,6 +2,7 @@ import { QueryFunc } from "@/server/define.ts";
 import { md5 } from "@takker/md5";
 import { encodeHex } from "jsr:@std/encoding@1/hex";
 import { parseXmlStream, type XmlEventCallbacks } from "@std/xml";
+import { parseDate } from "./date.ts";
 
 type Feed = {
   blog_id: number;
@@ -65,8 +66,8 @@ async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
   const hash = encodeHex(md5(body));
   feed.hash = hash;
   feed.etag = response.headers.get("etag") ?? feed.etag;
-  feed.last_modified =
-    response.headers.get("last-modified") ?? feed.last_modified;
+  feed.last_modified = response.headers.get("last-modified") ??
+    feed.last_modified;
 
   await sql`
     insert into feeds(blog_id, hash, etag, last_modified)
@@ -88,8 +89,9 @@ async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
 type Post = {
   title: string;
   url: string;
-  published_at_text: string;
-  thumbnail: string;
+  published_at_text?: string;
+  published_at: Date | null;
+  thumbnail?: string;
 };
 
 const set = new Set();
@@ -143,6 +145,7 @@ async function updatePosts(
         post.url = trimmed;
       } else if (el == "published" || el == "pubDate") {
         post.published_at_text = trimmed;
+        post.published_at = parseDate(trimmed);
       }
     },
   };
@@ -157,18 +160,27 @@ async function updatePosts(
     }
     try {
       await sql`
-        insert into posts(blog_id, title, url, published_at_text, thumbnail)
+        insert into posts(
+          blog_id, 
+          title, 
+          url, 
+          thumbnail,
+          published_at_text,
+          published_at
+        )
         values (
           ${blogId}, 
           ${post.title}, 
           ${post.url}, 
+          ${post.thumbnail ?? null},
           ${post.published_at_text ?? null},
-          ${post.thumbnail ?? null}
+          ${post.published_at ?? null}
         )
         on conflict (url) do update
         set 
           title=excluded.title,
           published_at_text=excluded.published_at_text,
+          published_at=excluded.published_at,
           thumbnail=excluded.thumbnail
       `;
     } catch (e) {

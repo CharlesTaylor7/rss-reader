@@ -40,9 +40,7 @@ export default define.page(async function (ctx) {
   return (
     <div class="px-4 py-8 mx-auto fresh-gradient min-h-screen">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center gap-3">
-        {posts.map((p) => (
-          <Article {...p} />
-        ))}
+        {posts.map((p) => <Article {...p} />)}
       </div>
     </div>
   );
