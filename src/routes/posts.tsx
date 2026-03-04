@@ -7,22 +7,22 @@ function viewQueryFragment(sql: QueryFunc, view: View) {
   if (view == "default") {
     return sql`
       where p.ignored = false
-      order by p.read, p.published_at desc
+      order by p.read, p.published_at DESC NULLS LAST
     `;
   } else if (view == "read") {
     return sql`
       where p.read = true
-      order by p.published_at desc
+      order by p.published_at desc NULLS LAST
     `;
   } else if (view == "ignored") {
     return sql`
       where p.ignored = true
-      order by p.published_at desc
+      order by p.published_at desc NULLS LAST
     `;
   } else if (view == "favorite") {
     return sql`
       where p.favorite = true
-      order by p.published_at desc
+      order by p.published_at desc NULLS LAST
     `;
   }
 }
@@ -33,7 +33,7 @@ export default define.page(async function (ctx) {
     select p.id, p.title, p.url, b.title as author,  p.thumbnail, 
 
       COALESCE(
-        to_char(p.published_at, 'YYYY-MM-DD HH24:MI:SS'),
+        to_char(p.published_at, 'YYYY-MM-DD'),
         p.published_at_text
       ) as published_at
     from posts p
