@@ -4,6 +4,7 @@ import { encodeHex } from "jsr:@std/encoding@1/hex";
 import { parseXmlStream, type XmlEventCallbacks } from "@std/xml";
 
 type Feed = {
+  blog_id: number;
   xml_url: string;
   etag?: string;
   last_modified?: string;
@@ -13,16 +14,30 @@ type Feed = {
 export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
   const feed: Feed = (
     await sql`
-    select b.xml_url, f.etag, f.last_modified, f.hash
+    select b.id as blog_id, b.xml_url, f.etag, f.last_modified, f.hash
     from blogs b 
     left join feeds f on b.id = f.blog_id
     where b.id = ${blogId}
   `
   )[0] as unknown as Feed;
-  console.log(feed);
-  if (feed.xml_url == undefined) {
-    console.error("no blog found!");
-    return;
+  const body = await fetchFeed(sql, feed);
+  if (body == null) return;
+
+  await updatePosts(sql, blogId, body);
+}
+
+async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
+  console.log(feed.xml_url);
+  if (!Deno.env.get("DENO_DEPLOY")) {
+    try {
+      return await Deno.readTextFile(`debug/${feed.blog_id}.xml`);
+    } catch {
+      const response = await fetch(feed.xml_url);
+      const body = await response.text();
+      await Deno.writeTextFile(`debug/${feed.blog_id}.xml`, body);
+      console.log(feed.blog_id);
+      return body;
+    }
   }
 
   const headers: HeadersInit = {};
@@ -39,28 +54,28 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
   });
 
   const body = await response.text();
-  // no updates on a not modified
-  if (response.status === 304) {
-    return;
-  }
 
   const hash = encodeHex(md5(body));
-  const shouldUpdatePosts = feed.hash != hash;
   feed.hash = hash;
-  feed.etag = response.headers.get("etag")!;
-  feed.last_modified = response.headers.get("last-modified")!;
+  feed.etag = response.headers.get("etag") ?? feed.etag;
+  feed.last_modified =
+    response.headers.get("last-modified") ?? feed.last_modified;
+
   await sql`
     insert into feeds(blog_id, hash, etag, last_modified)
-    values (${blogId}, ${feed.hash}, ${feed.etag}, ${feed.last_modified})
+    values (${feed.blog_id}, ${feed.hash}, ${feed.etag}, ${feed.last_modified})
     on conflict(blog_id) do update set
       hash = excluded.hash,
       etag = excluded.etag,
       last_modified = excluded.last_modified
   `;
 
-  if (shouldUpdatePosts) {
-    await updatePosts(sql, blogId, body);
+  // no updates on a not modified
+  if (response.status === 304 || feed.hash === hash) {
+    return null;
   }
+
+  return body;
 }
 
 type Post = {
@@ -69,22 +84,6 @@ type Post = {
   published_at_text: string;
   thumbnail: string;
 };
-
-export async function force_sync(
-  sql: QueryFunc,
-  blogId: number,
-): Promise<void> {
-  const feed = (
-    await sql`
-    select b.xml_url
-    from blogs b 
-    where b.id = ${blogId}
-  `
-  )[0].xml_url as string;
-  const response = await fetch(feed);
-  const body = await response.text();
-  await updatePosts(sql, blogId, body);
-}
 
 async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
   const posts: Array<Post> = [];
@@ -141,7 +140,9 @@ async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
     try {
       await sql`
           insert into posts(blog_id, title, url, published_at_text, thumbnail)
-          values (${blogId}, ${post.title}, ${post.url}, ${post.published_at_text ?? null}, ${post.thumbnail ?? null})
+          values (${blogId}, ${post.title}, ${post.url}, ${
+            post.published_at_text ?? null
+          }, ${post.thumbnail ?? null})
           on conflict (url) do update
           set 
             title=excluded.title,
