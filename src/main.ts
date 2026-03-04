@@ -1,5 +1,5 @@
 import { App, staticFiles } from "fresh";
-import { type QueryFunc, type State } from "@/server/define.ts";
+import { QueueMessage, type QueryFunc, type State } from "@/server/define.ts";
 import { neon } from "@neon/serverless";
 import { sync } from "@/server/sync.ts";
 
@@ -35,8 +35,21 @@ app.fsRoutes();
 async function startQueue() {
   const kv = await Deno.openKv();
 
-  kv.listenQueue(async (msg: { sync_blog: number }) => {
-    await sync(sql, msg.sync_blog);
+  kv.listenQueue(async function (msg: QueueMessage) {
+    if (msg.type == "sync-all") {
+      const blogs = await sql`
+      select b.id 
+      from blogs b
+      left join feeds f on b.id = f.blog_id
+      order by f.last_successful_sync
+    `;
+      using kv = await Deno.openKv();
+      for (const b of blogs) {
+        await kv.enqueue({ sync_blog: b.id });
+      }
+    } else if (msg.type == "sync") {
+      await sync(sql, msg.blog_id);
+    }
   });
 }
 startQueue();

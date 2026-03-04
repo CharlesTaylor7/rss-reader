@@ -27,7 +27,7 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
   if (success) {
     await sql`
       update feeds f
-      set f.last_successful_sync = now() 
+      set last_successful_sync = now() 
       where f.blog_id = ${blogId}
     `;
   }
