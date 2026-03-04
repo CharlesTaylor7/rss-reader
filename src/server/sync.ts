@@ -137,7 +137,7 @@ async function updatePosts(
       const trimmed = text.trim();
       if (trimmed === "") return;
 
-      if (el == "title" || el == "media:title") {
+      if (el == "title") {
         post.title = trimmed;
       } else if (el == "link" || el == "atom:link") {
         post.url = trimmed;
@@ -157,16 +157,20 @@ async function updatePosts(
     }
     try {
       await sql`
-          insert into posts(blog_id, title, url, published_at_text, thumbnail)
-          values (${blogId}, ${post.title}, ${post.url}, ${
-            post.published_at_text ?? null
-          }, ${post.thumbnail ?? null})
-          on conflict (url) do update
-          set 
-            title=excluded.title,
-            published_at_text=excluded.published_at_text,
-            thumbnail=excluded.thumbnail
-        `;
+        insert into posts(blog_id, title, url, published_at_text, thumbnail)
+        values (
+          ${blogId}, 
+          ${post.title}, 
+          ${post.url}, 
+          ${post.published_at_text ?? null},
+          ${post.thumbnail ?? null}
+        )
+        on conflict (url) do update
+        set 
+          title=excluded.title,
+          published_at_text=excluded.published_at_text,
+          thumbnail=excluded.thumbnail
+      `;
     } catch (e) {
       successful = false;
       console.error(e);

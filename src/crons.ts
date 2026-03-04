@@ -7,10 +7,10 @@ Deno.cron("sync feeds", "17 14 * * *", async function () {
   const databaseUrl = Deno.env.get("POSTGRES_URL")!;
   const sql = neon(databaseUrl);
   const blogs = await sql`
-select b.id 
-from blogs b
-order by last_successful_sync desc
-`;
+    select b.id 
+    from blogs b
+    order by last_successful_sync desc
+  `;
   for (const blog of blogs) {
     await sync(sql, blog.id);
   }

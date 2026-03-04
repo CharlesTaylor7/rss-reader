@@ -12,4 +12,8 @@ export default defineConfig({
     }),
     tailwindcss(),
   ],
+  ssr: {
+    // skip SSR for this file
+    external: ["./src/crons.ts", "./src/main.ts"],
+  },
 });
