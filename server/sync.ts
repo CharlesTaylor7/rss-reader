@@ -14,16 +14,23 @@ type Feed = {
 export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
   const feed: Feed = (
     await sql`
-    select b.id as blog_id, b.xml_url, f.etag, f.last_modified, f.hash
-    from blogs b 
-    left join feeds f on b.id = f.blog_id
-    where b.id = ${blogId}
-  `
+      select b.id as blog_id, b.xml_url, f.etag, f.last_modified, f.hash
+      from blogs b 
+      left join feeds f on b.id = f.blog_id
+      where b.id = ${blogId}
+    `
   )[0] as unknown as Feed;
   const body = await fetchFeed(sql, feed);
   if (body == null) return;
 
-  await updatePosts(sql, blogId, body);
+  const success = await updatePosts(sql, blogId, body);
+  if (success) {
+    await sql`
+      update feeds f
+      where f.blog_id = ${blogId}
+      set f.last_successful_sync = now() 
+    `;
+  }
 }
 
 async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
@@ -87,7 +94,11 @@ type Post = {
 
 const set = new Set();
 
-async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
+async function updatePosts(
+  sql: QueryFunc,
+  blogId: number,
+  body: string,
+): Promise<boolean> {
   const posts: Array<Post> = [];
   let post: Partial<Post> = {};
   let el: string = "";
@@ -138,10 +149,11 @@ async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
 
   await parseXmlStream(intoStream(body), xmlCallbacks);
 
+  let successful = true;
   for (const post of posts) {
-    if (post.title == null) {
+    if (post.title == null || post.url == null) {
       console.error(post);
-      return;
+      successful = false;
     }
     try {
       await sql`
@@ -156,10 +168,12 @@ async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
             thumbnail=excluded.thumbnail
         `;
     } catch (e) {
+      successful = false;
       console.error(e);
       console.log(post);
     }
   }
+  return successful;
 }
 
 async function* intoStream(body: string) {

@@ -4,7 +4,10 @@ import { sync } from "@/server/sync.ts";
 export const handler = define.handlers({
   async POST(ctx) {
     const blogs = await ctx.state.sql`
-      select * from blogs 
+      select b.id 
+      from blogs b
+      left join feeds f on b.id = f.blog_id
+      order by f.last_successful_sync
     `;
     for (const b of blogs) {
       try {
