@@ -7,7 +7,11 @@ export const handler = define.handlers({
       select * from blogs 
     `;
     for (const b of blogs) {
-      await sync(ctx.state.sql, b.id);
+      try {
+        await sync(ctx.state.sql, b.id);
+      } catch (e) {
+        console.error(e);
+      }
     }
     return new Response(`Done`);
   },

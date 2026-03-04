@@ -85,6 +85,8 @@ type Post = {
   thumbnail: string;
 };
 
+const set = new Set();
+
 async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
   const posts: Array<Post> = [];
   let post: Partial<Post> = {};
@@ -98,6 +100,10 @@ async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
     },
 
     onStartElement(name, _, __, attributes) {
+      if (!set.has(name)) {
+        console.log(name);
+        set.add(name);
+      }
       el = name;
       if (name == "entry" || name == "item") {
         post = {};
@@ -107,7 +113,7 @@ async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
             post.url = attributes.getValue(i);
           }
         }
-      } else if (name == "thumbnail") {
+      } else if (name == "image" || name == "media:thumbnail") {
         for (let i = 0; i < attributes.count; i++) {
           if (attributes.getName(i) == "url") {
             post.thumbnail = attributes.getValue(i).trim();
@@ -120,9 +126,9 @@ async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
       const trimmed = text.trim();
       if (trimmed === "") return;
 
-      if (el == "title") {
+      if (el == "title" || el == "media:title") {
         post.title = trimmed;
-      } else if (el == "link") {
+      } else if (el == "link" || el == "atom:link") {
         post.url = trimmed;
       } else if (el == "published" || el == "pubDate") {
         post.published_at_text = trimmed;

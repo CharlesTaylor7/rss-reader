@@ -8,7 +8,7 @@
     "update": "deno run -A -r jsr:@fresh/update ."
   },
   "lint": { "rules": { "tags": ["fresh", "recommended"] } },
-  "exclude": ["**/_fresh/*", ".nvim/", "old/"],
+  "exclude": ["**/_fresh/*", ".nvim/", "old/", "debug/"],
   "imports": {
     "@/": "./",
     "@neon/serverless": "jsr:@neon/serverless@^1.0.1",
