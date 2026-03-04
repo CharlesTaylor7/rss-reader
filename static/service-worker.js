@@ -24,7 +24,6 @@ self.addEventListener("activate", (event) => {
   );
 
   self.clients.claim();
-  fetch("/api/sync-all", { method: "POST" });
 });
 
 self.addEventListener("fetch", (event) => {
