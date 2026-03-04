@@ -1,7 +1,7 @@
 import { App, staticFiles } from "fresh";
-import { QueueMessage, type QueryFunc, type State } from "@/server/define.ts";
+import { type QueryFunc, type State } from "@/server/define.ts";
 import { neon } from "@neon/serverless";
-import { sync } from "@/server/sync.ts";
+import "@/crons.ts";
 
 function redirect(path: string): Response {
   return new Response("", {
@@ -31,29 +31,3 @@ app.use((ctx) => {
   return ctx.next();
 });
 app.fsRoutes();
-
-// run setup that depends on `Deno` module, which is not available when vite is doing its initial scan
-async function viteShield() {
-  Deno.cron("Log a message", "* * * * *", () => {
-    console.log("Cron");
-  });
-  const kv = await Deno.openKv();
-
-  kv.listenQueue(async function (msg: QueueMessage) {
-    if (msg.type == "sync-all") {
-      const blogs = await sql`
-      select b.id 
-      from blogs b
-      left join feeds f on b.id = f.blog_id
-      order by f.last_successful_sync
-    `;
-      using kv = await Deno.openKv();
-      for (const b of blogs) {
-        await kv.enqueue({ sync_blog: b.id });
-      }
-    } else if (msg.type == "sync") {
-      await sync(sql, msg.blog_id);
-    }
-  });
-}
-viteShield();

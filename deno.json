@@ -2,11 +2,12 @@
   "nodeModulesDir": "manual",
   "tasks": {
     "check": "deno fmt --check . && deno lint . && deno check",
-    "dev": "deno run -A --unstable-kv --unstable-cron -- vite --host localhost --port 3000",
+    "dev": "vite --host localhost --port 3000",
     "build": "vite build",
     "start": "deno serve -A _fresh/server.js",
     "update": "deno run -A -r jsr:@fresh/update ."
   },
+  "unstable": ["cron"],
   "lint": { "rules": { "tags": ["fresh", "recommended"] } },
   "exclude": ["**/_fresh/*", ".nvim/", "old/", "debug/"],
   "imports": {
