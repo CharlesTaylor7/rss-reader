@@ -1,5 +1,5 @@
-const APP_VERSION = "16";
-const ASSETS = ["/", "/manifest.json"];
+const APP_VERSION = "19";
+const ASSETS = ["/manifest.json", "pwa-icon.webp"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -19,7 +19,7 @@ self.addEventListener("activate", (event) => {
             return caches.delete(key);
           }
         }),
-      )
+      ),
     ),
   );
   self.clients.claim();

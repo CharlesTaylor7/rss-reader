@@ -1,15 +1,18 @@
 import { define } from "@/server/define.ts";
-import { sync } from "@/server/sync.ts";
+import { force_sync } from "@/server/sync.ts";
 
 export const handler = define.handlers({
   async POST(ctx) {
-    const ids = await ctx.state.sql`
-      select b.id
-      from blogs b
-      where b.archived = false
+    const blogs = await ctx.state.sql`
+      select * from blogs 
     `;
-    for (const b of ids) {
-      await sync(ctx.state.sql, b);
+    for (const b of blogs) {
+      console.log(`syncing: ${b.xml_url}`);
+      try {
+        await force_sync(ctx.state.sql, b.id);
+      } catch (e) {
+        console.error(e);
+      }
     }
     return new Response(`Done`);
   },

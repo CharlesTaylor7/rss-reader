@@ -1,12 +1,7 @@
 import { QueryFunc } from "@/server/define.ts";
 import { md5 } from "@takker/md5";
 import { encodeHex } from "jsr:@std/encoding@1/hex";
-import {
-  parse as parseXml,
-  parseXmlStream,
-  parseXmlStreamFromBytes,
-  type XmlEventCallbacks,
-} from "@std/xml";
+import { parseXmlStream, type XmlEventCallbacks } from "@std/xml";
 
 type Feed = {
   xml_url: string;
@@ -30,12 +25,17 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
     return;
   }
 
+  const headers: HeadersInit = {};
+  if (feed.etag) {
+    headers["If-None-Match"] = feed.etag;
+  }
+
+  if (feed.last_modified) {
+    headers["If-Modified-Since"] = feed.last_modified;
+  }
   const response = await fetch(feed.xml_url, {
     method: "GET",
-    headers: {
-      "If-None-Match": feed.etag,
-      "If-Modified-Since": feed.last_modified,
-    },
+    headers,
   });
 
   const body = await response.text();
@@ -59,7 +59,7 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
   `;
 
   if (shouldUpdatePosts) {
-    updatePosts(sql, blogId, body);
+    await updatePosts(sql, blogId, body);
   }
 }
 
@@ -83,7 +83,7 @@ export async function force_sync(
   )[0].xml_url as string;
   const response = await fetch(feed);
   const body = await response.text();
-  updatePosts(sql, blogId, body);
+  await updatePosts(sql, blogId, body);
 }
 
 async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
@@ -92,14 +92,21 @@ async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
   const xmlCallbacks: XmlEventCallbacks = {
     async onEndElement(name) {
       if (name == "entry" || name == "item") {
-        await sql`
+        if (post.title == null) return;
+        try {
+          await sql`
           insert into posts(blog_id, title, url, published_at_text, thumbnail)
-          values (${blogId}, ${post.title}, ${post.url}, ${post.published_at_text}, thumbnail)
+          values (${blogId}, ${post.title}, ${post.url}, ${post.published_at_text ?? null}, ${post.thumbnail ?? null})
           on conflict (url) do update
           set 
             title=excluded.title,
+            published_at_text=excluded.published_at_text,
             thumbnail=excluded.thumbnail
         `;
+        } catch (e) {
+          console.error(e);
+          console.log(post);
+        }
       }
     },
 
@@ -116,19 +123,22 @@ async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
       } else if (name == "thumbnail") {
         for (let i = 0; i < attributes.count; i++) {
           if (attributes.getName(i) == "url") {
-            post.thumbnail = attributes.getValue(i);
+            post.thumbnail = attributes.getValue(i).trim();
           }
         }
       }
     },
 
     onText(text) {
+      const trimmed = text.trim();
+      if (trimmed === "") return;
+
       if (el == "title") {
-        post.title = text;
+        post.title = trimmed;
       } else if (el == "link") {
-        post.url = text;
+        post.url = trimmed;
       } else if (el == "published" || el == "pubDate") {
-        post.published_at_text = text;
+        post.published_at_text = trimmed;
       }
     },
   };

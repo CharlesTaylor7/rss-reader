@@ -25,6 +25,7 @@ This will watch the project directory and restart as necessary.
 
 - https://neon.com/docs/auth/quick-start/react
 - https://fresh.deno.dev/docs/advanced
+- https://jsr.io/@neon/serverless
 
 ### Product & Tech spec
 

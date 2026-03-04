@@ -16,14 +16,15 @@ function sync() {
   const now = Date.now(); // number (ms since epoch)
   const lastSyncRaw = localStorage.getItem("last_full_sync");
 
+  console.log(lastSyncRaw);
   const ONE_HOUR_MS = 60 * 60 * 1000;
 
-  const shouldSync = lastSyncRaw === null ||
-    now - Number(lastSyncRaw) > ONE_HOUR_MS;
+  const shouldSync =
+    lastSyncRaw == null || now - Number(lastSyncRaw) > ONE_HOUR_MS;
 
   if (shouldSync) {
     console.log("Sync");
-    fetch("/api/sync-all").catch((err) => {
+    fetch("/api/sync-all", { method: "POST" }).catch((err) => {
       console.error("Sync failed:", err);
     });
 
