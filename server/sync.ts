@@ -87,26 +87,14 @@ export async function force_sync(
 }
 
 async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
+  const posts: Array<Post> = [];
   let post: Partial<Post> = {};
   let el: string = "";
+
   const xmlCallbacks: XmlEventCallbacks = {
-    async onEndElement(name) {
+    onEndElement(name) {
       if (name == "entry" || name == "item") {
-        if (post.title == null) return;
-        try {
-          await sql`
-          insert into posts(blog_id, title, url, published_at_text, thumbnail)
-          values (${blogId}, ${post.title}, ${post.url}, ${post.published_at_text ?? null}, ${post.thumbnail ?? null})
-          on conflict (url) do update
-          set 
-            title=excluded.title,
-            published_at_text=excluded.published_at_text,
-            thumbnail=excluded.thumbnail
-        `;
-        } catch (e) {
-          console.error(e);
-          console.log(post);
-        }
+        posts.push(post as Post);
       }
     },
 
@@ -144,6 +132,27 @@ async function updatePosts(sql: QueryFunc, blogId: number, body: string) {
   };
 
   await parseXmlStream(intoStream(body), xmlCallbacks);
+
+  for (const post of posts) {
+    if (post.title == null) {
+      console.error(post);
+      return;
+    }
+    try {
+      await sql`
+          insert into posts(blog_id, title, url, published_at_text, thumbnail)
+          values (${blogId}, ${post.title}, ${post.url}, ${post.published_at_text ?? null}, ${post.thumbnail ?? null})
+          on conflict (url) do update
+          set 
+            title=excluded.title,
+            published_at_text=excluded.published_at_text,
+            thumbnail=excluded.thumbnail
+        `;
+    } catch (e) {
+      console.error(e);
+      console.log(post);
+    }
+  }
 }
 
 async function* intoStream(body: string) {
