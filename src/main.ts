@@ -32,7 +32,11 @@ app.use((ctx) => {
 });
 app.fsRoutes();
 
-async function startQueue() {
+// run setup that depends on `Deno` module, which is not available when vite is doing its initial scan
+async function viteShield() {
+  Deno.cron("Log a message", "* * * * *", () => {
+    console.log("Cron");
+  });
   const kv = await Deno.openKv();
 
   kv.listenQueue(async function (msg: QueueMessage) {
@@ -52,4 +56,4 @@ async function startQueue() {
     }
   });
 }
-startQueue();
+viteShield();
