@@ -58,7 +58,6 @@ export function parseDate(raw: string): Date | null {
 
   if (result === null) {
     console.log(`Encountered unknown date format: ${raw}`);
-    console.log("Didn't match any known patterns");
     return null;
   }
 

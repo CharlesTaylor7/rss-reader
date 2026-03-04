@@ -30,7 +30,12 @@ function viewQueryFragment(sql: QueryFunc, view: View) {
 export default define.page(async function (ctx) {
   const view = (ctx.url.searchParams.get("view") ?? "default") as View;
   const posts = (await ctx.state.sql`
-    select p.id, p.title, p.url, b.title as author, p.published_at_text as published_at,  p.thumbnail
+    select p.id, p.title, p.url, b.title as author,  p.thumbnail, 
+
+      COALESCE(
+        to_char(p.published_at, 'YYYY-MM-DD HH24:MI:SS'),
+        p.published_at_text
+      ) as published_at
     from posts p
     inner join blogs b on b.id = p.blog_id
     ${viewQueryFragment(ctx.state.sql, view)}
@@ -40,7 +45,9 @@ export default define.page(async function (ctx) {
   return (
     <div class="px-4 py-8 mx-auto fresh-gradient min-h-screen">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center gap-3">
-        {posts.map((p) => <Article {...p} />)}
+        {posts.map((p) => (
+          <Article {...p} />
+        ))}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-const APP_VERSION = "20";
+const APP_VERSION = "22";
 const ASSETS = ["/manifest.json", "/pwa-icon.webp"];
 
 self.addEventListener("install", (event) => {
@@ -19,10 +19,12 @@ self.addEventListener("activate", (event) => {
             return caches.delete(key);
           }
         }),
-      )
+      ),
     ),
   );
+
   self.clients.claim();
+  fetch("/api/sync-all", { method: "POST" });
 });
 
 self.addEventListener("fetch", (event) => {
