@@ -1,4 +1,5 @@
-# Navigation:
+# Frontend:
+## Navigation
 
 - Home View
 - Posts View
@@ -9,21 +10,16 @@
 ## Home View
 
 - [x] Home page should redirect to /posts
-- [x] Visiting any part site should kick off a sync.
-- [x] spamming refreshes shouldn't refetch feeds multiple times
-  - mechanism, set a last refresh date in localstorage.
-  - allow refreshing once an hour.
-  - use middleware on the views
-
 ## Posts View
 
 - [ ] search posts
   - should search post titles and descriptions
-- [ ] sort by read status, then by publish date.
-- [ ] show all posts, do infinite scroll
+- [x] sort by read status, then by publish date.
+- [x] touch post to open, marks as read
+- [ ] grey out read posts
+- [ ] infinite scroll
 - [ ] swipe left to ignore
 - [ ] swipe right to favorite
-- [ ] click post to open in tab, (marks as read)
 
 ## Blogs View
 
@@ -40,6 +36,9 @@
   - the "figma way", fractional lexicographic ordering. Use unbounded text
     columns. "midpoint" between "a", and "b" is "am". Append more letters ad
     infinitum. Also called "CRDT" way.
+
+# Backend
+- [x] Cron job to sync feeds
 
 ## Import view
 
