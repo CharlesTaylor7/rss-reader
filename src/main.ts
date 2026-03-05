@@ -22,12 +22,12 @@ const debugSql: QueryFunc = (t, ...args) => {
 export const app = new App<State>();
 app.get("/", () => redirect("/posts"));
 app.use(staticFiles());
+// all middlewares inline
 app.use(async (ctx) => {
-  ctx.state.sql = sql;
-  return await ctx.next();
-});
-app.use((ctx) => {
   console.log(`${ctx.req.method} ${ctx.req.url}`);
-  return ctx.next();
+  ctx.state.sql = sql;
+  const response = await ctx.next();
+  response.headers.set("Cache-Control", "no-store");
+  return response;
 });
 app.fsRoutes();
