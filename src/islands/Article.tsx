@@ -45,19 +45,18 @@ export default function (props: ArticleProps) {
   const favoriteSignal = useSignal(props.favorite);
   const swipeTransformX = useSignal(0);
   const swipeHandlers = useSwipeable({
-    preventScrollOnSwipe: true,
     trackMouse: true,
     onSwiped(_event) {
       swipeTransformX.value = 0;
     },
     onSwipedLeft(event) {
-      if (event.absX > 50) {
+      if (event.absX > 100) {
         ignoredSignal.value = true;
         apiIgnore(props.id, true);
       }
     },
     onSwipedRight(event) {
-      if (event.absX > 50) {
+      if (event.absX > 100) {
         favoriteSignal.value = true;
         apiFavorite(props.id, true);
       }

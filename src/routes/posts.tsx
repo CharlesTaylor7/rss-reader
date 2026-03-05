@@ -38,14 +38,16 @@ export default define.page(async function (ctx) {
     from posts p
     inner join blogs b on b.id = p.blog_id
     ${viewQueryFragment(ctx.state.sql, view)}
-    limit 15
+    limit 12
   `) as ArticleProps[];
 
   return (
     <div class="min-h-screen">
       <h1 class="w-full text-center">Articles</h1>
       <div class="flex flex-col items-start justify-center">
-        {posts.map((p) => <Article key={p.id} {...p} />)}
+        {posts.map((p) => (
+          <Article key={p.id} {...p} />
+        ))}
       </div>
     </div>
   );
