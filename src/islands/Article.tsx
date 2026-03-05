@@ -25,22 +25,28 @@ export default function (props: ArticleProps) {
   const readSignal = useSignal(false);
   return (
     <div
-      class={`card card-side bg-base-200 shadow-sm cursor-pointer ${readSignal.value ? "text-base-content/50" : "text-base-content"}`}
+      class={`w-screen p-3 cursor-pointer ${readSignal.value ? "text-base-content/30" : "text-base-content/80"}`}
       onClick={() => {
         openInNewTab(props.url);
         readSignal.value = true;
         markRead(props.id, readSignal.value);
       }}
     >
-      <figure>
-        {props.thumbnail ? <img src={props.thumbnail} alt="thumbnail" /> : null}
-      </figure>
+      <div class="flex flex-row gap-2 ">
+        <figure>
+          {props.thumbnail ? (
+            <img src={props.thumbnail} alt="thumbnail" />
+          ) : null}
+        </figure>
 
-      <div class="card-body ">
-        <h2 class="card-title">{props.title}</h2>
-        <h2 class="card-subtitle">{props.author}</h2>
-        <h2 class="card-subtitle">{props.published_at}</h2>
-        {props.description}
+        <div class="">
+          <h2 class="text-sm text-ellipsis">{props.title}</h2>
+          {props.description}
+
+          <h3 class={`text-xs text-base-content/50`}>
+            {props.author} / {props.published_at}
+          </h3>
+        </div>
       </div>
     </div>
   );

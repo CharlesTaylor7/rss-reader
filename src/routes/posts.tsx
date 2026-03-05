@@ -31,7 +31,6 @@ export default define.page(async function (ctx) {
   const view = (ctx.url.searchParams.get("view") ?? "default") as View;
   const posts = (await ctx.state.sql`
     select p.id, p.title, p.url, b.title as author,  p.thumbnail, 
-
       COALESCE(
         to_char(p.published_at, 'YYYY-MM-DD'),
         p.published_at_text
@@ -39,13 +38,16 @@ export default define.page(async function (ctx) {
     from posts p
     inner join blogs b on b.id = p.blog_id
     ${viewQueryFragment(ctx.state.sql, view)}
-    limit 10
+    limit 15
   `) as ArticleProps[];
 
   return (
-    <div class="px-4 py-8 mx-auto fresh-gradient min-h-screen">
-      <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center gap-3">
-        {posts.map((p) => <Article {...p} />)}
+    <div class="min-h-screen">
+      <h1 class="w-full text-center">Articles</h1>
+      <div class="flex flex-col items-start justify-center">
+        {posts.map((p) => (
+          <Article key={p.id} {...p} />
+        ))}
       </div>
     </div>
   );
