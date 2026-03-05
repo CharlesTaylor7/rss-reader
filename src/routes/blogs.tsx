@@ -1,12 +1,5 @@
 import { define } from "@/server/define.ts";
-import SyncBlogButton from "@/islands/SyncBlogButton.tsx";
-
-type Blog = {
-  id: number;
-  title: string;
-  xml_url: string;
-  html_url: string;
-};
+import Blog, { BlogProps } from "@/islands/Blog.tsx";
 export default define.page(async function (ctx) {
   const sql = ctx.state.sql;
   const query = ctx.url.searchParams.get("q");
@@ -18,23 +11,17 @@ export default define.page(async function (ctx) {
     from blogs b
     ${query ? filter : sql``}
     order by sort_order desc
-    limit 10
-  `) as Blog[];
+  `) as BlogProps[];
 
   return (
-    <div class="px-4 py-8 mx-auto fresh-gradient min-h-screen">
-      <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center gap-3">
+    <div class="h-screen flex flex-col">
+      <h1 class="w-full text-center flex-none p-3 bg-base-200">
+        Blogs ({blogs.length})
+      </h1>
+
+      <div class="flex-1 overflow-y-scroll flex flex-col items-start justify-start gap-3">
         {blogs.map((b) => (
-          <div class="card">
-            <div class="card-body">
-              <h2 class="card-title">
-                <a href={b.html_url}>{b.title}</a>
-              </h2>
-              <div class="card-actions justify-end">
-                <SyncBlogButton blogId={b.id} />
-              </div>
-            </div>
-          </div>
+          <Blog key={b.id} {...b} />
         ))}
       </div>
     </div>
