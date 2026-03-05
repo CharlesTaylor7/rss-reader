@@ -1,13 +1,28 @@
 import { useSignal } from "@preact/signals";
+import { useSwipeable } from "react-swipeable";
 
 function openInNewTab(url: string) {
   globalThis.open(url)?.focus();
 }
 
-function markRead(id: number, read: boolean): Promise<any> {
+function apiRead(id: number, read: boolean): Promise<any> {
   return fetch("/api/read", {
     method: "POST",
     body: JSON.stringify({ post_id: id, read }),
+  });
+}
+
+function apiIgnore(id: number, ignore: boolean): Promise<any> {
+  return fetch("/api/ignore", {
+    method: "POST",
+    body: JSON.stringify({ post_id: id, ignore }),
+  });
+}
+
+function apiFavorite(id: number, favorite: boolean): Promise<any> {
+  return fetch("/api/favorite", {
+    method: "POST",
+    body: JSON.stringify({ post_id: id, favorite }),
   });
 }
 
@@ -19,18 +34,57 @@ export interface ArticleProps {
   published_at: string;
   description?: string;
   thumbnail?: string;
+  read: boolean;
+  ignored: boolean;
+  favorite: boolean;
 }
 
 export default function (props: ArticleProps) {
-  const readSignal = useSignal(false);
+  const readSignal = useSignal(props.read);
+  const ignoredSignal = useSignal(props.ignored);
+  const favoriteSignal = useSignal(props.favorite);
+  const swipeTransformX = useSignal(0);
+  const swipeHandlers = useSwipeable({
+    preventScrollOnSwipe: true,
+    trackMouse: true,
+    onSwiped(_event) {
+      swipeTransformX.value = 0;
+    },
+    onSwipedLeft(event) {
+      if (event.absX > 50) {
+        ignoredSignal.value = true;
+        apiIgnore(props.id, true);
+      }
+    },
+    onSwipedRight(event) {
+      if (event.absX > 50) {
+        favoriteSignal.value = true;
+        apiFavorite(props.id, true);
+      }
+    },
+    onSwipedUp(_event) {},
+    onSwipedDown(_event) {},
+    onSwipeStart(_event) {},
+    onSwiping(event) {
+      swipeTransformX.value = event.deltaX;
+    },
+    onTap(_event) {
+      openInNewTab(props.url);
+      readSignal.value = true;
+      apiRead(props.id, readSignal.value);
+    },
+  });
+
+  if (ignoredSignal.value) return null;
   return (
     <div
-      class={`w-screen p-3 cursor-pointer ${readSignal.value ? "text-base-content/30" : "text-base-content/80"}`}
-      onClick={() => {
-        openInNewTab(props.url);
-        readSignal.value = true;
-        markRead(props.id, readSignal.value);
+      {...swipeHandlers}
+      style={{
+        transform: `translate(${swipeTransformX}px, 0)`,
       }}
+      class={`w-screen p-3 cursor-pointer ${
+        readSignal.value ? "text-base-content/30" : "text-base-content/80"
+      }`}
     >
       <div class="flex flex-row gap-2 ">
         <figure>

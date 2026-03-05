@@ -1,4 +1,5 @@
 # Frontend:
+
 ## Navigation
 
 - Home View
@@ -10,16 +11,17 @@
 ## Home View
 
 - [x] Home page should redirect to /posts
+
 ## Posts View
 
 - [ ] search posts
   - should search post titles and descriptions
 - [x] sort by read status, then by publish date.
 - [x] touch post to open, marks as read
-- [ ] grey out read posts
+- [x] grey out read posts
 - [ ] infinite scroll
-- [ ] swipe left to ignore
-- [ ] swipe right to favorite
+- [x] swipe left to ignore
+- [x] swipe right to favorite
 
 ## Blogs View
 
@@ -38,6 +40,7 @@
     infinitum. Also called "CRDT" way.
 
 # Backend
+
 - [x] Cron job to sync feeds
 
 ## Import view

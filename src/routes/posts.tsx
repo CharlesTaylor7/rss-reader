@@ -45,9 +45,7 @@ export default define.page(async function (ctx) {
     <div class="min-h-screen">
       <h1 class="w-full text-center">Articles</h1>
       <div class="flex flex-col items-start justify-center">
-        {posts.map((p) => (
-          <Article key={p.id} {...p} />
-        ))}
+        {posts.map((p) => <Article key={p.id} {...p} />)}
       </div>
     </div>
   );
