@@ -14,16 +14,10 @@ export default define.page(async function (ctx) {
   `) as BlogProps[];
 
   return (
-    <div class="h-screen flex flex-col">
-      <h1 class="w-full text-center flex-none p-3 bg-base-200">
-        Blogs ({blogs.length})
-      </h1>
-
-      <div class="flex-1 overflow-y-scroll flex flex-col items-start justify-start gap-3">
-        {blogs.map((b) => (
-          <Blog key={b.id} {...b} />
-        ))}
-      </div>
+    <div class="flex flex-col items-start justify-start gap-3">
+      {blogs.map((b) => (
+        <Blog key={b.id} {...b} />
+      ))}
     </div>
   );
 });

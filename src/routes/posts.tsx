@@ -42,14 +42,10 @@ export default define.page(async function (ctx) {
   `) as ArticleProps[];
 
   return (
-    <div class="h-screen flex flex-col">
-      <h1 class="w-full text-center flex-none p-3 bg-base-200">Articles</h1>
-
-      <div class="flex-1 overflow-y-scroll flex flex-col items-start justify-start">
-        {posts.map((p) => (
-          <Article key={p.id} {...p} />
-        ))}
-      </div>
+    <div class="flex flex-col items-start justify-start">
+      {posts.map((p) => (
+        <Article key={p.id} {...p} />
+      ))}
     </div>
   );
 });
