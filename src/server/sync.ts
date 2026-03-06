@@ -24,7 +24,13 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
   const body = await fetchFeed(sql, feed);
   if (body == null) return;
 
-  const success = await updatePosts(sql, blogId, body);
+  let success = false;
+  try {
+    await updatePosts(sql, blogId, body);
+    success = true;
+  } catch (e) {
+    console.error(e);
+  }
   if (success) {
     await sql`
       update feeds f
@@ -97,7 +103,7 @@ async function updatePosts(
   sql: QueryFunc,
   blogId: number,
   body: string,
-): Promise<boolean> {
+): Promise<void> {
   const posts: Array<Post> = [];
   let post: Partial<Post> = {};
   let el: string = "";
@@ -146,13 +152,9 @@ async function updatePosts(
     ignoreComments: true,
   });
 
-  let successful = true;
   for (const post of posts) {
-    if (!post.url?.length || !post.title.length) {
-      successful = false;
-      continue;
-    }
     console.log(post);
+
     await sql`
         insert into posts(
           blog_id, 
@@ -178,7 +180,6 @@ async function updatePosts(
           thumbnail=excluded.thumbnail
       `;
   }
-  return successful;
 }
 
 async function* intoStream(body: string) {
