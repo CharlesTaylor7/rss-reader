@@ -27,7 +27,7 @@ export default define.page(function App({ Component, route }) {
             <PageName route={route} />
           </h1>
 
-          <div class="flex-1 overflow-y-scroll">
+          <div class="flex-1 overflow-y-scroll overflow-x-hidden">
             <Partial name="body">
               <Component />
             </Partial>
