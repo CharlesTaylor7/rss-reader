@@ -1,5 +1,6 @@
 import { useSignal } from "@preact/signals";
 import { useSwipeable } from "react-swipeable";
+import { toast } from "@/client/toast.ts";
 
 function openInNewTab(url: string) {
   globalThis.open(url)?.focus();
@@ -56,13 +57,41 @@ export default function (props: ArticleProps) {
     onSwipedLeft(event) {
       if (event.absX > SWIPE_ACTION) {
         ignoredSignal.value = true;
-        apiIgnore(props.id, true);
+
+        apiIgnore(props.id, true).then(() =>
+          toast((dismiss) => (
+            <div class="px-3 w-full flex flex-row justify-between items-center bg-base-300 rounded text-sm">
+              <h2>Ignored</h2>
+              <button
+                type="button"
+                class="btn btn-sm btn-ghost"
+                onClick={() => apiIgnore(props.id, false).then(dismiss)}
+              >
+                Undo
+              </button>
+            </div>
+          )),
+        );
       }
     },
     onSwipedRight(event) {
       if (event.absX > SWIPE_ACTION) {
         favoriteSignal.value = true;
-        apiFavorite(props.id, true);
+
+        apiFavorite(props.id, true).then(() =>
+          toast((dismiss) => (
+            <div class="px-3 w-full flex flex-row justify-between items-center bg-base-300 rounded text-sm">
+              <h2>Favorited</h2>
+              <button
+                type="button"
+                class="btn btn-sm btn-ghost"
+                onClick={() => apiFavorite(props.id, false).then(dismiss)}
+              >
+                Undo
+              </button>
+            </div>
+          )),
+        );
       }
     },
     onSwipedUp(_event) {},

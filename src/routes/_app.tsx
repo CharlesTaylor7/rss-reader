@@ -1,3 +1,4 @@
+import Toaster from "@/islands/Toaster.tsx";
 import { define } from "@/server/define.ts";
 import { Partial } from "fresh/runtime";
 
@@ -32,6 +33,7 @@ export default define.page(function App({ Component, route }) {
               <Component />
             </Partial>
           </div>
+          <Toaster />
         </div>
       </body>
     </html>
