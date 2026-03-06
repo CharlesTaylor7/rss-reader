@@ -2,7 +2,7 @@ const DATE_PATTERNS: RegExp[] = [
   // rfc 822
   /^(?<day_of_week>[a-zA-Z]{3}), (?<day>\d{1,2}) (?<month>[a-zA-Z]+) (?<year>\d{4})/,
   // iso 8601
-  /^(?<year>\d{4})-(?<month>\d{1,2})-(?<day>\d{1,2})$/,
+  /^(?<year>\d{4})-(?<month>\d{1,2})-(?<day>\d{1,2})/,
   // misc
   /^(?<day_of_week>\w{3}), (?<month>[a-zA-Z]+) (?<day>\d{1,2}) (?<year>\d{4})/,
   /^(?<day>\d{2}) (?<month>[a-zA-Z]+) (?<year>\d{4})$/,
@@ -54,6 +54,7 @@ function firstMatch(raw: string): MatchResult | null {
  * This attempts to parse the formats encountered so far.
  */
 export function parseDate(raw: string): Date | null {
+  if (raw == "") return null;
   const result = firstMatch(raw);
 
   if (result === null) {
@@ -78,7 +79,6 @@ export function parseDate(raw: string): Date | null {
     return date;
   } catch (_e) {
     console.log(`Encountered unknown date format: ${raw}`);
-    console.log(`Matched pattern: ${pattern}`);
     return null;
   }
 }

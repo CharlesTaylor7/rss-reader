@@ -14,6 +14,9 @@ export default function (props: BlogProps) {
   return (
     <div class="flex flex-row justify-between w-screen">
       <a href={props.html_url}>{props.title}</a>
+      <button type="button" onClick={() => _sync(props)}>
+        Sync
+      </button>
     </div>
   );
 }

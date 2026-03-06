@@ -35,7 +35,7 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
 }
 
 async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
-  console.log(feed.xml_url);
+  console.log(feed);
   if (!Deno.env.get("DENO_DEPLOY")) {
     try {
       return await Deno.readTextFile(`./debug/${feed.blog_id}.xml`);
@@ -43,7 +43,6 @@ async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
       const response = await fetch(feed.xml_url);
       const body = await response.text();
       await Deno.writeTextFile(`./debug/${feed.blog_id}.xml`, body);
-      console.log(feed.blog_id);
       return body;
     }
   }
@@ -66,8 +65,8 @@ async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
   const hash = encodeHex(md5(body));
   feed.hash = hash;
   feed.etag = response.headers.get("etag") ?? feed.etag;
-  feed.last_modified = response.headers.get("last-modified") ??
-    feed.last_modified;
+  feed.last_modified =
+    response.headers.get("last-modified") ?? feed.last_modified;
 
   await sql`
     insert into feeds(blog_id, hash, etag, last_modified)
@@ -94,8 +93,6 @@ type Post = {
   thumbnail?: string;
 };
 
-const set = new Set();
-
 async function updatePosts(
   sql: QueryFunc,
   blogId: number,
@@ -113,10 +110,6 @@ async function updatePosts(
     },
 
     onStartElement(name, _, __, attributes) {
-      if (!set.has(name)) {
-        console.log(name);
-        set.add(name);
-      }
       el = name;
       if (name == "entry" || name == "item") {
         post = {};
@@ -137,8 +130,6 @@ async function updatePosts(
 
     onText(text) {
       const trimmed = text.trim();
-      if (trimmed === "") return;
-
       if (el == "title") {
         post.title = trimmed;
       } else if (el == "link" || el == "atom:link") {
@@ -150,16 +141,19 @@ async function updatePosts(
     },
   };
 
-  await parseXmlStream(intoStream(body), xmlCallbacks);
+  await parseXmlStream(intoStream(body), xmlCallbacks, {
+    coerceCDataToText: true,
+    ignoreComments: true,
+  });
 
   let successful = true;
   for (const post of posts) {
-    if (post.title == null || post.url == null) {
-      console.error(post);
+    if (!post.url?.length || !post.title.length) {
       successful = false;
+      continue;
     }
-    try {
-      await sql`
+    console.log(post);
+    await sql`
         insert into posts(
           blog_id, 
           title, 
@@ -170,7 +164,7 @@ async function updatePosts(
         )
         values (
           ${blogId}, 
-          ${post.title}, 
+          ${post.title ?? ""}, 
           ${post.url}, 
           ${post.thumbnail ?? null},
           ${post.published_at_text ?? null},
@@ -183,11 +177,6 @@ async function updatePosts(
           published_at=excluded.published_at,
           thumbnail=excluded.thumbnail
       `;
-    } catch (e) {
-      successful = false;
-      console.error(e);
-      console.log(post);
-    }
   }
   return successful;
 }
