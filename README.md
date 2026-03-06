@@ -26,53 +26,27 @@ This will watch the project directory and restart as necessary.
 - https://neon.com/docs/auth/quick-start/react
 - https://fresh.deno.dev/docs/advanced
 - https://jsr.io/@neon/serverless
+- https://sonner.emilkowal.ski/getting-started
 
-### Product & Tech spec
+## Project Goals
 
-Rss reader
+- Easy to use RSS reader for myself
 
-I started on this like 3 times with different stacks
+## Import my feeds from another rss reader
 
-I am trying to go a little more product first for this go around:
+Nearly every atom/atom rss reader under the sun uses the
+[OPML](https://en.wikipedia.org/wiki/OPML) file format for import & export of
+feeds. You'll have to locate the export button.
 
-- pwa so i can “install” it to my phone
-- Mobile first app
-- Swipe controls
-- Free hosting; dont wanna pay for anything
-- Implies serverless
+For Inoreader, exporting is as simple as hitting this url while logged in:
+https://www.inoreader.com/reader/subscriptions/export?download=1
 
-Spec:
+## Resources
 
-- Starts refreshing rss feeds whenever i visit the site,
-- uses a db to save rss metadata and last fetch times etags, title, description
-  etc.
-- Uses auth so i can keep the site on the public web and not worry about someone
-  screwing it up
-- Google auth? Github auth?
-- Home page is feed
-- Feeds page to edit/add new feed
-- Imports from inoreader export
-- In feed oage swipe left to ignore
-- Swipe right to favorite
-- Feed shows unread before read and in publish order and infinite scroll?
-- Clicking a link should ooen a new tab me directly to the other page. Inoreader
-  does an obnoxious iframe/webview thing around it.
-- Clicking a link should flag it as “read”
-- Dark mode
-- Rounded corners
-- Daisy?
+### Rss & Atom
 
-Stack
+- [RSS Spec](https://www.rssboard.org/rss-specification)
+- [Atom Spec](https://www.ietf.org/rfc/rfc4287.txt)
+- [Rachel by the bay](https://rachelbythebay.com/w/2024/08/17/hash/)
 
-- tailwind
-- Daisyui
-- Deno deploy
-- Deno fresh (preact)
-- Google oauth (sso)/ neon auth?
-- Postgres (neondb)
 
-Db tables Users
-
-Feeds
-
-Articles
