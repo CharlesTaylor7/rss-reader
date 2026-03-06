@@ -5,21 +5,21 @@ function openInNewTab(url: string) {
   globalThis.open(url)?.focus();
 }
 
-function apiRead(id: number, read: boolean): Promise<any> {
+function apiRead(id: number, read: boolean): Promise<Response> {
   return fetch("/api/read", {
     method: "POST",
     body: JSON.stringify({ post_id: id, read }),
   });
 }
 
-function apiIgnore(id: number, ignore: boolean): Promise<any> {
+function apiIgnore(id: number, ignore: boolean): Promise<Response> {
   return fetch("/api/ignore", {
     method: "POST",
     body: JSON.stringify({ post_id: id, ignore }),
   });
 }
 
-function apiFavorite(id: number, favorite: boolean): Promise<any> {
+function apiFavorite(id: number, favorite: boolean): Promise<Response> {
   return fetch("/api/favorite", {
     method: "POST",
     body: JSON.stringify({ post_id: id, favorite }),
@@ -39,33 +39,45 @@ export interface ArticleProps {
   favorite: boolean;
 }
 
+const SWIPE_THRESHOLD = 50;
+const SWIPE_ACTION = 100;
 export default function (props: ArticleProps) {
   const readSignal = useSignal(props.read);
   const ignoredSignal = useSignal(props.ignored);
   const favoriteSignal = useSignal(props.favorite);
   const swipeTransformX = useSignal(0);
   const swipeHandlers = useSwipeable({
+    delta: SWIPE_THRESHOLD,
     trackMouse: true,
+
     onSwiped(_event) {
       swipeTransformX.value = 0;
     },
     onSwipedLeft(event) {
-      if (event.absX > 100) {
+      if (event.absX > SWIPE_ACTION) {
         ignoredSignal.value = true;
         apiIgnore(props.id, true);
       }
     },
     onSwipedRight(event) {
-      if (event.absX > 100) {
+      if (event.absX > SWIPE_ACTION) {
         favoriteSignal.value = true;
         apiFavorite(props.id, true);
       }
     },
     onSwipedUp(_event) {},
-    onSwipedDown(_event) {},
+    onSwipedDown(event) {
+      if (event.absY > SWIPE_ACTION) {
+        globalThis.location.reload();
+      }
+    },
     onSwipeStart(_event) {},
     onSwiping(event) {
-      swipeTransformX.value = event.deltaX;
+      // Allow translation if already in motion
+      // But to begin, you must be past the threshold
+      if (swipeTransformX.value !== 0 || event.absX > SWIPE_THRESHOLD) {
+        swipeTransformX.value = event.deltaX;
+      }
     },
     onTap(_event) {
       openInNewTab(props.url);
