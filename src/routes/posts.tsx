@@ -12,17 +12,17 @@ function viewQueryFragment(sql: QueryFunc, view: View) {
   } else if (view == "read") {
     return sql`
       where p.read = true
-      order by p.published_at desc NULLS LAST
+      order by p.published_at DESC NULLS LAST
     `;
   } else if (view == "ignored") {
     return sql`
       where p.ignored = true
-      order by p.published_at desc NULLS LAST
+      order by p.published_at DESC NULLS LAST
     `;
   } else if (view == "favorite") {
     return sql`
       where p.favorite = true
-      order by p.published_at desc NULLS LAST
+      order by p.published_at DESC NULLS LAST
     `;
   }
 }
