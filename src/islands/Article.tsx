@@ -127,7 +127,7 @@ export default function (props: ArticleProps) {
       }`}
     >
       <div class="flex flex-row gap-2 ">
-        <figure>
+        <figure class="w-12 h-12">
           {props.thumbnail ? (
             <img src={props.thumbnail} alt="thumbnail" />
           ) : null}
