@@ -99,11 +99,7 @@ type Post = {
   thumbnail?: string;
 };
 
-async function updatePosts(
-  sql: QueryFunc,
-  blogId: number,
-  body: string,
-): Promise<void> {
+export async function parseFeed(body: string): Promise<Array<Post>> {
   const posts: Array<Post> = [];
   let post: Partial<Post> = {};
   let el: string = "";
@@ -116,6 +112,7 @@ async function updatePosts(
     },
 
     onStartElement(name, _, __, attributes) {
+      console.log(name);
       el = name;
       if (name == "entry" || name == "item") {
         post = {};
@@ -135,6 +132,7 @@ async function updatePosts(
     },
 
     onText(text) {
+      console.log(text);
       const trimmed = text.trim();
       if (el == "title") {
         post.title = trimmed;
@@ -152,6 +150,15 @@ async function updatePosts(
     ignoreComments: true,
   });
 
+  return posts;
+}
+
+async function updatePosts(
+  sql: QueryFunc,
+  blogId: number,
+  body: string,
+): Promise<void> {
+  const posts = await parseFeed(body);
   for (const post of posts) {
     console.log(post);
 
