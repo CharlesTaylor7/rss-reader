@@ -10,7 +10,7 @@ export const handler = define.handlers({
         select b.id
         from blogs b 
         left join feeds f on f.blog_id = b.id
-        order by last_successful_sync desc
+        order by f.last_successful_sync desc
       `;
     for (const blog of blogs) {
       await sync(sql, blog.id);

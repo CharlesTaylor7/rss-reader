@@ -11,7 +11,7 @@ Deno.cron("sync feeds", "17 14 * * *", async function () {
     select b.id
     from blogs b 
     left join feeds f on f.blog_id = b.id
-    order by last_successful_sync DESC NULLS FIRST
+    order by f.last_successful_sync DESC NULLS FIRST
   `;
   for (const blog of blogs) {
     await sync(sql, blog.id);
