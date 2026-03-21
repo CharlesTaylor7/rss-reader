@@ -41,18 +41,6 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
 }
 
 async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
-  console.log(feed);
-  if (!Deno.env.get("DENO_DEPLOY")) {
-    try {
-      return await Deno.readTextFile(`./debug/${feed.blog_id}.xml`);
-    } catch {
-      const response = await fetch(feed.xml_url);
-      const body = await response.text();
-      await Deno.writeTextFile(`./debug/${feed.blog_id}.xml`, body);
-      return body;
-    }
-  }
-
   const headers: HeadersInit = {};
   if (feed.etag) {
     headers["If-None-Match"] = feed.etag;
