@@ -126,18 +126,24 @@ export default function (props: ArticleProps) {
         readSignal.value ? "text-base-content/30" : "text-base-content/80"
       }`}
     >
-      <div class="flex flex-row gap-2 ">
-        <figure class="w-12 h-12">
-          {props.thumbnail ? (
-            <img src={props.thumbnail} alt="thumbnail" />
-          ) : null}
-        </figure>
+      <div class="flex flex-row gap-2 items-center ">
+        {props.thumbnail ? (
+          <img
+            class="block"
+            src={props.thumbnail}
+            alt="thumbnail"
+            width="50"
+            height="50"
+          />
+        ) : (
+          <div class="w-[50px] h-[50px]" />
+        )}
 
         <div class="">
-          <h2 class="text-sm text-ellipsis">{props.title}</h2>
+          <h2 class="text-sm truncate">{props.title}</h2>
           {props.description}
 
-          <h3 class={`text-xs text-base-content/50`}>
+          <h3 class="text-xs text-base-content/50 truncate">
             {props.author} / {props.published_at}
           </h3>
         </div>
