@@ -112,7 +112,6 @@ export async function parseFeed(body: string): Promise<Array<Post>> {
     },
 
     onStartElement(name, _, __, attributes) {
-      console.log(name);
       el = name;
       if (name == "entry" || name == "item") {
         post = {};
@@ -132,8 +131,9 @@ export async function parseFeed(body: string): Promise<Array<Post>> {
     },
 
     onText(text) {
-      console.log(text);
       const trimmed = text.trim();
+      if (trimmed == "") return;
+      console.log(el, trimmed);
       if (el == "title") {
         post.title = trimmed;
       } else if (el == "link" || el == "atom:link") {

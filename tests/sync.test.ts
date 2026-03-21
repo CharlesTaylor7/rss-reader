@@ -5,6 +5,7 @@ for (const entry of Deno.readDirSync("./debug")) {
     const body = await Deno.readTextFile(`./debug/${entry.name}`);
 
     const posts = await parseFeed(body);
+    console.log(posts);
     for (let i = 0; i < posts.length; i++) {
       const post = posts[i];
 
