@@ -1,7 +1,5 @@
 import { define } from "@/server/define.ts";
-// import { parse } from "node-html-parser";
-// import { DOMParser } from "jsr:@b-fuze/deno-dom";
-import { DOMParser, parseHTML } from "linkedom";
+import { DOMParser } from "linkedom";
 function parse(html: string) {
   return new DOMParser().parseFromString(html, "text/html");
 }
@@ -16,7 +14,10 @@ export const handler = define.handlers({
     // TODO:
     // parse the html and look for a link tag that points to the rss feed
     let rssUrl: URL;
-    if (contentType?.includes("text/html")) {
+
+    if (contentType?.includes("text/xml")) {
+      rssUrl = siteUrl;
+    } else if (contentType?.includes("text/html")) {
       const doc = parse(await response.text());
 
       const links = doc.querySelectorAll("head>link[rel='alternate']");
@@ -28,15 +29,13 @@ export const handler = define.handlers({
       const parsedUrl = new URL(feedUrl, siteUrl);
 
       rssUrl = parsedUrl;
-    } else if (contentType?.includes("atom")) {
-      rssUrl = siteUrl;
     } else {
       throw new Error();
     }
 
     await ctx.state.sql`
-insert into blogs (xml_url) values (${rssUrl.toString()})
-`;
+      insert into blogs (xml_url) values (${rssUrl.toString()})
+    `;
 
     // parse the rss feed and look for the title of the blog, and its author.
     return new Response(`Successfully subscribed`);
