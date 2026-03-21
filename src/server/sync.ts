@@ -26,7 +26,7 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
 
   let success = false;
   try {
-    await updatePosts(sql, blogId, body);
+    await updateBlog(sql, blogId, body);
     success = true;
   } catch (e) {
     console.error(e);
@@ -91,28 +91,33 @@ async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
   return body;
 }
 
-type Post = {
+interface Post {
   title: string;
   url: string;
   published_at_text?: string;
   published_at?: Date | null;
   updated_at_text?: string;
   thumbnail?: string;
-};
+}
+interface Blog {
+  title: string;
+  subtitle: string;
+  posts: Post[];
+}
 
-export async function parseFeed(body: string): Promise<Array<Post>> {
-  const posts: Array<Post> = [];
-  let post: Partial<Post> = { title: "" };
+export async function parseBlog(body: string): Promise<Blog> {
+  const blog: Partial<Blog> = { posts: [] };
+  let post: Partial<Post> | null = null;
   let el: string | null = null;
 
   const xmlCallbacks: XmlEventCallbacks = {
     onEndElement(name) {
       if (el == "title") el = null;
       if (name == "entry" || name == "item") {
-        post.published_at = parseDate(
-          post.published_at_text ?? post.updated_at_text,
+        post!.published_at = parseDate(
+          post!.published_at_text ?? post!.updated_at_text,
         );
-        posts.push(post as Post);
+        blog.posts!.push(post as Post);
       }
     },
 
@@ -126,13 +131,13 @@ export async function parseFeed(body: string): Promise<Array<Post>> {
       } else if (name == "link") {
         for (let i = 0; i < attributes.count; i++) {
           if (attributes.getName(i) == "href") {
-            post.url = attributes.getValue(i);
+            post!.url = attributes.getValue(i);
           }
         }
       } else if (name == "image" || name == "media:thumbnail") {
         for (let i = 0; i < attributes.count; i++) {
           if (attributes.getName(i) == "url") {
-            post.thumbnail = attributes.getValue(i).trim();
+            post!.thumbnail = attributes.getValue(i).trim();
           }
         }
       }
@@ -141,14 +146,22 @@ export async function parseFeed(body: string): Promise<Array<Post>> {
     onText(text) {
       const trimmed = text.trim();
       if (trimmed == "") return;
+
+      if (!post) {
+        if (el == "title") {
+          blog.title = trimmed;
+        } else if (el == "subtitle") {
+          blog.subtitle = trimmed;
+        }
+      }
       if (el == "title") {
-        post.title += trimmed;
+        post!.title += trimmed;
       } else if (el == "link" || el == "atom:link") {
-        post.url = trimmed;
+        post!.url = trimmed;
       } else if (el == "published" || el == "pubDate") {
-        post.published_at_text = trimmed;
+        post!.published_at_text = trimmed;
       } else if (el == "updated") {
-        post.updated_at_text = trimmed;
+        post!.updated_at_text = trimmed;
       }
     },
   };
@@ -158,16 +171,23 @@ export async function parseFeed(body: string): Promise<Array<Post>> {
     ignoreComments: true,
   });
 
-  return posts;
+  return blog as Blog;
 }
 
-async function updatePosts(
+async function updateBlog(
   sql: QueryFunc,
   blogId: number,
   body: string,
 ): Promise<void> {
-  const posts = await parseFeed(body);
-  for (const post of posts) {
+  const blog = await parseBlog(body);
+  await sql`
+    update blogs 
+    set title = ${blog.title}
+    where blogId = ${blogId} 
+    and title <> ''  
+    and title is not null
+  `;
+  for (const post of blog.posts) {
     await sql`
         insert into posts(
           blog_id, 
