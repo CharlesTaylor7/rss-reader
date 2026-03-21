@@ -9,13 +9,13 @@ for (const entry of Deno.readDirSync("./debug")) {
     for (let i = 0; i < posts.length; i++) {
       const post = posts[i];
 
-      const assertNotEmpty = (text: string | null | undefined) => {
+      const assertNotEmpty = (text: unknown) => {
         if (text == null || text == "")
           throw new Error(`Blog ${entry.name}, post ${i}`);
       };
       assertNotEmpty(post.url);
       assertNotEmpty(post.title);
-      assertNotEmpty(post.published_at_text);
+      assertNotEmpty(post.published_at);
     }
   });
 }

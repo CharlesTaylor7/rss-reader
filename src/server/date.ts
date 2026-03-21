@@ -53,8 +53,8 @@ function firstMatch(raw: string): MatchResult | null {
  * RSS feeds are the wild west when it comes to date formats.
  * This attempts to parse the formats encountered so far.
  */
-export function parseDate(raw: string): Date | null {
-  if (raw == "") return null;
+export function parseDate(raw?: string): Date | null {
+  if (raw == null || raw == "") return null;
   const result = firstMatch(raw);
 
   if (result === null) {

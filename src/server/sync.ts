@@ -95,7 +95,8 @@ type Post = {
   title: string;
   url: string;
   published_at_text?: string;
-  published_at: Date | null;
+  published_at?: Date | null;
+  updated_at_text?: string;
   thumbnail?: string;
 };
 
@@ -107,6 +108,9 @@ export async function parseFeed(body: string): Promise<Array<Post>> {
   const xmlCallbacks: XmlEventCallbacks = {
     onEndElement(name) {
       if (name == "entry" || name == "item") {
+        post.published_at = parseDate(
+          post.published_at_text ?? post.updated_at_text,
+        );
         posts.push(post as Post);
       }
     },
@@ -140,7 +144,8 @@ export async function parseFeed(body: string): Promise<Array<Post>> {
         post.url = trimmed;
       } else if (el == "published" || el == "pubDate") {
         post.published_at_text = trimmed;
-        post.published_at = parseDate(trimmed);
+      } else if (el == "updated") {
+        post.updated_at_text = trimmed;
       }
     },
   };
