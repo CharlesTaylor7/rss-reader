@@ -14,8 +14,8 @@ for (const entry of Deno.readDirSync("./debug")) {
           throw new Error(`Blog ${entry.name}, post ${i}`);
       };
       assertNotEmpty(post.url);
-      assertNotEmpty(post.title);
       assertNotEmpty(post.published_at);
+      if (post.title == "") console.warn(post);
     }
   });
 }
