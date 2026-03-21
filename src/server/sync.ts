@@ -102,11 +102,12 @@ type Post = {
 
 export async function parseFeed(body: string): Promise<Array<Post>> {
   const posts: Array<Post> = [];
-  let post: Partial<Post> = {};
-  let el: string = "";
+  let post: Partial<Post> = { title: "" };
+  let el: string | null = null;
 
   const xmlCallbacks: XmlEventCallbacks = {
     onEndElement(name) {
+      if (el == "title") el = null;
       if (name == "entry" || name == "item") {
         post.published_at = parseDate(
           post.published_at_text ?? post.updated_at_text,
@@ -116,9 +117,12 @@ export async function parseFeed(body: string): Promise<Array<Post>> {
     },
 
     onStartElement(name, _, __, attributes) {
-      el = name;
+      if (el != "title") {
+        el = name;
+      }
+
       if (name == "entry" || name == "item") {
-        post = {};
+        post = { title: "" };
       } else if (name == "link") {
         for (let i = 0; i < attributes.count; i++) {
           if (attributes.getName(i) == "href") {
@@ -137,9 +141,8 @@ export async function parseFeed(body: string): Promise<Array<Post>> {
     onText(text) {
       const trimmed = text.trim();
       if (trimmed == "") return;
-      console.log(el, trimmed);
       if (el == "title") {
-        post.title = trimmed;
+        post.title += trimmed;
       } else if (el == "link" || el == "atom:link") {
         post.url = trimmed;
       } else if (el == "published" || el == "pubDate") {
@@ -165,8 +168,6 @@ async function updatePosts(
 ): Promise<void> {
   const posts = await parseFeed(body);
   for (const post of posts) {
-    console.log(post);
-
     await sql`
         insert into posts(
           blog_id, 
