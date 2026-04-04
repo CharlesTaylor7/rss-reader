@@ -21,30 +21,29 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
       where b.id = ${blogId}
     `
   )[0] as unknown as Feed;
-  const body = await fetchFeed(sql, feed);
+  const result = await fetchFeed(sql, feed);
 
-  if (body == null) {
+  if (result == null) {
     console.log("no updates!");
     return;
   }
 
   let success = false;
   try {
-    await updateBlog(sql, blogId, body);
+    await updateBlog(sql, blogId, result.body);
     success = true;
   } catch (e) {
     console.error(e);
   }
   if (success) {
-    await sql`
-      update feeds f
-      set last_successful_sync = now() 
-      where f.blog_id = ${blogId}
-    `;
+    saveFeedMetadata(sql, result);
   }
 }
 
-async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
+async function fetchFeed(
+  sql: QueryFunc,
+  feed: Feed,
+): Promise<FetchFeedResult | null> {
   const headers: HeadersInit = {};
   if (feed.etag) {
     headers["If-None-Match"] = feed.etag;
@@ -61,26 +60,46 @@ async function fetchFeed(sql: QueryFunc, feed: Feed): Promise<string | null> {
   const body = await response.text();
 
   const hash = encodeHex(md5(body));
-  feed.hash = hash;
-  feed.etag = response.headers.get("etag") ?? feed.etag;
-  feed.last_modified =
+  const etag = response.headers.get("etag") ?? feed.etag;
+  const last_modified =
     response.headers.get("last-modified") ?? feed.last_modified;
 
-  await sql`
-    insert into feeds(blog_id, hash, etag, last_modified)
-    values (${feed.blog_id}, ${feed.hash}, ${feed.etag}, ${feed.last_modified})
-    on conflict(blog_id) do update set
-      hash = excluded.hash,
-      etag = excluded.etag,
-      last_modified = excluded.last_modified
-  `;
-
   // no updates on a not modified
-  if (response.status === 304 || feed.hash === hash) {
+  if (response.status === 304 || hash === feed.hash) {
+    saveFeedMetadata(sql, { blog_id: feed.blog_id, hash, etag, last_modified });
     return null;
   }
 
-  return body;
+  return {
+    blog_id: feed.blog_id,
+    body,
+    hash,
+    etag,
+    last_modified,
+  };
+}
+
+interface FeedMeta {
+  blog_id: number;
+  hash: string;
+  etag?: string;
+  last_modified?: string;
+}
+
+interface FetchFeedResult extends FeedMeta {
+  body: string;
+}
+
+async function saveFeedMetadata(sql, feed: FeedMeta) {
+  await sql`
+    insert into feeds(blog_id, hash, etag, last_modified, last_successful_sync)
+    values (${feed.blog_id}, ${feed.hash}, ${feed.etag}, ${feed.last_modified}, now())
+    on conflict(blog_id) do update set
+      hash = excluded.hash,
+      etag = excluded.etag,
+      last_modified = excluded.last_modified,
+      last_successful_sync = excluded.last_successful_sync
+  `;
 }
 
 interface Post {
@@ -118,18 +137,23 @@ export async function parseBlog(body: string): Promise<Blog> {
         el = name;
       }
 
+      // blog level tags
       if (name == "entry" || name == "item") {
         post = { title: "" };
-      } else if (name == "link") {
-        for (let i = 0; i < attributes.count; i++) {
-          if (attributes.getName(i) == "href") {
-            post!.url = attributes.getValue(i);
+
+        // post level tags
+      } else if (post) {
+        if (name == "link") {
+          for (let i = 0; i < attributes.count; i++) {
+            if (attributes.getName(i) == "href") {
+              post!.url = attributes.getValue(i);
+            }
           }
-        }
-      } else if (name == "image" || name == "media:thumbnail") {
-        for (let i = 0; i < attributes.count; i++) {
-          if (attributes.getName(i) == "url") {
-            post!.thumbnail = attributes.getValue(i).trim();
+        } else if (name == "image" || name == "media:thumbnail") {
+          for (let i = 0; i < attributes.count; i++) {
+            if (attributes.getName(i) == "url") {
+              post!.thumbnail = attributes.getValue(i).trim();
+            }
           }
         }
       }
@@ -145,8 +169,7 @@ export async function parseBlog(body: string): Promise<Blog> {
         } else if (el == "subtitle") {
           blog.subtitle = trimmed;
         }
-      }
-      if (el == "title") {
+      } else if (el == "title") {
         post!.title += trimmed;
       } else if (el == "link" || el == "atom:link") {
         post!.url = trimmed;
@@ -176,7 +199,7 @@ async function updateBlog(
   await sql`
     update blogs 
     set title = ${blog.title}
-    where blogId = ${blogId} 
+    where id = ${blogId} 
     and title <> ''  
     and title is not null
   `;
