@@ -7,12 +7,13 @@ export const handler = define.handlers({
 
     const sql = ctx.state.sql;
     const blogs = await sql`
-        select b.id
+        select b.id, title
         from blogs b 
         left join feeds f on f.blog_id = b.id
         order by f.last_successful_sync desc
       `;
     for (const blog of blogs) {
+      console.log(`syncing ${blog.id}`, blog.title);
       await sync(sql, blog.id);
     }
     return new Response();

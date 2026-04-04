@@ -22,7 +22,11 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
     `
   )[0] as unknown as Feed;
   const body = await fetchFeed(sql, feed);
-  if (body == null) return;
+
+  if (body == null) {
+    console.log("no updates!");
+    return;
+  }
 
   let success = false;
   try {
@@ -168,6 +172,7 @@ async function updateBlog(
   body: string,
 ): Promise<void> {
   const blog = await parseBlog(body);
+  console.log("Parsed title", blog.title);
   await sql`
     update blogs 
     set title = ${blog.title}
@@ -175,6 +180,9 @@ async function updateBlog(
     and title <> ''  
     and title is not null
   `;
+
+  console.log("Parsed post count", blog.posts.length);
+  console.log("Most Recent", blog.posts[0]);
   for (const post of blog.posts) {
     await sql`
         insert into posts(
