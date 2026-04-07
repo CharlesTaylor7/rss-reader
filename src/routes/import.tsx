@@ -15,7 +15,6 @@ export default define.page(function () {
           required
           type="file"
           name="file"
-          accept="text/xml"
           form="upload"
         />
 
