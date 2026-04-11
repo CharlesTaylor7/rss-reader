@@ -116,6 +116,20 @@ interface Blog {
   posts: Post[];
 }
 
+interface XmlAttributes {
+  count: number;
+  getName(i: number): string;
+  getValue(i: number): string;
+}
+
+function readAttrs(attributes: XmlAttributes): Record<string, string> {
+  const attrs = {} as Record<string, string>;
+  for (let i = 0; i < attributes.count; i++) {
+    attrs[attributes.getName(i)] = attributes.getValue(i);
+  }
+  return attrs;
+}
+
 export async function parseBlog(body: string): Promise<Blog> {
   const blog: Partial<Blog> = { posts: [] };
   let post: Partial<Post> | null = null;
@@ -143,17 +157,15 @@ export async function parseBlog(body: string): Promise<Blog> {
 
         // post level tags
       } else if (post) {
+        const attrs = readAttrs(attributes);
         if (name == "link") {
-          for (let i = 0; i < attributes.count; i++) {
-            if (attributes.getName(i) == "href") {
-              post!.url = attributes.getValue(i);
-            }
+          // *shakes fist vaguely at tbray.org*
+          if ("href" in attrs && attrs.rel != "replies") {
+            post!.url = attrs.href;
           }
         } else if (name == "image" || name == "media:thumbnail") {
-          for (let i = 0; i < attributes.count; i++) {
-            if (attributes.getName(i) == "url") {
-              post!.thumbnail = attributes.getValue(i).trim();
-            }
+          if ("url" in attrs) {
+            post!.thumbnail = attrs.url;
           }
         }
       }
