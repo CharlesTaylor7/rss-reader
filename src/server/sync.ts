@@ -212,8 +212,7 @@ async function updateBlog(
     update blogs 
     set title = ${blog.title}
     where id = ${blogId} 
-    and title <> ''  
-    and title is not null
+    and (title = '' or title is null)
   `;
 
   console.log("Parsed post count", blog.posts.length);
