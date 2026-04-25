@@ -21,10 +21,11 @@ export async function sync(sql: QueryFunc, blogId: number): Promise<void> {
       where b.id = ${blogId}
     `
   )[0] as unknown as Feed;
+  console.log("Fetching", feed.xml_url);
   const result = await fetchFeed(sql, feed);
 
   if (result == null) {
-    console.log("no updates!");
+    console.log("No updates");
     return;
   }
 
