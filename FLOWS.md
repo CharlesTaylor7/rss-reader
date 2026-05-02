@@ -1,0 +1,4 @@
+- I need a way to unsubscribe from blogs
+- I don't need to be able to favorite posts
+- I need to able to filter and search blogs by title and jump to their homepages
+- I need a menu button to visit other pages
