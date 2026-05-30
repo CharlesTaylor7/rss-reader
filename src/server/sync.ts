@@ -62,8 +62,8 @@ async function fetchFeed(
 
   const hash = encodeHex(md5(body));
   const etag = response.headers.get("etag") ?? feed.etag;
-  const last_modified = response.headers.get("last-modified") ??
-    feed.last_modified;
+  const last_modified =
+    response.headers.get("last-modified") ?? feed.last_modified;
 
   // no updates on a not modified
   if (response.status === 304 || hash === feed.hash) {

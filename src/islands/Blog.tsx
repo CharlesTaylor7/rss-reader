@@ -5,23 +5,17 @@ export interface BlogProps {
   html_url: string;
 }
 
-const _sync = (props: BlogProps) => {
-  fetch(`/api/sync?blogId=${props.id}`, { method: "POST" });
+const unsubscribe = (props: BlogProps) => {
+  fetch(`/api/unsubscribe?blogId=${props.id}`, { method: "POST" });
 };
-const openModal = () => {};
 
 export default function (props: BlogProps) {
   return (
     <div class="flex flex-row justify-between w-screen">
       <a href={props.html_url}>{props.title}</a>
-      <button type="button" onClick={() => _sync(props)}>
-        Sync
+      <button type="button" onClick={() => unsubscribe(props)}>
+        Unsubscribe
       </button>
     </div>
   );
 }
-
-// TODO: more actions ellipsis something
-// <button type="button" class="btn btn-accent btn-sm" onClick={openModal}>
-//   Actions
-// </button>
