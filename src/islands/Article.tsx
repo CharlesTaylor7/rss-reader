@@ -70,7 +70,7 @@ export default function (props: ArticleProps) {
                 Undo
               </button>
             </div>
-          )),
+          ))
         );
       }
     },
@@ -90,7 +90,7 @@ export default function (props: ArticleProps) {
                 Undo
               </button>
             </div>
-          )),
+          ))
         );
       }
     },

@@ -48,5 +48,3 @@ https://www.inoreader.com/reader/subscriptions/export?download=1
 - [RSS Spec](https://www.rssboard.org/rss-specification)
 - [Atom Spec](https://www.ietf.org/rfc/rfc4287.txt)
 - [Rachel by the bay](https://rachelbythebay.com/w/2024/08/17/hash/)
-
-

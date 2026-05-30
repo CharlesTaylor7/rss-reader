@@ -1,11 +1,11 @@
 import {
-  DndContext,
   closestCenter,
+  DndContext,
+  DragOverlay,
   KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
-  DragOverlay,
 } from "@dnd-kit/core";
 import { useComputed, useSignal } from "@preact/signals";
 import { For } from "@preact/signals/utils";
@@ -94,7 +94,7 @@ export default function DndList() {
   const activeId = useSignal<string | null>(null);
 
   const activeItem = useComputed(() =>
-    items.value.find((i) => i.id === activeId.value),
+    items.value.find((i) => i.id === activeId.value)
   );
 
   const ids = useComputed(() => items.value.map((i) => i.id));
@@ -146,17 +146,19 @@ export default function DndList() {
 
         {/* Drag Overlay: renders a "floating" clone while dragging */}
         <DragOverlay dropAnimation={{ duration: 180, easing: "ease" }}>
-          {activeItem ? (
-            <div
-              style={{
-                transform: "rotate(2deg)",
-                boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
-                borderRadius: 10,
-              }}
-            >
-              {activeItem.value?.title}
-            </div>
-          ) : null}
+          {activeItem
+            ? (
+              <div
+                style={{
+                  transform: "rotate(2deg)",
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.18)",
+                  borderRadius: 10,
+                }}
+              >
+                {activeItem.value?.title}
+              </div>
+            )
+            : null}
         </DragOverlay>
       </DndContext>
     </div>

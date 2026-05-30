@@ -15,9 +15,7 @@ export default define.page(async function (ctx) {
 
   return (
     <div class="flex flex-col items-start justify-start gap-3">
-      {blogs.map((b) => (
-        <Blog key={b.id} {...b} />
-      ))}
+      {blogs.map((b) => <Blog key={b.id} {...b} />)}
     </div>
   );
 });

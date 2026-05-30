@@ -23,7 +23,7 @@ export const handler = define.handlers({
       const links = doc.querySelectorAll("head>link[rel='alternate']");
       const feedUrl = links
         .filter((link: HTMLElement) =>
-          link.getAttribute("type")!.includes("xml"),
+          link.getAttribute("type")!.includes("xml")
         )[0]
         .getAttribute("href")!;
       const parsedUrl = new URL(feedUrl, siteUrl);
