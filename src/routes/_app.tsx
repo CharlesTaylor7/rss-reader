@@ -23,7 +23,7 @@ export default define.page(function App({ Component, route }) {
         <title>RSS Reader</title>
         <link rel="manifest" href="manifest.json" />
       </head>
-      <body f-client-nav>
+      <body>
         <div class="h-screen flex flex-col">
           <h1 class="w-full p-3 bg-base-200 grid grid-cols-3 items-center">
             <div></div>
