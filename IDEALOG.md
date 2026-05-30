@@ -1,3 +1,8 @@
+# May 30th,2026
+
+Try another xml parser to handle more edge cases
+ "fast-xml-parser": "npm:fast-xml-parser@^5.7.2",
+
 # April 11th, 2026
 
 - [x] Remove the images from articles
