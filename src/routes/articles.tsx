@@ -6,22 +6,22 @@ type View = "default" | "read" | "ignored" | "favorite";
 function viewQueryFragment(sql: QueryFunc, view: View) {
   if (view == "default") {
     return sql`
-      where p.ignored = false
+      and p.ignored = false
       order by p.read, p.published_at DESC NULLS LAST
     `;
   } else if (view == "read") {
     return sql`
-      where p.read = true
+      and p.read = true
       order by p.published_at DESC NULLS LAST
     `;
   } else if (view == "ignored") {
     return sql`
-      where p.ignored = true
+      and p.ignored = true
       order by p.published_at DESC NULLS LAST
     `;
   } else if (view == "favorite") {
     return sql`
-      where p.favorite = true
+      and p.favorite = true
       order by p.published_at DESC NULLS LAST
     `;
   }
@@ -37,13 +37,16 @@ export default define.page(async function (ctx) {
       ) as published_at
     from posts p
     inner join blogs b on b.id = p.blog_id
+    where b.archived = false
     ${viewQueryFragment(ctx.state.sql, view)}
     limit 15
   `) as ArticleProps[];
 
   return (
     <div class="flex flex-col items-start justify-start">
-      {posts.map((p) => <Article key={p.id} {...p} />)}
+      {posts.map((p) => (
+        <Article key={p.id} {...p} />
+      ))}
     </div>
   );
 });
