@@ -11,7 +11,12 @@ function redirect(path: string): Response {
 }
 
 const databaseUrl = Deno.env.get("POSTGRES_URL")!;
-const sql = neon(databaseUrl);
+let sql: QueryFunc;
+try {
+  sql = neon(databaseUrl);
+} catch (e) {
+  console.error(e);
+}
 
 const debugSql: QueryFunc = (t, ...args) => {
   console.log(t);
