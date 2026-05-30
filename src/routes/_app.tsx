@@ -6,7 +6,7 @@ interface PageNameProps {
   route: string | null;
 }
 function PageName({ route }: PageNameProps) {
-  if (route === "/posts") return "Articles";
+  if (route === "/articles") return "Articles";
   if (route === "/blogs") return "Blogs";
   if (route === "/import") return "Import";
   if (route === "/login") return "Login";

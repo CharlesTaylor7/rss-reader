@@ -11,7 +11,7 @@ export default define.page(function () {
           <a href="/import">Import</a>
         </li>
         <li>
-          <a href="/posts">Posts</a>
+          <a href="/articles">Articles</a>
         </li>
       </ul>
     </nav>
