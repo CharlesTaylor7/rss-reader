@@ -13,3 +13,5 @@ vendor/
 
 # cache of xml docs
 debug/
+.zig-cache/
+zig-out/
