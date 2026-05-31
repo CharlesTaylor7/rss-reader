@@ -1,5 +1,6 @@
 import { define } from "@/server/define.ts";
 import Blog, { BlogProps } from "@/islands/Blog.tsx";
+
 export default define.page(async function (ctx) {
   const sql = ctx.state.sql;
   const query = ctx.url.searchParams.get("q");

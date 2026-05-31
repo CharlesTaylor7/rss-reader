@@ -5,9 +5,14 @@ export interface BlogProps {
   html_url: string;
 }
 
-const unsubscribe = (props: BlogProps) => {
-  fetch(`/api/unsubscribe?blogId=${props.id}`, { method: "POST" });
-};
+function unsubscribe(props: BlogProps) {
+  const body = new FormData();
+  body.append("blogId", props.id.toString());
+  fetch(`/api/unsubscribe`, {
+    method: "POST",
+    body,
+  });
+}
 
 export default function (props: BlogProps) {
   return (
