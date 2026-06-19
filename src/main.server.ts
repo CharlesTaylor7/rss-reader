@@ -18,8 +18,7 @@ try {
 }
 
 const debugSql: QueryFunc = (t, ...args) => {
-  console.log(t);
-  console.log(args);
+  console.log("debug", t, args);
   return sql(t, ...args);
 };
 
@@ -29,7 +28,7 @@ app.use(staticFiles());
 // all middlewares inline
 app.use(async (ctx) => {
   console.log(`${ctx.req.method} ${ctx.req.url}`);
-  ctx.state.sql = sql;
+  ctx.state.sql = debugSql;
   const response = await ctx.next();
   response.headers.set("Cache-Control", "no-store");
   return response;
