@@ -34,7 +34,6 @@ export interface ArticleProps {
   url: string;
   published_at: string;
   description?: string;
-  thumbnail?: string;
   read: boolean;
   ignored: boolean;
   favorite: boolean;
@@ -127,18 +126,6 @@ export default function (props: ArticleProps) {
       }`}
     >
       <div class="flex flex-row gap-2 items-center ">
-        {/* {props.thumbnail ? ( */}
-        {/*   <img */}
-        {/*     class="block" */}
-        {/*     src={props.thumbnail} */}
-        {/*     alt="thumbnail" */}
-        {/*     width="50" */}
-        {/*     height="50" */}
-        {/*   /> */}
-        {/* ) : ( */}
-        {/*   <div class="w-[50px] h-[50px]" /> */}
-        {/* )} */}
-
         <div class="">
           <h2 class="text-sm truncate">{props.title}</h2>
           {props.description}

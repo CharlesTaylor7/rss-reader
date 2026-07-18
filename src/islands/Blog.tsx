@@ -16,9 +16,14 @@ function unsubscribe(props: BlogProps) {
 
 export default function (props: BlogProps) {
   return (
-    <div class="flex flex-row justify-between w-screen">
-      <a href={props.html_url}>{props.title}</a>
-      <button type="button" onClick={() => unsubscribe(props)}>
+    <div class="flex flex-row justify-between w-screen" data-id={props.id}>
+      <a href={props.html_url || props.xml_url}>
+        {props.title || props.html_url || props.xml_url}
+      </a>
+      <button
+        type="button"
+        onClick={() => unsubscribe(props)}
+      >
         Unsubscribe
       </button>
     </div>
