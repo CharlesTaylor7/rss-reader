@@ -19,7 +19,6 @@
 - [x] sort by read status, then by publish date.
 - [x] touch post to open, marks as read
 - [x] grey out read posts
-- [ ] infinite scroll
 - [x] swipe left to ignore
 - [x] swipe right to favorite
 
@@ -30,8 +29,9 @@
 - [ ] Show's site favicon.
 - [ ] Subscribe to a new blog
 - [ ] Edit a blog's title, url.
-- [ ] Archive a blog (stop fetching, and hide by default)
-- [ ] Button to sync a blog's rss feed Stretch goal:
+- [x] Unsubscribe a blog (stop fetching, and hide by default)
+- [ ] Button to sync a blog's rss feed 
+Stretch goal:
 - manually sorted blog list
   - the "Trello way", sparse integer indexes 1000 apart, and inserts average the
     neighbors.

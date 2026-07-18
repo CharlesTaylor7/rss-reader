@@ -1,6 +1,3 @@
-# todo:
-
-switch to
 
 # UX issues
 
@@ -18,4 +15,3 @@ action to be taken favorited posts has no signifier no way to nav to other pages
 
 - yossarian's TILs don't get synced because there is no link, just content. Do I
   want to make an embedded html viewer?
-- Daring fireball has two rss feeds?
