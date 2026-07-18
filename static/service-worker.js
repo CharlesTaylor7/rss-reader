@@ -1,4 +1,4 @@
-const APP_VERSION = "24";
+const APP_VERSION = "25";
 const ASSETS = ["/manifest.json", "/pwa-icon.webp"];
 
 self.addEventListener("install", (event) => {
@@ -19,7 +19,7 @@ self.addEventListener("activate", (event) => {
             return caches.delete(key);
           }
         }),
-      ),
+      )
     ),
   );
 

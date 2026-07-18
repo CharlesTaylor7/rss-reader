@@ -7,9 +7,23 @@
     "start": "deno serve -A _fresh/server.js",
     "update": "deno run -A -r jsr:@fresh/update ."
   },
-  "unstable": ["cron"],
-  "lint": { "rules": { "tags": ["fresh", "recommended"] } },
-  "exclude": ["**/_fresh/*", ".nvim/", "old/", "debug/"],
+  "unstable": [
+    "cron"
+  ],
+  "lint": {
+    "rules": {
+      "tags": [
+        "fresh",
+        "recommended"
+      ]
+    }
+  },
+  "exclude": [
+    "**/_fresh/*",
+    ".nvim/",
+    "old/",
+    "debug/"
+  ],
   "imports": {
     "@/": "./src/",
     "@dnd-kit/core": "npm:@dnd-kit/core@^6.3.1",
@@ -27,7 +41,6 @@
     "@preact/signals": "npm:@preact/signals@^2.9.0",
     "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.8",
     "react-hook-form": "npm:react-hook-form@^7.71.2",
-    "react-swipeable": "npm:react-swipeable@^7.0.2",
     "sonner": "npm:sonner@^2.0.7",
     "vite": "npm:vite@^7.3.1",
     "tailwindcss": "npm:tailwindcss@^4.2.1",
@@ -59,6 +72,8 @@
       "noscript",
       "template"
     ],
-    "types": ["vite/client"]
+    "types": [
+      "vite/client"
+    ]
   }
 }
