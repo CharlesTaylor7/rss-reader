@@ -1,3 +1,5 @@
+import { toast } from "@/client/toast.ts";
+
 export interface BlogProps {
   id: number;
   title: string;
@@ -5,13 +7,24 @@ export interface BlogProps {
   html_url: string;
 }
 
-function unsubscribe(props: BlogProps) {
+async function unsubscribe(props: BlogProps) {
   const body = new FormData();
   body.append("blogId", props.id.toString());
-  fetch(`/api/unsubscribe`, {
-    method: "POST",
-    body,
-  });
+
+  try {
+    await fetch(`/api/unsubscribe`, {
+      method: "POST",
+      body,
+    });
+    toast(() =>
+      `unsubscribed from ${props.title || props.html_url || props.xml_url}`
+    );
+    const el = document.querySelector(`[data-id='${props.id}']`);
+    el?.remove();
+  } catch (e) {
+    const err = e as Error;
+    toast(() => <>{err.message}</>);
+  }
 }
 
 export default function (props: BlogProps) {
@@ -21,6 +34,7 @@ export default function (props: BlogProps) {
         {props.title || props.html_url || props.xml_url}
       </a>
       <button
+        className="btn btn-error btn-sm"
         type="button"
         onClick={() => unsubscribe(props)}
       >
