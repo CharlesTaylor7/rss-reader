@@ -1,5 +1,3 @@
-import { useSignal } from "@preact/signals";
-
 function openInNewTab(url: string) {
   globalThis.open(url)?.focus();
 }
@@ -22,19 +20,20 @@ export interface ArticleProps {
 }
 
 export default function (props: ArticleProps) {
-  const readSignal = useSignal(props.read);
   function onTap() {
     openInNewTab(props.url);
-    readSignal.value = true;
-    apiRead(props.id, readSignal.value);
+    apiRead(props.id, true);
+    document.querySelector(`[data-id='${props.id}']`)?.classList.replace(
+      "text-base-content/80",
+      "text-base-content/30",
+    );
   }
 
   return (
     <div
+      data-id={props.id}
       onClick={onTap}
-      class={`w-screen p-3 cursor-pointer ${
-        readSignal.value ? "text-base-content/30" : "text-base-content/80"
-      }`}
+      class="w-screen p-3 cursor-pointer text-base-content/80"
     >
       <div class="flex flex-row gap-2 items-center ">
         <div class="">

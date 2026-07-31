@@ -35,8 +35,7 @@
     "npm:@babel/core@^7.28.0": "7.29.7",
     "npm:@babel/preset-react@^7.27.1": "7.29.7_@babel+core@7.29.7",
     "npm:@opentelemetry/api@^1.9.0": "1.9.1",
-    "npm:@preact/signals@^2.5.1": "2.10.0_preact@10.29.7__preact-render-to-string@6.7.0_preact-render-to-string@6.7.0__preact@10.29.7",
-    "npm:@preact/signals@^2.9.0": "2.10.0_preact@10.29.7__preact-render-to-string@6.7.0_preact-render-to-string@6.7.0__preact@10.29.7",
+    "npm:@preact/signals@^2.5.1": "2.10.0_preact@10.29.7__preact-render-to-string@6.7.0",
     "npm:@prefresh/vite@^2.4.8": "2.4.12_preact@10.29.7__preact-render-to-string@6.7.0_vite@7.3.1__@types+node@22.19.13__picomatch@4.0.3_preact-render-to-string@6.7.0__preact@10.29.7",
     "npm:@remix-run/node-fetch-server@0.12": "0.12.0",
     "npm:@tailwindcss/vite@^4.2.1": "4.2.1_vite@7.3.1__@types+node@22.19.13__picomatch@4.0.3_@types+node@22.19.13",
@@ -97,7 +96,7 @@
         "jsr:@std/semver",
         "jsr:@std/uuid",
         "npm:@opentelemetry/api",
-        "npm:@preact/signals@^2.5.1",
+        "npm:@preact/signals",
         "npm:esbuild-wasm",
         "npm:esbuild@0.25.7",
         "npm:preact-render-to-string",
@@ -804,7 +803,7 @@
     "@preact/signals-core@1.14.4": {
       "integrity": "sha512-HNB6HYeYKhQbJ1aKl+YRjrS4+QWHLKX6qKoUsfS/m0vqzsVaEBiZiaKbG/e+NKk2ch5ALQr/ihWaMHxiCuuWHA=="
     },
-    "@preact/signals@2.10.0_preact@10.29.7__preact-render-to-string@6.7.0_preact-render-to-string@6.7.0__preact@10.29.7": {
+    "@preact/signals@2.10.0_preact@10.29.7__preact-render-to-string@6.7.0": {
       "integrity": "sha512-avH1zQLZR6c0DmH3pT/sn4RIzsNDXAue+MEoyS5RIvApKALSU8m05KyBOL8ua21gxeDYp1DclTMcFd+N1zaL1Q==",
       "dependencies": [
         "@preact/signals-core",
@@ -1669,7 +1668,6 @@
       "jsr:@neon/serverless@^1.0.1",
       "jsr:@std/xml@0.1",
       "jsr:@takker/md5@0.1",
-      "npm:@preact/signals@^2.9.0",
       "npm:@tailwindcss/vite@^4.2.1",
       "npm:daisyui@^5.5.19",
       "npm:linkedom@~0.18.12",

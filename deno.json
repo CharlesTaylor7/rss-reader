@@ -33,7 +33,6 @@
     "fresh": "jsr:@fresh/core@^2.3.3",
     "linkedom": "npm:linkedom@^0.18.12",
     "preact": "npm:preact@^10.29.1",
-    "@preact/signals": "npm:@preact/signals@^2.9.0",
     "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.8",
     "react-hook-form": "npm:react-hook-form@^7.71.2",
     "sonner": "npm:sonner@^2.0.7",
