@@ -19,6 +19,9 @@ async function unsubscribe(props: BlogProps) {
     toast(() =>
       `unsubscribed from ${props.title || props.html_url || props.xml_url}`
     );
+    // flouting the React way gives me such great joy.
+    // This act of rebellion is a small but sure step
+    // I think I will redo the frontend to not use react, and just use htmx/alpine/hyperscript
     const el = document.querySelector(`[data-id='${props.id}']`);
     el?.remove();
   } catch (e) {

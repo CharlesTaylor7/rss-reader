@@ -5,13 +5,16 @@ export default define.page(function () {
     <nav>
       <ul class="flex flex-col gap-2">
         <li>
-          <a href="/blogs">Blogs</a>
-        </li>
-        <li>
           <a href="/import">Import</a>
         </li>
         <li>
+          <a href="/blogs">Blogs</a>
+        </li>
+        <li>
           <a href="/articles">Articles</a>
+        </li>
+        <li>
+          <a href="/subscribe">Subscribe</a>
         </li>
       </ul>
     </nav>
