@@ -26,15 +26,13 @@ export default define.page(function App({ Component, route }) {
       <body>
         <div class="h-screen flex flex-col">
           <h1 class="w-full p-3 bg-base-200 grid grid-cols-3 items-center">
-            <div></div>
-
+            <div class="text-left">
+              {route != "/nav" ? <a href="/nav">Nav</a> : null}
+            </div>
             <div class="text-center">
               <PageName route={route} />
             </div>
-
-            <div class="text-right">
-              {route != "/nav" ? <a href="/nav">Nav</a> : null}
-            </div>
+            <div></div>
           </h1>
 
           <div class="flex-1 overflow-y-scroll overflow-x-hidden">

@@ -30,7 +30,7 @@ function viewQueryFragment(sql: QueryFunc, view: View) {
 export default define.page(async function (ctx) {
   const view = (ctx.url.searchParams.get("view") ?? "default") as View;
   const posts = (await ctx.state.sql`
-    select p.id, p.title, p.url, COALESCE(b.title,b.html_url,b.xml_url) as author,
+    select p.id, p.title, p.url, p.favorite, COALESCE(b.title,b.html_url,b.xml_url) as author,
       COALESCE(
         to_char(p.published_at, 'YYYY-MM-DD'),
         p.published_at_text

@@ -1,3 +1,5 @@
+import { useState } from "preact/compat";
+
 function openInNewTab(url: string) {
   globalThis.open(url)?.focus();
 }
@@ -17,25 +19,27 @@ export interface ArticleProps {
   published_at: string;
   description?: string;
   read: boolean;
+  favorite: boolean;
 }
 
 export default function (props: ArticleProps) {
+  const [read, setRead] = useState(props.read);
+  const [bookmarked, setBookmark] = useState(props.favorite);
   function onTap() {
     openInNewTab(props.url);
     apiRead(props.id, true);
-    document.querySelector(`[data-id='${props.id}']`)?.classList.replace(
-      "text-base-content/80",
-      "text-base-content/30",
-    );
+    setRead(true);
   }
 
   return (
     <div
       data-id={props.id}
       onClick={onTap}
-      class="w-screen p-3 cursor-pointer text-base-content/80"
+      class={`w-screen p-3 cursor-pointer ${
+        read ? "text-base-content/30" : "text-base-content/80"
+      }`}
     >
-      <div class="flex flex-row gap-2 items-center ">
+      <div class="flex flex-row gap-2 items-center justify-between">
         <div class="">
           <h2 class="text-sm truncate">{props.title}</h2>
           {props.description}
@@ -44,6 +48,18 @@ export default function (props: ArticleProps) {
             {props.author} / {props.published_at}
           </h3>
         </div>
+
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setBookmark(!bookmarked);
+          }}
+        >
+          {bookmarked
+            ? <img src="/bookmarked.svg" />
+            : <img src="/bookmark.svg" />}
+        </button>
       </div>
     </div>
   );
