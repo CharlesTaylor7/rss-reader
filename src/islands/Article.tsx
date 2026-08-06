@@ -47,8 +47,8 @@ export default function (props: ArticleProps) {
       }`}
     >
       <div class="flex flex-row gap-2 items-center justify-between">
-        <div class="">
-          <h2 class="text-sm truncate">{props.title}</h2>
+        <div class="truncate">
+          <h2 class="text-sm">{props.title}</h2>
           {props.description}
 
           <h3 class="text-xs text-base-content/50 truncate">
@@ -58,7 +58,7 @@ export default function (props: ArticleProps) {
 
         <button
           type="button"
-          class="cursor-pointer"
+          class="cursor-pointer shrink-0"
           onClick={(e) => {
             e.stopPropagation();
             setBookmark(!bookmarked);
