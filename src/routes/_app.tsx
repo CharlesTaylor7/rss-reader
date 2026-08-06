@@ -25,20 +25,17 @@ export default define.page(function App({ Component, route }) {
       </head>
       <body>
         <div class="h-screen flex flex-col">
-          <h1 class="w-full p-3 bg-base-200 grid grid-cols-3 items-center">
-            <div class="text-left">
-              {route != "/nav" ? <a href="/nav">Nav</a> : null}
-            </div>
-            <div class="text-center">
-              <PageName route={route} />
-            </div>
-            <div></div>
+          <h1 class="w-full p-3 bg-base-200 ">
+            <nav class="tabs gap-2">
+              <a class="tab" href="/articles">Articles</a>
+              <a class="tab" href="/blogs">Blogs</a>
+              <a class="tab" href="/import">Import</a>
+              <a class="tab" href="/subscribe">Subscribe</a>
+            </nav>
           </h1>
 
           <div class="flex-1 overflow-y-scroll overflow-x-hidden">
-            <Partial name="body">
-              <Component />
-            </Partial>
+            <Component />
           </div>
           <Toaster />
         </div>

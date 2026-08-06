@@ -28,7 +28,7 @@ app.use(staticFiles());
 // all middlewares inline
 app.use(async (ctx) => {
   console.log(`${ctx.req.method} ${ctx.req.url}`);
-  ctx.state.sql = debugSql;
+  ctx.state.sql = sql;
   const response = await ctx.next();
   response.headers.set("Cache-Control", "no-store");
   return response;

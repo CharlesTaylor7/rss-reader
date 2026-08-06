@@ -1,7 +1,9 @@
 import { define, type QueryFunc } from "@/server/define.ts";
 import Article, { type ArticleProps } from "@/islands/Article.tsx";
+import ArticleFilterTab from "@/routes/partials/ArticleFilterTab.tsx";
+import { Partial } from "fresh/runtime";
 
-type View = "default" | "read" | "ignored" | "favorite";
+export type View = "default" | "read" | "ignored" | "favorite";
 
 function viewQueryFragment(sql: QueryFunc, view: View) {
   if (view == "default") {
@@ -43,8 +45,14 @@ export default define.page(async function (ctx) {
   `) as ArticleProps[];
 
   return (
-    <div class="flex flex-col items-start justify-start">
-      {posts.map((p) => <Article key={p.id} {...p} />)}
-    </div>
+    <>
+      <ArticleFilterTab
+        view={(ctx.url.searchParams.get("view") ?? "default") as any}
+      />
+
+      <div class="flex flex-col items-start justify-start">
+        {posts.map((p) => <Article key={p.id} {...p} />)}
+      </div>
+    </>
   );
 });
