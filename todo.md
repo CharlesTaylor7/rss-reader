@@ -1,7 +1,7 @@
 # Easy wins
 - [x] move navlink to top left
-- [ ] put fave button to right of each post
-- [ ] new page to list favorites 
+- [x] put fave button to right of each post
+- [x] new page to list favorites 
 
 # UX issues
 

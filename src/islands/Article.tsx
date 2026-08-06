@@ -11,6 +11,13 @@ function apiRead(id: number, read: boolean): Promise<Response> {
   });
 }
 
+function apiFavorite(id: number, favorite: boolean): Promise<Response> {
+  return fetch("/api/favorite", {
+    method: "POST",
+    body: JSON.stringify({ post_id: id, favorite }),
+  });
+}
+
 export interface ArticleProps {
   id: number;
   title: string;
@@ -51,9 +58,11 @@ export default function (props: ArticleProps) {
 
         <button
           type="button"
+          class="cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
             setBookmark(!bookmarked);
+            apiFavorite(props.id, !bookmarked);
           }}
         >
           {bookmarked

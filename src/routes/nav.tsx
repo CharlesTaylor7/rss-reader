@@ -16,6 +16,9 @@ export default define.page(function () {
         <li>
           <a href="/subscribe">Subscribe</a>
         </li>
+        <li>
+          <a href="/articles?view=favorite">Favorites</a>
+        </li>
       </ul>
     </nav>
   );
