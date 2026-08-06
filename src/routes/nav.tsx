@@ -19,6 +19,9 @@ export default define.page(function () {
         <li>
           <a href="/articles?view=favorite">Favorites</a>
         </li>
+        <li>
+          <a href="/articles?view=read">Read Recently</a>
+        </li>
       </ul>
     </nav>
   );
