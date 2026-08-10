@@ -1,7 +1,5 @@
 import { define, type QueryFunc } from "@/server/define.ts";
 import Article, { type ArticleProps } from "@/islands/Article.tsx";
-import ArticleFilterTab from "@/routes/partials/ArticleFilterTab.tsx";
-import { Partial } from "fresh/runtime";
 
 export type View = "default" | "read" | "ignored" | "favorite";
 
@@ -46,10 +44,6 @@ export default define.page(async function (ctx) {
 
   return (
     <>
-      <ArticleFilterTab
-        view={(ctx.url.searchParams.get("view") ?? "default") as any}
-      />
-
       <div class="flex flex-col items-start justify-start">
         {posts.map((p) => <Article key={p.id} {...p} />)}
       </div>

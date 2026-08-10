@@ -1,13 +1,14 @@
 import { View } from "@/routes/articles.tsx";
-import { Partial } from "fresh/runtime";
 import { ReactNode } from "preact/compat";
 
 interface Props {
-  view: View;
+  url: URL;
 }
 
 export default function (props: Props) {
-  const { view } = props;
+  const { url } = props;
+
+  const view = (url.searchParams.get("view") ?? "default") as View;
   return (
     <div class="tabs">
       <Tab view="default" active={view}>Unread</Tab>
