@@ -1,0 +1,9 @@
+@import "tailwindcss" source(none);
+@source "./routes";
+@source "./islands";
+
+@plugin "daisyui";
+
+@view-transition { 
+  navigation: auto; 
+} 

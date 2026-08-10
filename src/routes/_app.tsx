@@ -3,8 +3,6 @@ import { define } from "@/server/define.ts";
 import ArticleFilterTab from "@/routes/partials/ArticleFilterTab.tsx";
 
 export default define.page(function App({ Component, route, url }) {
-  console.log("component", route);
-
   return (
     <html>
       <head>
@@ -21,11 +19,7 @@ export default define.page(function App({ Component, route, url }) {
               type="button"
               className="cursor-pointer"
               popoverTarget="popover-1"
-              style={
-                {
-                  anchorName: "--anchor-1",
-                } /* as React.CSSProperties */
-              }
+              style={{ anchorName: "--anchor-1" }}
             >
               <svg
                 class="swap-off fill-current"
@@ -37,16 +31,11 @@ export default define.page(function App({ Component, route, url }) {
                 <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
               </svg>
             </button>
-
             <ul
               className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
               popover="auto"
               id="popover-1"
-              style={
-                {
-                  positionAnchor: "--anchor-1",
-                } /* as React.CSSProperties */
-              }
+              style={{ positionAnchor: "--anchor-1" }}
             >
               <li>
                 <a class="link" href="/articles">Articles</a>
